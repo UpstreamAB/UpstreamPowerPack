@@ -16,10 +16,10 @@ Write-host "UPSTREAM: Deploy Webroot: Downloading Webroot MSI installer from" $U
 $WebClient.DownloadFile($Url,$File)
 
 #Deploy the software.
-Write-host "UPSTREAM: Deploy Webroot: Webroot MSI package downloaded. Starting silent installation. Waiting for succesful Event log response."
+Write-host "UPSTREAM: Deploy Webroot: Silent installation begins. Waiting for succesful event log response."
 msiexec /i $File GUILIC=$WebrootKey CMDLINE="SME,quiet" /qn
 
-#Validate successful installation by looking at the Windows Application Event log. 
+#Validate successful installation by looking at the Windows Application event log. 
 $StartInstallDate = (Get-Date)
 $SucessfullInstall = $Null
 do
