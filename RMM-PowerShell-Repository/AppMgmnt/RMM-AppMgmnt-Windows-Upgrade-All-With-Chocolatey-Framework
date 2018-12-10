@@ -1,0 +1,2 @@
+c:\ProgramData\Chocolatey\choco.exe upgrade all --limit-output --no-progress -y
+      
