@@ -1,2 +1,3 @@
+@ECHO UPSTREAM: Upgrade All With Chocolatey: Upgrading all supported apps.
 c:\ProgramData\Chocolatey\choco.exe upgrade all --limit-output --no-progress -y
-      
+@ECHO UPSTREAM: Upgrade All With Chocolatey: End of script: Evaluate the script output."     
