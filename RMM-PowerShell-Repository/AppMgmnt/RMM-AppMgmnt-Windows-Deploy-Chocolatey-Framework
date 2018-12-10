@@ -1,1 +1,10 @@
+
+REM Script name: RMM-AppMgmnt-Windows-Deploy-Chocolatey-Framework.
+REM Script type: Batch.
+REM Script description: Deploy Chocolatey framewok for application management.
+REM Dependencies: Powershell 1.0.
+REM Supported OS: Windows Server 2012, Windows Server 2016, Windows Server 2019, Windows 7, Windows 10.
+REM Script maintainer: powerpack@upstream.se
+REM https://www.upstream.com/powerpack"
+REM
 @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
