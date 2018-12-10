@@ -13,5 +13,5 @@ foreach($guid in $guids) {
     $guidSubKey = $subKey.OpenSubKey($guid);
     $DisplayName = $guidSubKey.GetValue("DisplayName");
 }
-#Let's write the Azure Tenant name to the concole for Kaseya VSA to pick up as a variable.
+# Let's write the Azure Tenant name to the concole for Kaseya VSA to pick up as a variable.
 write-output $DisplayName
