@@ -1,6 +1,6 @@
 # Script name: KaseyaVSA-Audit-GetAzureTenantName.ps1
 # Script type: PowerShell.
-# Script description: Audit the Azure tenant name on a Windows 10 computer if joined to Azure AD.
+# Script description: Audit the Azure tenant name on a Windows 10 computer.
 # Dependencies: Azure AD joined.
 # Supported OS: Windows 10.
 # Script maintainer: powerpack@upstream.se
