@@ -1,0 +1,767 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ScriptExport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.kaseya.com/vsa/2008/12/Scripting">
+  <Folder name="Windows 10 Specific Mgmnt 2018-12-19" treePres="3">
+    <Folder name="Windows 10 Audit" treePres="3">
+      <Procedure name="Audit - Windows 10 - Custom Field - Azure AD Info" treePres="3" id="1331139952" folderId="911996210884305" treeFullPath="Upstream Kaseya Power Pack.Windows 10 Specific Mgmnt 2018-12-19.Windows 10 Audit">
+        <Body description="">
+          <Statement description="Procedure description: Get Azure AD specific information from the registry.&#xD;&#xA;Kaseya customer value: Audit if the computer is Azure AD joined or not.&#xD;&#xA;End user value: Track non Azure AD joined computers for compliance.&#xD;&#xA;Dependencies: Windows 10. Custom Fields &quot;CF Azure AD Tenant&quot; &amp; &quot;CF Azure AD User&quot; created.&#xD;&#xA;Usage: Schedule from Kaseya Policy Manager or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for &quot;UPSTREAM: Get Azure Info:&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------" name="GetURL" continueOnFail="false" osType="10">
+            <Parameter xsi:type="StringParameter" name="URL" value="https://raw.githubusercontent.com/UpstreamAB/UpstreamPowerPack/master/KaseyaVSA/Powershell/KaseyaVSA-Audit-GetAzureTenantName.ps1?token=Akb5rmVSl0_Q7ntWH0rvtSCEOjFXFlKUks5cGjgPwA%3D%3D" />
+            <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\KaseyaVSA-Audit-GetAzureTenantName.ps1" />
+            <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+          </Statement>
+          <Statement name="GetURL" continueOnFail="false" osType="10">
+            <Parameter xsi:type="StringParameter" name="URL" value="https://raw.githubusercontent.com/UpstreamAB/UpstreamPowerPack/master/KaseyaVSA/Powershell/KaseyaVSA-Audit-GetAzureUserName.ps1?token=Akb5rnL4AMfI3mOTK7rj-7GMonczogkJks5cGjiswA%3D%3D" />
+            <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\KaseyaVSA-Audit-GetAzureUserName.ps1" />
+            <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+          </Statement>
+          <Statement description="Let's get the Azure AD tenant name." name="Execute Powershell" continueOnFail="false" osType="10">
+            <Parameter xsi:type="StringParameter" name="Parameter1" value="#vAgentConfiguration.agentTempDir#\KaseyaVSA-Audit-GetAzureTenantName.ps1" />
+            <Parameter xsi:type="StringParameter" name="Parameter2" value="" />
+            <Parameter xsi:type="StringParameter" name="Parameter3" value="True" />
+          </Statement>
+          <If description="">
+            <Condition name="CheckVariable">
+              <Parameter xsi:type="StringParameter" name="VariableName" value="#global:psresult#" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="DoesNotContain" />
+              <Parameter xsi:type="StringParameter" name="Value" value="Cannot find path" />
+            </Condition>
+            <Then>
+              <Statement name="UpdateSystemInfo" continueOnFail="false" osType="10">
+                <Parameter xsi:type="StringParameter" name="ColumnName" value="CF Azure AD Tenant" />
+                <Parameter xsi:type="StringParameter" name="Value" value="#global:psresult#" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="10">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Get Azure Info: Tenant Name: #global:psresult#" />
+              </Statement>
+            </Then>
+            <Else>
+              <Statement name="UpdateSystemInfo" continueOnFail="false" osType="10">
+                <Parameter xsi:type="StringParameter" name="ColumnName" value="CF Azure AD Tenant" />
+                <Parameter xsi:type="StringParameter" name="Value" value="Not Detected" />
+              </Statement>
+            </Else>
+          </If>
+          <Statement description="Let's get the Azure AD user." name="Execute Powershell" continueOnFail="false" osType="10">
+            <Parameter xsi:type="StringParameter" name="Parameter1" value="#vAgentConfiguration.agentTempDir#\KaseyaVSA-Audit-GetAzureUserName.ps1" />
+            <Parameter xsi:type="StringParameter" name="Parameter2" value="" />
+            <Parameter xsi:type="StringParameter" name="Parameter3" value="True" />
+          </Statement>
+          <If description="">
+            <Condition name="CheckVariable">
+              <Parameter xsi:type="StringParameter" name="VariableName" value="#global:psresult#" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="DoesNotContain" />
+              <Parameter xsi:type="StringParameter" name="Value" value="Cannot find path" />
+            </Condition>
+            <Then>
+              <Statement name="UpdateSystemInfo" continueOnFail="false" osType="10">
+                <Parameter xsi:type="StringParameter" name="ColumnName" value="CF Azure AD User" />
+                <Parameter xsi:type="StringParameter" name="Value" value="#global:psresult#" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="10">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Get Azure Info: User Name: #global:psresult#" />
+              </Statement>
+            </Then>
+            <Else>
+              <Statement name="UpdateSystemInfo" continueOnFail="false" osType="10">
+                <Parameter xsi:type="StringParameter" name="ColumnName" value="CF Azure AD User" />
+                <Parameter xsi:type="StringParameter" name="Value" value="Not Detected" />
+              </Statement>
+            </Else>
+          </If>
+          <Statement description="Let's do some cleanup." name="DeleteFile" continueOnFail="false" osType="10">
+            <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\KaseyaVSA-Audit-GetAzureUserName.ps1" />
+          </Statement>
+          <Statement name="DeleteFile" continueOnFail="false" osType="10">
+            <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\KaseyaVSA-Audit-GetAzureUserName.ps1" />
+          </Statement>
+        </Body>
+      </Procedure>
+      <Procedure name="Audit - Windows 10 - Custom Field - Get Version" treePres="3" id="1567706558" folderId="911996210884305" treeFullPath="Upstream Kaseya Power Pack.Windows 10 Specific Mgmnt 2018-12-19.Windows 10 Audit">
+        <Body description="">
+          <If description="Procedure description: Get Windows 10 Version from the registry&#xD;&#xA;Kaseya customer value: Patching, compliance and troubleshooting.&#xD;&#xA;End user value: Ensure to meet any compliande.&#xD;&#xA;Dependencies: Windows OS. Custom Field &quot;CF Win 10 Version&quot; created.&#xD;&#xA;Usage: Schedule recurringly from Kaseya Policy Manager or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for &quot;UPSTREAM: Get Win 10 Version:&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
+            <Condition name="CheckRegistryValue">
+              <Parameter xsi:type="StringParameter" name="RegistryPath" value="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ReleaseID" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Exists" />
+              <Parameter xsi:type="StringParameter" name="Value" value="" />
+            </Condition>
+            <Then>
+              <Statement name="GetVariable" continueOnFail="false" osType="10">
+                <Parameter xsi:type="EnumParameter" name="VariableType" value="RegistryValue" />
+                <Parameter xsi:type="StringParameter" name="SourceContent" value="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ReleaseID" />
+                <Parameter xsi:type="StringParameter" name="VariableName" value="Win10Version" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="10">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Get Win 10 Version: #Win10Version#" />
+              </Statement>
+              <Statement name="UpdateSystemInfo" continueOnFail="false" osType="10">
+                <Parameter xsi:type="StringParameter" name="ColumnName" value="CF Win 10 Version" />
+                <Parameter xsi:type="StringParameter" name="Value" value="#Win10Version#" />
+              </Statement>
+            </Then>
+          </If>
+          <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Get Win 10 Version: The Agent Procedure hit the last row and will now exit. Evaluate the Agent Procedure log output." />
+          </Statement>
+        </Body>
+      </Procedure>
+    </Folder>
+    <Folder name="Windows 10 Patch Management" treePres="3">
+      <Procedure name="Patch Mgmnt - Windows 10 - Audit Active Hours" treePres="3" id="139054035" folderId="203412543471629" treeFullPath="Upstream Kaseya Power Pack.Windows 10 Specific Mgmnt 2018-12-19.Windows 10 Patch Management">
+        <Body description="">
+          <If description="Procedure description: Get Windows 10 Active hours from the registry.&#xD;&#xA;Kaseya customer value: Patching, compliance and troubleshooting.&#xD;&#xA;End user value: Ensure to meet any agreed compliande.&#xD;&#xA;Dependencies: Windows 10 OS.&#xD;&#xA;Usage: Schedule recurringly from Kaseya Policy Manager or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for &quot;UPSTREAM: Current Windows 10 Active Hours Is:&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
+            <Condition name="Windows 32 or 64 Bit Check">
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Exists" />
+            </Condition>
+            <Then>
+              <Statement name="GetVariable" continueOnFail="false" osType="10">
+                <Parameter xsi:type="EnumParameter" name="VariableType" value="RegistryValue64" />
+                <Parameter xsi:type="StringParameter" name="SourceContent" value="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings\ActiveHoursStart" />
+                <Parameter xsi:type="StringParameter" name="VariableName" value="GLOBAL:ActiveHoursStart" />
+              </Statement>
+              <Statement name="GetVariable" continueOnFail="false" osType="10">
+                <Parameter xsi:type="EnumParameter" name="VariableType" value="RegistryValue64" />
+                <Parameter xsi:type="StringParameter" name="SourceContent" value="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings\ActiveHoursEnd" />
+                <Parameter xsi:type="StringParameter" name="VariableName" value="GLOBAL:ActiveHoursEnd" />
+              </Statement>
+            </Then>
+            <Else>
+              <Statement name="GetVariable" continueOnFail="false" osType="10">
+                <Parameter xsi:type="EnumParameter" name="VariableType" value="RegistryValue" />
+                <Parameter xsi:type="StringParameter" name="SourceContent" value="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings\ActiveHoursStart" />
+                <Parameter xsi:type="StringParameter" name="VariableName" value="GLOBAL:ActiveHoursStart" />
+              </Statement>
+              <Statement name="GetVariable" continueOnFail="false" osType="10">
+                <Parameter xsi:type="EnumParameter" name="VariableType" value="RegistryValue" />
+                <Parameter xsi:type="StringParameter" name="SourceContent" value="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings\ActiveHoursEnd" />
+                <Parameter xsi:type="StringParameter" name="VariableName" value="GLOBAL:ActiveHoursEnd" />
+              </Statement>
+            </Else>
+          </If>
+          <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="10">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Current Windows 10 Active Hours Is: ActiveHoursStart: #GLOBAL:ActiveHoursStart# ActiveHoursEnd: #GLOBAL:ActiveHoursEnd#" />
+          </Statement>
+          <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Audit Current Windows 10 Active Hours: The Agent Procedure hit the last row and will now exit. Evaluate the Agent Procedure log output." />
+          </Statement>
+        </Body>
+      </Procedure>
+      <Procedure name="Patch Mgmnt - Windows 10 - Patch From Command Line - No Reboot" treePres="3" id="715216591" folderId="203412543471629" treeFullPath="Upstream Kaseya Power Pack.Windows 10 Specific Mgmnt 2018-12-19.Windows 10 Patch Management">
+        <Body description="">
+          <If description="Procedure description: Kaseya can not patch post Windows 10 Anniversary Eedition that good. This Freeware from Flemming Varmer at ABC-Deploy.com do the trick.&#xD;&#xA;Kaseya customer value: Ensures that Windows 10 Anniversary Edition gets patched.&#xD;&#xA;End user value: Secure Windows 10 Anniversary Edition (Any Win 10) with the latest patches.&#xD;&#xA;Dependencies: Windows 10.&#xD;&#xA;Usage: Recurring schedule or Run Now.&#xD;&#xA;Report options: Agent Procedure log.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
+            <Condition name="TestFile">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\abc-update\abc-update.exe" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+              <Parameter xsi:type="StringParameter" name="Value" value="" />
+            </Condition>
+            <Then>
+              <Statement name="GetURL" continueOnFail="false" osType="10">
+                <Parameter xsi:type="StringParameter" name="URL" value="http://abc-deploy.com/Files/ABC-Update.zip" />
+                <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\ABC-Update.zip" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+              <Statement name="Unzip file" continueOnFail="false" osType="10">
+                <Parameter xsi:type="StringParameter" name="Parameter1" value="#vAgentConfiguration.agentTempDir#\ABC-Update.zip" />
+                <Parameter xsi:type="StringParameter" name="Parameter2" value="#vAgentConfiguration.agentTempDir#\abc-update" />
+                <Parameter xsi:type="StringParameter" name="Parameter3" value="True" />
+              </Statement>
+              <Statement name="DeleteFile" continueOnFail="false" osType="10">
+                <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\ABC-Update\ABC-Update EULA.pdf" />
+              </Statement>
+              <Statement name="DeleteFile" continueOnFail="false" osType="10">
+                <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\ABC-Update\ABC-Update GUI.exe" />
+              </Statement>
+              <Statement name="DeleteFile" continueOnFail="false" osType="10">
+                <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\ABC-Update\ABC-Update GUI.exe.config" />
+              </Statement>
+              <Statement name="DeleteFile" continueOnFail="false" osType="10">
+                <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\ABC-Update\abc-update.exe.config" />
+              </Statement>
+              <Statement name="DeleteFile" continueOnFail="false" osType="10">
+                <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\ABC-Update\ABC-Update.pdf" />
+              </Statement>
+              <Statement name="DeleteFile" continueOnFail="false" osType="10">
+                <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\ABC-Update.zip" />
+              </Statement>
+            </Then>
+          </If>
+          <Statement description="The ABC Update commands can be views here: http://abc-deploy.com/files/abc" name="ExecuteShellCommand" continueOnFail="false" osType="10">
+            <Parameter xsi:type="StringParameter" name="Command" value="#vAgentConfiguration.agentTempDir#\abc-update\abc-update.exe /A:Install /R:N /Log:#vAgentConfiguration.agentTempDir#\WinUpdate-Commandline.log" />
+            <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+            <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+          </Statement>
+          <Statement name="GetVariable" continueOnFail="false" osType="10">
+            <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+            <Parameter xsi:type="StringParameter" name="SourceContent" value="#vAgentConfiguration.agentTempDir#\WinUpdate-Commandline.log" />
+            <Parameter xsi:type="StringParameter" name="VariableName" value="WinUpdate_Commandline_results" />
+          </Statement>
+          <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="10">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Patch Windows 10: : #WinUpdate_Commandline_results#" />
+          </Statement>
+        </Body>
+      </Procedure>
+      <Procedure name="Patch Mgmnt - Windows 10 - Set Active Hours" treePres="3" id="1366253877" folderId="203412543471629" treeFullPath="Upstream Kaseya Power Pack.Windows 10 Specific Mgmnt 2018-12-19.Windows 10 Patch Management">
+        <Body description="">
+          <If description="Procedure description: Set Windows 10 Active hours in the registry.&#xD;&#xA;Kaseya customer value: Patching, compliance and troubleshooting.&#xD;&#xA;End user value: Ensure to meet any agreed compliande.&#xD;&#xA;Dependencies: Windows 10 OS.&#xD;&#xA;Usage: Schedule recurringly from Kaseya Policy Manager or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for &quot;UPSTREAM: Windows 10 Active Hours Is Now Set To:&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
+            <Condition name="Windows 32 or 64 Bit Check">
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Exists" />
+            </Condition>
+            <Then>
+              <Statement name="SetRegistryValue64" continueOnFail="false" osType="10">
+                <Parameter xsi:type="StringParameter" name="RegistryPath" value="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings\ActiveHoursStart" />
+                <Parameter xsi:type="StringParameter" name="Value" value="6" />
+                <Parameter xsi:type="EnumParameter" name="DataType" value="Integer" />
+              </Statement>
+              <Statement name="SetRegistryValue64" continueOnFail="false" osType="10">
+                <Parameter xsi:type="StringParameter" name="RegistryPath" value="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings\ActiveHoursEnd" />
+                <Parameter xsi:type="StringParameter" name="Value" value="22" />
+                <Parameter xsi:type="EnumParameter" name="DataType" value="Integer" />
+              </Statement>
+              <Statement name="GetVariable" continueOnFail="false" osType="10">
+                <Parameter xsi:type="EnumParameter" name="VariableType" value="RegistryValue64" />
+                <Parameter xsi:type="StringParameter" name="SourceContent" value="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings\ActiveHoursStart" />
+                <Parameter xsi:type="StringParameter" name="VariableName" value="GLOBAL:ActiveHoursStart" />
+              </Statement>
+              <Statement name="GetVariable" continueOnFail="false" osType="10">
+                <Parameter xsi:type="EnumParameter" name="VariableType" value="RegistryValue64" />
+                <Parameter xsi:type="StringParameter" name="SourceContent" value="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings\ActiveHoursEnd" />
+                <Parameter xsi:type="StringParameter" name="VariableName" value="GLOBAL:ActiveHoursEnd" />
+              </Statement>
+            </Then>
+            <Else>
+              <Statement name="SetRegistryValue" continueOnFail="false" osType="10">
+                <Parameter xsi:type="StringParameter" name="RegistryPath" value="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings\ActiveHoursStart" />
+                <Parameter xsi:type="StringParameter" name="Value" value="6" />
+                <Parameter xsi:type="EnumParameter" name="DataType" value="Integer" />
+              </Statement>
+              <Statement name="SetRegistryValue" continueOnFail="false" osType="10">
+                <Parameter xsi:type="StringParameter" name="RegistryPath" value="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings\ActiveHoursEnd" />
+                <Parameter xsi:type="StringParameter" name="Value" value="22" />
+                <Parameter xsi:type="EnumParameter" name="DataType" value="Integer" />
+              </Statement>
+              <Statement name="GetVariable" continueOnFail="false" osType="10">
+                <Parameter xsi:type="EnumParameter" name="VariableType" value="RegistryValue" />
+                <Parameter xsi:type="StringParameter" name="SourceContent" value="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings\ActiveHoursStart" />
+                <Parameter xsi:type="StringParameter" name="VariableName" value="GLOBAL:ActiveHoursStart" />
+              </Statement>
+              <Statement name="GetVariable" continueOnFail="false" osType="10">
+                <Parameter xsi:type="EnumParameter" name="VariableType" value="RegistryValue" />
+                <Parameter xsi:type="StringParameter" name="SourceContent" value="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings\ActiveHoursEnd" />
+                <Parameter xsi:type="StringParameter" name="VariableName" value="GLOBAL:ActiveHoursEnd" />
+              </Statement>
+            </Else>
+          </If>
+          <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="10">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Windows 10 Active Hours Is Now Set To: ActiveHoursStart: #GLOBAL:ActiveHoursStart# ActiveHoursEnd: #GLOBAL:ActiveHoursEnd#" />
+          </Statement>
+        </Body>
+      </Procedure>
+      <Procedure name="Patch Mgmnt - Windows 10 - Test For Reboot Pending" treePres="3" id="463189573" folderId="203412543471629" treeFullPath="Upstream Kaseya Power Pack.Windows 10 Specific Mgmnt 2018-12-19.Windows 10 Patch Management">
+        <Body description="">
+          <If description="https://gallery.technet.microsoft.com/scriptcenter/Get-PendingReboot-Query-bdb79542">
+            <Condition name="TestFile">
+              <Parameter xsi:type="StringParameter" name="Path" value="c:\kworking\rebootpending.result" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Exists" />
+              <Parameter xsi:type="StringParameter" name="Value" value="" />
+            </Condition>
+            <Then>
+              <Statement name="DeleteFile" continueOnFail="true" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Path" value="c:\kworking\rebootpending.result" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="">
+            <Condition name="TestRegistryKey">
+              <Parameter xsi:type="StringParameter" name="Path" value="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\AutoUpdate\RebootRequired" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Exists" />
+            </Condition>
+            <Then>
+              <Statement name="Write text to file" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Parameter1" value="RegKey exists. Reboot required: &quot;HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\AutoUpdate\RebootRequired&quot;" />
+                <Parameter xsi:type="StringParameter" name="Parameter2" value="c:\kworking\rebootpending.result" />
+                <Parameter xsi:type="StringParameter" name="Parameter3" value="True" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="">
+            <Condition name="TestRegistryKey">
+              <Parameter xsi:type="StringParameter" name="Path" value="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootPending" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Exists" />
+            </Condition>
+            <Then>
+              <Statement name="Write text to file" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Parameter1" value="RegKey exists. Reboot required: &quot;HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootPending&quot;" />
+                <Parameter xsi:type="StringParameter" name="Parameter2" value="c:\kworking\rebootpending.result" />
+                <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="">
+            <Condition name="TestRegistryKey">
+              <Parameter xsi:type="StringParameter" name="Path" value="HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\PendingFileRenameOperations" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Exists" />
+            </Condition>
+            <Then>
+              <Statement name="Write text to file" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Parameter1" value="RegKey exists. Reboot required. &quot;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\PendingFileRenameOperations&quot;" />
+                <Parameter xsi:type="StringParameter" name="Parameter2" value="c:\kworking\rebootpending.result" />
+                <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="">
+            <Condition name="TestFile">
+              <Parameter xsi:type="StringParameter" name="Path" value="c:\kworking\rebootpending.result" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Exists" />
+              <Parameter xsi:type="StringParameter" name="Value" value="" />
+            </Condition>
+            <Then>
+              <Statement name="GetVariable" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+                <Parameter xsi:type="StringParameter" name="SourceContent" value="c:\kworking\rebootpending.result" />
+                <Parameter xsi:type="StringParameter" name="VariableName" value="RebootPending" />
+              </Statement>
+              <Statement name="DeleteFile" continueOnFail="true" osType="None">
+                <Parameter xsi:type="StringParameter" name="Path" value="c:\kworking\rebootpending.result" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Reboot Pending!" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: #RebootPending#" />
+              </Statement>
+            </Then>
+            <Else>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: No reboot needed." />
+              </Statement>
+            </Else>
+          </If>
+        </Body>
+      </Procedure>
+    </Folder>
+    <Folder name="Windows 10 System Management" treePres="3">
+      <Procedure name="Sys Mgmnt - Windows - Disable Storage Sense" treePres="3" id="2071087211" folderId="881167117544061" treeFullPath="Upstream Kaseya Power Pack.Windows 10 Specific Mgmnt 2018-12-19.Windows 10 System Management">
+        <Body description="Description: This procedure will enable RDP for remote control.&#xA;&#xA;Kaseya customer value: This procedure enables RDP in the registry and enables RDP connections from Kaseya Live Connect. Security, support and control.&#xA;&#xA;End user value: Security, support and control.&#xA;&#xA;Dependencies: Windows.&#xA;&#xA;Usage: Execute the procedure at any time.&#xA;&#xA;Report options: Procedure Log, content: &quot;RDP is now enabled.&quot;&#xA; &#xA;Script maintainer: ronny [at] upstream.se&#xA;&#xA;Support: This script is delivered &quot;as is&quot; No support included.">
+          <Statement description="Procedure description: Disable the built in disk cleanup tool in Windows 10.&#xD;&#xA;Kaseya customer value: Ensure Storge Sense is Disabled.&#xD;&#xA;End user value: Ensure Storge Sense is Disabled.&#xD;&#xA;Dependencies: Windows 10.&#xD;&#xA;Usage: Schedule recurringly for compliance.&#xD;&#xA;Report options: Agent Procedure log. Look for &quot;UPSTREAM: Enable Storage Sense&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------&#xD;&#xA;Let's disable Storage Sense.&#xD;&#xA;Registry settings can be reviewed here: https://stealthpuppy.com/windows-10-storage-sense-intune/#.W446jPZuJPY" name="SetRegistryValue" continueOnFail="false" osType="10">
+            <Parameter xsi:type="StringParameter" name="RegistryPath" value="HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\StorageSense\Parameters\StoragePolicy\01" />
+            <Parameter xsi:type="StringParameter" name="Value" value="0" />
+            <Parameter xsi:type="EnumParameter" name="DataType" value="Integer" />
+          </Statement>
+          <Statement description="Writes a procedure log entry." name="WriteScriptLogEntry" continueOnFail="false" osType="10">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Disable Storage Sense: The Agent Procedure hit the last row and will now exit. Evaluate the Agent Procedure log output." />
+          </Statement>
+        </Body>
+      </Procedure>
+      <Procedure name="Sys Mgmnt - Windows - Enable Storage Sense" treePres="3" id="1795254147" folderId="881167117544061" treeFullPath="Upstream Kaseya Power Pack.Windows 10 Specific Mgmnt 2018-12-19.Windows 10 System Management">
+        <Body description="">
+          <Statement description="Procedure description: Enable and configure the built in disk cleanup tool in Windows 10.&#xD;&#xA;Kaseya customer value: Ensure disk usage is optimal without any additional automation procedures.&#xD;&#xA;End user value: Ensure disk usage is optimal.&#xD;&#xA;Dependencies: Windows 10.&#xD;&#xA;Usage: Schedule recurringly for compliance.&#xD;&#xA;Report options: Agent Procedure log. Look for &quot;UPSTREAM: Enable Storage Sense&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------&#xD;&#xA;Let's enable Storage Sense and configure the disk cleanup.&#xD;&#xA;Settings can be reviewed here: https://stealthpuppy.com/windows-10-storage-sense-intune/#.W446jPZuJPY" name="SetRegistryValue" continueOnFail="false" osType="10">
+            <Parameter xsi:type="StringParameter" name="RegistryPath" value="HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\StorageSense\Parameters\StoragePolicy\01" />
+            <Parameter xsi:type="StringParameter" name="Value" value="1" />
+            <Parameter xsi:type="EnumParameter" name="DataType" value="Integer" />
+          </Statement>
+          <Statement description="Run Storage Sense every week." name="SetRegistryValue" continueOnFail="false" osType="10">
+            <Parameter xsi:type="StringParameter" name="RegistryPath" value="HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\StorageSense\Parameters\StoragePolicy\2048" />
+            <Parameter xsi:type="StringParameter" name="Value" value="7" />
+            <Parameter xsi:type="EnumParameter" name="DataType" value="Integer" />
+          </Statement>
+          <Statement description="Delete temporary files that my apps aren't using." name="SetRegistryValue" continueOnFail="false" osType="10">
+            <Parameter xsi:type="StringParameter" name="RegistryPath" value="HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\StorageSense\Parameters\StoragePolicy\04" />
+            <Parameter xsi:type="StringParameter" name="Value" value="0" />
+            <Parameter xsi:type="EnumParameter" name="DataType" value="Integer" />
+          </Statement>
+          <Statement description="Enalbe the ability to delete files in the &quot;my Recycle Bin&quot;." name="SetRegistryValue" continueOnFail="false" osType="10">
+            <Parameter xsi:type="StringParameter" name="RegistryPath" value="HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\StorageSense\Parameters\StoragePolicy\08" />
+            <Parameter xsi:type="StringParameter" name="Value" value="1" />
+            <Parameter xsi:type="EnumParameter" name="DataType" value="Integer" />
+          </Statement>
+          <Statement description="Delete files in the recycle bin if they have been there for over 30 days." name="SetRegistryValue" continueOnFail="false" osType="10">
+            <Parameter xsi:type="StringParameter" name="RegistryPath" value="HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\StorageSense\Parameters\StoragePolicy\256" />
+            <Parameter xsi:type="StringParameter" name="Value" value="30" />
+            <Parameter xsi:type="EnumParameter" name="DataType" value="Integer" />
+          </Statement>
+          <Statement description="Enalbe the ability to delete files in &quot;my Downloads&quot;." name="SetRegistryValue" continueOnFail="false" osType="10">
+            <Parameter xsi:type="StringParameter" name="RegistryPath" value="HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\StorageSense\Parameters\StoragePolicy\32" />
+            <Parameter xsi:type="StringParameter" name="Value" value="1" />
+            <Parameter xsi:type="EnumParameter" name="DataType" value="Integer" />
+          </Statement>
+          <Statement description="Delete files in &quot;my Downloads&quot; folder if they have been there for over 30 days." name="SetRegistryValue" continueOnFail="false" osType="10">
+            <Parameter xsi:type="StringParameter" name="RegistryPath" value="HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\StorageSense\Parameters\StoragePolicy\512" />
+            <Parameter xsi:type="StringParameter" name="Value" value="30" />
+            <Parameter xsi:type="EnumParameter" name="DataType" value="Integer" />
+          </Statement>
+          <Statement description="Writes a procedure log entry." name="WriteScriptLogEntry" continueOnFail="false" osType="10">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Enable Storage Sense: The Agent Procedure hit the last row and will now exit. Evaluate the Agent Procedure log output." />
+          </Statement>
+        </Body>
+      </Procedure>
+    </Folder>
+    <Folder name="Windows 10 User Experience" treePres="3">
+      <Procedure name="User Experience -  Windows 10 - Remove Modern Apps for Current User" treePres="3" id="1246766826" folderId="487889136694327" treeFullPath="Upstream Kaseya Power Pack.Windows 10 Specific Mgmnt 2018-12-19.Windows 10 User Experience">
+        <Body description="">
+          <If description="Procedure description: Removes the Windows 10 modern apps for the current user.&#xD;&#xA;Kaseya customer value: Streamline the Windows 10 current user start menu.&#xD;&#xA;End user value: Removes non business and unwanted apps from the Windows 10 start menu for a clean look and feel.&#xD;&#xA;Dependencies: Windows 10.&#xD;&#xA;Usage: Schedule, Recurring or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for before, during and after statements.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
+            <Condition name="UserIsLoggedIn">
+              <Parameter xsi:type="StringParameter" name="UserName" value="" />
+            </Condition>
+            <Then>
+              <If description="">
+                <Condition name="Windows 32 or 64 Bit Check">
+                  <Parameter xsi:type="EnumParameter" name="Condition" value="Exists" />
+                </Condition>
+                <Then>
+                  <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Remove Windows 10 Modern Apps: Current user is #vAgentConfiguration.CurrentUser#" />
+                  </Statement>
+                  <Statement description="First we take a look at the current apps installed." name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="true" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="True" />
+                  </Statement>
+                  <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Remove Windows 10 Modern Apps: Apps before removal: #global:psresult#" />
+                  </Statement>
+                  <Statement description="Let's remove a bunch of Microsoft modern apps (if present) for the current user." name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="false" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *3dbuilder* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="true" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *alarms* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement description="Note: We decided to keep the Windows Calculator in this example. You may enable the step and remove if you wish." name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="true" osType="None">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *calculator* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="true" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *communications* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="true" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *camera* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="true" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *officehub* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="true" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *skypeapp* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="true" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *getstarted* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="true" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *zunemusic* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="true" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *maps* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="true" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *solitairecollection* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="true" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *bingfinance* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="true" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *zunevideo* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="true" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *bingnews* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="true" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *onenote* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="true" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *people* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="true" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *windowsphone* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="true" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *photos* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement description="Note: We decided to keep the Windows store in this example. You may enable the step and remove if you wish." name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="false" osType="None">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *windowsstore* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="false" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *bingsports* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="false" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *soundrecorder* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="false" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *bingweather* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="false" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *sway* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="false" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *xbox* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement description="Let's remove other non Microsoft apps (if present) for the current user." name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="false" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *CandyCrushSodaSaga* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="false" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *twitter* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement description="How do the list after removal compare with the one before?" name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="true" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="True" />
+                  </Statement>
+                  <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Remove Windows 10 Modern Apps: Apps after removal: #global:psresult#" />
+                  </Statement>
+                </Then>
+              </If>
+              <If description="">
+                <Condition name="Windows 32 or 64 Bit Check">
+                  <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+                </Condition>
+                <Then>
+                  <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Remove Windows 10 Modern Apps: Current user is #vAgentConfiguration.CurrentUser#" />
+                  </Statement>
+                  <Statement description="First we take a look at the current apps installed." name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="true" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="True" />
+                  </Statement>
+                  <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Remove Windows 10 Modern Apps: Apps before removal: #global:psresult#" />
+                  </Statement>
+                  <Statement description="Let's remove a bunch of Microsoft modern apps (if present) for the current user." name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="false" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *3dbuilder* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="true" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *alarms* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement description="Note: We decided to keep the Windows Calculator in this example. You may enable the step and remove if you wish." name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="true" osType="None">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *calculator* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="true" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *communications* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="true" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *camera* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="true" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *officehub* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="true" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *skypeapp* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="true" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *getstarted* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="true" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *zunemusic* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="true" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *maps* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="true" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *solitairecollection* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="true" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *bingfinance* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="true" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *zunevideo* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="true" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *bingnews* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="true" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *onenote* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="true" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *people* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="true" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *windowsphone* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="true" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *photos* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement description="Note: We decided to keep the Windows store in this example. You may enable the step and remove if you wish." name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="false" osType="None">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *windowsstore* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="false" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *bingsports* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="false" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *soundrecorder* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="false" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *bingweather* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="false" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *sway* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="false" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *xbox* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement description="Let's remove other non Microsoft apps (if present) for the current user." name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="false" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *CandyCrushSodaSaga* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="false" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage *twitter* | Remove-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="False" />
+                  </Statement>
+                  <Statement description="How do the list after removal compare with the one before?" name="Execute Powershell Command (64-bit, Run As User)" continueOnFail="true" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Parameter1" value="" />
+                    <Parameter xsi:type="StringParameter" name="Parameter2" value="Get-AppxPackage" />
+                    <Parameter xsi:type="StringParameter" name="Parameter3" value="True" />
+                  </Statement>
+                  <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Remove Windows 10 Modern Apps: Apps after removal: #global:psresult#" />
+                  </Statement>
+                </Then>
+              </If>
+            </Then>
+            <Else>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="10">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Remove Windows 10 Modern Apps: No action taken. There is no user logged in." />
+              </Statement>
+            </Else>
+          </If>
+          <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="10">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Remove Windows 10 Modern Apps: The Agent Procedure hit the last row and will now exit. Evaluate the Agent Procedure log output." />
+          </Statement>
+        </Body>
+      </Procedure>
+      <Procedure name="User Experience - Windows 10 - Remove Annoying App Suggestions" treePres="3" id="445980080" folderId="487889136694327" treeFullPath="Upstream Kaseya Power Pack.Windows 10 Specific Mgmnt 2018-12-19.Windows 10 User Experience">
+        <Body description="">
+          <If description="Procedure description: Removes the annoying Windows 10 app suggestion feature in start menu.&#xD;&#xA;Kaseya customer value: Streamline the Windows 10 current user start menu.&#xD;&#xA;End user value: Removes non business and unwanted clutter from the Windows 10 start menu for a clean look and feel.&#xD;&#xA;Dependencies: Windows 10.&#xD;&#xA;Usage: Schedule, Recurring or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for before, during and after statements.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
+            <Condition name="UserIsLoggedIn">
+              <Parameter xsi:type="StringParameter" name="UserName" value="" />
+            </Condition>
+            <Then>
+              <Statement name="SetRegistryValue" continueOnFail="false" osType="10">
+                <Parameter xsi:type="StringParameter" name="RegistryPath" value="HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\SystemPaneSuggestionsEnabled" />
+                <Parameter xsi:type="StringParameter" name="Value" value="0" />
+                <Parameter xsi:type="EnumParameter" name="DataType" value="Integer" />
+              </Statement>
+              <Statement name="GetVariable" continueOnFail="false" osType="10">
+                <Parameter xsi:type="EnumParameter" name="VariableType" value="RegistryValue" />
+                <Parameter xsi:type="StringParameter" name="SourceContent" value="HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\SystemPaneSuggestionsEnabled" />
+                <Parameter xsi:type="StringParameter" name="VariableName" value="setting" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="10">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Remove Windows 10 App suggestions: Registry set to #setting#" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="10">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Remove Windows 10 App suggestions: Take affect at next logon." />
+              </Statement>
+            </Then>
+            <Else>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="10">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Remove Windows 10 App suggestions: Skipped. No user logged in to apply registry setting to." />
+              </Statement>
+            </Else>
+          </If>
+          <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="10">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Remove Windows 10 App suggestions: The Agent Procedure hit the last row and will now exit. Evaluate the Agent Procedure log output." />
+          </Statement>
+        </Body>
+      </Procedure>
+    </Folder>
+  </Folder>
+</ScriptExport>

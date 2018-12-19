@@ -1,0 +1,1747 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ScriptExport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.kaseya.com/vsa/2008/12/Scripting">
+  <Folder name="Extended Audit (Custom Fields Required) 2018-10-26" treePres="3">
+    <Folder name="Linux" treePres="3">
+      <Procedure name="Custom Field - Audit - Linux Generic - System - Get Linux Kernel Version" treePres="3" id="1288353127" folderId="153249944631592" treeFullPath="Upstream Kaseya Power Pack.Extended Audit (Custom Fields Required) 2018-10-26.Linux">
+        <Body description="">
+          <Statement description="Create a custom field named &quot;CF Linux Kernel&quot; and update step 5 before running." name="ExecuteShellCommand" continueOnFail="false" osType="Linux">
+            <Parameter xsi:type="StringParameter" name="Command" value="uname -r  &gt;&gt; #vAgentConfiguration.agentTempDir#/linux-kernel.result" />
+            <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+            <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+          </Statement>
+          <Statement name="GetVariable" continueOnFail="false" osType="Linux">
+            <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+            <Parameter xsi:type="StringParameter" name="SourceContent" value="#vAgentConfiguration.agentTempDir#/linux-kernel.result" />
+            <Parameter xsi:type="StringParameter" name="VariableName" value="linux-kernel" />
+          </Statement>
+          <Statement name="DeleteFile" continueOnFail="false" osType="Linux">
+            <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#/linux-kernel.result" />
+          </Statement>
+          <Statement name="UpdateSystemInfo" continueOnFail="false" osType="Linux">
+            <Parameter xsi:type="StringParameter" name="ColumnName" value="Mac / Linux Kernel" />
+            <Parameter xsi:type="StringParameter" name="Value" value="#linux-kernel#" />
+          </Statement>
+          <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Linux">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: #linux-kernel# The Agent Procedure hit the last row and will now exit. Evaluate the Agent Procedure log output." />
+          </Statement>
+        </Body>
+      </Procedure>
+    </Folder>
+    <Folder name="Mac" treePres="3">
+      <Procedure name="Custom Field - Audit - Mac OS X - Get Current WIFI Signal Strength" treePres="3" id="2126661294" folderId="944197126312272" treeFullPath="Upstream Kaseya Power Pack.Extended Audit (Custom Fields Required) 2018-10-26.Mac">
+        <Body description="Description: Detects current disk temperature and writes the results to a custom field and in the the script log.&#xA;&#xA;Kaseya customer value: Procedure to secure clients from unwanted downtime and data loss.&#xA;&#xA;End user value: Limiting the risks for unwanted downtime and data loss.&#xA;&#xA;Dependencies: Windows OS. Make sure you have created &quot;CF Disk Temp&quot; (string) under &quot;Audit, Custom Fields&quot;.&#xA;&#xA;Usage: Run at any given time.&#xA;&#xA;Report options: Procedure Log, content: &quot;GetDiskTemp:*&quot; and Aggregate Table, Diskt Temp.&#xA;&#xA;Script maintainer: ronny [at] upstream.se&#xA;&#xA;Support: This script is delivered &quot;as is&quot;. No support included.">
+          <Statement name="ExecuteShellCommand" continueOnFail="false" osType="MacOS">
+            <Parameter xsi:type="StringParameter" name="Command" value="/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | grep -w SSID | cut -c18- &gt;&gt;#vAgentConfiguration.agentTempDir#/current_wifi_ssid.result" />
+            <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+            <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+          </Statement>
+          <Statement name="ExecuteShellCommand" continueOnFail="false" osType="MacOS">
+            <Parameter xsi:type="StringParameter" name="Command" value="/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | grep CtlRSSI | cut -c18- &gt;&gt;#vAgentConfiguration.agentTempDir#/current_wifi_signal_strength.result" />
+            <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+            <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+          </Statement>
+          <Statement name="GetVariable" continueOnFail="false" osType="MacOS">
+            <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+            <Parameter xsi:type="StringParameter" name="SourceContent" value="#vAgentConfiguration.agentTempDir#/current_wifi_ssid.result" />
+            <Parameter xsi:type="StringParameter" name="VariableName" value="current_wifi_ssid" />
+          </Statement>
+          <Statement name="GetVariable" continueOnFail="false" osType="MacOS">
+            <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+            <Parameter xsi:type="StringParameter" name="SourceContent" value="#vAgentConfiguration.agentTempDir#/current_wifi_signal_strength.result" />
+            <Parameter xsi:type="StringParameter" name="VariableName" value="current_wifi_signal_strength" />
+          </Statement>
+          <Statement name="UpdateSystemInfo" continueOnFail="false" osType="MacOS">
+            <Parameter xsi:type="StringParameter" name="ColumnName" value="CF Last Used Wifi SSID" />
+            <Parameter xsi:type="StringParameter" name="Value" value="#current_wifi_ssid#" />
+          </Statement>
+          <Statement name="UpdateSystemInfo" continueOnFail="false" osType="MacOS">
+            <Parameter xsi:type="StringParameter" name="ColumnName" value="CF Last Wifi Signal Strength" />
+            <Parameter xsi:type="StringParameter" name="Value" value="#current_wifi_signal_strength#" />
+          </Statement>
+          <Statement name="DeleteFile" continueOnFail="false" osType="MacOS">
+            <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#/current_wifi_ssid.result" />
+          </Statement>
+          <Statement name="DeleteFile" continueOnFail="false" osType="MacOS">
+            <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#/current_wifi_signal_strength.result" />
+          </Statement>
+          <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="MacOS">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Wifi Info: #current_wifi_ssid# #current_wifi_signal_strength#" />
+          </Statement>
+        </Body>
+      </Procedure>
+      <Procedure name="Custom Field - Audit - Mac OS X - System - Get Kernel Version" treePres="3" id="1168866076" folderId="944197126312272" treeFullPath="Upstream Kaseya Power Pack.Extended Audit (Custom Fields Required) 2018-10-26.Mac">
+        <Body description="">
+          <Statement description="Create a custom field named &quot;CF OS X Kernel&quot; and update step 5 before running." name="ExecuteShellCommand" continueOnFail="false" osType="MacOS">
+            <Parameter xsi:type="StringParameter" name="Command" value="uname -r  &gt;&gt; #vAgentConfiguration.agentTempDir#/osx-kernel.result" />
+            <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+            <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+          </Statement>
+          <Statement name="GetVariable" continueOnFail="false" osType="MacOS">
+            <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+            <Parameter xsi:type="StringParameter" name="SourceContent" value="#vAgentConfiguration.agentTempDir#/osx-kernel.result" />
+            <Parameter xsi:type="StringParameter" name="VariableName" value="osx-kernel" />
+          </Statement>
+          <Statement name="DeleteFile" continueOnFail="false" osType="MacOS">
+            <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#/osx-kernel.result" />
+          </Statement>
+          <Statement name="UpdateSystemInfo" continueOnFail="false" osType="MacOS">
+            <Parameter xsi:type="StringParameter" name="ColumnName" value="Mac / Linux Kernel" />
+            <Parameter xsi:type="StringParameter" name="Value" value="#osx-kernel#" />
+          </Statement>
+          <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="MacOS">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Kernel Version: #osx-kernel#" />
+          </Statement>
+        </Body>
+      </Procedure>
+    </Folder>
+    <Folder name="Windows" treePres="3">
+      <Procedure name="Custom Field - Audit - Windows - Get .NET 4.5 Version Number" treePres="3" id="211070858" folderId="869681115248091" treeFullPath="Upstream Kaseya Power Pack.Extended Audit (Custom Fields Required) 2018-10-26.Windows">
+        <Body description="">
+          <If description="Procedure description: Get version of .net 4.5&#xD;&#xA;Kaseya customer value: Procedure for pro-active support and troubleshooting. Knowing the age of the OS.&#xD;&#xA;End user value: Knowing the .net version&#xD;&#xA;Dependencies: Windows OS. CUT present i Kworking. Custom field &quot;CF_dotNET_Version&quot;&#xD;&#xA;Usage: Schedule once or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for &quot;Upstream: .NET Version&quot; before, during and after update deployment statements.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------&#xD;&#xA;Stage 1: We need GREP and CUT later on. Let's download if not present. Don't trust us? Look for GNU win32 on Sourceforge.">
+            <Condition name="TestFile">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\cut.exe" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+              <Parameter xsi:type="StringParameter" name="Value" value="" />
+            </Condition>
+            <Then>
+              <Statement name="GetURL" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/xpA9kZ12sPVNqGe/download" />
+                <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\cut.exe" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="">
+            <Condition name="TestFile">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\grep.exe" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+              <Parameter xsi:type="StringParameter" name="Value" value="" />
+            </Condition>
+            <Then>
+              <Statement name="GetURL" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/CBpPnAk64JFb5Xy/download" />
+                <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\grep.exe" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="">
+            <Condition name="TestFile">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\libiconv2.dll" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+              <Parameter xsi:type="StringParameter" name="Value" value="" />
+            </Condition>
+            <Then>
+              <Statement name="GetURL" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/fpORA7CwbVT2bot/download" />
+                <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\libiconv2.dll" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="">
+            <Condition name="TestFile">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\libintl3.dll" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+              <Parameter xsi:type="StringParameter" name="Value" value="" />
+            </Condition>
+            <Then>
+              <Statement name="GetURL" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/TvnmSmeJHNMGhC5/download" />
+                <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\libintl3.dll" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="">
+            <Condition name="TestFile">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\pcre3.dll" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+              <Parameter xsi:type="StringParameter" name="Value" value="" />
+            </Condition>
+            <Then>
+              <Statement name="GetURL" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/UCCmJfmJgwq1a7Y/download" />
+                <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\pcre3.dll" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="">
+            <Condition name="TestFile">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\regex2.dll" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+              <Parameter xsi:type="StringParameter" name="Value" value="" />
+            </Condition>
+            <Then>
+              <Statement name="GetURL" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/aR2qPyzgJwBa1Gt/download" />
+                <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\regex2.dll" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+            </Then>
+          </If>
+          <Statement description="Get HEX reg value for .net 4.5" name="ExecuteShellCommand" continueOnFail="false">
+            <Parameter xsi:type="StringParameter" name="Command" value="REG QUERY &quot;HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full&quot; /v /e /f Release | find &quot;Release&quot; | #vAgentConfiguration.agentTempDir#\cut -c29-35 &gt;&gt; #vAgentConfiguration.agentTempDir#\dotnet.results" />
+            <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+            <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+          </Statement>
+          <Statement name="GetVariable" continueOnFail="false">
+            <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+            <Parameter xsi:type="StringParameter" name="SourceContent" value="#vAgentConfiguration.agentTempDir#\dotnet.results" />
+            <Parameter xsi:type="StringParameter" name="VariableName" value="dotnet.results" />
+          </Statement>
+          <If description="">
+            <Condition name="CheckVariable">
+              <Parameter xsi:type="StringParameter" name="VariableName" value="#dotnet.results#" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Contains" />
+              <Parameter xsi:type="StringParameter" name="Value" value="x" />
+            </Condition>
+            <Then>
+              <Statement description="Convert from HEX to DEC" name="ExecuteShellCommand" continueOnFail="false">
+                <Parameter xsi:type="StringParameter" name="Command" value="set /a DEC=#dotnet.results# &gt;&gt; #vAgentConfiguration.agentTempDir#\dotnetversion.results" />
+                <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+              </Statement>
+              <Statement name="GetVariable" continueOnFail="false">
+                <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+                <Parameter xsi:type="StringParameter" name="SourceContent" value="#vAgentConfiguration.agentTempDir#\dotnetversion.results" />
+                <Parameter xsi:type="StringParameter" name="VariableName" value="dotnet.version" />
+              </Statement>
+              <If description="Convert DEC to version number and put custom field and procedure log">
+                <Condition name="CheckVariable">
+                  <Parameter xsi:type="StringParameter" name="VariableName" value="#dotnet.version#" />
+                  <Parameter xsi:type="EnumParameter" name="Condition" value="Equals" />
+                  <Parameter xsi:type="StringParameter" name="Value" value="378389" />
+                </Condition>
+                <Then>
+                  <Statement name="WriteScriptLogEntry" continueOnFail="false">
+                    <Parameter xsi:type="StringParameter" name="Comment" value="Upstream: .NET version 4.5 installed" />
+                  </Statement>
+                  <Statement name="UpdateSystemInfo" continueOnFail="false">
+                    <Parameter xsi:type="StringParameter" name="ColumnName" value="CF_dotNET_Version" />
+                    <Parameter xsi:type="StringParameter" name="Value" value="4.5" />
+                  </Statement>
+                </Then>
+              </If>
+              <If description="">
+                <Condition name="CheckVariable">
+                  <Parameter xsi:type="StringParameter" name="VariableName" value="#dotnet.version#" />
+                  <Parameter xsi:type="EnumParameter" name="Condition" value="Equals" />
+                  <Parameter xsi:type="StringParameter" name="Value" value="378675" />
+                </Condition>
+                <Then>
+                  <Statement name="WriteScriptLogEntry" continueOnFail="false">
+                    <Parameter xsi:type="StringParameter" name="Comment" value="Upstream: .NET version 4.5.1 installed" />
+                  </Statement>
+                  <Statement name="UpdateSystemInfo" continueOnFail="false">
+                    <Parameter xsi:type="StringParameter" name="ColumnName" value="CF_dotNET_Version" />
+                    <Parameter xsi:type="StringParameter" name="Value" value="4.5.1" />
+                  </Statement>
+                </Then>
+              </If>
+              <If description="">
+                <Condition name="CheckVariable">
+                  <Parameter xsi:type="StringParameter" name="VariableName" value="#dotnet.version#" />
+                  <Parameter xsi:type="EnumParameter" name="Condition" value="Equals" />
+                  <Parameter xsi:type="StringParameter" name="Value" value="378758" />
+                </Condition>
+                <Then>
+                  <Statement name="WriteScriptLogEntry" continueOnFail="false">
+                    <Parameter xsi:type="StringParameter" name="Comment" value="Upstream: .NET version 4.5.1 installed" />
+                  </Statement>
+                  <Statement name="UpdateSystemInfo" continueOnFail="false">
+                    <Parameter xsi:type="StringParameter" name="ColumnName" value="CF_dotNET_Version" />
+                    <Parameter xsi:type="StringParameter" name="Value" value="4.5.1" />
+                  </Statement>
+                </Then>
+              </If>
+              <If description="">
+                <Condition name="CheckVariable">
+                  <Parameter xsi:type="StringParameter" name="VariableName" value="#dotnet.version#" />
+                  <Parameter xsi:type="EnumParameter" name="Condition" value="Equals" />
+                  <Parameter xsi:type="StringParameter" name="Value" value="379893" />
+                </Condition>
+                <Then>
+                  <Statement name="WriteScriptLogEntry" continueOnFail="false">
+                    <Parameter xsi:type="StringParameter" name="Comment" value="Upstream: .NET version 4.5.2 installed" />
+                  </Statement>
+                  <Statement name="UpdateSystemInfo" continueOnFail="false">
+                    <Parameter xsi:type="StringParameter" name="ColumnName" value="CF_dotNET_Version" />
+                    <Parameter xsi:type="StringParameter" name="Value" value="4.5.2" />
+                  </Statement>
+                </Then>
+              </If>
+              <If description="">
+                <Condition name="CheckVariable">
+                  <Parameter xsi:type="StringParameter" name="VariableName" value="#dotnet.version#" />
+                  <Parameter xsi:type="EnumParameter" name="Condition" value="Equals" />
+                  <Parameter xsi:type="StringParameter" name="Value" value="393295" />
+                </Condition>
+                <Then>
+                  <Statement name="WriteScriptLogEntry" continueOnFail="false">
+                    <Parameter xsi:type="StringParameter" name="Comment" value="Upstream: .NET version 4.6 installed" />
+                  </Statement>
+                  <Statement name="UpdateSystemInfo" continueOnFail="false">
+                    <Parameter xsi:type="StringParameter" name="ColumnName" value="CF_dotNET_Version" />
+                    <Parameter xsi:type="StringParameter" name="Value" value="4.6" />
+                  </Statement>
+                </Then>
+              </If>
+              <If description="">
+                <Condition name="CheckVariable">
+                  <Parameter xsi:type="StringParameter" name="VariableName" value="#dotnet.version#" />
+                  <Parameter xsi:type="EnumParameter" name="Condition" value="Equals" />
+                  <Parameter xsi:type="StringParameter" name="Value" value="393297" />
+                </Condition>
+                <Then>
+                  <Statement name="WriteScriptLogEntry" continueOnFail="false">
+                    <Parameter xsi:type="StringParameter" name="Comment" value="Upstream: .NET version 4.6 installed" />
+                  </Statement>
+                  <Statement name="UpdateSystemInfo" continueOnFail="false">
+                    <Parameter xsi:type="StringParameter" name="ColumnName" value="CF_dotNET_Version" />
+                    <Parameter xsi:type="StringParameter" name="Value" value="4.6" />
+                  </Statement>
+                </Then>
+              </If>
+              <If description="">
+                <Condition name="CheckVariable">
+                  <Parameter xsi:type="StringParameter" name="VariableName" value="#dotnet.version#" />
+                  <Parameter xsi:type="EnumParameter" name="Condition" value="Equals" />
+                  <Parameter xsi:type="StringParameter" name="Value" value="394254" />
+                </Condition>
+                <Then>
+                  <Statement name="WriteScriptLogEntry" continueOnFail="false">
+                    <Parameter xsi:type="StringParameter" name="Comment" value="Upstream: .NET version 4.6.1 installed" />
+                  </Statement>
+                  <Statement name="UpdateSystemInfo" continueOnFail="false">
+                    <Parameter xsi:type="StringParameter" name="ColumnName" value="CF_dotNET_Version" />
+                    <Parameter xsi:type="StringParameter" name="Value" value="4.6.1" />
+                  </Statement>
+                </Then>
+              </If>
+              <If description="">
+                <Condition name="CheckVariable">
+                  <Parameter xsi:type="StringParameter" name="VariableName" value="#dotnet.version#" />
+                  <Parameter xsi:type="EnumParameter" name="Condition" value="Equals" />
+                  <Parameter xsi:type="StringParameter" name="Value" value="394271" />
+                </Condition>
+                <Then>
+                  <Statement name="WriteScriptLogEntry" continueOnFail="false">
+                    <Parameter xsi:type="StringParameter" name="Comment" value="Upstream: .NET version 4.6.1 installed" />
+                  </Statement>
+                  <Statement name="UpdateSystemInfo" continueOnFail="false">
+                    <Parameter xsi:type="StringParameter" name="ColumnName" value="CF_dotNET_Version" />
+                    <Parameter xsi:type="StringParameter" name="Value" value="4.6.1" />
+                  </Statement>
+                </Then>
+              </If>
+              <If description="">
+                <Condition name="CheckVariable">
+                  <Parameter xsi:type="StringParameter" name="VariableName" value="#dotnet.version#" />
+                  <Parameter xsi:type="EnumParameter" name="Condition" value="Equals" />
+                  <Parameter xsi:type="StringParameter" name="Value" value="394802" />
+                </Condition>
+                <Then>
+                  <Statement name="WriteScriptLogEntry" continueOnFail="false">
+                    <Parameter xsi:type="StringParameter" name="Comment" value="Upstream: .NET version 4.6.2 installed" />
+                  </Statement>
+                  <Statement name="UpdateSystemInfo" continueOnFail="false">
+                    <Parameter xsi:type="StringParameter" name="ColumnName" value="CF_dotNET_Version" />
+                    <Parameter xsi:type="StringParameter" name="Value" value="4.6.2" />
+                  </Statement>
+                </Then>
+              </If>
+              <If description="">
+                <Condition name="CheckVariable">
+                  <Parameter xsi:type="StringParameter" name="VariableName" value="#dotnet.version#" />
+                  <Parameter xsi:type="EnumParameter" name="Condition" value="Equals" />
+                  <Parameter xsi:type="StringParameter" name="Value" value="394806" />
+                </Condition>
+                <Then>
+                  <Statement name="WriteScriptLogEntry" continueOnFail="false">
+                    <Parameter xsi:type="StringParameter" name="Comment" value="Upstream: .NET version 4.6.2 installed" />
+                  </Statement>
+                  <Statement name="UpdateSystemInfo" continueOnFail="false">
+                    <Parameter xsi:type="StringParameter" name="ColumnName" value="CF_dotNET_Version" />
+                    <Parameter xsi:type="StringParameter" name="Value" value="4.6.2" />
+                  </Statement>
+                </Then>
+              </If>
+              <If description="">
+                <Condition name="CheckVariable">
+                  <Parameter xsi:type="StringParameter" name="VariableName" value="#dotnet.version#" />
+                  <Parameter xsi:type="EnumParameter" name="Condition" value="Equals" />
+                  <Parameter xsi:type="StringParameter" name="Value" value="460798" />
+                </Condition>
+                <Then>
+                  <Statement name="WriteScriptLogEntry" continueOnFail="false">
+                    <Parameter xsi:type="StringParameter" name="Comment" value="Upstream: .NET version 4.7 installed" />
+                  </Statement>
+                  <Statement name="UpdateSystemInfo" continueOnFail="false">
+                    <Parameter xsi:type="StringParameter" name="ColumnName" value="CF_dotNET_Version" />
+                    <Parameter xsi:type="StringParameter" name="Value" value="4.7" />
+                  </Statement>
+                </Then>
+              </If>
+              <If description="">
+                <Condition name="CheckVariable">
+                  <Parameter xsi:type="StringParameter" name="VariableName" value="#dotnet.version#" />
+                  <Parameter xsi:type="EnumParameter" name="Condition" value="Equals" />
+                  <Parameter xsi:type="StringParameter" name="Value" value="460805" />
+                </Condition>
+                <Then>
+                  <Statement name="WriteScriptLogEntry" continueOnFail="false">
+                    <Parameter xsi:type="StringParameter" name="Comment" value="Upstream: .NET version 4.7 installed" />
+                  </Statement>
+                  <Statement name="UpdateSystemInfo" continueOnFail="false">
+                    <Parameter xsi:type="StringParameter" name="ColumnName" value="CF_dotNET_Version" />
+                    <Parameter xsi:type="StringParameter" name="Value" value="4.7" />
+                  </Statement>
+                </Then>
+              </If>
+            </Then>
+          </If>
+          <Statement description="cleanup" name="DeleteFile" continueOnFail="false">
+            <Parameter xsi:type="StringParameter" name="Path" value=" #vAgentConfiguration.agentTempDir#\dotnetversion.results" />
+          </Statement>
+          <Statement name="DeleteFile" continueOnFail="false">
+            <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\dotnet.results" />
+          </Statement>
+        </Body>
+      </Procedure>
+      <Procedure name="Custom Field - Audit - Windows - Get Current Temp On Drive(s)" treePres="3" id="1969820934" folderId="869681115248091" treeFullPath="Upstream Kaseya Power Pack.Extended Audit (Custom Fields Required) 2018-10-26.Windows">
+        <Body description="">
+          <If description="Procedure description: Get the disktemp on the drives on the machine.&#xD;&#xA;Kaseya customer value: Procedure for pro-active support and troubleshooting harddrive problems.&#xD;&#xA;End user value: Prevent any production and data loss tied to harddrive failure.&#xD;&#xA;Dependencies: Windows OS. Custom Field &quot;CF Disk Temp&quot;.&#xD;&#xA;Usage: Schedule once or Run Now.&#xD;&#xA;Report options: Agent Procedure log.&#xD;&#xA;Maintainer: powerpack@upstream.se Last change: 2017-09-28&#xD;&#xA;------------------------------------------------------------------------------------------------------------&#xD;&#xA;First we need a file.">
+            <Condition name="TestFile">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\disktemp.exe" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+              <Parameter xsi:type="StringParameter" name="Value" value="" />
+            </Condition>
+            <Then>
+              <Statement name="GetURL" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/M0Q0RMd0D3yERYC/download" />
+                <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\disktemp.exe" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+            </Then>
+          </If>
+          <Statement name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+            <Parameter xsi:type="StringParameter" name="Command" value="#vAgentConfiguration.agentTempDir#\disktemp.exe &gt;&gt;#vAgentConfiguration.agentTempDir#\disktemp.result" />
+            <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+            <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+          </Statement>
+          <If description="">
+            <Condition name="TestFile">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\disktemp.result" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Exists" />
+              <Parameter xsi:type="StringParameter" name="Value" value="" />
+            </Condition>
+            <Then>
+              <Statement name="GetVariable" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+                <Parameter xsi:type="StringParameter" name="SourceContent" value="#vAgentConfiguration.agentTempDir#\disktemp.result" />
+                <Parameter xsi:type="StringParameter" name="VariableName" value="disktemp" />
+              </Statement>
+              <Statement name="UpdateSystemInfo" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="ColumnName" value="CF Disk Temp" />
+                <Parameter xsi:type="StringParameter" name="Value" value="#disktemp#" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="true" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Disktemp: #disktemp#" />
+              </Statement>
+            </Then>
+            <Else>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: OS Install Date: No result exists. Run &quot;wmic os get installdate&quot; manually to troubleshoot." />
+              </Statement>
+            </Else>
+          </If>
+          <Statement name="DeleteFile" continueOnFail="true" osType="Windows">
+            <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\disktemp.result" />
+          </Statement>
+          <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Disktemp: #disktemp#" />
+          </Statement>
+          <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Disktemp: The Agent Procedure hit the last row and will now exit. Evaluate the Agent Procedure log output." />
+          </Statement>
+        </Body>
+      </Procedure>
+      <Procedure name="Custom Field - Audit - Windows - Get Current WIFI Signal Strength" treePres="3" id="473384581" folderId="869681115248091" treeFullPath="Upstream Kaseya Power Pack.Extended Audit (Custom Fields Required) 2018-10-26.Windows">
+        <Body description="">
+          <Statement description="Procedure description: Get current WIFI SSID and signal strength.&#xD;&#xA;Kaseya customer value: Procedure for pro-active support and troubleshooting.&#xD;&#xA;End user value: Limiting the risks for unwanted external Java related attacks, downtime and data loss.&#xD;&#xA;Dependencies: Windows OS. GREP and CUT present i Kworking. Custom fields &quot;CF Last Used Wifi SSID&quot; and &quot;CF Last Wifi Signal Strength&quot;.&#xD;&#xA;Usage: Schedule or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for &quot;UPSTREAM: Wifi Info:&quot; before, during and after update deployment statements.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------&#xD;&#xA;Stage 1: We need GREP and CUT later on. Let's download if not present. Don't trust us? Look for GNU win32 on Sourceforge." name="WriteScriptLogEntry" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Wifi Info: Entering Stage 1. Copy GREP and CUT if needed." />
+          </Statement>
+          <If description="">
+            <Condition name="TestFile">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\cut.exe" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+              <Parameter xsi:type="StringParameter" name="Value" value="" />
+            </Condition>
+            <Then>
+              <Statement name="GetURL" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/xpA9kZ12sPVNqGe/download" />
+                <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\cut.exe" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="">
+            <Condition name="TestFile">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\grep.exe" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+              <Parameter xsi:type="StringParameter" name="Value" value="" />
+            </Condition>
+            <Then>
+              <Statement name="GetURL" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/CBpPnAk64JFb5Xy/download" />
+                <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\grep.exe" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="">
+            <Condition name="TestFile">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\libiconv2.dll" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+              <Parameter xsi:type="StringParameter" name="Value" value="" />
+            </Condition>
+            <Then>
+              <Statement name="GetURL" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/fpORA7CwbVT2bot/download" />
+                <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\libiconv2.dll" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="">
+            <Condition name="TestFile">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\libintl3.dll" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+              <Parameter xsi:type="StringParameter" name="Value" value="" />
+            </Condition>
+            <Then>
+              <Statement name="GetURL" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/TvnmSmeJHNMGhC5/download" />
+                <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\libintl3.dll" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="">
+            <Condition name="TestFile">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\pcre3.dll" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+              <Parameter xsi:type="StringParameter" name="Value" value="" />
+            </Condition>
+            <Then>
+              <Statement name="GetURL" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/UCCmJfmJgwq1a7Y/download" />
+                <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\pcre3.dll" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="">
+            <Condition name="TestFile">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\regex2.dll" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+              <Parameter xsi:type="StringParameter" name="Value" value="" />
+            </Condition>
+            <Then>
+              <Statement name="GetURL" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/aR2qPyzgJwBa1Gt/download" />
+                <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\regex2.dll" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+            </Then>
+          </If>
+          <Statement description="------------------------------------------------------------------------------------------------------------&#xD;&#xA;Stage 2: We look for WLAN statistics and do a little old school text manipulation with GREP and CUT." name="WriteScriptLogEntry" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Wifi Info: Entering Stage 2: The WIFI audit part." />
+          </Statement>
+          <Statement name="ExecuteShellCommand" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="StringParameter" name="Command" value="netsh wlan show interfaces | #vAgentConfiguration.agentTempDir#\grep -w SSID | #vAgentConfiguration.agentTempDir#\cut -c30- &gt;&gt;#vAgentConfiguration.agentTempDir#\current_wifi_ssid.result" />
+            <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+            <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+          </Statement>
+          <Statement name="ExecuteShellCommand" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="StringParameter" name="Command" value="netsh wlan show interfaces | #vAgentConfiguration.agentTempDir#\grep -w Signal | #vAgentConfiguration.agentTempDir#\cut -c30- &gt;&gt;#vAgentConfiguration.agentTempDir#\current_wifi_signal_strength.result" />
+            <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+            <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+          </Statement>
+          <Statement description="------------------------------------------------------------------------------------------------------------&#xD;&#xA;Stage 3: Let's get the results back in to Kaseya by populating custom fields and the Agent Procedure Log." name="WriteScriptLogEntry" continueOnFail="false">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Wifi Info: Entering Stage 3: Getting the results back to Kaseya." />
+          </Statement>
+          <If description="">
+            <Condition name="TestFile">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\current_wifi_ssid.result" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Exists" />
+              <Parameter xsi:type="StringParameter" name="Value" value="" />
+            </Condition>
+            <Then>
+              <Statement name="GetVariable" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+                <Parameter xsi:type="StringParameter" name="SourceContent" value="#vAgentConfiguration.agentTempDir#\current_wifi_ssid.result" />
+                <Parameter xsi:type="StringParameter" name="VariableName" value="current_wifi_ssid" />
+              </Statement>
+              <Statement name="UpdateSystemInfo" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                <Parameter xsi:type="StringParameter" name="ColumnName" value="CF Last Used Wifi SSID" />
+                <Parameter xsi:type="StringParameter" name="Value" value="#current_wifi_ssid#" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="true" osType="NT4|2000|XP|2003|Vista|2008">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Wifi Info: Wifi SSID #current_wifi_ssid# detected." />
+              </Statement>
+              <Statement name="DeleteFile" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\current_wifi_ssid.result" />
+              </Statement>
+            </Then>
+            <Else>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Wifi Info: Error: SSID variable not detected. Try to run the command &quot;netsh wlan show&quot; manually to troubleshoot." />
+              </Statement>
+            </Else>
+          </If>
+          <If description="">
+            <Condition name="TestFile">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\current_wifi_signal_strength.result" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Exists" />
+              <Parameter xsi:type="StringParameter" name="Value" value="" />
+            </Condition>
+            <Then>
+              <Statement name="GetVariable" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+                <Parameter xsi:type="StringParameter" name="SourceContent" value="#vAgentConfiguration.agentTempDir#\current_wifi_signal_strength.result" />
+                <Parameter xsi:type="StringParameter" name="VariableName" value="current_wifi_signal_strength" />
+              </Statement>
+              <Statement name="UpdateSystemInfo" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                <Parameter xsi:type="StringParameter" name="ColumnName" value="CF Last Wifi Signal Strength" />
+                <Parameter xsi:type="StringParameter" name="Value" value="#current_wifi_signal_strength#" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="true" osType="NT4|2000|XP|2003|Vista|2008">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Wifi Info: Wifi Strength #current_wifi_signal_strength# detected." />
+              </Statement>
+              <Statement name="DeleteFile" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\current_wifi_signal_strength.result" />
+              </Statement>
+            </Then>
+            <Else>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Wifi Info: Error: Signal Strength variable not detected. Try to run the command &quot;netsh wlan show&quot; manually to troubleshoot." />
+              </Statement>
+            </Else>
+          </If>
+          <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Wifi Info: The Agent Procedure hit the last row and will now exit. Evaluate the Agent Procedure log output." />
+          </Statement>
+        </Body>
+      </Procedure>
+      <Procedure name="Custom Field - Audit - Windows - Get Current WIFI Supported Radio Types" treePres="3" id="1049547137" folderId="869681115248091" treeFullPath="Upstream Kaseya Power Pack.Extended Audit (Custom Fields Required) 2018-10-26.Windows">
+        <Body description="">
+          <Statement description="Procedure description: Get current WIFI Supported Radio Types.&#xD;&#xA;Kaseya customer value: Procedure for pro-active support and troubleshooting.&#xD;&#xA;Dependencies: Windows OS. GREP and CUT present i Kworking. Custom fields &quot;CF Wifi Radio Types&quot;.&#xD;&#xA;Usage: Schedule or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for &quot;UPSTREAM: Wifi Info:&quot; before, during and after update deployment statements.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------&#xD;&#xA;Stage 1: We need GREP and CUT later on. Let's download if not present. Don't trust us? Look for GNU win32 on Sourceforge." name="WriteScriptLogEntry" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Wifi Radio Info: Entering Stage 1. Copy GREP adn CUT if needed." />
+          </Statement>
+          <If description="">
+            <Condition name="TestFile">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\cut.exe" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+              <Parameter xsi:type="StringParameter" name="Value" value="" />
+            </Condition>
+            <Then>
+              <Statement name="GetURL" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/xpA9kZ12sPVNqGe/download" />
+                <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\cut.exe" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="">
+            <Condition name="TestFile">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\grep.exe" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+              <Parameter xsi:type="StringParameter" name="Value" value="" />
+            </Condition>
+            <Then>
+              <Statement name="GetURL" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/CBpPnAk64JFb5Xy/download" />
+                <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\grep.exe" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="">
+            <Condition name="TestFile">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\libiconv2.dll" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+              <Parameter xsi:type="StringParameter" name="Value" value="" />
+            </Condition>
+            <Then>
+              <Statement name="GetURL" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/fpORA7CwbVT2bot/download" />
+                <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\libiconv2.dll" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="">
+            <Condition name="TestFile">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\libintl3.dll" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+              <Parameter xsi:type="StringParameter" name="Value" value="" />
+            </Condition>
+            <Then>
+              <Statement name="GetURL" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/TvnmSmeJHNMGhC5/download" />
+                <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\libintl3.dll" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="">
+            <Condition name="TestFile">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\pcre3.dll" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+              <Parameter xsi:type="StringParameter" name="Value" value="" />
+            </Condition>
+            <Then>
+              <Statement name="GetURL" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/UCCmJfmJgwq1a7Y/download" />
+                <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\pcre3.dll" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="">
+            <Condition name="TestFile">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\regex2.dll" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+              <Parameter xsi:type="StringParameter" name="Value" value="" />
+            </Condition>
+            <Then>
+              <Statement name="GetURL" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/aR2qPyzgJwBa1Gt/download" />
+                <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\regex2.dll" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+            </Then>
+          </If>
+          <Statement description="------------------------------------------------------------------------------------------------------------&#xD;&#xA;Swedish or English tester. If Swedish look for Radiotyper if not look for Radio" name="ExecuteShellCommand" continueOnFail="false">
+            <Parameter xsi:type="StringParameter" name="Command" value="netsh wlan show drivers &gt;&gt; #vAgentConfiguration.agentTempDir#\swe-eng-tester.txt" />
+            <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+            <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+          </Statement>
+          <Statement name="PauseScript" continueOnFail="false">
+            <Parameter xsi:type="IntegerParameter" name="Seconds" value="5" />
+          </Statement>
+          <If description="">
+            <Condition name="TestFile">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\swe-eng-tester.txt" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Contains" />
+              <Parameter xsi:type="StringParameter" name="Value" value="Radiotyper" />
+            </Condition>
+            <Then>
+              <Statement description="Stage 2: We look for WLAN statistics and do a little text manipulation with GREP adn CUT." name="WriteScriptLogEntry" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Wifi Info: Entering Stage 2: The WIFI audit part." />
+              </Statement>
+              <Statement name="ExecuteShellCommand" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                <Parameter xsi:type="StringParameter" name="Command" value="netsh wlan show drivers | #vAgentConfiguration.agentTempDir#\grep -w Radiotyper | #vAgentConfiguration.agentTempDir#\cut -c41- &gt;&gt; #vAgentConfiguration.agentTempDir#\current_wifi_radio.result" />
+                <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+              </Statement>
+              <Statement description="------------------------------------------------------------------------------------------------------------&#xD;&#xA;Stage 3: Let's get the results back in to Kaseya by populating custom fields and the Agent Procedure Log." name="WriteScriptLogEntry" continueOnFail="false">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Wifi Radio Type: Entering Stage 3: Getting the results back to Kaseya." />
+              </Statement>
+              <If description="">
+                <Condition name="TestFile">
+                  <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\current_wifi_radio.result" />
+                  <Parameter xsi:type="EnumParameter" name="Condition" value="Exists" />
+                  <Parameter xsi:type="StringParameter" name="Value" value="" />
+                </Condition>
+                <Then>
+                  <Statement name="GetVariable" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                    <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+                    <Parameter xsi:type="StringParameter" name="SourceContent" value="#vAgentConfiguration.agentTempDir#\current_wifi_radio.result" />
+                    <Parameter xsi:type="StringParameter" name="VariableName" value="current_wifi_radio" />
+                  </Statement>
+                  <Statement name="UpdateSystemInfo" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                    <Parameter xsi:type="StringParameter" name="ColumnName" value="CF Wifi Radio Types" />
+                    <Parameter xsi:type="StringParameter" name="Value" value="#current_wifi_radio#" />
+                  </Statement>
+                  <Statement name="WriteScriptLogEntry" continueOnFail="true" osType="NT4|2000|XP|2003|Vista|2008">
+                    <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Wifi Info: Wifi Radio Types #current_wifi_radio# detected." />
+                  </Statement>
+                  <Statement name="DeleteFile" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                    <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\current_wifi_radio.result" />
+                  </Statement>
+                </Then>
+                <Else>
+                  <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                    <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Wifi Info: Error: Radio variable not detected. Try to run the command &quot;netsh wlan show&quot; manually to troubleshoot." />
+                  </Statement>
+                </Else>
+              </If>
+            </Then>
+            <Else>
+              <Statement description="Stage 2: We look for WLAN statistics and do a little text manipulation with GREP adn CUT." name="WriteScriptLogEntry" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Wifi Info: Entering Stage 2: The WIFI audit part." />
+              </Statement>
+              <Statement name="ExecuteShellCommand" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                <Parameter xsi:type="StringParameter" name="Command" value="netsh wlan show drivers | #vAgentConfiguration.agentTempDir#\grep -w Radio | #vAgentConfiguration.agentTempDir#\cut -c33- &gt;&gt; #vAgentConfiguration.agentTempDir#\current_wifi_radio.result" />
+                <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+              </Statement>
+              <Statement description="------------------------------------------------------------------------------------------------------------&#xD;&#xA;Stage 3: Let's get the results back in to Kaseya by populating custom fields and the Agent Procedure Log." name="WriteScriptLogEntry" continueOnFail="false">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Wifi Radio Type: Entering Stage 3: Getting the results back to Kaseya." />
+              </Statement>
+              <If description="">
+                <Condition name="TestFile">
+                  <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\current_wifi_radio.result" />
+                  <Parameter xsi:type="EnumParameter" name="Condition" value="Exists" />
+                  <Parameter xsi:type="StringParameter" name="Value" value="" />
+                </Condition>
+                <Then>
+                  <Statement name="GetVariable" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                    <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+                    <Parameter xsi:type="StringParameter" name="SourceContent" value="#vAgentConfiguration.agentTempDir#\current_wifi_radio.result" />
+                    <Parameter xsi:type="StringParameter" name="VariableName" value="current_wifi_radio" />
+                  </Statement>
+                  <Statement name="UpdateSystemInfo" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                    <Parameter xsi:type="StringParameter" name="ColumnName" value="CF Wifi Radio Types" />
+                    <Parameter xsi:type="StringParameter" name="Value" value="#current_wifi_radio#" />
+                  </Statement>
+                  <Statement name="WriteScriptLogEntry" continueOnFail="true" osType="NT4|2000|XP|2003|Vista|2008">
+                    <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Wifi Info: Wifi Radio Types #current_wifi_radio# detected." />
+                  </Statement>
+                  <Statement name="DeleteFile" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                    <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\current_wifi_radio.result" />
+                  </Statement>
+                </Then>
+                <Else>
+                  <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                    <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Wifi Info: Error: Radio variable not detected. Try to run the command &quot;netsh wlan show&quot; manually to troubleshoot." />
+                  </Statement>
+                </Else>
+              </If>
+            </Else>
+          </If>
+          <Statement name="DeleteFile" continueOnFail="false">
+            <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\swe-eng-tester.txt" />
+          </Statement>
+          <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Wifi Info: The Agent Procedure hit the last row and will now exit. Evaluate the Agent Procedure log output." />
+          </Statement>
+        </Body>
+      </Procedure>
+      <Procedure name="Custom Field - Audit - Windows - Get If Local MDF Files Exists" treePres="3" id="503815102" folderId="869681115248091" treeFullPath="Upstream Kaseya Power Pack.Extended Audit (Custom Fields Required) 2018-10-26.Windows">
+        <Body description="Description: Detects local MDF files with size + location and writes the result in the Agent Procedure log. The Custom Field &quot;Local MDF Files&quot; will aslo be populated with Yes or No depending on the result.&#xA;&#xA;Kaseya customer value: Procedure to audit clients berfore setting up backup. Limiting the risks for unwanted data loss.&#xA;&#xA;End user value: Limiting the risks for unwanted data loss.&#xA;&#xA;Dependencies: Windows OS.&#xA;&#xA;Usage: Run at any given time.&#xA;&#xA;Report options: Procedure Log, content: &quot;FindMDFFiles:* &quot; OR Aggregate Table, Local MDF Files. &#xA;&#xA;Script maintainer: ronny [at] upstream.se&#xA;&#xA;Support: This script is delivered &quot;as is&quot;. No support included.">
+          <Statement name="ExecuteShellCommand" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="StringParameter" name="Command" value="dir c:\*.pst /S &gt;&gt; #vAgentConfiguration.agentTempDir#\mdf.result" />
+            <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+            <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+          </Statement>
+          <Statement name="PauseScript" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="IntegerParameter" name="Seconds" value="60" />
+          </Statement>
+          <Statement name="GetVariable" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+            <Parameter xsi:type="StringParameter" name="SourceContent" value="#vAgentConfiguration.agentTempDir#\mdf.result" />
+            <Parameter xsi:type="StringParameter" name="VariableName" value="mdf" />
+          </Statement>
+          <Statement name="DeleteFile" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\mdf.result" />
+          </Statement>
+          <If description="">
+            <Condition name="CheckVariable">
+              <Parameter xsi:type="StringParameter" name="VariableName" value="#mdf#" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Contains" />
+              <Parameter xsi:type="StringParameter" name="Value" value=".mdf" />
+            </Condition>
+            <Then>
+              <Statement name="UpdateSystemInfo" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                <Parameter xsi:type="StringParameter" name="ColumnName" value="Local MDF Files" />
+                <Parameter xsi:type="StringParameter" name="Value" value="Yes" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="">
+            <Condition name="CheckVariable">
+              <Parameter xsi:type="StringParameter" name="VariableName" value="#mdf#" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="DoesNotContain" />
+              <Parameter xsi:type="StringParameter" name="Value" value=".mdf" />
+            </Condition>
+            <Then>
+              <Statement name="UpdateSystemInfo" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                <Parameter xsi:type="StringParameter" name="ColumnName" value="Local MDF Files" />
+                <Parameter xsi:type="StringParameter" name="Value" value="No" />
+              </Statement>
+            </Then>
+          </If>
+          <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: FindMDFFiles: ##mdf#" />
+          </Statement>
+        </Body>
+      </Procedure>
+      <Procedure name="Custom Field - Audit - Windows - Get If Local PST Files Exists" treePres="3" id="1154852388" folderId="869681115248091" treeFullPath="Upstream Kaseya Power Pack.Extended Audit (Custom Fields Required) 2018-10-26.Windows">
+        <Body description="Description: Detects local PST files with size + location and writes the result in the Agent Procedure log. The Custom Field &quot;Local PST Files&quot; will aslo be populated with Yes or No depending on the result.&#xA;&#xA;Kaseya customer value: Procedure to audit clients berfore setting up backup. Limiting the risks for unwanted data loss.&#xA;&#xA;End user value: Limiting the risks for unwanted data loss.&#xA;&#xA;Dependencies: Windows OS.&#xA;&#xA;Usage: Run at any given time.&#xA;&#xA;Report options: Procedure Log, content: &quot;FindPSTFiles:* &quot; OR Aggregate Table, Local PST Files. &#xA;&#xA;Script maintainer: ronny [at] upstream.se&#xA;&#xA;Support: This script is delivered &quot;as is&quot;. No support included.">
+          <Statement name="ExecuteShellCommand" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="StringParameter" name="Command" value="dir c:\*.pst /S &gt;&gt; #vAgentConfiguration.agentTempDir#\pst.result" />
+            <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+            <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+          </Statement>
+          <Statement name="PauseScript" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="IntegerParameter" name="Seconds" value="60" />
+          </Statement>
+          <Statement name="GetVariable" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+            <Parameter xsi:type="StringParameter" name="SourceContent" value="#vAgentConfiguration.agentTempDir#\pst.result" />
+            <Parameter xsi:type="StringParameter" name="VariableName" value="pst" />
+          </Statement>
+          <Statement name="DeleteFile" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\pst.result" />
+          </Statement>
+          <If description="">
+            <Condition name="CheckVariable">
+              <Parameter xsi:type="StringParameter" name="VariableName" value="#pst#" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Contains" />
+              <Parameter xsi:type="StringParameter" name="Value" value=".pst" />
+            </Condition>
+            <Then>
+              <Statement name="UpdateSystemInfo" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                <Parameter xsi:type="StringParameter" name="ColumnName" value="Local PST Files" />
+                <Parameter xsi:type="StringParameter" name="Value" value="Yes" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="">
+            <Condition name="CheckVariable">
+              <Parameter xsi:type="StringParameter" name="VariableName" value="#pst#" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="DoesNotContain" />
+              <Parameter xsi:type="StringParameter" name="Value" value=".pst" />
+            </Condition>
+            <Then>
+              <Statement name="UpdateSystemInfo" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                <Parameter xsi:type="StringParameter" name="ColumnName" value="Local PST Files" />
+                <Parameter xsi:type="StringParameter" name="Value" value="No" />
+              </Statement>
+            </Then>
+          </If>
+          <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: FindPSTFiles: #pst#" />
+          </Statement>
+        </Body>
+      </Procedure>
+      <Procedure name="Custom Field - Audit - Windows - Get If Windows Reboot Pending Says Yes" treePres="3" id="1805889674" folderId="869681115248091" treeFullPath="Upstream Kaseya Power Pack.Extended Audit (Custom Fields Required) 2018-10-26.Windows">
+        <Body description="">
+          <If description="Procedure description: checks if windows requires a reboot after patching&#xD;&#xA;Kaseya Customer Value: Assist in making sure rervers requiring a reboot are logged&#xD;&#xA;End User Value: helps make sure patches are correctly applied&#xD;&#xA;Dependencies:  Windows OS, kaseya patch management&#xD;&#xA;Usage: Schedule as post procedure for Kaseya patch management and custom patch cycles&#xD;&#xA;Report Options: check the Custom Field&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;Check if windows has any reboot pending operations in registry">
+            <Condition name="TestRegistryKey64">
+              <Parameter xsi:type="StringParameter" name="Path" value="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update\RebootRequired" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Exists" />
+            </Condition>
+            <Then>
+              <Statement name="UpdateSystemInfo" continueOnFail="true">
+                <Parameter xsi:type="StringParameter" name="ColumnName" value="CF Reboot Pending" />
+                <Parameter xsi:type="StringParameter" name="Value" value="YES" />
+              </Statement>
+              <If description="">
+                <Condition name="TestRegistryKey">
+                  <Parameter xsi:type="StringParameter" name="Path" value="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update\RebootRequired" />
+                  <Parameter xsi:type="EnumParameter" name="Condition" value="Exists" />
+                </Condition>
+                <Then>
+                  <Statement name="UpdateSystemInfo" continueOnFail="true">
+                    <Parameter xsi:type="StringParameter" name="ColumnName" value="CF Reboot Pending" />
+                    <Parameter xsi:type="StringParameter" name="Value" value="YES" />
+                  </Statement>
+                </Then>
+              </If>
+              <If description="">
+                <Condition name="TestRegistryKey64">
+                  <Parameter xsi:type="StringParameter" name="Path" value="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootPending" />
+                  <Parameter xsi:type="EnumParameter" name="Condition" value="Exists" />
+                </Condition>
+                <Then>
+                  <Statement name="UpdateSystemInfo" continueOnFail="true">
+                    <Parameter xsi:type="StringParameter" name="ColumnName" value="CF Reboot Pending" />
+                    <Parameter xsi:type="StringParameter" name="Value" value="YES" />
+                  </Statement>
+                </Then>
+              </If>
+              <If description="">
+                <Condition name="TestRegistryKey">
+                  <Parameter xsi:type="StringParameter" name="Path" value="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootPending" />
+                  <Parameter xsi:type="EnumParameter" name="Condition" value="Exists" />
+                </Condition>
+                <Then>
+                  <Statement name="UpdateSystemInfo" continueOnFail="true">
+                    <Parameter xsi:type="StringParameter" name="ColumnName" value="CF Reboot Pending" />
+                    <Parameter xsi:type="StringParameter" name="Value" value="YES" />
+                  </Statement>
+                </Then>
+              </If>
+              <If description="">
+                <Condition name="TestRegistryKey64">
+                  <Parameter xsi:type="StringParameter" name="Path" value="HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\PendingFileRenameOperations" />
+                  <Parameter xsi:type="EnumParameter" name="Condition" value="Exists" />
+                </Condition>
+                <Then>
+                  <Statement name="UpdateSystemInfo" continueOnFail="false">
+                    <Parameter xsi:type="StringParameter" name="ColumnName" value="CF Reboot Pending" />
+                    <Parameter xsi:type="StringParameter" name="Value" value="Yes" />
+                  </Statement>
+                </Then>
+              </If>
+              <If description="">
+                <Condition name="TestRegistryKey">
+                  <Parameter xsi:type="StringParameter" name="Path" value="HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\PendingFileRenameOperations" />
+                  <Parameter xsi:type="EnumParameter" name="Condition" value="Exists" />
+                </Condition>
+                <Then>
+                  <Statement name="UpdateSystemInfo" continueOnFail="false">
+                    <Parameter xsi:type="StringParameter" name="ColumnName" value="CF Reboot Pending" />
+                    <Parameter xsi:type="StringParameter" name="Value" value="Yes" />
+                  </Statement>
+                </Then>
+              </If>
+            </Then>
+          </If>
+          <Statement name="UpdateSystemInfo" continueOnFail="true">
+            <Parameter xsi:type="StringParameter" name="ColumnName" value="CF Reboot Pending" />
+            <Parameter xsi:type="StringParameter" name="Value" value="No" />
+          </Statement>
+          <Statement description="Write result in agent procedure log" name="GetVariable" continueOnFail="false">
+            <Parameter xsi:type="EnumParameter" name="VariableType" value="SQLView" />
+            <Parameter xsi:type="StringParameter" name="SourceContent" value="vSystemInfoManual/CF Reboot Pending" />
+            <Parameter xsi:type="StringParameter" name="VariableName" value="CF_Reboot_Pending" />
+          </Statement>
+          <Statement name="WriteScriptLogEntry" continueOnFail="false">
+            <Parameter xsi:type="StringParameter" name="Comment" value="reboot Variable found #CF_Reboot_Pending#" />
+          </Statement>
+        </Body>
+      </Procedure>
+      <Procedure name="Custom Field - Audit - Windows - Get Internet Explorer Version" treePres="3" id="1731014944" folderId="869681115248091" treeFullPath="Upstream Kaseya Power Pack.Extended Audit (Custom Fields Required) 2018-10-26.Windows">
+        <Body description="Description: This procedure will  get the current pagefile settings from registry and put this in a custom audit field.&#xA;&#xA;Kaseya customer value: Health, performance and troubleshooting.&#xA;&#xA;End user value: Ensures that the machine is working in optimal performance condition.&#xA;&#xA;Dependencies: Windows OS. Custom Aduit Field: &quot;Pagefile Settings&quot; present.&#xA;&#xA;Usage: Execture the procedure at any time.&#xA;&#xA;Report options: Procedure Log, content: &quot;Pagefile:&quot; OR Audit, Aggregate Table, &quot;Pagefile Settings&quot;&#xA; &#xA;Script maintainer: ronny [at] upstream.se&#xA;&#xA;Support: This script is delivered &quot;as is&quot; No support included.">
+          <Statement description="Procedure description: Get Internet Explorer in use.&#xD;&#xA;Kaseya customer value: Procedure for pro-active support and troubleshooting. IE 10,9, &amp; 8 is out of business.&#xD;&#xA;End user value: Limiting the risk for IE related attacks. IE 10,9, &amp; 8 is out of business.&#xD;&#xA;Dependencies: Windows OS. Custom field &quot;CF IE Version&quot;.&#xD;&#xA;Usage: Schedule or Run Now.&#xD;&#xA;Report options: Audit, &quot;CF IE Version&quot; and Agent Procedure log, &quot;UPSTREAM: IE Version&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------" name="GetVariable" continueOnFail="false" osType="Windows">
+            <Parameter xsi:type="EnumParameter" name="VariableType" value="RegistryValue" />
+            <Parameter xsi:type="StringParameter" name="SourceContent" value="HKEY_LOCAL_MACHINE\Software\Microsoft\Internet Explorer\svcVersion" />
+            <Parameter xsi:type="StringParameter" name="VariableName" value="ie_version" />
+          </Statement>
+          <Statement description="Let's reset the &quot;CF IE Version&quot; variable." name="UpdateSystemInfo" continueOnFail="false" osType="Windows">
+            <Parameter xsi:type="StringParameter" name="ColumnName" value="CF IE Version" />
+            <Parameter xsi:type="StringParameter" name="Value" value="No Info" />
+          </Statement>
+          <If description="">
+            <Condition name="CheckVariable">
+              <Parameter xsi:type="StringParameter" name="VariableName" value="#ie_version#" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="BeginsWith" />
+              <Parameter xsi:type="StringParameter" name="Value" value="11." />
+            </Condition>
+            <Then>
+              <Statement name="UpdateSystemInfo" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="ColumnName" value="CF IE Version" />
+                <Parameter xsi:type="StringParameter" name="Value" value="Supported. IE v11.x" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="">
+            <Condition name="CheckVariable">
+              <Parameter xsi:type="StringParameter" name="VariableName" value="#ie_version#" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="BeginsWith" />
+              <Parameter xsi:type="StringParameter" name="Value" value="10." />
+            </Condition>
+            <Then>
+              <Statement name="UpdateSystemInfo" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="ColumnName" value="CF IE Version" />
+                <Parameter xsi:type="StringParameter" name="Value" value="Expired. IE v10.x" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="">
+            <Condition name="CheckVariable">
+              <Parameter xsi:type="StringParameter" name="VariableName" value="#ie_version#" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="BeginsWith" />
+              <Parameter xsi:type="StringParameter" name="Value" value="9." />
+            </Condition>
+            <Then>
+              <Statement name="UpdateSystemInfo" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="ColumnName" value="CF IE Version" />
+                <Parameter xsi:type="StringParameter" name="Value" value="Expired. IE v9.x" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="">
+            <Condition name="CheckVariable">
+              <Parameter xsi:type="StringParameter" name="VariableName" value="#ie_version#" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="BeginsWith" />
+              <Parameter xsi:type="StringParameter" name="Value" value="8." />
+            </Condition>
+            <Then>
+              <Statement name="UpdateSystemInfo" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="ColumnName" value="CF IE Version" />
+                <Parameter xsi:type="StringParameter" name="Value" value="Expired. IE v8.x" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="">
+            <Condition name="CheckVariable">
+              <Parameter xsi:type="StringParameter" name="VariableName" value="#ie_version#" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="BeginsWith" />
+              <Parameter xsi:type="StringParameter" name="Value" value="7." />
+            </Condition>
+            <Then>
+              <Statement name="UpdateSystemInfo" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="ColumnName" value="CF IE Version" />
+                <Parameter xsi:type="StringParameter" name="Value" value="Expired. IE v7.x" />
+              </Statement>
+            </Then>
+          </If>
+          <Statement description="Let's end wit a Agent Procedure Log entry" name="WriteScriptLogEntry" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: IE Version: #ie_version#" />
+          </Statement>
+        </Body>
+      </Procedure>
+      <Procedure name="Custom Field - Audit - Windows - Get OS Install Date" treePres="3" id="466461793" folderId="869681115248091" treeFullPath="Upstream Kaseya Power Pack.Extended Audit (Custom Fields Required) 2018-10-26.Windows">
+        <Body description="">
+          <If description="Procedure description: Get OS install date from command line.&#xD;&#xA;Kaseya customer value: Procedure for pro-active support and troubleshooting. Knowing the age of the OS.&#xD;&#xA;End user value: Knowing the age of the OS.&#xD;&#xA;Dependencies: Windows OS. CUT present i Kworking. Custom field &quot;CF OS Install Date&quot;.&#xD;&#xA;Usage: Schedule once or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for &quot;Upstream: OS Install Date&quot; before, during and after update deployment statements.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------&#xD;&#xA;Stage 1: We need GREP and CUT later on. Let's download if not present. Don't trust us? Look for GNU win32 on Sourceforge.">
+            <Condition name="TestFile">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\cut.exe" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+              <Parameter xsi:type="StringParameter" name="Value" value="" />
+            </Condition>
+            <Then>
+              <Statement name="GetURL" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/xpA9kZ12sPVNqGe/download" />
+                <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\cut.exe" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="">
+            <Condition name="TestFile">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\grep.exe" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+              <Parameter xsi:type="StringParameter" name="Value" value="" />
+            </Condition>
+            <Then>
+              <Statement name="GetURL" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/CBpPnAk64JFb5Xy/download" />
+                <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\grep.exe" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="">
+            <Condition name="TestFile">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\libiconv2.dll" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+              <Parameter xsi:type="StringParameter" name="Value" value="" />
+            </Condition>
+            <Then>
+              <Statement name="GetURL" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/fpORA7CwbVT2bot/download" />
+                <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\libiconv2.dll" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="">
+            <Condition name="TestFile">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\libintl3.dll" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+              <Parameter xsi:type="StringParameter" name="Value" value="" />
+            </Condition>
+            <Then>
+              <Statement name="GetURL" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/TvnmSmeJHNMGhC5/download" />
+                <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\libintl3.dll" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="">
+            <Condition name="TestFile">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\pcre3.dll" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+              <Parameter xsi:type="StringParameter" name="Value" value="" />
+            </Condition>
+            <Then>
+              <Statement name="GetURL" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/UCCmJfmJgwq1a7Y/download" />
+                <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\pcre3.dll" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="">
+            <Condition name="TestFile">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\regex2.dll" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+              <Parameter xsi:type="StringParameter" name="Value" value="" />
+            </Condition>
+            <Then>
+              <Statement name="GetURL" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/aR2qPyzgJwBa1Gt/download" />
+                <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\regex2.dll" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+            </Then>
+          </If>
+          <Statement description="------------------------------------------------------------------------------------------------------------&#xD;&#xA;Stage 2: Let's do some WMI, GREP and CUT magic to get the install date." name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+            <Parameter xsi:type="StringParameter" name="Command" value="wmic os get installdate | #vAgentConfiguration.agentTempDir#\grep 2 | #vAgentConfiguration.agentTempDir#\cut -c1-8 &gt;&gt;#vAgentConfiguration.agentTempDir#\installdate.result" />
+            <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+            <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+          </Statement>
+          <If description="------------------------------------------------------------------------------------------------------------&#xD;&#xA;Stage 3: Let's get the results back in to Kaseya by populating custom fields and the Agent Procedure Log.">
+            <Condition name="TestFile">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\installdate.result" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Exists" />
+              <Parameter xsi:type="StringParameter" name="Value" value="" />
+            </Condition>
+            <Then>
+              <Statement name="GetVariable" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+                <Parameter xsi:type="StringParameter" name="SourceContent" value="#vAgentConfiguration.agentTempDir#\installdate.result" />
+                <Parameter xsi:type="StringParameter" name="VariableName" value="installdate" />
+              </Statement>
+              <Statement name="UpdateSystemInfo" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="ColumnName" value="CF OS Install Date" />
+                <Parameter xsi:type="StringParameter" name="Value" value="#installdate#" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="true" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: OS Install Date: #installdate#" />
+              </Statement>
+              <Statement name="DeleteFile" continueOnFail="true" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\installdate.result" />
+              </Statement>
+            </Then>
+            <Else>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: OS Install Date: No result exists. Run &quot;wmic os get installdate&quot; manually to troubleshoot." />
+              </Statement>
+            </Else>
+          </If>
+          <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: OS Install Date: The Agent Procedure hit the last row and will now exit. Evaluate the Agent Procedure log output." />
+          </Statement>
+        </Body>
+      </Procedure>
+      <Procedure name="Custom Field - Audit - Windows - Get OS Language" treePres="3" id="1229895230" folderId="869681115248091" treeFullPath="Upstream Kaseya Power Pack.Extended Audit (Custom Fields Required) 2018-10-26.Windows">
+        <Body description="">
+          <If description="Procedure description: Get OS language from the registry&#xD;&#xA;Kaseya customer value: Extended auditing and troubleshooting.&#xD;&#xA;End user value: Understand the importance of consistency in language versions.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule Once or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for &quot;UPSTREAM: Get OS Language:&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
+            <Condition name="CheckRegistryValue">
+              <Parameter xsi:type="StringParameter" name="RegistryPath" value="HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Nls\Language\InstallLanguage" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Exists" />
+              <Parameter xsi:type="StringParameter" name="Value" value="" />
+            </Condition>
+            <Then>
+              <Statement name="GetVariable" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="EnumParameter" name="VariableType" value="RegistryValue" />
+                <Parameter xsi:type="StringParameter" name="SourceContent" value="HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Nls\Language\InstallLanguage" />
+                <Parameter xsi:type="StringParameter" name="VariableName" value="OSlanguage" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Get OS Language: Hex: #OSlanguage#" />
+              </Statement>
+              <Statement description="Let's get the language result back in to Kaseya by populating custom fields. Add more translation steps as you go.&#xD;&#xA;https://www.autoitscript.com/autoit3/docs/appendix/OSLangCodes.htm&#xD;&#xA;If we don't have a translation match for the language codes below we at least put the code visible for you in the Custom Field." name="UpdateSystemInfo" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="ColumnName" value="CF OS Language" />
+                <Parameter xsi:type="StringParameter" name="Value" value="#OSlanguage#" />
+              </Statement>
+              <If description="">
+                <Condition name="CheckVariable">
+                  <Parameter xsi:type="StringParameter" name="VariableName" value="#OSlanguage#" />
+                  <Parameter xsi:type="EnumParameter" name="Condition" value="Equals" />
+                  <Parameter xsi:type="StringParameter" name="Value" value="0409" />
+                </Condition>
+                <Then>
+                  <Statement name="UpdateSystemInfo" continueOnFail="false" osType="Windows">
+                    <Parameter xsi:type="StringParameter" name="ColumnName" value="CF OS Language" />
+                    <Parameter xsi:type="StringParameter" name="Value" value="US English" />
+                  </Statement>
+                  <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                    <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Get OS Language: US English." />
+                  </Statement>
+                </Then>
+              </If>
+              <If description="">
+                <Condition name="CheckVariable">
+                  <Parameter xsi:type="StringParameter" name="VariableName" value="#OSlanguage#" />
+                  <Parameter xsi:type="EnumParameter" name="Condition" value="Equals" />
+                  <Parameter xsi:type="StringParameter" name="Value" value="0414" />
+                </Condition>
+                <Then>
+                  <Statement name="UpdateSystemInfo" continueOnFail="false" osType="Windows">
+                    <Parameter xsi:type="StringParameter" name="ColumnName" value="CF OS Language" />
+                    <Parameter xsi:type="StringParameter" name="Value" value="Norwegian" />
+                  </Statement>
+                  <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                    <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Get OS Language: Norwegian." />
+                  </Statement>
+                </Then>
+              </If>
+              <If description="">
+                <Condition name="CheckVariable">
+                  <Parameter xsi:type="StringParameter" name="VariableName" value="#OSlanguage#" />
+                  <Parameter xsi:type="EnumParameter" name="Condition" value="Equals" />
+                  <Parameter xsi:type="StringParameter" name="Value" value="0406" />
+                </Condition>
+                <Then>
+                  <Statement name="UpdateSystemInfo" continueOnFail="false" osType="Windows">
+                    <Parameter xsi:type="StringParameter" name="ColumnName" value="CF OS Language" />
+                    <Parameter xsi:type="StringParameter" name="Value" value="Danish" />
+                  </Statement>
+                  <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                    <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Get OS Language: Dansish." />
+                  </Statement>
+                </Then>
+              </If>
+              <If description="">
+                <Condition name="CheckVariable">
+                  <Parameter xsi:type="StringParameter" name="VariableName" value="#OSlanguage#" />
+                  <Parameter xsi:type="EnumParameter" name="Condition" value="Equals" />
+                  <Parameter xsi:type="StringParameter" name="Value" value="040B" />
+                </Condition>
+                <Then>
+                  <Statement name="UpdateSystemInfo" continueOnFail="false" osType="Windows">
+                    <Parameter xsi:type="StringParameter" name="ColumnName" value="CF OS Language" />
+                    <Parameter xsi:type="StringParameter" name="Value" value="Finnish" />
+                  </Statement>
+                  <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                    <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Get OS Language: Finnish." />
+                  </Statement>
+                </Then>
+              </If>
+              <If description="">
+                <Condition name="CheckVariable">
+                  <Parameter xsi:type="StringParameter" name="VariableName" value="#OSlanguage#" />
+                  <Parameter xsi:type="EnumParameter" name="Condition" value="Equals" />
+                  <Parameter xsi:type="StringParameter" name="Value" value="041D" />
+                </Condition>
+                <Then>
+                  <Statement name="UpdateSystemInfo" continueOnFail="false" osType="Windows">
+                    <Parameter xsi:type="StringParameter" name="ColumnName" value="CF OS Language" />
+                    <Parameter xsi:type="StringParameter" name="Value" value="Swedish" />
+                  </Statement>
+                  <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                    <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Get OS Language: Swedish." />
+                  </Statement>
+                </Then>
+              </If>
+              <If description="">
+                <Condition name="CheckVariable">
+                  <Parameter xsi:type="StringParameter" name="VariableName" value="#OSlanguage#" />
+                  <Parameter xsi:type="EnumParameter" name="Condition" value="Equals" />
+                  <Parameter xsi:type="StringParameter" name="Value" value="0809" />
+                </Condition>
+                <Then>
+                  <Statement name="UpdateSystemInfo" continueOnFail="false" osType="Windows">
+                    <Parameter xsi:type="StringParameter" name="ColumnName" value="CF OS Language" />
+                    <Parameter xsi:type="StringParameter" name="Value" value="UK English" />
+                  </Statement>
+                  <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                    <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Get OS Language: UK English." />
+                  </Statement>
+                </Then>
+              </If>
+            </Then>
+            <Else>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Get OS Language: Failed to get registry value." />
+              </Statement>
+            </Else>
+          </If>
+          <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Get OS Language: The Agent Procedure hit the last row and will now exit. Evaluate the Agent Procedure log output." />
+          </Statement>
+        </Body>
+      </Procedure>
+      <Procedure name="Custom Field - Audit - Windows - Get SMART Status For C" treePres="3" id="1574174584" folderId="869681115248091" treeFullPath="Upstream Kaseya Power Pack.Extended Audit (Custom Fields Required) 2018-10-26.Windows">
+        <Body description="Description: Detects current disk health and writes the results to the script log.&#xA;&#xA;Kaseya customer value: Procedure to secure clients from unwanted downtime and data loss.&#xA;&#xA;End user value: Limiting the risks for unwanted downtime and data loss.&#xA;&#xA;Dependencies: Windows OS.&#xA;&#xA;Usage: Run at any given time.&#xA;&#xA;Report options: Procedure Log, content: &quot;SMART:*&quot;, Aggregate Table, SMART.&#xA;&#xA;Script maintainer: ronny [at] upstream.se&#xA;&#xA;Support: This script is delivered &quot;as is&quot;. No support included.">
+          <If description="Important! Create a custom field named &quot;CF SMART Health&quot;.  You need to reload the Agent Procedure Editor after creating the custom field.&#xD;&#xA;First, let's test if the files needed are present on the machine. Don't trust our Dropbox? You can upload these files to your own Kaseya server in &quot;Managed Files&quot;  and use the step writeFile to replace getURL.">
+            <Condition name="TestFile">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\smartctl.exe" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+              <Parameter xsi:type="StringParameter" name="Value" value="" />
+            </Condition>
+            <Then>
+              <Statement name="GetURL" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/YFLP3qTr89ZdOuW/download" />
+                <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\smartctl.exe" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+            </Then>
+          </If>
+          <Statement description="Let's execute stmartctl.exe and put the results in a text file. In this example we are testing the C: drive." name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+            <Parameter xsi:type="StringParameter" name="Command" value="#vAgentConfiguration.agentTempDir#\smartctl.exe -H -T verypermissive C: &gt;&gt; #vAgentConfiguration.agentTempDir#\smart.result" />
+            <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+            <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+          </Statement>
+          <Statement description="Pause this procedure for 30 seconds to give a previous action time to complete." name="PauseScript" continueOnFail="false" osType="Windows">
+            <Parameter xsi:type="IntegerParameter" name="Seconds" value="30" />
+          </Statement>
+          <Statement description="Let's create a variable from the contet in smart.result" name="GetVariable" continueOnFail="false" osType="Windows">
+            <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+            <Parameter xsi:type="StringParameter" name="SourceContent" value="#vAgentConfiguration.agentTempDir#\smart.result" />
+            <Parameter xsi:type="StringParameter" name="VariableName" value="smart" />
+          </Statement>
+          <Statement name="DeleteFile" continueOnFail="false">
+            <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\smart.result" />
+          </Statement>
+          <Statement description="Let's start with a default &quot;No Value&quot; in the Custom Field as a default." name="UpdateSystemInfo" continueOnFail="false" osType="Windows">
+            <Parameter xsi:type="StringParameter" name="ColumnName" value="CF SMART Health" />
+            <Parameter xsi:type="StringParameter" name="Value" value="No Value" />
+          </Statement>
+          <If description="Some disks report a positive SMART result like this: &quot;SMART Health Status: OK&quot;. Let's check for the content : OK in the smart.result log.">
+            <Condition name="CheckVariable">
+              <Parameter xsi:type="StringParameter" name="VariableName" value="#smart#" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Contains" />
+              <Parameter xsi:type="StringParameter" name="Value" value=": OK" />
+            </Condition>
+            <Then>
+              <Statement description="We put &quot;Healthy&quot; in the Custom Audit filed based on the file content &quot;: OK&quot;." name="UpdateSystemInfo" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="ColumnName" value="CF SMART Health" />
+                <Parameter xsi:type="StringParameter" name="Value" value="Healthy" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="Most disks report a positive SMART result like this: &quot;SMART overall-health self-assessment test result: PASSED&quot;. Let's check for the content : PASSED in the smart.result log.">
+            <Condition name="CheckVariable">
+              <Parameter xsi:type="StringParameter" name="VariableName" value="#smart#" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Contains" />
+              <Parameter xsi:type="StringParameter" name="Value" value=": PASSED" />
+            </Condition>
+            <Then>
+              <Statement description="We put &quot;Healthy&quot; in the Custom Audit filed based on the file content &quot;: PASSED&quot;." name="UpdateSystemInfo" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="ColumnName" value="CF SMART Health" />
+                <Parameter xsi:type="StringParameter" name="Value" value="Healthy" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="">
+            <Condition name="CheckVariable">
+              <Parameter xsi:type="StringParameter" name="VariableName" value="#smart#" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Contains" />
+              <Parameter xsi:type="StringParameter" name="Value" value="result: UNKNOWN!" />
+            </Condition>
+            <Then>
+              <Statement description="We put &quot;Healthy&quot; in the Custom Audit filed based on the file content &quot;: UNKNOWN! &quot;." name="UpdateSystemInfo" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="ColumnName" value="CF SMART Health" />
+                <Parameter xsi:type="StringParameter" name="Value" value="Unknown" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: SMART Status: Unknown. This means we didn't get any feedback from SMART Disk Controller. Is this a virtual machine?" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="">
+            <Condition name="CheckVariable">
+              <Parameter xsi:type="StringParameter" name="VariableName" value="#smart#" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Contains" />
+              <Parameter xsi:type="StringParameter" name="Value" value="FAILED!" />
+            </Condition>
+            <Then>
+              <Statement description="We put &quot;Warning!&quot; in the Custom Audit filed based on the file content &quot;: PASSED&quot;." name="UpdateSystemInfo" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="ColumnName" value="CF SMART Health" />
+                <Parameter xsi:type="StringParameter" name="Value" value="Warning" />
+              </Statement>
+              <Statement description="Let's raise a alert in the Monitor Alert log." name="SendAlert" continueOnFail="false" osType="Windows" />
+            </Then>
+          </If>
+          <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: SMART Status (if any): #smart#" />
+          </Statement>
+        </Body>
+      </Procedure>
+      <Procedure name="Custom Field - Audit - Windows - Get SQL Version" treePres="3" id="2105724818" folderId="869681115248091" treeFullPath="Upstream Kaseya Power Pack.Extended Audit (Custom Fields Required) 2018-10-26.Windows">
+        <Body description="">
+          <If description="Procedure description: Get the SQL version from the registry.&#xD;&#xA;Kaseya customer value: Knowing the SQL version and the associated costs.&#xD;&#xA;End user value: Knowing the SQL version and the associated costs.&#xD;&#xA;Dependencies: Windows OS. MS SQL present. Custom field CF SQL Version.&#xD;&#xA;Usage: Schedule once or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for &quot;UPSTREAM: Get SQL Version:&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------&#xD;&#xA;We do a REG query to get the SQL version regsitry information in a text text file.">
+            <Condition name="Windows 32 or 64 Bit Check">
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Exists" />
+            </Condition>
+            <Then>
+              <Statement name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Command" value="REG QUERY &quot;HKLM\SOFTWARE\Microsoft\Microsoft SQL Server&quot; /s /v /e /f Edition &gt;&gt; #vAgentConfiguration.agentTempDir#\sqlversion.result" />
+                <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="True" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="">
+            <Condition name="Windows 32 or 64 Bit Check">
+              <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+            </Condition>
+            <Then>
+              <Statement name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Command" value="REG QUERY &quot;HKLM\SOFTWARE\Microsoft\Microsoft SQL Server&quot; /s /v /e /f Edition &gt;&gt; #vAgentConfiguration.agentTempDir#\sqlversion.result" />
+                <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+              </Statement>
+            </Then>
+          </If>
+          <Statement name="GetVariable" continueOnFail="false" osType="Windows">
+            <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+            <Parameter xsi:type="StringParameter" name="SourceContent" value="#vAgentConfiguration.agentTempDir#\sqlversion.result" />
+            <Parameter xsi:type="StringParameter" name="VariableName" value="sqlout" />
+          </Statement>
+          <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Get SQL Version: #sqlout#" />
+          </Statement>
+          <If description="By looking at the version presented in the text file we set the proper version in the custom filed &quot;CF SQL Vesion&quot;.">
+            <Condition name="CheckVariable">
+              <Parameter xsi:type="StringParameter" name="VariableName" value="#sqlout#" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Contains" />
+              <Parameter xsi:type="StringParameter" name="Value" value="Express" />
+            </Condition>
+            <Then>
+              <Statement name="UpdateSystemInfo" continueOnFail="true" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="ColumnName" value="CF SQL Version" />
+                <Parameter xsi:type="StringParameter" name="Value" value="Express Edition" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="">
+            <Condition name="CheckVariable">
+              <Parameter xsi:type="StringParameter" name="VariableName" value="#sqlout#" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Contains" />
+              <Parameter xsi:type="StringParameter" name="Value" value="Developer" />
+            </Condition>
+            <Then>
+              <Statement name="UpdateSystemInfo" continueOnFail="true" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="ColumnName" value="CF SQL Version" />
+                <Parameter xsi:type="StringParameter" name="Value" value="Developer Edition" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="">
+            <Condition name="CheckVariable">
+              <Parameter xsi:type="StringParameter" name="VariableName" value="#sqlout#" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Contains" />
+              <Parameter xsi:type="StringParameter" name="Value" value="Standard" />
+            </Condition>
+            <Then>
+              <Statement name="UpdateSystemInfo" continueOnFail="true" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="ColumnName" value="CF SQL Version" />
+                <Parameter xsi:type="StringParameter" name="Value" value="Standard Edition" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="">
+            <Condition name="CheckVariable">
+              <Parameter xsi:type="StringParameter" name="VariableName" value="#sqlout#" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Contains" />
+              <Parameter xsi:type="StringParameter" name="Value" value="Enterprise" />
+            </Condition>
+            <Then>
+              <Statement name="UpdateSystemInfo" continueOnFail="true" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="ColumnName" value="CF SQL Version" />
+                <Parameter xsi:type="StringParameter" name="Value" value="Enterprise Edition" />
+              </Statement>
+            </Then>
+          </If>
+          <Statement name="DeleteFile" continueOnFail="false" osType="Windows">
+            <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\sqlversion.result" />
+          </Statement>
+          <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Get SQL Version: The Agent Procedure hit the last row and will now exit. Evaluate the Agent Procedure log output." />
+          </Statement>
+        </Body>
+      </Procedure>
+      <Procedure name="Custom Field - Audit - Windows - Get Teamviewer ID Example" treePres="3" id="2030850088" folderId="869681115248091" treeFullPath="Upstream Kaseya Power Pack.Extended Audit (Custom Fields Required) 2018-10-26.Windows">
+        <Body description="Description: This procedure will  get the current pagefile settings from registry and put this in a custom audit field.&#xA;&#xA;Kaseya customer value: Health, performance and troubleshooting.&#xA;&#xA;End user value: Ensures that the machine is working in optimal performance condition.&#xA;&#xA;Dependencies: Windows OS. Custom Aduit Field: &quot;Pagefile Settings&quot; present.&#xA;&#xA;Usage: Execture the procedure at any time.&#xA;&#xA;Report options: Procedure Log, content: &quot;Pagefile:&quot; OR Audit, Aggregate Table, &quot;Pagefile Settings&quot;&#xA; &#xA;Script maintainer: ronny [at] upstream.se&#xA;&#xA;Support: This script is delivered &quot;as is&quot; No support included.">
+          <Statement name="GetVariable" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="EnumParameter" name="VariableType" value="RegistryValue" />
+            <Parameter xsi:type="StringParameter" name="SourceContent" value="HKEY_LOCAL_MACHINE\SOFTWARE\TeamViewer\Version9\ClientIC" />
+            <Parameter xsi:type="StringParameter" name="VariableName" value="teamviwerID" />
+          </Statement>
+          <Statement name="UpdateSystemInfo" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="StringParameter" name="ColumnName" value="CF TeamViewer ID" />
+            <Parameter xsi:type="StringParameter" name="Value" value="#teamviwerID#" />
+          </Statement>
+          <Statement description="Writes a procedure log entry." name="WriteScriptLogEntry" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: TeamviewerID: #teamviwerID#" />
+          </Statement>
+        </Body>
+      </Procedure>
+      <Procedure name="Custom Field - Audit - Windows - Scan for Intel Mgmnt Engine Vulnerability" treePres="3" id="227655803" folderId="869681115248091" treeFullPath="Upstream Kaseya Power Pack.Extended Audit (Custom Fields Required) 2018-10-26.Windows">
+        <Body description="">
+          <Statement description="Procedure description: Evaluate if system has Intel vulnerability (Intel-SA-00086)&#xD;&#xA;More information: https://www.intel.com/content/www/us/en/support/articles/000025619/software.html&#xD;&#xA;Kaseya customer value: Procedure to quickly check system vurnability.&#xD;&#xA;End user value: Limiting the risk of secuirty breach.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule, Recurring or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for before, during and after update deployment statements.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------" name="WriteScriptLogEntry" continueOnFail="false">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Downloading Intel vurnability detection tool." />
+          </Statement>
+          <Statement name="GetURL" continueOnFail="false">
+            <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/cR6uHCTyPZctKTf/download" />
+            <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\SA00086_Windows.zip" />
+            <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+          </Statement>
+          <Statement name="WriteScriptLogEntry" continueOnFail="false">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Unzipping..." />
+          </Statement>
+          <Statement name="Unzip file" continueOnFail="false" osType="Windows">
+            <Parameter xsi:type="StringParameter" name="Parameter1" value="#vAgentConfiguration.agentTempDir#\SA00086_Windows.zip" />
+            <Parameter xsi:type="StringParameter" name="Parameter2" value="#vAgentConfiguration.agentTempDir#\DetectionTool" />
+            <Parameter xsi:type="StringParameter" name="Parameter3" value="True" />
+          </Statement>
+          <Statement name="WriteScriptLogEntry" continueOnFail="false">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Running detection tool. See next log entry for result." />
+          </Statement>
+          <Statement description="IMPORTANT: You have to cd to the same directory of the tool first and then execute it. It will NOT work if you execute with a path (ex C:\path\to\file\Intel-SA-00086.exe).&#xD;&#xA;&quot;findstr&quot; is to get the vulnerability string, pipe it to a file to later get it as a variale." name="ExecuteShellCommand" continueOnFail="false">
+            <Parameter xsi:type="StringParameter" name="Command" value="cd #vAgentConfiguration.agentTempDir#\DetectionTool\DiscoveryTool &amp;&amp; Intel-SA-00086-console.exe | findstr vulnerable &gt;&gt; #vAgentConfiguration.agentTempDir#\result.txt" />
+            <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+            <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+          </Statement>
+          <If description="">
+            <Condition name="TestFile">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\result.txt" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Contains" />
+              <Parameter xsi:type="StringParameter" name="Value" value="Based on the analysis performed by this tool:" />
+            </Condition>
+            <Then>
+              <If description="">
+                <Condition name="TestFile">
+                  <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\result.txt" />
+                  <Parameter xsi:type="EnumParameter" name="Condition" value="Contains" />
+                  <Parameter xsi:type="StringParameter" name="Value" value="This system is vulnerable." />
+                </Condition>
+                <Then>
+                  <Statement name="WriteScriptLogEntry" continueOnFail="false">
+                    <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: This system is vulnerable" />
+                  </Statement>
+                  <Statement name="UpdateSystemInfo" continueOnFail="false">
+                    <Parameter xsi:type="StringParameter" name="ColumnName" value="Intel vulnerability status" />
+                    <Parameter xsi:type="StringParameter" name="Value" value="Vulnerable" />
+                  </Statement>
+                </Then>
+              </If>
+              <If description="">
+                <Condition name="TestFile">
+                  <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\result.txt" />
+                  <Parameter xsi:type="EnumParameter" name="Condition" value="Contains" />
+                  <Parameter xsi:type="StringParameter" name="Value" value="This system is not vulnerable." />
+                </Condition>
+                <Then>
+                  <Statement name="WriteScriptLogEntry" continueOnFail="false">
+                    <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: This system is not vulnerable" />
+                  </Statement>
+                  <Statement name="UpdateSystemInfo" continueOnFail="false">
+                    <Parameter xsi:type="StringParameter" name="ColumnName" value="Intel vulnerability status" />
+                    <Parameter xsi:type="StringParameter" name="Value" value="Not vulnerable" />
+                  </Statement>
+                </Then>
+              </If>
+            </Then>
+            <Else>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: This outputfile does not exist or does not conatin any data." />
+              </Statement>
+              <Statement name="UpdateSystemInfo" continueOnFail="false">
+                <Parameter xsi:type="StringParameter" name="ColumnName" value="Intel vulnerability status" />
+                <Parameter xsi:type="StringParameter" name="Value" value="Test failed" />
+              </Statement>
+            </Else>
+          </If>
+          <Statement description="House cleaning." name="Delete Directory" continueOnFail="false">
+            <Parameter xsi:type="StringParameter" name="Parameter1" value="#vAgentConfiguration.agentTempDir#\DetectionTool" />
+            <Parameter xsi:type="StringParameter" name="Parameter2" value="true" />
+          </Statement>
+          <Statement name="DeleteFile" continueOnFail="false">
+            <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\SA00086_Windows.zip" />
+          </Statement>
+          <Statement name="DeleteFile" continueOnFail="false">
+            <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\result.txt" />
+          </Statement>
+          <Statement name="WriteScriptLogEntry" continueOnFail="false">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Vulnerability check complete." />
+          </Statement>
+        </Body>
+      </Procedure>
+      <Procedure name="Custom Filed - Audit - Windows - Get Disk Encryption Status" treePres="3" id="2032368826" folderId="869681115248091" treeFullPath="Upstream Kaseya Power Pack.Extended Audit (Custom Fields Required) 2018-10-26.Windows">
+        <Body description="">
+          <If description="Procedure description: Quick repair for Office 365 installation silently without user interaction.&#xD;&#xA;Kaseya customer value: Enhanced support experience. Quickly troubleshooting Office 365 realted problems.&#xD;&#xA;End user value: Enhanced support experience.&#xD;&#xA;Dependencies: Office 365.&#xD;&#xA;Usage: Schedule Once or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for &quot;UPSTREAM: Office 365 Quick Repair&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------&#xD;&#xA;Let's ask Windows for current disk encryption status.">
+            <Condition name="Windows 32 or 64 Bit Check">
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Exists" />
+            </Condition>
+            <Then>
+              <Statement name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Command" value="manage-bde -status &gt;&gt;#vAgentConfiguration.agentTempDir#\bitlocker.status" />
+                <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="True" />
+              </Statement>
+            </Then>
+            <Else>
+              <Statement name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Command" value="manage-bde -status &gt;&gt;#vAgentConfiguration.agentTempDir#\bitlocker.status" />
+                <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+              </Statement>
+            </Else>
+          </If>
+          <If description="Let's parse the result and update the Custom Field &quot;CF Encryption&quot; and update the Agent Procedure Log.">
+            <Condition name="TestFile">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\bitlocker.status" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Exists" />
+              <Parameter xsi:type="StringParameter" name="Value" value="" />
+            </Condition>
+            <Then>
+              <If description="">
+                <Condition name="TestFile">
+                  <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\bitlocker.status" />
+                  <Parameter xsi:type="EnumParameter" name="Condition" value="Contains" />
+                  <Parameter xsi:type="StringParameter" name="Value" value="Used Space Only Encrypted" />
+                </Condition>
+                <Then>
+                  <Statement name="UpdateSystemInfo" continueOnFail="false" osType="Windows">
+                    <Parameter xsi:type="StringParameter" name="ColumnName" value="CF Encryption" />
+                    <Parameter xsi:type="StringParameter" name="Value" value="Used Space Only Encrypted" />
+                  </Statement>
+                  <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                    <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Disk Encryption Status: Used Space Only Encrypted." />
+                  </Statement>
+                </Then>
+              </If>
+              <If description="">
+                <Condition name="TestFile">
+                  <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\bitlocker.status" />
+                  <Parameter xsi:type="EnumParameter" name="Condition" value="Contains" />
+                  <Parameter xsi:type="StringParameter" name="Value" value="Fully Encrypted" />
+                </Condition>
+                <Then>
+                  <Statement name="UpdateSystemInfo" continueOnFail="false" osType="Windows">
+                    <Parameter xsi:type="StringParameter" name="ColumnName" value="CF Encryption" />
+                    <Parameter xsi:type="StringParameter" name="Value" value="Fully Encrypted" />
+                  </Statement>
+                  <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                    <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Disk Encryption Status: Fully Encrypted." />
+                  </Statement>
+                </Then>
+              </If>
+              <If description="">
+                <Condition name="TestFile">
+                  <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\bitlocker.status" />
+                  <Parameter xsi:type="EnumParameter" name="Condition" value="Contains" />
+                  <Parameter xsi:type="StringParameter" name="Value" value="Fully Decrypted" />
+                </Condition>
+                <Then>
+                  <Statement name="UpdateSystemInfo" continueOnFail="false" osType="Windows">
+                    <Parameter xsi:type="StringParameter" name="ColumnName" value="CF Encryption" />
+                    <Parameter xsi:type="StringParameter" name="Value" value="Fully Decrypted" />
+                  </Statement>
+                  <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                    <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Disk Encryption Status: Fully Decrypted." />
+                  </Statement>
+                </Then>
+              </If>
+            </Then>
+            <Else>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Disk Encryption Status: The bitlocker.status is either empty or does not contain any useful information. Try running &quot;manage-bde -status&quot; from the command line." />
+              </Statement>
+            </Else>
+          </If>
+          <Statement name="DeleteFile" continueOnFail="true" osType="Windows">
+            <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\bitlocker.status" />
+          </Statement>
+          <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Disk Encryption Status: The Agent Procedure hit the last row and will now exit. Evaluate the Agent Procedure log output." />
+          </Statement>
+        </Body>
+      </Procedure>
+    </Folder>
+  </Folder>
+</ScriptExport>

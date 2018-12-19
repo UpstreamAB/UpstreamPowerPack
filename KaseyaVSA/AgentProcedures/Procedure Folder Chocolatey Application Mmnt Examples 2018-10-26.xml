@@ -1,0 +1,865 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ScriptExport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.kaseya.com/vsa/2008/12/Scripting">
+  <Folder name="Chocolatey Application Mmnt Examples 2018-10-26" treePres="3">
+    <Folder name="Windows" treePres="3">
+      <Folder name="Chocolatey Install" treePres="3">
+        <Procedure name="Chocolatey Install - Windows - 7-Zip" treePres="3" id="906544300" folderId="552071683552149" treeFullPath="Upstream Kaseya Power Pack.Chocolatey Application Mmnt Examples 2018-10-26.Windows.Chocolatey Install">
+          <Body description="">
+            <If description="Procedure description: Deploy applications with Chocolatey. Read more here: https://chocolatey.org&#xD;&#xA;Kaseya customer value: Procedure to secure clients with the latest software.&#xD;&#xA;End user value: Limiting the risks for exploits, ransomware, phishing attacks, downtime and possible data loss.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule Once, Recurring or Run Now.&#xD;&#xA;Report options: Agent Procedure log and &quot;C:\ProgramData\chocolatey\logs\chocolatey.log&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se Latest update: 2018-04-15&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
+              <Condition name="TestFile">
+                <Parameter xsi:type="StringParameter" name="Path" value="c:\ProgramData\Chocolatey\choco.exe" />
+                <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+                <Parameter xsi:type="StringParameter" name="Value" value="" />
+              </Condition>
+              <Then>
+                <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocloatey deployment framework missing on this machine. Deploying." />
+                </Statement>
+                <Statement name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Command" value="@&quot;%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe&quot; -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command &quot;iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))&quot; &amp;&amp; SET &quot;PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin&quot;" />
+                  <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                  <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+                </Statement>
+              </Then>
+            </If>
+            <Statement description="This pararmeter defines what application to deploy. Full package list here: https://chocolatey.org/packages" name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Command" value="c:\ProgramData\Chocolatey\choco.exe install 7zip.install --limit-output --no-progress -y &gt;&gt;#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+              <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+              <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+            </Statement>
+            <Statement name="GetVariable" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+              <Parameter xsi:type="StringParameter" name="SourceContent" value="#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+              <Parameter xsi:type="StringParameter" name="VariableName" value="chocolatey-deploy" />
+            </Statement>
+            <Statement name="DeleteFile" continueOnFail="true" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+            </Statement>
+            <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocolatey Deployment Log: #chocolatey-deploy#" />
+            </Statement>
+          </Body>
+        </Procedure>
+        <Procedure name="Chocolatey Install - Windows - Adobe AIR" treePres="3" id="929103734" folderId="552071683552149" treeFullPath="Upstream Kaseya Power Pack.Chocolatey Application Mmnt Examples 2018-10-26.Windows.Chocolatey Install">
+          <Body description="">
+            <If description="Procedure description: Deploy applications with Chocolatey. Read more here: https://chocolatey.org&#xD;&#xA;Kaseya customer value: Procedure to secure clients with the latest software.&#xD;&#xA;End user value: Limiting the risks for exploits, ransomware, phishing attacks, downtime and possible data loss.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule Once, Recurring or Run Now.&#xD;&#xA;Report options: Agent Procedure log and &quot;C:\ProgramData\chocolatey\logs\chocolatey.log&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se Latest update: 2018-04-15&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
+              <Condition name="TestFile">
+                <Parameter xsi:type="StringParameter" name="Path" value="c:\ProgramData\Chocolatey\choco.exe" />
+                <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+                <Parameter xsi:type="StringParameter" name="Value" value="" />
+              </Condition>
+              <Then>
+                <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocloatey deployment framework missing on this machine. Deploying." />
+                </Statement>
+                <Statement name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Command" value="@&quot;%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe&quot; -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command &quot;iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))&quot; &amp;&amp; SET &quot;PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin&quot;" />
+                  <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                  <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+                </Statement>
+              </Then>
+            </If>
+            <Statement description="This pararmeter defines what application to deploy. Full package list here: https://chocolatey.org/packages" name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Command" value="c:\ProgramData\Chocolatey\choco.exe install adobeair --limit-output --no-progress -y &gt;&gt;#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+              <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+              <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+            </Statement>
+            <Statement name="GetVariable" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+              <Parameter xsi:type="StringParameter" name="SourceContent" value="#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+              <Parameter xsi:type="StringParameter" name="VariableName" value="chocolatey-deploy" />
+            </Statement>
+            <Statement name="DeleteFile" continueOnFail="true" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+            </Statement>
+            <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocolatey Deployment Log: #chocolatey-deploy#" />
+            </Statement>
+          </Body>
+        </Procedure>
+        <Procedure name="Chocolatey Install - Windows - Adobe Reader DC" treePres="3" id="1802942685" folderId="552071683552149" treeFullPath="Upstream Kaseya Power Pack.Chocolatey Application Mmnt Examples 2018-10-26.Windows.Chocolatey Install">
+          <Body description="">
+            <If description="Procedure description: Deploy applications with Chocolatey. Read more here: https://chocolatey.org&#xD;&#xA;Kaseya customer value: Procedure to secure clients with the latest software.&#xD;&#xA;End user value: Limiting the risks for exploits, ransomware, phishing attacks, downtime and possible data loss.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule Once, Recurring or Run Now.&#xD;&#xA;Report options: Agent Procedure log and &quot;C:\ProgramData\chocolatey\logs\chocolatey.log&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se Latest update: 2018-04-15&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
+              <Condition name="TestFile">
+                <Parameter xsi:type="StringParameter" name="Path" value="c:\ProgramData\Chocolatey\choco.exe" />
+                <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+                <Parameter xsi:type="StringParameter" name="Value" value="" />
+              </Condition>
+              <Then>
+                <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocloatey deployment framework missing on this machine. Deploying." />
+                </Statement>
+                <Statement name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Command" value="@&quot;%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe&quot; -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command &quot;iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))&quot; &amp;&amp; SET &quot;PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin&quot;" />
+                  <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                  <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+                </Statement>
+              </Then>
+            </If>
+            <Statement description="This pararmeter defines what application to deploy. Full package list here: https://chocolatey.org/packages" name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Command" value="c:\ProgramData\Chocolatey\choco.exe install adobereader adobereader-update --limit-output --no-progress /y &gt;&gt;#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+              <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+              <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+            </Statement>
+            <Statement name="GetVariable" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+              <Parameter xsi:type="StringParameter" name="SourceContent" value="#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+              <Parameter xsi:type="StringParameter" name="VariableName" value="chocolatey-deploy" />
+            </Statement>
+            <Statement name="DeleteFile" continueOnFail="true" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+            </Statement>
+            <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocolatey Deployment Log: #chocolatey-deploy#" />
+            </Statement>
+          </Body>
+        </Procedure>
+        <Procedure name="Chocolatey Install - Windows - Citrix Receiver" treePres="3" id="1129375210" folderId="552071683552149" treeFullPath="Upstream Kaseya Power Pack.Chocolatey Application Mmnt Examples 2018-10-26.Windows.Chocolatey Install">
+          <Body description="">
+            <If description="Procedure description: Deploy applications with Chocolatey. Read more here: https://chocolatey.org&#xD;&#xA;Kaseya customer value: Procedure to secure clients with the latest software.&#xD;&#xA;End user value: Limiting the risks for exploits, ransomware, phishing attacks, downtime and possible data loss.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule Once, Recurring or Run Now.&#xD;&#xA;Report options: Agent Procedure log and &quot;C:\ProgramData\chocolatey\logs\chocolatey.log&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se Latest update: 2018-04-15&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
+              <Condition name="TestFile">
+                <Parameter xsi:type="StringParameter" name="Path" value="c:\ProgramData\Chocolatey\choco.exe" />
+                <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+                <Parameter xsi:type="StringParameter" name="Value" value="" />
+              </Condition>
+              <Then>
+                <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocloatey deployment framework missing on this machine. Deploying." />
+                </Statement>
+                <Statement name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Command" value="@&quot;%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe&quot; -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command &quot;iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))&quot; &amp;&amp; SET &quot;PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin&quot;" />
+                  <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                  <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+                </Statement>
+              </Then>
+            </If>
+            <Statement description="This pararmeter defines what application to deploy. Full package list here: https://chocolatey.org/packages" name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Command" value="c:\ProgramData\Chocolatey\choco.exe install citrix-receiver --limit-output --no-progress /y &gt;&gt;#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+              <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+              <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+            </Statement>
+            <Statement name="GetVariable" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+              <Parameter xsi:type="StringParameter" name="SourceContent" value="#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+              <Parameter xsi:type="StringParameter" name="VariableName" value="chocolatey-deploy" />
+            </Statement>
+            <Statement name="DeleteFile" continueOnFail="true" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+            </Statement>
+            <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocolatey Deployment Log: #chocolatey-deploy#" />
+            </Statement>
+          </Body>
+        </Procedure>
+        <Procedure name="Chocolatey Install - Windows - Datto Drive" treePres="3" id="271719543" folderId="552071683552149" treeFullPath="Upstream Kaseya Power Pack.Chocolatey Application Mmnt Examples 2018-10-26.Windows.Chocolatey Install">
+          <Body description="">
+            <If description="Procedure description: Deploy applications with Chocolatey. Read more here: https://chocolatey.org&#xD;&#xA;Kaseya customer value: Procedure to secure clients with the latest software.&#xD;&#xA;End user value: Limiting the risks for exploits, ransomware, phishing attacks, downtime and possible data loss.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule Once, Recurring or Run Now.&#xD;&#xA;Report options: Agent Procedure log and &quot;C:\ProgramData\chocolatey\logs\chocolatey.log&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se Latest update: 2018-04-15&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
+              <Condition name="TestFile">
+                <Parameter xsi:type="StringParameter" name="Path" value="c:\ProgramData\Chocolatey\choco.exe" />
+                <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+                <Parameter xsi:type="StringParameter" name="Value" value="" />
+              </Condition>
+              <Then>
+                <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocloatey deployment framework missing on this machine. Deploying." />
+                </Statement>
+                <Statement name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Command" value="@&quot;%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe&quot; -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command &quot;iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))&quot; &amp;&amp; SET &quot;PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin&quot;" />
+                  <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                  <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+                </Statement>
+              </Then>
+            </If>
+            <Statement description="This pararmeter defines what application to deploy. Full package list here: https://chocolatey.org/packages" name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Command" value="c:\ProgramData\Chocolatey\choco.exe install dattodrive --limit-output --no-progress -y &gt;&gt;#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+              <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+              <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+            </Statement>
+            <Statement name="GetVariable" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+              <Parameter xsi:type="StringParameter" name="SourceContent" value="#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+              <Parameter xsi:type="StringParameter" name="VariableName" value="chocolatey-deploy" />
+            </Statement>
+            <Statement name="DeleteFile" continueOnFail="true" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+            </Statement>
+            <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocolatey Deployment Log: #chocolatey-deploy#" />
+            </Statement>
+          </Body>
+        </Procedure>
+        <Procedure name="Chocolatey Install - Windows - Dropbox" treePres="3" id="633359237" folderId="552071683552149" treeFullPath="Upstream Kaseya Power Pack.Chocolatey Application Mmnt Examples 2018-10-26.Windows.Chocolatey Install">
+          <Body description="">
+            <If description="Procedure description: Deploy applications with Chocolatey. Read more here: https://chocolatey.org&#xD;&#xA;Kaseya customer value: Procedure to secure clients with the latest software.&#xD;&#xA;End user value: Limiting the risks for exploits, ransomware, phishing attacks, downtime and possible data loss.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule Once, Recurring or Run Now.&#xD;&#xA;Report options: Agent Procedure log and &quot;C:\ProgramData\chocolatey\logs\chocolatey.log&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se Latest update: 2018-04-15&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
+              <Condition name="TestFile">
+                <Parameter xsi:type="StringParameter" name="Path" value="c:\ProgramData\Chocolatey\choco.exe" />
+                <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+                <Parameter xsi:type="StringParameter" name="Value" value="" />
+              </Condition>
+              <Then>
+                <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocloatey deployment framework missing on this machine. Deploying." />
+                </Statement>
+                <Statement name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Command" value="@&quot;%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe&quot; -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command &quot;iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))&quot; &amp;&amp; SET &quot;PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin&quot;" />
+                  <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                  <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+                </Statement>
+              </Then>
+            </If>
+            <Statement description="This pararmeter defines what application to deploy. Full package list here: https://chocolatey.org/packages" name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Command" value="c:\ProgramData\Chocolatey\choco.exe install dropbox --limit-output --no-progress /y &gt;&gt;#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+              <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+              <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+            </Statement>
+            <Statement name="GetVariable" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+              <Parameter xsi:type="StringParameter" name="SourceContent" value="#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+              <Parameter xsi:type="StringParameter" name="VariableName" value="chocolatey-deploy" />
+            </Statement>
+            <Statement name="DeleteFile" continueOnFail="true" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+            </Statement>
+            <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocolatey Deployment Log: #chocolatey-deploy#" />
+            </Statement>
+          </Body>
+        </Procedure>
+        <Procedure name="Chocolatey Install - Windows - FileZilla Client" treePres="3" id="1336200521" folderId="552071683552149" treeFullPath="Upstream Kaseya Power Pack.Chocolatey Application Mmnt Examples 2018-10-26.Windows.Chocolatey Install">
+          <Body description="">
+            <If description="Procedure description: Deploy applications with Chocolatey. Read more here: https://chocolatey.org&#xD;&#xA;Kaseya customer value: Procedure to secure clients with the latest software.&#xD;&#xA;End user value: Limiting the risks for exploits, ransomware, phishing attacks, downtime and possible data loss.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule Once, Recurring or Run Now.&#xD;&#xA;Report options: Agent Procedure log and &quot;C:\ProgramData\chocolatey\logs\chocolatey.log&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se Latest update: 2018-04-15&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
+              <Condition name="TestFile">
+                <Parameter xsi:type="StringParameter" name="Path" value="c:\ProgramData\Chocolatey\choco.exe" />
+                <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+                <Parameter xsi:type="StringParameter" name="Value" value="" />
+              </Condition>
+              <Then>
+                <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocloatey deployment framework missing on this machine. Deploying." />
+                </Statement>
+                <Statement name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Command" value="@&quot;%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe&quot; -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command &quot;iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))&quot; &amp;&amp; SET &quot;PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin&quot;" />
+                  <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                  <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+                </Statement>
+              </Then>
+            </If>
+            <Statement description="This pararmeter defines what application to deploy. Full package list here: https://chocolatey.org/packages" name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Command" value="c:\ProgramData\Chocolatey\choco.exe install filezilla --limit-output --no-progress -y &gt;&gt;#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+              <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+              <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+            </Statement>
+            <Statement name="GetVariable" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+              <Parameter xsi:type="StringParameter" name="SourceContent" value="#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+              <Parameter xsi:type="StringParameter" name="VariableName" value="chocolatey-deploy" />
+            </Statement>
+            <Statement name="DeleteFile" continueOnFail="true" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+            </Statement>
+            <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocolatey Deployment Log: #chocolatey-deploy#" />
+            </Statement>
+          </Body>
+        </Procedure>
+        <Procedure name="Chocolatey Install - Windows - Firefox" treePres="3" id="1253927225" folderId="552071683552149" treeFullPath="Upstream Kaseya Power Pack.Chocolatey Application Mmnt Examples 2018-10-26.Windows.Chocolatey Install">
+          <Body description="">
+            <If description="Procedure description: Deploy applications with Chocolatey. Read more here: https://chocolatey.org&#xD;&#xA;Kaseya customer value: Procedure to secure clients with the latest software.&#xD;&#xA;End user value: Limiting the risks for exploits, ransomware, phishing attacks, downtime and possible data loss.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule Once, Recurring or Run Now.&#xD;&#xA;Report options: Agent Procedure log and &quot;C:\ProgramData\chocolatey\logs\chocolatey.log&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se Latest update: 2018-04-15&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
+              <Condition name="TestFile">
+                <Parameter xsi:type="StringParameter" name="Path" value="c:\ProgramData\Chocolatey\choco.exe" />
+                <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+                <Parameter xsi:type="StringParameter" name="Value" value="" />
+              </Condition>
+              <Then>
+                <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocloatey deployment framework missing on this machine. Deploying." />
+                </Statement>
+                <Statement name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Command" value="@&quot;%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe&quot; -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command &quot;iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))&quot; &amp;&amp; SET &quot;PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin&quot;" />
+                  <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                  <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+                </Statement>
+              </Then>
+            </If>
+            <Statement description="This pararmeter defines what application to deploy. Full package list here: https://chocolatey.org/packages" name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Command" value="c:\ProgramData\Chocolatey\choco.exe install firefox --limit-output --no-progress /y &gt;&gt;#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+              <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+              <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+            </Statement>
+            <Statement name="GetVariable" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+              <Parameter xsi:type="StringParameter" name="SourceContent" value="#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+              <Parameter xsi:type="StringParameter" name="VariableName" value="chocolatey-deploy" />
+            </Statement>
+            <Statement name="DeleteFile" continueOnFail="true" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+            </Statement>
+            <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocolatey Deployment Log: #chocolatey-deploy#" />
+            </Statement>
+          </Body>
+        </Procedure>
+        <Procedure name="Chocolatey Install - Windows - Flash Player Active X" treePres="3" id="1919823180" folderId="552071683552149" treeFullPath="Upstream Kaseya Power Pack.Chocolatey Application Mmnt Examples 2018-10-26.Windows.Chocolatey Install">
+          <Body description="">
+            <If description="Procedure description: Deploy applications with Chocolatey. Read more here: https://chocolatey.org&#xD;&#xA;Kaseya customer value: Procedure to secure clients with the latest software.&#xD;&#xA;End user value: Limiting the risks for exploits, ransomware, phishing attacks, downtime and possible data loss.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule Once, Recurring or Run Now.&#xD;&#xA;Report options: Agent Procedure log and &quot;C:\ProgramData\chocolatey\logs\chocolatey.log&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se Latest update: 2018-04-15&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
+              <Condition name="TestFile">
+                <Parameter xsi:type="StringParameter" name="Path" value="c:\ProgramData\Chocolatey\choco.exe" />
+                <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+                <Parameter xsi:type="StringParameter" name="Value" value="" />
+              </Condition>
+              <Then>
+                <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocloatey deployment framework missing on this machine. Deploying." />
+                </Statement>
+                <Statement name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Command" value="@&quot;%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe&quot; -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command &quot;iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))&quot; &amp;&amp; SET &quot;PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin&quot;" />
+                  <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                  <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+                </Statement>
+              </Then>
+            </If>
+            <Statement description="This pararmeter defines what application to deploy. Full package list here: https://chocolatey.org/packages" name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Command" value="c:\ProgramData\Chocolatey\choco.exe install flashplayeractivex --limit-output --no-progress /y &gt;&gt;#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+              <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+              <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+            </Statement>
+            <Statement name="GetVariable" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+              <Parameter xsi:type="StringParameter" name="SourceContent" value="#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+              <Parameter xsi:type="StringParameter" name="VariableName" value="chocolatey-deploy" />
+            </Statement>
+            <Statement name="DeleteFile" continueOnFail="true" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+            </Statement>
+            <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocolatey Deployment Log: #chocolatey-deploy#" />
+            </Statement>
+          </Body>
+        </Procedure>
+        <Procedure name="Chocolatey Install - Windows - Flash Player Plugin" treePres="3" id="1995814321" folderId="552071683552149" treeFullPath="Upstream Kaseya Power Pack.Chocolatey Application Mmnt Examples 2018-10-26.Windows.Chocolatey Install">
+          <Body description="">
+            <If description="Procedure description: Deploy applications with Chocolatey. Read more here: https://chocolatey.org&#xD;&#xA;Kaseya customer value: Procedure to secure clients with the latest software.&#xD;&#xA;End user value: Limiting the risks for exploits, ransomware, phishing attacks, downtime and possible data loss.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule Once, Recurring or Run Now.&#xD;&#xA;Report options: Agent Procedure log and &quot;C:\ProgramData\chocolatey\logs\chocolatey.log&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se Latest update: 2018-04-15&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
+              <Condition name="TestFile">
+                <Parameter xsi:type="StringParameter" name="Path" value="c:\ProgramData\Chocolatey\choco.exe" />
+                <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+                <Parameter xsi:type="StringParameter" name="Value" value="" />
+              </Condition>
+              <Then>
+                <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocloatey deployment framework missing on this machine. Deploying." />
+                </Statement>
+                <Statement name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Command" value="@&quot;%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe&quot; -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command &quot;iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))&quot; &amp;&amp; SET &quot;PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin&quot;" />
+                  <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                  <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+                </Statement>
+              </Then>
+            </If>
+            <Statement description="This pararmeter defines what application to deploy. Full package list here: https://chocolatey.org/packages" name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Command" value="c:\ProgramData\Chocolatey\choco.exe install flashplayerplugin --limit-output --no-progress /y &gt;&gt;#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+              <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+              <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+            </Statement>
+            <Statement name="GetVariable" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+              <Parameter xsi:type="StringParameter" name="SourceContent" value="#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+              <Parameter xsi:type="StringParameter" name="VariableName" value="chocolatey-deploy" />
+            </Statement>
+            <Statement name="DeleteFile" continueOnFail="true" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+            </Statement>
+            <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocolatey Deployment Log: #chocolatey-deploy#" />
+            </Statement>
+          </Body>
+        </Procedure>
+        <Procedure name="Chocolatey Install - Windows - Google Chrome" treePres="3" id="388852650" folderId="552071683552149" treeFullPath="Upstream Kaseya Power Pack.Chocolatey Application Mmnt Examples 2018-10-26.Windows.Chocolatey Install">
+          <Body description="">
+            <If description="Procedure description: Deploy applications with Chocolatey. Read more here: https://chocolatey.org&#xD;&#xA;Kaseya customer value: Procedure to secure clients with the latest software.&#xD;&#xA;End user value: Limiting the risks for exploits, ransomware, phishing attacks, downtime and possible data loss.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule Once, Recurring or Run Now.&#xD;&#xA;Report options: Agent Procedure log and &quot;C:\ProgramData\chocolatey\logs\chocolatey.log&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se Latest update: 2018-04-15&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
+              <Condition name="TestFile">
+                <Parameter xsi:type="StringParameter" name="Path" value="c:\ProgramData\Chocolatey\choco.exe" />
+                <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+                <Parameter xsi:type="StringParameter" name="Value" value="" />
+              </Condition>
+              <Then>
+                <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocloatey deployment framework missing on this machine. Deploying." />
+                </Statement>
+                <Statement name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Command" value="@&quot;%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe&quot; -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command &quot;iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))&quot; &amp;&amp; SET &quot;PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin&quot;" />
+                  <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                  <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+                </Statement>
+              </Then>
+            </If>
+            <Statement description="This pararmeter defines what application to deploy. Full package list here: https://chocolatey.org/packages" name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Command" value="c:\ProgramData\Chocolatey\choco.exe install googlechrome --limit-output --no-progress /y &gt;&gt;#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+              <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+              <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+            </Statement>
+            <Statement name="GetVariable" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+              <Parameter xsi:type="StringParameter" name="SourceContent" value="#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+              <Parameter xsi:type="StringParameter" name="VariableName" value="chocolatey-deploy" />
+            </Statement>
+            <Statement name="DeleteFile" continueOnFail="true" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+            </Statement>
+            <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocolatey Deployment Log: #chocolatey-deploy#" />
+            </Statement>
+          </Body>
+        </Procedure>
+        <Procedure name="Chocolatey Install - Windows - Greenshot" treePres="3" id="1000024910" folderId="552071683552149" treeFullPath="Upstream Kaseya Power Pack.Chocolatey Application Mmnt Examples 2018-10-26.Windows.Chocolatey Install">
+          <Body description="">
+            <If description="Procedure description: Deploy applications with Chocolatey. Read more here: https://chocolatey.org&#xD;&#xA;Kaseya customer value: Procedure to secure clients with the latest software.&#xD;&#xA;End user value: Limiting the risks for exploits, ransomware, phishing attacks, downtime and possible data loss.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule Once, Recurring or Run Now.&#xD;&#xA;Report options: Agent Procedure log and &quot;C:\ProgramData\chocolatey\logs\chocolatey.log&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se Latest update: 2018-04-15&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
+              <Condition name="TestFile">
+                <Parameter xsi:type="StringParameter" name="Path" value="c:\ProgramData\Chocolatey\choco.exe" />
+                <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+                <Parameter xsi:type="StringParameter" name="Value" value="" />
+              </Condition>
+              <Then>
+                <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocloatey deployment framework missing on this machine. Deploying." />
+                </Statement>
+                <Statement name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Command" value="@&quot;%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe&quot; -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command &quot;iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))&quot; &amp;&amp; SET &quot;PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin&quot;" />
+                  <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                  <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+                </Statement>
+              </Then>
+            </If>
+            <Statement description="This pararmeter defines what application to deploy. Full package list here: https://chocolatey.org/packages" name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Command" value="c:\ProgramData\Chocolatey\choco.exe install greenshot --limit-output --no-progress -y &gt;&gt;#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+              <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+              <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+            </Statement>
+            <Statement name="GetVariable" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+              <Parameter xsi:type="StringParameter" name="SourceContent" value="#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+              <Parameter xsi:type="StringParameter" name="VariableName" value="chocolatey-deploy" />
+            </Statement>
+            <Statement name="DeleteFile" continueOnFail="true" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+            </Statement>
+            <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocolatey Deployment Log: #chocolatey-deploy#" />
+            </Statement>
+          </Body>
+        </Procedure>
+        <Procedure name="Chocolatey Install - Windows - Java 8 32Bit" treePres="3" id="1135982104" folderId="552071683552149" treeFullPath="Upstream Kaseya Power Pack.Chocolatey Application Mmnt Examples 2018-10-26.Windows.Chocolatey Install">
+          <Body description="">
+            <If description="Procedure description: Deploy applications with Chocolatey. Read more here: https://chocolatey.org&#xD;&#xA;Kaseya customer value: Procedure to secure clients with the latest software.&#xD;&#xA;End user value: Limiting the risks for exploits, ransomware, phishing attacks, downtime and possible data loss.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule Once, Recurring or Run Now.&#xD;&#xA;Report options: Agent Procedure log and &quot;C:\ProgramData\chocolatey\logs\chocolatey.log&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se Latest update: 2018-04-15&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
+              <Condition name="TestFile">
+                <Parameter xsi:type="StringParameter" name="Path" value="c:\ProgramData\Chocolatey\choco.exe" />
+                <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+                <Parameter xsi:type="StringParameter" name="Value" value="" />
+              </Condition>
+              <Then>
+                <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocloatey deployment framework missing on this machine. Deploying." />
+                </Statement>
+                <Statement name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Command" value="@&quot;%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe&quot; -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command &quot;iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))&quot; &amp;&amp; SET &quot;PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin&quot;" />
+                  <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                  <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+                </Statement>
+              </Then>
+            </If>
+            <Statement description="This pararmeter defines what application to deploy. Full package list here: https://chocolatey.org/packages" name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Command" value="c:\ProgramData\Chocolatey\choco.exe install jre8 --limit-output --no-progress -PackageParameters &quot;/exclude:64&quot; -y &gt;&gt;#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+              <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+              <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+            </Statement>
+            <Statement name="GetVariable" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+              <Parameter xsi:type="StringParameter" name="SourceContent" value="#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+              <Parameter xsi:type="StringParameter" name="VariableName" value="chocolatey-deploy" />
+            </Statement>
+            <Statement name="DeleteFile" continueOnFail="true" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+            </Statement>
+            <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocolatey Deployment Log: #chocolatey-deploy#" />
+            </Statement>
+          </Body>
+        </Procedure>
+        <Procedure name="Chocolatey Install - Windows - Java 8 64Bit" treePres="3" id="1899428299" folderId="552071683552149" treeFullPath="Upstream Kaseya Power Pack.Chocolatey Application Mmnt Examples 2018-10-26.Windows.Chocolatey Install">
+          <Body description="">
+            <If description="Procedure description: Deploy applications with Chocolatey. Read more here: https://chocolatey.org&#xD;&#xA;Kaseya customer value: Procedure to secure clients with the latest software.&#xD;&#xA;End user value: Limiting the risks for exploits, ransomware, phishing attacks, downtime and possible data loss.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule Once, Recurring or Run Now.&#xD;&#xA;Report options: Agent Procedure log and &quot;C:\ProgramData\chocolatey\logs\chocolatey.log&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se Latest update: 2018-04-15&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
+              <Condition name="TestFile">
+                <Parameter xsi:type="StringParameter" name="Path" value="c:\ProgramData\Chocolatey\choco.exe" />
+                <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+                <Parameter xsi:type="StringParameter" name="Value" value="" />
+              </Condition>
+              <Then>
+                <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocloatey deployment framework missing on this machine. Deploying." />
+                </Statement>
+                <Statement name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Command" value="@&quot;%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe&quot; -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command &quot;iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))&quot; &amp;&amp; SET &quot;PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin&quot;" />
+                  <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                  <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+                </Statement>
+              </Then>
+            </If>
+            <Statement description="This pararmeter defines what application to deploy. Full package list here: https://chocolatey.org/packages" name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Command" value="c:\ProgramData\Chocolatey\choco.exe install jre8 --limit-output --no-progress -PackageParameters &quot;/exclude:32&quot; -y &gt;&gt;#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+              <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+              <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+            </Statement>
+            <Statement name="GetVariable" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+              <Parameter xsi:type="StringParameter" name="SourceContent" value="#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+              <Parameter xsi:type="StringParameter" name="VariableName" value="chocolatey-deploy" />
+            </Statement>
+            <Statement name="DeleteFile" continueOnFail="true" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+            </Statement>
+            <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocolatey Deployment Log: #chocolatey-deploy#" />
+            </Statement>
+          </Body>
+        </Procedure>
+        <Procedure name="Chocolatey Install - Windows - Notepad ++" treePres="3" id="2040214752" folderId="552071683552149" treeFullPath="Upstream Kaseya Power Pack.Chocolatey Application Mmnt Examples 2018-10-26.Windows.Chocolatey Install">
+          <Body description="">
+            <If description="Procedure description: Deploy applications with Chocolatey. Read more here: https://chocolatey.org&#xD;&#xA;Kaseya customer value: Procedure to secure clients with the latest software.&#xD;&#xA;End user value: Limiting the risks for exploits, ransomware, phishing attacks, downtime and possible data loss.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule Once, Recurring or Run Now.&#xD;&#xA;Report options: Agent Procedure log and &quot;C:\ProgramData\chocolatey\logs\chocolatey.log&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se Latest update: 2018-04-15&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
+              <Condition name="TestFile">
+                <Parameter xsi:type="StringParameter" name="Path" value="c:\ProgramData\Chocolatey\choco.exe" />
+                <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+                <Parameter xsi:type="StringParameter" name="Value" value="" />
+              </Condition>
+              <Then>
+                <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocloatey deployment framework missing on this machine. Deploying." />
+                </Statement>
+                <Statement name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Command" value="@&quot;%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe&quot; -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command &quot;iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))&quot; &amp;&amp; SET &quot;PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin&quot;" />
+                  <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                  <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+                </Statement>
+              </Then>
+            </If>
+            <Statement description="This pararmeter defines what application to deploy. Full package list here: https://chocolatey.org/packages" name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Command" value="c:\ProgramData\Chocolatey\choco.exe install notepadplusplus --limit-output --no-progress -y &gt;&gt;#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+              <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+              <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+            </Statement>
+            <Statement name="GetVariable" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+              <Parameter xsi:type="StringParameter" name="SourceContent" value="#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+              <Parameter xsi:type="StringParameter" name="VariableName" value="chocolatey-deploy" />
+            </Statement>
+            <Statement name="DeleteFile" continueOnFail="true" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+            </Statement>
+            <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocolatey Deployment Log: #chocolatey-deploy#" />
+            </Statement>
+          </Body>
+        </Procedure>
+        <Procedure name="Chocolatey Install - Windows - Office365 Business" treePres="3" id="489987242" folderId="552071683552149" treeFullPath="Upstream Kaseya Power Pack.Chocolatey Application Mmnt Examples 2018-10-26.Windows.Chocolatey Install">
+          <Body description="">
+            <If description="Procedure description: Deploy applications with Chocolatey. Read more here: https://chocolatey.org&#xD;&#xA;Kaseya customer value: Procedure to secure clients with the latest software.&#xD;&#xA;End user value: Limiting the risks for exploits, ransomware, phishing attacks, downtime and possible data loss.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule Once, Recurring or Run Now.&#xD;&#xA;Report options: Agent Procedure log and &quot;C:\ProgramData\chocolatey\logs\chocolatey.log&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se Latest update: 2018-04-15&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
+              <Condition name="TestFile">
+                <Parameter xsi:type="StringParameter" name="Path" value="c:\ProgramData\Chocolatey\choco.exe" />
+                <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+                <Parameter xsi:type="StringParameter" name="Value" value="" />
+              </Condition>
+              <Then>
+                <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocloatey deployment framework missing on this machine. Deploying." />
+                </Statement>
+                <Statement name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Command" value="@&quot;%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe&quot; -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command &quot;iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))&quot; &amp;&amp; SET &quot;PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin&quot;" />
+                  <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                  <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+                </Statement>
+              </Then>
+            </If>
+            <Statement description="This pararmeter defines what application to deploy. Full package list here: https://chocolatey.org/packages" name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Command" value="c:\ProgramData\Chocolatey\choco.exe install office365business --limit-output --no-progress /y &gt;&gt;#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+              <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+              <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+            </Statement>
+            <Statement name="GetVariable" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+              <Parameter xsi:type="StringParameter" name="SourceContent" value="#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+              <Parameter xsi:type="StringParameter" name="VariableName" value="chocolatey-deploy" />
+            </Statement>
+            <Statement name="DeleteFile" continueOnFail="true" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+            </Statement>
+            <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocolatey Deployment Log: #chocolatey-deploy#" />
+            </Statement>
+          </Body>
+        </Procedure>
+        <Procedure name="Chocolatey Install - Windows - Skype (Consumer)" treePres="3" id="473415305" folderId="552071683552149" treeFullPath="Upstream Kaseya Power Pack.Chocolatey Application Mmnt Examples 2018-10-26.Windows.Chocolatey Install">
+          <Body description="">
+            <If description="Procedure description: Deploy applications with Chocolatey. Read more here: https://chocolatey.org&#xD;&#xA;Kaseya customer value: Procedure to secure clients with the latest software.&#xD;&#xA;End user value: Limiting the risks for exploits, ransomware, phishing attacks, downtime and possible data loss.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule Once, Recurring or Run Now.&#xD;&#xA;Report options: Agent Procedure log and &quot;C:\ProgramData\chocolatey\logs\chocolatey.log&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se Latest update: 2018-04-15&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
+              <Condition name="TestFile">
+                <Parameter xsi:type="StringParameter" name="Path" value="c:\ProgramData\Chocolatey\choco.exe" />
+                <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+                <Parameter xsi:type="StringParameter" name="Value" value="" />
+              </Condition>
+              <Then>
+                <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocloatey deployment framework missing on this machine. Deploying." />
+                </Statement>
+                <Statement name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Command" value="@&quot;%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe&quot; -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command &quot;iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))&quot; &amp;&amp; SET &quot;PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin&quot;" />
+                  <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                  <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+                </Statement>
+              </Then>
+            </If>
+            <Statement description="This pararmeter defines what application to deploy. Full package list here: https://chocolatey.org/packages" name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Command" value="c:\ProgramData\Chocolatey\choco.exe install skype --limit-output --no-progress /y &gt;&gt;#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+              <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+              <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+            </Statement>
+            <Statement name="GetVariable" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+              <Parameter xsi:type="StringParameter" name="SourceContent" value="#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+              <Parameter xsi:type="StringParameter" name="VariableName" value="chocolatey-deploy" />
+            </Statement>
+            <Statement name="DeleteFile" continueOnFail="true" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+            </Statement>
+            <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocolatey Deployment Log: #chocolatey-deploy#" />
+            </Statement>
+          </Body>
+        </Procedure>
+        <Procedure name="Chocolatey Install - Windows - Teamviewer (Yes, really)" treePres="3" id="1910848438" folderId="552071683552149" treeFullPath="Upstream Kaseya Power Pack.Chocolatey Application Mmnt Examples 2018-10-26.Windows.Chocolatey Install">
+          <Body description="">
+            <If description="Procedure description: Deploy applications with Chocolatey. Read more here: https://chocolatey.org&#xD;&#xA;Kaseya customer value: Procedure to secure clients with the latest software.&#xD;&#xA;End user value: Limiting the risks for exploits, ransomware, phishing attacks, downtime and possible data loss.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule Once, Recurring or Run Now.&#xD;&#xA;Report options: Agent Procedure log and &quot;C:\ProgramData\chocolatey\logs\chocolatey.log&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se Latest update: 2018-04-15&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
+              <Condition name="TestFile">
+                <Parameter xsi:type="StringParameter" name="Path" value="c:\ProgramData\Chocolatey\choco.exe" />
+                <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+                <Parameter xsi:type="StringParameter" name="Value" value="" />
+              </Condition>
+              <Then>
+                <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocloatey deployment framework missing on this machine. Deploying." />
+                </Statement>
+                <Statement name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Command" value="@&quot;%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe&quot; -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command &quot;iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))&quot; &amp;&amp; SET &quot;PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin&quot;" />
+                  <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                  <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+                </Statement>
+              </Then>
+            </If>
+            <Statement description="This pararmeter defines what application to deploy. Full package list here: https://chocolatey.org/packages" name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Command" value="c:\ProgramData\Chocolatey\choco.exe install teamviewer --limit-output --no-progress /y &gt;&gt;#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+              <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+              <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+            </Statement>
+            <Statement name="GetVariable" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+              <Parameter xsi:type="StringParameter" name="SourceContent" value="#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+              <Parameter xsi:type="StringParameter" name="VariableName" value="chocolatey-deploy" />
+            </Statement>
+            <Statement name="DeleteFile" continueOnFail="true" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+            </Statement>
+            <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocolatey Deployment Log: #chocolatey-deploy#" />
+            </Statement>
+          </Body>
+        </Procedure>
+        <Procedure name="Chocolatey Install - Windows - VLC Media Player" treePres="3" id="1685069061" folderId="552071683552149" treeFullPath="Upstream Kaseya Power Pack.Chocolatey Application Mmnt Examples 2018-10-26.Windows.Chocolatey Install">
+          <Body description="">
+            <If description="Procedure description: Deploy applications with Chocolatey. Read more here: https://chocolatey.org&#xD;&#xA;Kaseya customer value: Procedure to secure clients with the latest software.&#xD;&#xA;End user value: Limiting the risks for exploits, ransomware, phishing attacks, downtime and possible data loss.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule Once, Recurring or Run Now.&#xD;&#xA;Report options: Agent Procedure log and &quot;C:\ProgramData\chocolatey\logs\chocolatey.log&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se Latest update: 2018-04-15&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
+              <Condition name="TestFile">
+                <Parameter xsi:type="StringParameter" name="Path" value="c:\ProgramData\Chocolatey\choco.exe" />
+                <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+                <Parameter xsi:type="StringParameter" name="Value" value="" />
+              </Condition>
+              <Then>
+                <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocloatey deployment framework missing on this machine. Deploying." />
+                </Statement>
+                <Statement name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Command" value="@&quot;%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe&quot; -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command &quot;iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))&quot; &amp;&amp; SET &quot;PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin&quot;" />
+                  <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                  <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+                </Statement>
+              </Then>
+            </If>
+            <Statement description="This pararmeter defines what application to deploy. Full package list here: https://chocolatey.org/packages" name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Command" value="c:\ProgramData\Chocolatey\choco.exe install vlc --limit-output --no-progress /y &gt;&gt;#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+              <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+              <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+            </Statement>
+            <Statement name="GetVariable" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+              <Parameter xsi:type="StringParameter" name="SourceContent" value="#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+              <Parameter xsi:type="StringParameter" name="VariableName" value="chocolatey-deploy" />
+            </Statement>
+            <Statement name="DeleteFile" continueOnFail="true" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+            </Statement>
+            <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocolatey Deployment Log: #chocolatey-deploy#" />
+            </Statement>
+          </Body>
+        </Procedure>
+        <Procedure name="Chocolatey Install - Windows - Zoom Meeting" treePres="3" id="1684809494" folderId="552071683552149" treeFullPath="Upstream Kaseya Power Pack.Chocolatey Application Mmnt Examples 2018-10-26.Windows.Chocolatey Install">
+          <Body description="">
+            <If description="Procedure description: Deploy applications with Chocolatey. Read more here: https://chocolatey.org&#xD;&#xA;Kaseya customer value: Procedure to secure clients with the latest software.&#xD;&#xA;End user value: Limiting the risks for exploits, ransomware, phishing attacks, downtime and possible data loss.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule Once, Recurring or Run Now.&#xD;&#xA;Report options: Agent Procedure log and &quot;C:\ProgramData\chocolatey\logs\chocolatey.log&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se Latest update: 2018-04-15&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
+              <Condition name="TestFile">
+                <Parameter xsi:type="StringParameter" name="Path" value="c:\ProgramData\Chocolatey\choco.exe" />
+                <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+                <Parameter xsi:type="StringParameter" name="Value" value="" />
+              </Condition>
+              <Then>
+                <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocloatey deployment framework missing on this machine. Deploying." />
+                </Statement>
+                <Statement name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Command" value="@&quot;%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe&quot; -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command &quot;iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))&quot; &amp;&amp; SET &quot;PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin&quot;" />
+                  <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                  <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+                </Statement>
+              </Then>
+            </If>
+            <Statement description="This pararmeter defines what application to deploy. Full package list here: https://chocolatey.org/packages" name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Command" value="c:\ProgramData\Chocolatey\choco.exe install zoom --limit-output --no-progress -y &gt;&gt;#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+              <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+              <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+            </Statement>
+            <Statement name="GetVariable" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+              <Parameter xsi:type="StringParameter" name="SourceContent" value="#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+              <Parameter xsi:type="StringParameter" name="VariableName" value="chocolatey-deploy" />
+            </Statement>
+            <Statement name="DeleteFile" continueOnFail="true" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\chocolatey-deploy.log" />
+            </Statement>
+            <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocolatey Deployment Log: #chocolatey-deploy#" />
+            </Statement>
+          </Body>
+        </Procedure>
+      </Folder>
+      <Folder name="Chocolatey Uninstall" treePres="3">
+        <Procedure name="Chocolatey Uninstall - Windows - 7-Zip (Use as template for any other apps)" treePres="3" id="455106151" folderId="452744672891099" treeFullPath="Upstream Kaseya Power Pack.Chocolatey Application Mmnt Examples 2018-10-26.Windows.Chocolatey Uninstall">
+          <Body description="">
+            <If description="Procedure description: Uninstall applications deployed with Chocolatey. Read more here: https://github.com/chocolatey/choco/wiki/CommandsUninstall&#xD;&#xA;Kaseya customer value: Procedure to secure clients by removing unwanted software.&#xD;&#xA;End user value: Limiting the risks for exploits, ransomware, phishing attacks, downtime and possible data loss.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule Once, Recurring or Run Now.&#xD;&#xA;Report options: Agent Procedure log and &quot;C:\ProgramData\chocolatey\logs\chocolatey.log&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se Latest update: 2018-04-15&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
+              <Condition name="TestFile">
+                <Parameter xsi:type="StringParameter" name="Path" value="c:\ProgramData\Chocolatey\choco.exe" />
+                <Parameter xsi:type="EnumParameter" name="Condition" value="Exists" />
+                <Parameter xsi:type="StringParameter" name="Value" value="" />
+              </Condition>
+              <Then>
+                <If description="In case of the app is running, kill it.">
+                  <Condition name="ApplicationRunning">
+                    <Parameter xsi:type="StringParameter" name="ApplicationName" value="7zFM.exe" />
+                  </Condition>
+                  <Then>
+                    <Statement name="CloseApplication" continueOnFail="false" osType="Windows">
+                      <Parameter xsi:type="StringParameter" name="ApplicationName" value="7zFM.exe" />
+                    </Statement>
+                  </Then>
+                </If>
+                <Statement description="This pararmeter defines what App to uninstall. Full package list here: https://chocolatey.org/packages" name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Command" value="c:\ProgramData\Chocolatey\choco.exe uninstall 7zip.install --limit-output --no-progress -y &gt;&gt;#vAgentConfiguration.agentTempDir#\chocolatey-uninstall.log" />
+                  <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                  <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+                </Statement>
+                <Statement name="GetVariable" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+                  <Parameter xsi:type="StringParameter" name="SourceContent" value="#vAgentConfiguration.agentTempDir#\chocolatey-uninstall.log" />
+                  <Parameter xsi:type="StringParameter" name="VariableName" value="chocolatey-uninstall" />
+                </Statement>
+                <Statement name="DeleteFile" continueOnFail="true" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\chocolatey-uninstall.log" />
+                </Statement>
+                <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocolatey Uninstall Log: #chocolatey-uninstall#" />
+                </Statement>
+              </Then>
+              <Else>
+                <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocolatey deployment framework is missing on this machine. You can only manage applications deployed by Chocolatey with Chocolatey." />
+                </Statement>
+              </Else>
+            </If>
+          </Body>
+        </Procedure>
+      </Folder>
+      <Folder name="Chocolatey Upgrade" treePres="3">
+        <Procedure name="Chocolatey Upgrade - Windows - All Apps Previously Installed With Chocolatey" treePres="3" id="1721054001" folderId="944164344269858" treeFullPath="Upstream Kaseya Power Pack.Chocolatey Application Mmnt Examples 2018-10-26.Windows.Chocolatey Upgrade">
+          <Body description="">
+            <If description="Procedure description: Upgrade applications deployed with Chocolatey. Read more here: https://chocolatey.org/docs/commandsupgrade&#xD;&#xA;Kaseya customer value: Procedure to secure clients with the latest software.&#xD;&#xA;End user value: Limiting the risks for exploits, ransomware, phishing attacks, downtime and possible data loss.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule Once, Recurring or Run Now.&#xD;&#xA;Report options: Agent Procedure log and &quot;C:\ProgramData\chocolatey\logs\chocolatey.log&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se Latest update: 2018-04-15&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
+              <Condition name="TestFile">
+                <Parameter xsi:type="StringParameter" name="Path" value="c:\ProgramData\Chocolatey\choco.exe" />
+                <Parameter xsi:type="EnumParameter" name="Condition" value="Exists" />
+                <Parameter xsi:type="StringParameter" name="Value" value="" />
+              </Condition>
+              <Then>
+                <Statement description="This pararmeter defines what App to upgrade. Full package list here: https://chocolatey.org/packages" name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Command" value="c:\ProgramData\Chocolatey\choco.exe upgrade all --limit-output --no-progress -y &gt;&gt;#vAgentConfiguration.agentTempDir#\chocolatey-upgrade.log" />
+                  <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                  <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+                </Statement>
+                <Statement name="GetVariable" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+                  <Parameter xsi:type="StringParameter" name="SourceContent" value="#vAgentConfiguration.agentTempDir#\chocolatey-upgrade.log" />
+                  <Parameter xsi:type="StringParameter" name="VariableName" value="chocolatey-upgrade" />
+                </Statement>
+                <Statement name="DeleteFile" continueOnFail="true" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\chocolatey-upgrade.log" />
+                </Statement>
+                <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocolatey Upgrade Log: #chocolatey-upgrade#" />
+                </Statement>
+              </Then>
+              <Else>
+                <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocolatey deployment framework is missing on this machine. You can only manage applications deployed by Chocolatey with Chocolatey." />
+                </Statement>
+              </Else>
+            </If>
+          </Body>
+        </Procedure>
+        <Procedure name="Chocolatey Upgrade - Windows - Chocolatey Framework (Also use as template for other single apps)" treePres="3" id="1631414903" folderId="944164344269858" treeFullPath="Upstream Kaseya Power Pack.Chocolatey Application Mmnt Examples 2018-10-26.Windows.Chocolatey Upgrade">
+          <Body description="">
+            <If description="Procedure description: Upgrade applications deployed with Chocolatey. Read more here: https://chocolatey.org/docs/commandsupgrade&#xD;&#xA;Kaseya customer value: Procedure to secure clients with the latest software.&#xD;&#xA;End user value: Limiting the risks for exploits, ransomware, phishing attacks, downtime and possible data loss.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule Once, Recurring or Run Now.&#xD;&#xA;Report options: Agent Procedure log and &quot;C:\ProgramData\chocolatey\logs\chocolatey.log&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se Latest update: 2018-04-15&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
+              <Condition name="TestFile">
+                <Parameter xsi:type="StringParameter" name="Path" value="c:\ProgramData\Chocolatey\choco.exe" />
+                <Parameter xsi:type="EnumParameter" name="Condition" value="Exists" />
+                <Parameter xsi:type="StringParameter" name="Value" value="" />
+              </Condition>
+              <Then>
+                <Statement description="This pararmeter defines what App to upgrade. Full package list here: https://chocolatey.org/packages" name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Command" value="c:\ProgramData\Chocolatey\choco.exe upgrade chocolatey --limit-output --no-progress -y &gt;&gt;#vAgentConfiguration.agentTempDir#\chocolatey-upgrade.log" />
+                  <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                  <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+                </Statement>
+                <Statement name="GetVariable" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+                  <Parameter xsi:type="StringParameter" name="SourceContent" value="#vAgentConfiguration.agentTempDir#\chocolatey-upgrade.log" />
+                  <Parameter xsi:type="StringParameter" name="VariableName" value="chocolatey-deploy" />
+                </Statement>
+                <Statement name="DeleteFile" continueOnFail="true" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\chocolatey-upgrade.log" />
+                </Statement>
+                <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocolatey Upgrade Log: #chocolatey-upgradey#" />
+                </Statement>
+              </Then>
+              <Else>
+                <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Chocolatey deployment framework is missing on this machine. Start by deploying some Chocolatey Apps" />
+                </Statement>
+              </Else>
+            </If>
+          </Body>
+        </Procedure>
+      </Folder>
+    </Folder>
+  </Folder>
+</ScriptExport>

@@ -1,0 +1,575 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ScriptExport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.kaseya.com/vsa/2008/12/Scripting">
+  <Folder name="MS Office And Office 365 Mgmnt 2018-10-26" treePres="3">
+    <Folder name="Mac" treePres="3">
+      <Folder name="MS Office 365 Deployment" treePres="3">
+        <Procedure name="Application Deployment - Mac - Office 2016 for Mac (O365) - Deploy Latest" treePres="3" id="1629967232" folderId="444028143186135" treeFullPath="Upstream Kaseya Power Pack.MS Office And Office 365 Mgmnt 2018-10-26.Mac.MS Office 365 Deployment">
+          <Body description="">
+            <Statement description="Under development." name="GetURL" continueOnFail="false" osType="MacOS">
+              <Parameter xsi:type="StringParameter" name="URL" value="https://go.microsoft.com/fwlink/?LinkId=525133" />
+              <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#/Office2016.pkg" />
+              <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+            </Statement>
+            <Statement name="ExecuteShellCommand" continueOnFail="false" osType="MacOS">
+              <Parameter xsi:type="StringParameter" name="Command" value="installer -pkg #vAgentConfiguration.agentTempDir#/Office2016.pkg -target /" />
+              <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+              <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+            </Statement>
+            <Statement name="DeleteFile" continueOnFail="false" osType="MacOS">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#/Office2016.pkg" />
+            </Statement>
+            <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="MacOS">
+              <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 2016 deployed or updated to latest version." />
+            </Statement>
+          </Body>
+        </Procedure>
+      </Folder>
+    </Folder>
+    <Folder name="Windows" treePres="3">
+      <Folder name="MS Office 365 Deployment" treePres="3">
+        <Folder name="Danish" treePres="3">
+          <Procedure name="Application Deployment - Windows - Office365 For Business Example - Danish - Deploy Latest" treePres="3" id="726659021" folderId="141335782567661" treeFullPath="Upstream Kaseya Power Pack.MS Office And Office 365 Mgmnt 2018-10-26.Windows.MS Office 365 Deployment.Danish">
+            <Body description="">
+              <Statement description="Procedure description: Deploy latest Office 365 For Business Premium build. Components: Outlook, Skype For Business, OneDrive, Word, Excel, Powerpoint, Publisher, Access&#xD;&#xA;Kaseya customer value: Standardize the Office 365 deployment process.&#xD;&#xA;End user value: Quick and standardized software deployment process.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for before, during and after update deployment statements.&#xD;&#xA;Maintainer: powerpack@upstream.se Last change: 2017-03-31&#xD;&#xA;------------------------------------------------------------------------------------------------------------" name="GetURL" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/VCU88s3Uvn4CRsk/download" />
+                <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\o365.msi" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office365 MSI installer downloaded successfully." />
+              </Statement>
+              <Statement name="ExecuteFile" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Path" value="c:\windows\system32\msiexec.exe" />
+                <Parameter xsi:type="StringParameter" name="Arguments" value="/i #vAgentConfiguration.agentTempDir#\o365.msi /L*V &quot;#vAgentConfiguration.agentTempDir#\o365deploy.log&quot;" />
+                <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 installation: The MSI installer spawns a Click-2-Run process to pull Office 365 over the Intenet. We create a 10 min pause to let that process finish up." />
+              </Statement>
+              <Statement description="The MSI installer spawns a Click-2-Run process to pull Office 365 over the Intenet. We create a 10 min pause to let that process finish up." name="PauseScript" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="IntegerParameter" name="Seconds" value="600" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 installation: Complete. Components: Outlook, Skype For Business, OneDrive, Word, Excel, Powerpoint, Publisher, Access. Evaluate the log file: &quot;#vAgentConfiguration.agentTempDir#\o365deploy.log&quot;" />
+              </Statement>
+              <Statement description="Some house cleaning" name="DeleteFile" continueOnFail="true" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\o365.msi" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 installation: The Agent Procedure hit the last row and will now exit. Evaluate the Agent Procedure log output." />
+              </Statement>
+            </Body>
+          </Procedure>
+          <Procedure name="Application Deployment - Windows - Office365 Pro Plus Example - Danish - Deploy Latest" treePres="3" id="1916337441" folderId="141335782567661" treeFullPath="Upstream Kaseya Power Pack.MS Office And Office 365 Mgmnt 2018-10-26.Windows.MS Office 365 Deployment.Danish">
+            <Body description="">
+              <Statement description="Procedure description: Deploy latest Office 365 ProPlus build. Components: Outlook, OneDrive, Word, Excel, Powerpoint.&#xD;&#xA;Kaseya customer value: Standardize the Office 365 deploymen process.&#xD;&#xA;End user value: Quick and standardized software deployment process.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for before, during and after update deployment statements.&#xD;&#xA;Maintainer: powerpack@upstream.se Last change: 2017-03-31&#xD;&#xA;------------------------------------------------------------------------------------------------------------" name="GetURL" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/bG5vJE14DzMga5G/download" />
+                <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\o365.msi" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office365 MSI installer downloaded successfully." />
+              </Statement>
+              <Statement name="ExecuteFile" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Path" value="c:\windows\system32\msiexec.exe" />
+                <Parameter xsi:type="StringParameter" name="Arguments" value="/i #vAgentConfiguration.agentTempDir#\o365.msi /L*V &quot;#vAgentConfiguration.agentTempDir#\o365deploy.log&quot;" />
+                <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 installation: The MSI installer spawns a Click-2-Run process to pull Office 365 over the Intenet. We create a 10 min pause to let that process finish up." />
+              </Statement>
+              <Statement description="The MSI installer spawns a Click-2-Run process to pull Office 365 over the Intenet. We create a 10 min pause to let that process finish up." name="PauseScript" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="IntegerParameter" name="Seconds" value="600" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 installation: Complete. Components: Outlook, OneDrive, Word, Excel, Powerpoint. Evaluate the log file: &quot;#vAgentConfiguration.agentTempDir#\o365deploy.log&quot;" />
+              </Statement>
+              <Statement description="Some house cleaning" name="DeleteFile" continueOnFail="true" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\o365.msi" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 installation: The Agent Procedure hit the last row and will now exit. Evaluate the Agent Procedure log output." />
+              </Statement>
+            </Body>
+          </Procedure>
+        </Folder>
+        <Folder name="Finnish" treePres="3">
+          <Procedure name="Application Deployment - Windows - Office365 For Business Example - Finnish - Deploy Latest" treePres="3" id="958542223" folderId="434496082381576" treeFullPath="Upstream Kaseya Power Pack.MS Office And Office 365 Mgmnt 2018-10-26.Windows.MS Office 365 Deployment.Finnish">
+            <Body description="">
+              <Statement description="Procedure description: Deploy latest Office 365 For Business Premium build. Components: Outlook, Skype For Business, OneDrive, Word, Excel, Powerpoint, Publisher, Access&#xD;&#xA;Kaseya customer value: Standardize the Office 365 deployment process.&#xD;&#xA;End user value: Quick and standardized software deployment process.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for before, during and after update deployment statements.&#xD;&#xA;Maintainer: powerpack@upstream.se Last change: 2017-03-31&#xD;&#xA;------------------------------------------------------------------------------------------------------------" name="GetURL" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/43lLkn4c2Lsiaz8/download" />
+                <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\o365.msi" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office365 MSI installer downloaded successfully." />
+              </Statement>
+              <Statement name="ExecuteFile" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Path" value="c:\windows\system32\msiexec.exe" />
+                <Parameter xsi:type="StringParameter" name="Arguments" value="/i #vAgentConfiguration.agentTempDir#\o365.msi /L*V &quot;#vAgentConfiguration.agentTempDir#\o365deploy.log&quot;" />
+                <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 installation: The MSI installer spawns a Click-2-Run process to pull Office 365 over the Intenet. We create a 10 min pause to let that process finish up." />
+              </Statement>
+              <Statement description="The MSI installer spawns a Click-2-Run process to pull Office 365 over the Intenet. We create a 10 min pause to let that process finish up." name="PauseScript" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="IntegerParameter" name="Seconds" value="600" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 installation: Complete. Components: Outlook, Skype For Business, OneDrive, Word, Excel, Powerpoint, Publisher, Access. Evaluate the log file: &quot;#vAgentConfiguration.agentTempDir#\o365deploy.log&quot;" />
+              </Statement>
+              <Statement description="Some house cleaning" name="DeleteFile" continueOnFail="true" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\o365.msi" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 installation: The Agent Procedure hit the last row and will now exit. Evaluate the Agent Procedure log output." />
+              </Statement>
+            </Body>
+          </Procedure>
+          <Procedure name="Application Deployment - Windows - Office365 Pro Plus Example - Finnish - Deploy Latest" treePres="3" id="747005" folderId="434496082381576" treeFullPath="Upstream Kaseya Power Pack.MS Office And Office 365 Mgmnt 2018-10-26.Windows.MS Office 365 Deployment.Finnish">
+            <Body description="">
+              <Statement description="Procedure description: Deploy latest Office 365 ProPlus build. Components: Outlook, OneDrive, Word, Excel, Powerpoint.&#xD;&#xA;Kaseya customer value: Standardize the Office 365 deploymen process.&#xD;&#xA;End user value: Quick and standardized software deployment process.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for before, during and after update deployment statements.&#xD;&#xA;Maintainer: powerpack@upstream.se Last change: 2017-03-31&#xD;&#xA;------------------------------------------------------------------------------------------------------------" name="GetURL" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/pWtCzyPbAOC4SsR/download" />
+                <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\o365.msi" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office365 MSI installer downloaded successfully." />
+              </Statement>
+              <Statement name="ExecuteFile" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Path" value="c:\windows\system32\msiexec.exe" />
+                <Parameter xsi:type="StringParameter" name="Arguments" value="/i #vAgentConfiguration.agentTempDir#\o365.msi /L*V &quot;#vAgentConfiguration.agentTempDir#\o365deploy.log&quot;" />
+                <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 installation: The MSI installer spawns a Click-2-Run process to pull Office 365 over the Intenet. We create a 10 min pause to let that process finish up." />
+              </Statement>
+              <Statement description="The MSI installer spawns a Click-2-Run process to pull Office 365 over the Intenet. We create a 10 min pause to let that process finish up." name="PauseScript" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="IntegerParameter" name="Seconds" value="600" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 installation: Complete. Components: Outlook, OneDrive, Word, Excel, Powerpoint. Evaluate the log file: &quot;#vAgentConfiguration.agentTempDir#\o365deploy.log&quot;" />
+              </Statement>
+              <Statement description="Some house cleaning" name="DeleteFile" continueOnFail="true" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\o365.msi" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 installation: The Agent Procedure hit the last row and will now exit. Evaluate the Agent Procedure log output." />
+              </Statement>
+            </Body>
+          </Procedure>
+        </Folder>
+        <Folder name="Norwegian" treePres="3">
+          <Procedure name="Application Deployment - Windows - Office365 For Business Example - Norwegian - Deploy Latest" treePres="3" id="1190425425" folderId="767344189978837" treeFullPath="Upstream Kaseya Power Pack.MS Office And Office 365 Mgmnt 2018-10-26.Windows.MS Office 365 Deployment.Norwegian">
+            <Body description="">
+              <Statement description="Procedure description: Deploy latest Office 365 For Business Premium build. Components: Outlook, Skype For Business, OneDrive, Word, Excel, Powerpoint, Publisher, Access&#xD;&#xA;Kaseya customer value: Standardize the Office 365 deployment process.&#xD;&#xA;End user value: Quick and standardized software deployment process.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for before, during and after update deployment statements.&#xD;&#xA;Maintainer: powerpack@upstream.se Last change: 2017-03-31&#xD;&#xA;------------------------------------------------------------------------------------------------------------" name="GetURL" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/lpcVRwBJVmYTSEx/download" />
+                <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\o365.msi" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office365 MSI installer downloaded successfully." />
+              </Statement>
+              <Statement name="ExecuteFile" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Path" value="c:\windows\system32\msiexec.exe" />
+                <Parameter xsi:type="StringParameter" name="Arguments" value="/i #vAgentConfiguration.agentTempDir#\o365.msi /L*V &quot;#vAgentConfiguration.agentTempDir#\o365deploy.log&quot;" />
+                <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 installation: The MSI installer spawns a Click-2-Run process to pull Office 365 over the Intenet. We create a 10 min pause to let that process finish up." />
+              </Statement>
+              <Statement description="The MSI installer spawns a Click-2-Run process to pull Office 365 over the Intenet. We create a 10 min pause to let that process finish up." name="PauseScript" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="IntegerParameter" name="Seconds" value="600" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 installation: Complete. Components: Outlook, Skype For Business, OneDrive, Word, Excel, Powerpoint, Publisher, Access. Evaluate the log file: &quot;#vAgentConfiguration.agentTempDir#\o365deploy.log&quot;" />
+              </Statement>
+              <Statement description="Some house cleaning" name="DeleteFile" continueOnFail="true" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\o365.msi" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 installation: The Agent Procedure hit the last row and will now exit. Evaluate the Agent Procedure log output." />
+              </Statement>
+            </Body>
+          </Procedure>
+          <Procedure name="Application Deployment - Windows - Office365 Pro Plus Example - Norwegian - Deploy Latest" treePres="3" id="232630207" folderId="767344189978837" treeFullPath="Upstream Kaseya Power Pack.MS Office And Office 365 Mgmnt 2018-10-26.Windows.MS Office 365 Deployment.Norwegian">
+            <Body description="">
+              <Statement description="Procedure description: Deploy latest Office 365 ProPlus build. Components: Outlook, OneDrive, Word, Excel, Powerpoint.&#xD;&#xA;Kaseya customer value:Standardize the Office 365 deploymen process.&#xD;&#xA;End user value: Quick and standardized software deployment process.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for before, during and after update deployment statements.&#xD;&#xA;Maintainer: powerpack@upstream.se Last change: 2017-03-31&#xD;&#xA;------------------------------------------------------------------------------------------------------------" name="GetURL" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/qfBzzYu5GFYAjGB/download" />
+                <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\o365.msi" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office365 MSI installer downloaded successfully." />
+              </Statement>
+              <Statement name="ExecuteFile" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Path" value="c:\windows\system32\msiexec.exe" />
+                <Parameter xsi:type="StringParameter" name="Arguments" value="/i #vAgentConfiguration.agentTempDir#\o365.msi /L*V &quot;#vAgentConfiguration.agentTempDir#\o365deploy.log&quot;" />
+                <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 installation: The MSI installer spawns a Click-2-Run process to pull Office 365 over the Intenet. We create a 10 min pause to let that process finish up." />
+              </Statement>
+              <Statement description="The MSI installer spawns a Click-2-Run process to pull Office 365 over the Intenet. We create a 10 min pause to let that process finish up." name="PauseScript" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="IntegerParameter" name="Seconds" value="600" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 installation: Complete. Components: Outlook, OneDrive, Word, Excel, Powerpoint. Evaluate the log file: &quot;#vAgentConfiguration.agentTempDir#\o365deploy.log&quot;" />
+              </Statement>
+              <Statement description="Some house cleaning" name="DeleteFile" continueOnFail="true" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\o365.msi" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 installation: The Agent Procedure hit the last row and will now exit. Evaluate the Agent Procedure log output." />
+              </Statement>
+            </Body>
+          </Procedure>
+        </Folder>
+        <Folder name="Swedish" treePres="3">
+          <Procedure name="Application Deployment - Windows - Office365 For Business Example - Swedish - Deploy Latest" treePres="3" id="1422308627" folderId="592240424823127" treeFullPath="Upstream Kaseya Power Pack.MS Office And Office 365 Mgmnt 2018-10-26.Windows.MS Office 365 Deployment.Swedish">
+            <Body description="">
+              <Statement description="Procedure description: Deploy latest Office 365 For Business Premium build. Components: Outlook, Skype For Business, OneDrive, Word, Excel, Powerpoint, Publisher, Access&#xD;&#xA;Kaseya customer value: Standardize the Office 365 deployment process.&#xD;&#xA;End user value: Quick and standardized software deployment process.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for before, during and after update deployment statements.&#xD;&#xA;Maintainer: powerpack@upstream.se Last change: 2017-03-31&#xD;&#xA;------------------------------------------------------------------------------------------------------------" name="GetURL" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/WLkhmhUJP90poID/download" />
+                <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\o365.msi" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office365 MSI installer downloaded successfully." />
+              </Statement>
+              <Statement name="ExecuteFile" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Path" value="c:\windows\system32\msiexec.exe" />
+                <Parameter xsi:type="StringParameter" name="Arguments" value="/i #vAgentConfiguration.agentTempDir#\o365.msi /L*V &quot;#vAgentConfiguration.agentTempDir#\o365deploy.log&quot;" />
+                <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 installation: The MSI installer spawns a Click-2-Run process to pull Office 365 over the Intenet. We create a 10 min pause to let that process finish up." />
+              </Statement>
+              <Statement description="The MSI installer spawns a Click-2-Run process to pull Office 365 over the Intenet. We create a 10 min pause to let that process finish up." name="PauseScript" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="IntegerParameter" name="Seconds" value="600" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 installation: Complete. Components: Outlook, Skype For Business, OneDrive, Word, Excel, Powerpoint, Publisher, Access. Evaluate the log file: &quot;#vAgentConfiguration.agentTempDir#\o365deploy.log&quot;" />
+              </Statement>
+              <Statement description="Some house cleaning" name="DeleteFile" continueOnFail="true" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\o365.msi" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 installation: The Agent Procedure hit the last row and will now exit. Evaluate the Agent Procedure log output." />
+              </Statement>
+            </Body>
+          </Procedure>
+          <Procedure name="Application Deployment - Windows - Office365 Pro Plus Example - Swedish - Deploy Latest" treePres="3" id="1490092457" folderId="592240424823127" treeFullPath="Upstream Kaseya Power Pack.MS Office And Office 365 Mgmnt 2018-10-26.Windows.MS Office 365 Deployment.Swedish">
+            <Body description="">
+              <Statement description="Procedure description: Deploy latest Office 365 ProPlus build. Components: Outlook, OneDrive, Word, Excel, Powerpoint.&#xD;&#xA;Kaseya customer value:Standardize the Office 365 deploymen process.&#xD;&#xA;End user value: Quick and standardized software deployment process.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for before, during and after update deployment statements.&#xD;&#xA;Maintainer: powerpack@upstream.se Last change: 2017-03-31&#xD;&#xA;------------------------------------------------------------------------------------------------------------" name="GetURL" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/1l6anXSH8owrpHk/download" />
+                <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\o365.msi" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office365 MSI installer downloaded successfully." />
+              </Statement>
+              <Statement name="ExecuteFile" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Path" value="c:\windows\system32\msiexec.exe" />
+                <Parameter xsi:type="StringParameter" name="Arguments" value="/i #vAgentConfiguration.agentTempDir#\o365.msi /L*V &quot;#vAgentConfiguration.agentTempDir#\o365deploy.log&quot;" />
+                <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 installation: The MSI installer spawns a Click-2-Run process to pull Office 365 over the Intenet. We create a 10 min pause to let that process finish up." />
+              </Statement>
+              <Statement description="The MSI installer spawns a Click-2-Run process to pull Office 365 over the Intenet. We create a 10 min pause to let that process finish up." name="PauseScript" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="IntegerParameter" name="Seconds" value="600" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 installation: Complete. Components: Outlook, OneDrive, Word, Excel, Powerpoint. Evaluate the log file: &quot;#vAgentConfiguration.agentTempDir#\o365deploy.log&quot;" />
+              </Statement>
+              <Statement description="Some house cleaning" name="DeleteFile" continueOnFail="true" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\o365.msi" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 installation: The Agent Procedure hit the last row and will now exit. Evaluate the Agent Procedure log output." />
+              </Statement>
+            </Body>
+          </Procedure>
+        </Folder>
+        <Folder name="US English" treePres="3">
+          <Procedure name="Application Deployment - Windows - Office365 For Business Example - US English - Deploy Latest" treePres="3" id="532297240" folderId="788576203672483" treeFullPath="Upstream Kaseya Power Pack.MS Office And Office 365 Mgmnt 2018-10-26.Windows.MS Office 365 Deployment.US English">
+            <Body description="">
+              <Statement description="Procedure description: Deploy latest Office 365 For Business Premium build. Components: Outlook, Skype For Business, OneDrive, Word, Excel, Powerpoint, Publisher, Access&#xD;&#xA;Kaseya customer value: Standardize the Office 365 deployment process.&#xD;&#xA;End user value: Quick and standardized software deployment process.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for before, during and after update deployment statements.&#xD;&#xA;Maintainer: powerpack@upstream.se Last change: 2017-03-31&#xD;&#xA;------------------------------------------------------------------------------------------------------------" name="GetURL" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/E4HsQ81wKYv2KhZ/download" />
+                <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\o365.msi" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office365 MSI installer downloaded successfully." />
+              </Statement>
+              <Statement name="ExecuteFile" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Path" value="c:\windows\system32\msiexec.exe" />
+                <Parameter xsi:type="StringParameter" name="Arguments" value="/i #vAgentConfiguration.agentTempDir#\o365.msi /L*V &quot;#vAgentConfiguration.agentTempDir#\o365deploy.log&quot;" />
+                <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 installation: The MSI installer spawns a Click-2-Run process to pull Office 365 over the Intenet. We create a 10 min pause to let that process finish up." />
+              </Statement>
+              <Statement description="The MSI installer spawns a Click-2-Run process to pull Office 365 over the Intenet. We create a 10 min pause to let that process finish up." name="PauseScript" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="IntegerParameter" name="Seconds" value="600" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 installation: Complete. Components: Outlook, Skype For Business, OneDrive, Word, Excel, Powerpoint, Publisher, Access. Evaluate the log file: &quot;#vAgentConfiguration.agentTempDir#\o365deploy.log&quot;" />
+              </Statement>
+              <Statement description="Some house cleaning" name="DeleteFile" continueOnFail="true" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\o365.msi" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 installation: The Agent Procedure hit the last row and will now exit. Evaluate the Agent Procedure log output." />
+              </Statement>
+            </Body>
+          </Procedure>
+          <Procedure name="Application Deployment - Windows - Office365 Pro Plus Example - US English - Deploy Latest" treePres="3" id="345026358" folderId="788576203672483" treeFullPath="Upstream Kaseya Power Pack.MS Office And Office 365 Mgmnt 2018-10-26.Windows.MS Office 365 Deployment.US English">
+            <Body description="">
+              <Statement description="Procedure description: Deploy latest Office 365 ProPlus build. Components: Outlook, OneDrive, Word, Excel, Powerpoint.&#xD;&#xA;Kaseya customer value:Standardize the Office 365 deploymen process.&#xD;&#xA;End user value: Quick and standardized software deployment process.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for before, during and after update deployment statements.&#xD;&#xA;Maintainer: powerpack@upstream.se Last change: 2017-03-31&#xD;&#xA;------------------------------------------------------------------------------------------------------------" name="GetURL" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/7UP93NLGjT3IhbM/download" />
+                <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\o365.msi" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office365 MSI installer downloaded successfully." />
+              </Statement>
+              <Statement name="ExecuteFile" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Path" value="c:\windows\system32\msiexec.exe" />
+                <Parameter xsi:type="StringParameter" name="Arguments" value="/i #vAgentConfiguration.agentTempDir#\o365.msi /L*V &quot;#vAgentConfiguration.agentTempDir#\o365deploy.log&quot;" />
+                <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 installation: The MSI installer spawns a Click-2-Run process to pull Office 365 over the Intenet. We create a 10 min pause to let that process finish up." />
+              </Statement>
+              <Statement description="The MSI installer spawns a Click-2-Run process to pull Office 365 over the Intenet. We create a 10 min pause to let that process finish up." name="PauseScript" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="IntegerParameter" name="Seconds" value="600" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 installation: Complete. Components: Outlook, OneDrive, Word, Excel, Powerpoint. Evaluate the log file: &quot;#vAgentConfiguration.agentTempDir#\o365deploy.log&quot;" />
+              </Statement>
+              <Statement description="Some house cleaning" name="DeleteFile" continueOnFail="true" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\o365.msi" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 installation: The Agent Procedure hit the last row and will now exit. Evaluate the Agent Procedure log output." />
+              </Statement>
+            </Body>
+          </Procedure>
+        </Folder>
+      </Folder>
+      <Folder name="MS Office 365 Repair" treePres="3">
+        <Procedure name="Repair Application  - Windows - Office 365 Full Online Repair - No User Interaction" treePres="3" id="1512117268" folderId="575133441982387" treeFullPath="Upstream Kaseya Power Pack.MS Office And Office 365 Mgmnt 2018-10-26.Windows.MS Office 365 Repair">
+          <Body description="">
+            <If description="Procedure description: Full online repair for Office 365 installation silently without user interaction.&#xD;&#xA;Kaseya customer value: Enhanced support experience. Quickly troubleshooting Office 365 realted problems.&#xD;&#xA;End user value: Enhanced support experience.&#xD;&#xA;Dependencies: Office 365.&#xD;&#xA;Usage: Schedule Once or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for &quot;UPSTREAM: Office 365 Online Repair&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
+              <Condition name="TestFile">
+                <Parameter xsi:type="StringParameter" name="Path" value="c:\program\common files\microsoft shared\ClickToRun\officeclicktorun.exe" />
+                <Parameter xsi:type="EnumParameter" name="Condition" value="Exists" />
+                <Parameter xsi:type="StringParameter" name="Value" value="" />
+              </Condition>
+              <Then>
+                <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 Full Online Repair: Click2Run.exe exists. Contiuing ." />
+                </Statement>
+                <Statement name="ExecuteFile" continueOnFail="false">
+                  <Parameter xsi:type="StringParameter" name="Path" value="c:\program\common files\microsoft shared\ClickToRun\officeclicktorun.exe" />
+                  <Parameter xsi:type="StringParameter" name="Arguments" value="scenario=Repair forceappshutdown=True repairtype=FullRepair Displaylevel=False" />
+                  <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                  <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+                </Statement>
+              </Then>
+              <Else>
+                <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 Full Online Repair: Click2Run.exe does not exist. Aborting." />
+                </Statement>
+              </Else>
+            </If>
+            <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 Full Online Repair: The Agent Procedure hit the last row and will now exit. Evaluate the Agent Procedure log output." />
+            </Statement>
+          </Body>
+        </Procedure>
+        <Procedure name="Repair Application  - Windows - Office 365 Quick Repair - No User Interaction" treePres="3" id="1651685516" folderId="575133441982387" treeFullPath="Upstream Kaseya Power Pack.MS Office And Office 365 Mgmnt 2018-10-26.Windows.MS Office 365 Repair">
+          <Body description="">
+            <If description="Procedure description: Quick repair for Office 365 installation silently without user interaction.&#xD;&#xA;Kaseya customer value: Enhanced support experience. Quickly troubleshooting Office 365 realted problems.&#xD;&#xA;End user value: Enhanced support experience.&#xD;&#xA;Dependencies: Office 365.&#xD;&#xA;Usage: Schedule Once or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for &quot;UPSTREAM: Office 365 Quick Repair&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
+              <Condition name="TestFile">
+                <Parameter xsi:type="StringParameter" name="Path" value="c:\program\common files\microsoft shared\ClickToRun\officeclicktorun.exe" />
+                <Parameter xsi:type="EnumParameter" name="Condition" value="Exists" />
+                <Parameter xsi:type="StringParameter" name="Value" value="" />
+              </Condition>
+              <Then>
+                <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 Quick Repair: Click2Run.exe exists. Contiuing ." />
+                </Statement>
+                <Statement name="ExecuteFile" continueOnFail="false">
+                  <Parameter xsi:type="StringParameter" name="Path" value="c:\program\common files\microsoft shared\ClickToRun\officeclicktorun.exe" />
+                  <Parameter xsi:type="StringParameter" name="Arguments" value="scenario=Repair forceappshutdown=True repairtype=QuickRepair Displaylevel=False" />
+                  <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                  <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+                </Statement>
+              </Then>
+              <Else>
+                <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 Quick Repair: Click2Run.exe does not exist. Aborting." />
+                </Statement>
+              </Else>
+            </If>
+            <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 Quick Repair: The Agent Procedure hit the last row and will now exit. Evaluate the Agent Procedure log output." />
+            </Statement>
+          </Body>
+        </Procedure>
+      </Folder>
+      <Folder name="MS Office Application Removal" treePres="3">
+        <Procedure name="Remove Application - Windows - Remove Office 2003" treePres="3" id="141170532" folderId="424805219715836" treeFullPath="Upstream Kaseya Power Pack.MS Office And Office 365 Mgmnt 2018-10-26.Windows.MS Office Application Removal">
+          <Body description="">
+            <Statement description="Procedure description: Procedure to completely remove specific Offic product without user interaction.&#xD;&#xA;Kaseya customer value: Removes any manual interaction when uninstalling Microsoft Office.&#xD;&#xA;End user value: No end user interaction needed.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule or Run Now.&#xD;&#xA;Report options: Look for log #vAgentConfiguration.agentTempDir#\OfficeRemoval.log&#xD;&#xA;Maintainer: powerpack@upstream.se Last change: 2018-05-04&#xD;&#xA;------------------------------------------------------------------------------------------------------------&#xD;&#xA;https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/tree/master/Office-ProPlus-Deployment/Remove-PreviousOfficeInstalls" name="GetURL" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="URL" value="https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/blob/master/Office-ProPlus-Deployment/Remove-PreviousOfficeInstalls/OffScrub03.vbs" />
+              <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\OffScrub.vbs" />
+              <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+            </Statement>
+            <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Executing cscript #vAgentConfiguration.agentTempDir#\Offscrub.vbs, logs at #vAgentConfiguration.agentTempDir#\OffScrub_Logs" />
+            </Statement>
+            <Statement name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Command" value="cscript #vAgentConfiguration.agentTempDir#\OffScrub.vbs ALL /Q /NoCancel /BYPASS 1 /Log #vAgentConfiguration.agentTempDir#\OfficeRemoval.log" />
+              <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+              <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+            </Statement>
+            <Statement name="DeleteFile" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\OffScrub.vbs" />
+            </Statement>
+            <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Ending Office 2003 removal." />
+            </Statement>
+          </Body>
+        </Procedure>
+        <Procedure name="Remove Application - Windows - Remove Office 2007" treePres="3" id="1330848952" folderId="424805219715836" treeFullPath="Upstream Kaseya Power Pack.MS Office And Office 365 Mgmnt 2018-10-26.Windows.MS Office Application Removal">
+          <Body description="">
+            <Statement description="Procedure description: Procedure to completely remove specific Offic product without user interaction.&#xD;&#xA;Kaseya customer value: Removes any manual interaction when uninstalling Microsoft Office.&#xD;&#xA;End user value: No end user interaction needed.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule or Run Now.&#xD;&#xA;Report options: Look for log #vAgentConfiguration.agentTempDir#\OfficeRemoval.log&#xD;&#xA;Maintainer: powerpack@upstream.se Last change: 2018-05-04&#xD;&#xA;------------------------------------------------------------------------------------------------------------&#xD;&#xA;https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/tree/master/Office-ProPlus-Deployment/Remove-PreviousOfficeInstalls" name="GetURL" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="URL" value="https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/blob/master/Office-ProPlus-Deployment/Remove-PreviousOfficeInstalls/OffScrub07.vbs" />
+              <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\OffScrub.vbs" />
+              <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+            </Statement>
+            <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Executing cscript #vAgentConfiguration.agentTempDir#\Offscrub.vbs, logs at #vAgentConfiguration.agentTempDir#\OffScrub_Logs" />
+            </Statement>
+            <Statement name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Command" value="cscript #vAgentConfiguration.agentTempDir#\OffScrub.vbs ALL /Q /NoCancel /BYPASS 1 /Log #vAgentConfiguration.agentTempDir#\OfficeRemoval.log" />
+              <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+              <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+            </Statement>
+            <Statement name="DeleteFile" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\OffScrub.vbs" />
+            </Statement>
+            <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Ending Office 2007 removal." />
+            </Statement>
+          </Body>
+        </Procedure>
+        <Procedure name="Remove Application - Windows - Remove Office 2010" treePres="3" id="373053734" folderId="424805219715836" treeFullPath="Upstream Kaseya Power Pack.MS Office And Office 365 Mgmnt 2018-10-26.Windows.MS Office Application Removal">
+          <Body description="">
+            <Statement description="Procedure description: Procedure to completely remove specific Offic product without user interaction.&#xD;&#xA;Kaseya customer value: Removes any manual interaction when uninstalling Microsoft Office.&#xD;&#xA;End user value: No end user interaction needed.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule or Run Now.&#xD;&#xA;Report options: Look for log #vAgentConfiguration.agentTempDir#\OfficeRemoval.log&#xD;&#xA;Maintainer: powerpack@upstream.se Last change: 2018-05-04&#xD;&#xA;------------------------------------------------------------------------------------------------------------&#xD;&#xA;https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/tree/master/Office-ProPlus-Deployment/Remove-PreviousOfficeInstalls" name="GetURL" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="URL" value="https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/blob/master/Office-ProPlus-Deployment/Remove-PreviousOfficeInstalls/OffScrub10.vbs" />
+              <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\OffScrub.vbs" />
+              <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+            </Statement>
+            <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Executing cscript #vAgentConfiguration.agentTempDir#\Offscrub.vbs, logs at #vAgentConfiguration.agentTempDir#\OffScrub_Logs" />
+            </Statement>
+            <Statement name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Command" value="cscript #vAgentConfiguration.agentTempDir#\OffScrub.vbs ALL /Q /NoCancel /BYPASS 1 /Log #vAgentConfiguration.agentTempDir#\OfficeRemoval.log" />
+              <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+              <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+            </Statement>
+            <Statement name="DeleteFile" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\OffScrub.vbs" />
+            </Statement>
+            <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Ending Office 2010 removal." />
+            </Statement>
+          </Body>
+        </Procedure>
+        <Procedure name="Remove Application - Windows - Remove Office 2013" treePres="3" id="475039199" folderId="424805219715836" treeFullPath="Upstream Kaseya Power Pack.MS Office And Office 365 Mgmnt 2018-10-26.Windows.MS Office Application Removal">
+          <Body description="">
+            <Statement description="Procedure description: Procedure to completely remove specific Offic product without user interaction.&#xD;&#xA;Kaseya customer value: Removes any manual interaction when uninstalling Microsoft Office.&#xD;&#xA;End user value: No end user interaction needed.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule or Run Now.&#xD;&#xA;Report options: Look for log #vAgentConfiguration.agentTempDir#\OfficeRemoval.log&#xD;&#xA;Maintainer: powerpack@upstream.se Last change: 2018-05-04&#xD;&#xA;------------------------------------------------------------------------------------------------------------&#xD;&#xA;https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/tree/master/Office-ProPlus-Deployment/Remove-PreviousOfficeInstalls" name="GetURL" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="URL" value="https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/blob/master/Office-ProPlus-Deployment/Remove-PreviousOfficeInstalls/OffScrub_O15msi.vbs" />
+              <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\OffScrub.vbs" />
+              <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+            </Statement>
+            <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Executing cscript #vAgentConfiguration.agentTempDir#\Offscrub.vbs, logs at #vAgentConfiguration.agentTempDir#\OffScrub_Logs" />
+            </Statement>
+            <Statement name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Command" value="cscript #vAgentConfiguration.agentTempDir#\OffScrub.vbs ALL /Q /NoCancel /BYPASS 1 /Log #vAgentConfiguration.agentTempDir#\OfficeRemoval.log" />
+              <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+              <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+            </Statement>
+            <Statement name="DeleteFile" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\OffScrub.vbs" />
+            </Statement>
+            <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Ending Office 2013 removal." />
+            </Statement>
+          </Body>
+        </Procedure>
+        <Procedure name="Remove Application - Windows - Remove Office 2016" treePres="3" id="1880169454" folderId="424805219715836" treeFullPath="Upstream Kaseya Power Pack.MS Office And Office 365 Mgmnt 2018-10-26.Windows.MS Office Application Removal">
+          <Body description="">
+            <Statement description="Procedure description: Procedure to completely remove specific Offic product without user interaction.&#xD;&#xA;Kaseya customer value: Removes any manual interaction when uninstalling Microsoft Office.&#xD;&#xA;End user value: No end user interaction needed.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule or Run Now.&#xD;&#xA;Report options: Look for log #vAgentConfiguration.agentTempDir#\OfficeRemoval.log&#xD;&#xA;Maintainer: powerpack@upstream.se Last change: 2018-05-04&#xD;&#xA;------------------------------------------------------------------------------------------------------------&#xD;&#xA;https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/tree/master/Office-ProPlus-Deployment/Remove-PreviousOfficeInstalls" name="GetURL" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="URL" value="https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/blob/master/Office-ProPlus-Deployment/Remove-PreviousOfficeInstalls/OffScrub_O16msi.vbs" />
+              <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\OffScrub.vbs" />
+              <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+            </Statement>
+            <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Executing cscript #vAgentConfiguration.agentTempDir#\Offscrub.vbs, logs at #vAgentConfiguration.agentTempDir#\OffScrub_Logs" />
+            </Statement>
+            <Statement name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Command" value="cscript #vAgentConfiguration.agentTempDir#\OffScrub.vbs ALL /Q /NoCancel /BYPASS 1 /Log #vAgentConfiguration.agentTempDir#\OfficeRemoval.log" />
+              <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+              <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+            </Statement>
+            <Statement name="DeleteFile" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\OffScrub.vbs" />
+            </Statement>
+            <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Ending Office 2016 removal." />
+            </Statement>
+          </Body>
+        </Procedure>
+        <Procedure name="Remove Application - Windows - Remove Office Click 2 Run" treePres="3" id="279830912" folderId="424805219715836" treeFullPath="Upstream Kaseya Power Pack.MS Office And Office 365 Mgmnt 2018-10-26.Windows.MS Office Application Removal">
+          <Body description="">
+            <Statement description="Procedure description: Procedure to completely remove specific Offic product without user interaction.&#xD;&#xA;Kaseya customer value: Removes any manual interaction when uninstalling Microsoft Office.&#xD;&#xA;End user value: No end user interaction needed.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule or Run Now.&#xD;&#xA;Report options: Look for log #vAgentConfiguration.agentTempDir#\OfficeRemoval.log&#xD;&#xA;Maintainer: powerpack@upstream.se Last change: 2018-05-04&#xD;&#xA;------------------------------------------------------------------------------------------------------------&#xD;&#xA;https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/tree/master/Office-ProPlus-Deployment/Remove-PreviousOfficeInstalls" name="GetURL" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="URL" value="https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/blob/master/Office-ProPlus-Deployment/Remove-PreviousOfficeInstalls/OffScrubc2r.vbs" />
+              <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\OffScrub.vbs" />
+              <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+            </Statement>
+            <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Executing cscript #vAgentConfiguration.agentTempDir#\Offscrub.vbs, logs at #vAgentConfiguration.agentTempDir#\OffScrub_Logs" />
+            </Statement>
+            <Statement name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Command" value="cscript #vAgentConfiguration.agentTempDir#\OffScrub.vbs ALL /Q /NoCancel /BYPASS 1 /Log #vAgentConfiguration.agentTempDir#\OfficeRemoval.log" />
+              <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+              <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+            </Statement>
+            <Statement name="DeleteFile" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\OffScrub.vbs" />
+            </Statement>
+            <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Ending Office Click 2 Run removal." />
+            </Statement>
+          </Body>
+        </Procedure>
+      </Folder>
+    </Folder>
+  </Folder>
+</ScriptExport>

@@ -1,0 +1,608 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ScriptExport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.kaseya.com/vsa/2008/12/Scripting">
+  <Folder name="User Experience 2018-10-26" treePres="3">
+    <Folder name="Windows" treePres="3">
+      <Folder name="Manipulate Windows System Tray Icons" treePres="3">
+        <Procedure name="User Experience - Windows - Always Show Kaseya Agent In System Tray" treePres="3" id="3150151" folderId="436092226829422" treeFullPath="Upstream Kaseya Power Pack.User Experience 2018-10-26.Windows.Manipulate Windows System Tray Icons">
+          <Body description="">
+            <If description="Procedure description: This example will make the Kaseya Agent always visible in the Windows System Tray down to the right. This cool tool was found at: hianz.wordpress.com&#xD;&#xA;Kaseya customer value: Simple way to make any system tray icon always visible.&#xD;&#xA;End user value: Easy access to the most used softwares in the system tray.&#xD;&#xA;Dependencies: Windows OS&#xD;&#xA;Usage: Schedule recurring or run now.&#xD;&#xA;Report options: Agent Procedure log.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
+              <Condition name="TestFile">
+                <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\traymanager.exe" />
+                <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+                <Parameter xsi:type="StringParameter" name="Value" value="" />
+              </Condition>
+              <Then>
+                <Statement name="GetURL" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/EkrAUrl0rLBbCAg/download" />
+                  <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\traymanager.exe" />
+                  <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+                </Statement>
+              </Then>
+            </If>
+            <If description="">
+              <Condition name="TestFile">
+                <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\TrayNotificationManagement.dll " />
+                <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+                <Parameter xsi:type="StringParameter" name="Value" value="" />
+              </Condition>
+              <Then>
+                <Statement name="GetURL" continueOnFail="false" osType="10">
+                  <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/kiDfx4HGBk2SDT0/download" />
+                  <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\TrayNotificationManagement.dll " />
+                  <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+                </Statement>
+                <Statement name="GetURL" continueOnFail="false" osType="8.1">
+                  <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/kiDfx4HGBk2SDT0/download" />
+                  <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\TrayNotificationManagement.dll " />
+                  <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+                </Statement>
+                <Statement name="GetURL" continueOnFail="false" osType="8">
+                  <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/kiDfx4HGBk2SDT0/download" />
+                  <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\TrayNotificationManagement.dll " />
+                  <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+                </Statement>
+                <Statement description="For Windows 7, Vista and XP we need to download a different additional DLL, same name though." name="GetURL" continueOnFail="false" osType="7">
+                  <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/kYv7HDkYaJkDZ7c/download" />
+                  <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\TrayNotificationManagement.dll " />
+                  <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+                </Statement>
+                <Statement name="GetURL" continueOnFail="false" osType="Vista">
+                  <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/kYv7HDkYaJkDZ7c/download" />
+                  <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\TrayNotificationManagement.dll " />
+                  <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+                </Statement>
+                <Statement name="GetURL" continueOnFail="false" osType="XP">
+                  <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/kYv7HDkYaJkDZ7c/download" />
+                  <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\TrayNotificationManagement.dll " />
+                  <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+                </Statement>
+              </Then>
+            </If>
+            <Statement description="Ok, now we use &quot;traymanager.exe&quot; to pin our preffered icon to always visible. Read more here: https://hianz.wordpress.com/" name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Command" value="#vAgentConfiguration.agentTempDir#\traymanager.exe -p &quot;KaUsrTsk.exe&quot; 2" />
+              <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="User" />
+              <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+            </Statement>
+            <Statement description="We keep the tools in the Kworking folder for reuse in the future." name="WriteScriptLogEntry" continueOnFail="false">
+              <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM.: Kasyea Agent System tray: Always visible." />
+            </Statement>
+          </Body>
+        </Procedure>
+        <Procedure name="User Experience - Windows - Always Show Skype 4 Business Agent In System Tray" treePres="3" id="47762472" folderId="436092226829422" treeFullPath="Upstream Kaseya Power Pack.User Experience 2018-10-26.Windows.Manipulate Windows System Tray Icons">
+          <Body description="">
+            <If description="Procedure description: This example will make the Skype 4 Business Agent always visible in the Windows System Tray down to the right. This cool tool was found at: hianz.wordpress.com&#xD;&#xA;Kaseya customer value: Simple way to make any system tray icon always visible.&#xD;&#xA;End user value: Easy access to the most used softwares in the system tray.&#xD;&#xA;Dependencies: Windows OS&#xD;&#xA;Usage: Schedule recurring or run now.&#xD;&#xA;Report options: Agent Procedure log.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
+              <Condition name="TestFile">
+                <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\traymanager.exe" />
+                <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+                <Parameter xsi:type="StringParameter" name="Value" value="" />
+              </Condition>
+              <Then>
+                <Statement name="GetURL" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/EkrAUrl0rLBbCAg/download" />
+                  <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\traymanager.exe" />
+                  <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+                </Statement>
+              </Then>
+            </If>
+            <If description="For Windows 10, 8.1 and 8 we need to download a additional DLL.">
+              <Condition name="TestFile">
+                <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\TrayNotificationManagement.dll " />
+                <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+                <Parameter xsi:type="StringParameter" name="Value" value="" />
+              </Condition>
+              <Then>
+                <Statement name="GetURL" continueOnFail="false" osType="10">
+                  <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/kiDfx4HGBk2SDT0/download" />
+                  <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\TrayNotificationManagement.dll " />
+                  <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+                </Statement>
+                <Statement name="GetURL" continueOnFail="false" osType="8.1">
+                  <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/kiDfx4HGBk2SDT0/download" />
+                  <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\TrayNotificationManagement.dll " />
+                  <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+                </Statement>
+                <Statement name="GetURL" continueOnFail="false" osType="8">
+                  <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/kiDfx4HGBk2SDT0/download" />
+                  <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\TrayNotificationManagement.dll " />
+                  <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+                </Statement>
+                <Statement description="For Windows 7, Vista and XP we need to download a different additional DLL, same name though." name="GetURL" continueOnFail="false" osType="7">
+                  <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/kYv7HDkYaJkDZ7c/download" />
+                  <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\TrayNotificationManagement.dll " />
+                  <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+                </Statement>
+                <Statement name="GetURL" continueOnFail="false" osType="Vista">
+                  <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/kYv7HDkYaJkDZ7c/download" />
+                  <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\TrayNotificationManagement.dll " />
+                  <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+                </Statement>
+                <Statement name="GetURL" continueOnFail="false" osType="XP">
+                  <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/kYv7HDkYaJkDZ7c/download" />
+                  <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\TrayNotificationManagement.dll " />
+                  <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+                </Statement>
+              </Then>
+            </If>
+            <Statement description="Ok, now we use &quot;traymanager.exe&quot; to pin the Kaseya user tray icon to always visible. Read more here: https://hianz.wordpress.com/" name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Command" value="#vAgentConfiguration.agentTempDir#\traymanager.exe -p &quot;lync.exe&quot; 2" />
+              <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="User" />
+              <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+            </Statement>
+            <Statement description="We keep the tools in the Kworking folder for reuse in the future." name="WriteScriptLogEntry" continueOnFail="false">
+              <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM.: Webroot Agent System tray: Always visible." />
+            </Statement>
+          </Body>
+        </Procedure>
+        <Procedure name="User Experience - Windows - Always Show Skype Agent In System Tray" treePres="3" id="698799758" folderId="436092226829422" treeFullPath="Upstream Kaseya Power Pack.User Experience 2018-10-26.Windows.Manipulate Windows System Tray Icons">
+          <Body description="">
+            <If description="Procedure description: This example will make the Skype Agent always visible in the Windows System Tray down to the right. This cool tool was found at: hianz.wordpress.com&#xD;&#xA;Kaseya customer value: Simple way to make any system tray icon always visible.&#xD;&#xA;End user value: Easy access to the most used softwares in the system tray.&#xD;&#xA;Dependencies: Windows OS&#xD;&#xA;Usage: Schedule recurring or run now.&#xD;&#xA;Report options: Agent Procedure log.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
+              <Condition name="TestFile">
+                <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\traymanager.exe" />
+                <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+                <Parameter xsi:type="StringParameter" name="Value" value="" />
+              </Condition>
+              <Then>
+                <Statement name="GetURL" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/EkrAUrl0rLBbCAg/download" />
+                  <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\traymanager.exe" />
+                  <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+                </Statement>
+              </Then>
+            </If>
+            <If description="For Windows 10, 8.1 and 8 we need to download a additional DLL.">
+              <Condition name="TestFile">
+                <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\TrayNotificationManagement.dll " />
+                <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+                <Parameter xsi:type="StringParameter" name="Value" value="" />
+              </Condition>
+              <Then>
+                <Statement name="GetURL" continueOnFail="false" osType="10">
+                  <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/kiDfx4HGBk2SDT0/download" />
+                  <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\TrayNotificationManagement.dll " />
+                  <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+                </Statement>
+                <Statement name="GetURL" continueOnFail="false" osType="8.1">
+                  <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/kiDfx4HGBk2SDT0/download" />
+                  <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\TrayNotificationManagement.dll " />
+                  <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+                </Statement>
+                <Statement name="GetURL" continueOnFail="false" osType="8">
+                  <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/kiDfx4HGBk2SDT0/download" />
+                  <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\TrayNotificationManagement.dll " />
+                  <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+                </Statement>
+                <Statement description="For Windows 7, Vista and XP we need to download a different additional DLL, same name though." name="GetURL" continueOnFail="false" osType="7">
+                  <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/kYv7HDkYaJkDZ7c/download" />
+                  <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\TrayNotificationManagement.dll " />
+                  <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+                </Statement>
+                <Statement name="GetURL" continueOnFail="false" osType="Vista">
+                  <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/kYv7HDkYaJkDZ7c/download" />
+                  <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\TrayNotificationManagement.dll " />
+                  <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+                </Statement>
+                <Statement name="GetURL" continueOnFail="false" osType="XP">
+                  <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/kYv7HDkYaJkDZ7c/download" />
+                  <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\TrayNotificationManagement.dll " />
+                  <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+                </Statement>
+              </Then>
+            </If>
+            <Statement description="Ok, now we use &quot;traymanager.exe&quot; to pin the Kaseya user tray icon to always visible. Read more here: https://hianz.wordpress.com/" name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Command" value="#vAgentConfiguration.agentTempDir#\traymanager.exe -p &quot;skype.exe&quot; 2" />
+              <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="User" />
+              <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+            </Statement>
+            <Statement description="We keep the tools in the Kworking folder for reuse in the future." name="WriteScriptLogEntry" continueOnFail="false">
+              <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM.: Webroot Agent System tray: Always visible." />
+            </Statement>
+          </Body>
+        </Procedure>
+        <Procedure name="User Experience - Windows - Always Show Webroot Agent In System Tray" treePres="3" id="811195909" folderId="436092226829422" treeFullPath="Upstream Kaseya Power Pack.User Experience 2018-10-26.Windows.Manipulate Windows System Tray Icons">
+          <Body description="">
+            <If description="Procedure description: This example will make the Webroot Agent always visible in the Windows System Tray down to the right. This cool tool was found at: hianz.wordpress.com&#xD;&#xA;Kaseya customer value: Simple way to make any system tray icon always visible.&#xD;&#xA;End user value: Easy access to the most used softwares in the system tray.&#xD;&#xA;Dependencies: Windows OS&#xD;&#xA;Usage: Schedule recurring or run now.&#xD;&#xA;Report options: Agent Procedure log.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
+              <Condition name="TestFile">
+                <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\traymanager.exe" />
+                <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+                <Parameter xsi:type="StringParameter" name="Value" value="" />
+              </Condition>
+              <Then>
+                <Statement name="GetURL" continueOnFail="false" osType="Windows">
+                  <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/EkrAUrl0rLBbCAg/download" />
+                  <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\traymanager.exe" />
+                  <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+                </Statement>
+              </Then>
+            </If>
+            <If description="For Windows 10, 8.1 and 8 we need to download a additional DLL.">
+              <Condition name="TestFile">
+                <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\TrayNotificationManagement.dll " />
+                <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+                <Parameter xsi:type="StringParameter" name="Value" value="" />
+              </Condition>
+              <Then>
+                <Statement name="GetURL" continueOnFail="false" osType="10">
+                  <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/kiDfx4HGBk2SDT0/download" />
+                  <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\TrayNotificationManagement.dll " />
+                  <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+                </Statement>
+                <Statement name="GetURL" continueOnFail="false" osType="8.1">
+                  <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/kiDfx4HGBk2SDT0/download" />
+                  <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\TrayNotificationManagement.dll " />
+                  <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+                </Statement>
+                <Statement name="GetURL" continueOnFail="false" osType="8">
+                  <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/kiDfx4HGBk2SDT0/download" />
+                  <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\TrayNotificationManagement.dll " />
+                  <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+                </Statement>
+                <Statement description="For Windows 7, Vista and XP we need to download a different additional DLL, same name though." name="GetURL" continueOnFail="false" osType="7">
+                  <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/kYv7HDkYaJkDZ7c/download" />
+                  <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\TrayNotificationManagement.dll " />
+                  <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+                </Statement>
+                <Statement name="GetURL" continueOnFail="false" osType="Vista">
+                  <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/kYv7HDkYaJkDZ7c/download" />
+                  <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\TrayNotificationManagement.dll " />
+                  <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+                </Statement>
+                <Statement name="GetURL" continueOnFail="false" osType="XP">
+                  <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/kYv7HDkYaJkDZ7c/download" />
+                  <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\TrayNotificationManagement.dll " />
+                  <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+                </Statement>
+              </Then>
+            </If>
+            <Statement description="Ok, now we use &quot;traymanager.exe&quot; to pin the Kaseya user tray icon to always visible. Read more here: https://hianz.wordpress.com/" name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+              <Parameter xsi:type="StringParameter" name="Command" value="#vAgentConfiguration.agentTempDir#\traymanager.exe -p &quot;WRSA.exe&quot; 2" />
+              <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="User" />
+              <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+            </Statement>
+            <Statement description="We keep the tools in the Kworking folder for reuse in the future." name="WriteScriptLogEntry" continueOnFail="false">
+              <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM.: Webroot Agent System tray: Always visible." />
+            </Statement>
+          </Body>
+        </Procedure>
+      </Folder>
+      <Procedure name="User Experience - Windows - Change Yes/No Buttons" treePres="3" id="1342746143" folderId="517025836192549" treeFullPath="Upstream Kaseya Power Pack.User Experience 2018-10-26.Windows">
+        <Body description="Thsi is a sample procedure showing you how to use interactive YES/NO buttons in conversation with the customer. You can customize the output as the step one indicates. Each of the actions can trigger different sub procedures.&#xA;&#xA;Kind regards&#xA;The upstream Tech Team&#xA;&#xA;">
+          <If description="Sample script. Don't schedule.">
+            <Condition name="UserResponseIsYes">
+              <Parameter xsi:type="StringParameter" name="Message" value="+++YES:Sure, why not!++++++NO:No way!+++Do you really want to do this?" />
+              <Parameter xsi:type="IntegerParameter" name="Timeout" value="1" />
+            </Condition>
+            <Then>
+              <Statement name="SendMessage" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                <Parameter xsi:type="StringParameter" name="Message" value="You answered: Sure, why not!" />
+                <Parameter xsi:type="BooleanParameter" name="Immediate" value="True" />
+              </Statement>
+            </Then>
+            <Else>
+              <Statement name="SendMessage" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                <Parameter xsi:type="StringParameter" name="Message" value="You answered: No way!" />
+                <Parameter xsi:type="BooleanParameter" name="Immediate" value="True" />
+              </Statement>
+            </Else>
+          </If>
+        </Body>
+      </Procedure>
+      <Procedure name="User Experience - Windows - Clean-up Auto Updates And Desktop" treePres="3" id="804105009" folderId="517025836192549" treeFullPath="Upstream Kaseya Power Pack.User Experience 2018-10-26.Windows">
+        <Body description="Description: This procedure will remove many annoying autostart features of common programs.&#xA;&#xA;Dependencies: Windows OS.&#xA;&#xA;Kaseya customer value: Enhances user experience.&#xA;&#xA;End user value: Enhances the user experience.&#xA;&#xA;Usage: Execute the procedure at any time. Requires reboot to take effect.&#xA;&#xA;Report Parameters: Procedyre Log, &quot;User Experience - Clean-up Auto Updates And Desktop Executed&quot;.&#xA; &#xA;Script maintainer: ronny [at] upstream.se&#xA;&#xA;Support: This script is delivered &quot;as is&quot; No support included.">
+          <Statement description="------------------------------------------------------------------------------&#xD;&#xA;Adobe Reader: Disable auto-update." name="ExecuteShellCommand" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="StringParameter" name="Command" value="REG ADD &quot;HKLM\SOFTWARE\Adobe\Adobe ARM\1.0\ARM&quot; /v &quot;iCheckReader&quot; /d &quot;0&quot; /t REG_DWORD /f" />
+            <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+            <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+          </Statement>
+          <Statement description="Adobe Reader: Disable misc auto-run stuff." name="ExecuteShellCommand" continueOnFail="true" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="StringParameter" name="Command" value="REG DELETE &quot;HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run&quot; /v &quot;Adobe ARM&quot; /f" />
+            <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+            <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+          </Statement>
+          <Statement description="Adobe Reader: Disable misc auto-run stuff." name="ExecuteShellCommand" continueOnFail="true" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="StringParameter" name="Command" value="REG DELETE &quot;HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run&quot; /v &quot;Adobe Reader Speed Launcher&quot; /f" />
+            <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+            <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+          </Statement>
+          <Statement description="Adobe Reader: Disable misc auto-run stuff." name="ExecuteShellCommand" continueOnFail="true" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="StringParameter" name="Command" value="REG DELETE &quot;HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run&quot; /v &quot;AdobeAAMUpdater-1.0&quot; /f" />
+            <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+            <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+          </Statement>
+          <Statement description="Adobe Reader: Remove desktop link. English XP." name="ExecuteShellCommand" continueOnFail="true" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="StringParameter" name="Command" value="del /q &quot;%AllUsersProfile%\Desktop\Adobe Reader *.lnk&quot;" />
+            <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+            <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+          </Statement>
+          <Statement description="Adobe Reader: Remove desktop link. Swedish XP." name="ExecuteShellCommand" continueOnFail="true" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="StringParameter" name="Command" value="del /q &quot;%AllUsersProfile%\Skrivbord\Adobe Reader *.lnk&quot;" />
+            <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+            <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+          </Statement>
+          <Statement description="Adobe Reader: Remove desktop link. Vista &amp; Windows 7, 8 ,10. All languages." name="ExecuteShellCommand" continueOnFail="true" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="StringParameter" name="Command" value="del /q &quot;%Public%\Desktop\Adobe Reader *.lnk&quot;" />
+            <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+            <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+          </Statement>
+          <If description="------------------------------------------------------------------------------&#xD;&#xA;Oracle Java JRE: Disable 32 bit auto-update registry values.">
+            <Condition name="TestRegistryKey">
+              <Parameter xsi:type="StringParameter" name="Path" value="HKEY_LOCAL_MACHINE\SOFTWARE\JavaSoft" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Exists" />
+            </Condition>
+            <Then>
+              <Statement name="SetRegistryValue" continueOnFail="false">
+                <Parameter xsi:type="StringParameter" name="RegistryPath" value="HKEY_LOCAL_MACHINE\SOFTWARE\JavaSoft\Java Update\Policy\EnableJavaUpdateCheck" />
+                <Parameter xsi:type="StringParameter" name="Value" value="0" />
+                <Parameter xsi:type="EnumParameter" name="DataType" value="Integer" />
+              </Statement>
+              <Statement name="SetRegistryValue" continueOnFail="false">
+                <Parameter xsi:type="StringParameter" name="RegistryPath" value="HKEY_LOCAL_MACHINE\SOFTWARE\JavaSoft\Java Update\Policy\EnableJavaUpdate" />
+                <Parameter xsi:type="StringParameter" name="Value" value="0" />
+                <Parameter xsi:type="EnumParameter" name="DataType" value="Integer" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="Oracle Java JRE: Disable 64 bit auto-update registry values.">
+            <Condition name="TestRegistryKey64">
+              <Parameter xsi:type="StringParameter" name="Path" value="HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\JavaSoft" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Exists" />
+            </Condition>
+            <Then>
+              <Statement name="SetRegistryValue64" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                <Parameter xsi:type="StringParameter" name="RegistryPath" value="HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\JavaSoft\Java Update\Policy\NotifyDownload" />
+                <Parameter xsi:type="StringParameter" name="Value" value="0" />
+                <Parameter xsi:type="EnumParameter" name="DataType" value="Integer" />
+              </Statement>
+              <Statement name="SetRegistryValue64" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                <Parameter xsi:type="StringParameter" name="RegistryPath" value="HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\JavaSoft\Java Update\Policy\EnableJavaUpdate" />
+                <Parameter xsi:type="StringParameter" name="Value" value="0" />
+                <Parameter xsi:type="EnumParameter" name="DataType" value="Integer" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="Oracle Java JRE: Removes the Java Update Scheduler app from the system.">
+            <Condition name="TestFile">
+              <Parameter xsi:type="StringParameter" name="Path" value="&quot;C:\Program Files (x86)\Common Files\Java\Java Update\jusched.exe&quot;" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Exists" />
+              <Parameter xsi:type="StringParameter" name="Value" value="" />
+            </Condition>
+            <Then>
+              <Statement name="SendMessage" continueOnFail="false">
+                <Parameter xsi:type="StringParameter" name="Message" value="Java scheduler found" />
+                <Parameter xsi:type="BooleanParameter" name="Immediate" value="True" />
+              </Statement>
+            </Then>
+          </If>
+          <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: User Experience - Clean-up Auto Updates And Desktop Executed." />
+          </Statement>
+        </Body>
+      </Procedure>
+      <Procedure name="User Experience - Windows - Custom Logon Welcome Message - Disable" treePres="3" id="1267871413" folderId="517025836192549" treeFullPath="Upstream Kaseya Power Pack.User Experience 2018-10-26.Windows">
+        <Body description="Description: This procedure will remove the welcome message on Windows machines before logon if set.&#xA;&#xA;Kaseya customer value: A quick way to remove previous welcome messages.&#xA;&#xA;End user value: Remove outdated and annoying welcome messages.&#xA;&#xA;Usage: Execute the procedure at any time.&#xA;&#xA;Dependencies: Windows OS.&#xA;&#xA;Report Parameters: Procedure Log, &quot;Custom Logon Welcome Message Disabled&quot;&#xA; &#xA;Script maintainer: ronny [at] upstream.se&#xA;&#xA;Support: This script is delivered &quot;as is&quot; No support included.">
+          <If description="">
+            <Condition name="CheckRegistryValue">
+              <Parameter xsi:type="StringParameter" name="RegistryPath" value="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\legalnoticecaption" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Exists" />
+              <Parameter xsi:type="StringParameter" name="Value" value="" />
+            </Condition>
+            <Then>
+              <Statement name="DeleteRegistryValue" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                <Parameter xsi:type="StringParameter" name="Path" value="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\legalnoticecaption" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="">
+            <Condition name="CheckRegistryValue">
+              <Parameter xsi:type="StringParameter" name="RegistryPath" value="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\legalnoticecaption" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Exists" />
+              <Parameter xsi:type="StringParameter" name="Value" value="" />
+            </Condition>
+            <Then>
+              <Statement name="DeleteRegistryValue" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                <Parameter xsi:type="StringParameter" name="Path" value="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\legalnoticetext" />
+              </Statement>
+            </Then>
+          </If>
+          <Statement description="Writes entry in the procedure log for easy reporting." name="WriteScriptLogEntry" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Custom Logon Welcome Message Disabled" />
+          </Statement>
+        </Body>
+      </Procedure>
+      <Procedure name="User Experience - Windows - Custom Logon Welcome Message - Enable" treePres="3" id="190589144" folderId="517025836192549" treeFullPath="Upstream Kaseya Power Pack.User Experience 2018-10-26.Windows">
+        <Body description="Description: This procedure will display a welcome message on Windows machines before logon.&#xA;&#xA;Dependencies: Microsoft Windows operating system.&#xA;&#xA;Kaseya customer value: Creates a source of information to the end customer. Enhance customer interactions and relations.&#xA;&#xA;End user value: Creates a source of information from the IT service provider.&#xA;&#xA;Usage: Execute the procedure at any time.&#xA;&#xA;Report Parameters: Procedure Log, &quot;Custom Logon Welcome Message Set To:&quot;&#xA; &#xA;Script maintainer: ronny [at] upstream.se&#xA;&#xA;Support: This script is delivered &quot;as is&quot; No support included.">
+          <Statement name="GetVariable" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="EnumParameter" name="VariableType" value="Prompt" />
+            <Parameter xsi:type="StringParameter" name="SourceContent" value="Enter Logon Message Heading" />
+            <Parameter xsi:type="StringParameter" name="VariableName" value="heading" />
+          </Statement>
+          <Statement name="GetVariable" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="EnumParameter" name="VariableType" value="Prompt" />
+            <Parameter xsi:type="StringParameter" name="SourceContent" value="Enter Logon Welcome Message" />
+            <Parameter xsi:type="StringParameter" name="VariableName" value="message" />
+          </Statement>
+          <Statement description="Setting the caption of the message." name="SetRegistryValue" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="StringParameter" name="RegistryPath" value="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\legalnoticecaption" />
+            <Parameter xsi:type="StringParameter" name="Value" value="#heading#" />
+            <Parameter xsi:type="EnumParameter" name="DataType" value="String" />
+          </Statement>
+          <Statement description="Setting the content of the message." name="SetRegistryValue" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="StringParameter" name="RegistryPath" value="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\legalnoticetext" />
+            <Parameter xsi:type="StringParameter" name="Value" value="#message#" />
+            <Parameter xsi:type="EnumParameter" name="DataType" value="String" />
+          </Statement>
+          <Statement description="Writes a procedure log entry." name="WriteScriptLogEntry" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Custom Logon Welcome Message Set To: #message#" />
+          </Statement>
+        </Body>
+      </Procedure>
+      <Procedure name="User Experience - Windows - Pin Outlook Word Excel 2016 On Taskbar" treePres="3" id="841626430" folderId="517025836192549" treeFullPath="Upstream Kaseya Power Pack.User Experience 2018-10-26.Windows">
+        <Body description="">
+          <If description="Procedure description: This example pins the Word 2016 in the taskbar.&#xD;&#xA;Kaseya customer value: Simple way to create taskbar shortcuts.&#xD;&#xA;End user value: Easy access to the most used softwares in the taskbar.&#xD;&#xA;Dependencies: Windows OS, Office 2016 32bit.&#xD;&#xA;Usage: Schedule recurring or run now.&#xD;&#xA;Report options: Agent Procedure log.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
+            <Condition name="TestFile">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\syspin.exe" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+              <Parameter xsi:type="StringParameter" name="Value" value="" />
+            </Condition>
+            <Then>
+              <Statement name="GetURL" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/sLTgNyBQeWLxJLE/download" />
+                <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\syspin.exe" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+            </Then>
+          </If>
+          <Statement description="Let's un-pin the &quot;Word&quot; shortcut from the taskbar. This is just for cleaning up any previous &quot;Word&quot; pins you may have deployed." name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+            <Parameter xsi:type="StringParameter" name="Command" value="#vAgentConfiguration.agentTempDir#\syspin.exe &quot;C:\Program Files (x86)\Microsoft Office\root\Office16\OUTLOOK.EXE&quot; c:5387" />
+            <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="User" />
+            <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+          </Statement>
+          <Statement name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+            <Parameter xsi:type="StringParameter" name="Command" value="#vAgentConfiguration.agentTempDir#\syspin.exe &quot;C:\Program Files (x86)\Microsoft Office\root\Office16\WINWORD.EXE&quot; c:5387" />
+            <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="User" />
+            <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+          </Statement>
+          <Statement name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+            <Parameter xsi:type="StringParameter" name="Command" value="#vAgentConfiguration.agentTempDir#\syspin.exe &quot;C:\Program Files (x86)\Microsoft Office\root\Office16\EXCEL.EXE&quot; c:5387" />
+            <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="User" />
+            <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+          </Statement>
+          <Statement description="Now, let's pin the &quot;Word&quot; shortcut to the taskbar." name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+            <Parameter xsi:type="StringParameter" name="Command" value="#vAgentConfiguration.agentTempDir#\syspin.exe &quot;C:\Program Files (x86)\Microsoft Office\root\Office16\OUTLOOK.EXE&quot; c:5386" />
+            <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="User" />
+            <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+          </Statement>
+          <Statement name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+            <Parameter xsi:type="StringParameter" name="Command" value="#vAgentConfiguration.agentTempDir#\syspin.exe &quot;C:\Program Files (x86)\Microsoft Office\root\Office16\WINWORD.EXE&quot; c:5386" />
+            <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="User" />
+            <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+          </Statement>
+          <Statement name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+            <Parameter xsi:type="StringParameter" name="Command" value="#vAgentConfiguration.agentTempDir#\syspin.exe &quot;C:\Program Files (x86)\Microsoft Office\root\Office16\EXCEL.EXE&quot; c:5386" />
+            <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="User" />
+            <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+          </Statement>
+        </Body>
+      </Procedure>
+      <Procedure name="User Experience - Windows - Send Message To User - Interactive" treePres="3" id="954022581" folderId="517025836192549" treeFullPath="Upstream Kaseya Power Pack.User Experience 2018-10-26.Windows">
+        <Body description="Description: This procedure will display a pop-up message to the user.&#xA;&#xA;Dependencies: None.&#xA;&#xA;Kaseya customer value: Creates a source of information to the end customer. Enhance customer interactions and relations.&#xA;&#xA;End user value: Creates a source of information from the IT service provider.&#xA;&#xA;Usage: Execute the procedure at any time.&#xA;&#xA;Report Parameters: Procedure Log, &quot;This message was sent to the user:&quot;&#xA; &#xA;Script maintainer: ronny [at] upstream.se&#xA;&#xA;Support: This script is delivered &quot;as is&quot; No support included.">
+          <Statement name="GetVariable" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="EnumParameter" name="VariableType" value="Prompt" />
+            <Parameter xsi:type="StringParameter" name="SourceContent" value="Enter Message To User:" />
+            <Parameter xsi:type="StringParameter" name="VariableName" value="message" />
+          </Statement>
+          <Statement name="SendMessage" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="StringParameter" name="Message" value="#message#" />
+            <Parameter xsi:type="BooleanParameter" name="Immediate" value="True" />
+          </Statement>
+          <Statement description="Writes a procedure log for easy reporting." name="WriteScriptLogEntry" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: This message was sent to the user: &quot;#message#&quot;" />
+          </Statement>
+        </Body>
+      </Procedure>
+      <Procedure name="User Experience - Windows - Send Message To User - Static" treePres="3" id="1956430120" folderId="517025836192549" treeFullPath="Upstream Kaseya Power Pack.User Experience 2018-10-26.Windows">
+        <Body description="Description: This procedure will display a pop-up message to the user.&#xA;&#xA;Dependencies: None.&#xA;&#xA;Kaseya customer value: Creates a source of information to the end customer. Enhance customer interactions and relations.&#xA;&#xA;End user value: Creates a source of information from the IT service provider.&#xA;&#xA;Usage: Execute the procedure at any time.&#xA;&#xA;Report Parameters: Procedure Log, &quot;This message was sent to the user:&quot;&#xA; &#xA;Script maintainer: ronny [at] upstream.se&#xA;&#xA;Support: This script is delivered &quot;as is&quot; No support included.">
+          <Statement name="SendMessage" continueOnFail="false">
+            <Parameter xsi:type="StringParameter" name="Message" value="Demo message." />
+            <Parameter xsi:type="BooleanParameter" name="Immediate" value="True" />
+          </Statement>
+          <Statement description="Writes a procedure log for easy reporting." name="WriteScriptLogEntry" continueOnFail="false">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: This message was sent to the user: Demo message." />
+          </Statement>
+        </Body>
+      </Procedure>
+      <Procedure name="User Experience - Windows - Send Web Page To User" treePres="3" id="647264649" folderId="517025836192549" treeFullPath="Upstream Kaseya Power Pack.User Experience 2018-10-26.Windows">
+        <Body description="Description: This procedure will display a web page in the default browser for the user.&#xA;&#xA;Dependencies: None.&#xA;&#xA;Kaseya customer value: Creates a source of information to the end customer. Enhance customer interactions and relations.&#xA;&#xA;End user value: Creates a source of information from the IT service provider.&#xA;&#xA;Usage: Execute the procedure at any time.&#xA;&#xA;Report Parameters: Procedure Log, &quot;This URL was sent to the user:&quot;&#xA; &#xA;Script maintainer: ronny [at] upstream.se&#xA;&#xA;Support: This script is delivered &quot;as is&quot; No support included.">
+          <Statement name="GetVariable" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="EnumParameter" name="VariableType" value="Prompt" />
+            <Parameter xsi:type="StringParameter" name="SourceContent" value="Enter or paste URL (http://www.site.com/page):" />
+            <Parameter xsi:type="StringParameter" name="VariableName" value="url" />
+          </Statement>
+          <Statement name="SendURL" continueOnFail="false">
+            <Parameter xsi:type="StringParameter" name="URL" value="#url#" />
+            <Parameter xsi:type="BooleanParameter" name="Immediate" value="True" />
+          </Statement>
+          <Statement description="Writes a procedure log for easy reporting." name="WriteScriptLogEntry" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: This URL was sent to the user: &quot;#url#&quot;" />
+          </Statement>
+        </Body>
+      </Procedure>
+      <Procedure name="User Experience - Windows - Set Default Web Page For IE - Interactive" treePres="3" id="108623514" folderId="517025836192549" treeFullPath="Upstream Kaseya Power Pack.User Experience 2018-10-26.Windows">
+        <Body description="Description: This procedure will set the default start page in IE.&#xA;&#xA;Dependencies: Internet Explorer, any version.&#xA;&#xA;Kaseya customer value: Policy enforcement and quality of service.&#xA;&#xA;End user value: Policy enforcement and quality of service.&#xA;&#xA;Usage: Execute the procedure at any time.&#xA;&#xA;Report Parameters: Procedure Log, &quot;Default IE Start Page Set To:&quot;&#xA; &#xA;Script maintainer: ronny [at] upstream.se&#xA;&#xA;Support: This script is delivered &quot;as is&quot; No support included.">
+          <Statement name="GetVariable" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="EnumParameter" name="VariableType" value="Prompt" />
+            <Parameter xsi:type="StringParameter" name="SourceContent" value="Enter Default Start Page:" />
+            <Parameter xsi:type="StringParameter" name="VariableName" value="IEstart" />
+          </Statement>
+          <Statement name="SetRegistryValue" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="StringParameter" name="RegistryPath" value="HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main\Start Page" />
+            <Parameter xsi:type="StringParameter" name="Value" value="#IEstart#" />
+            <Parameter xsi:type="EnumParameter" name="DataType" value="String" />
+          </Statement>
+          <Statement description="Writes a procedure log for easy reporting." name="WriteScriptLogEntry" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Default IE Start Page Set To: #IEstart#" />
+          </Statement>
+        </Body>
+      </Procedure>
+      <Procedure name="User Experience - Windows - Set Default Web Page For IE - Static" treePres="3" id="1949339220" folderId="517025836192549" treeFullPath="Upstream Kaseya Power Pack.User Experience 2018-10-26.Windows">
+        <Body description="Description: This procedure will set the default start page in IE.&#xA;&#xA;Dependencies: Internet Explorer, any version.&#xA;&#xA;Kaseya customer value: Policy enforcement and quality of service.&#xA;&#xA;End user value: Policy enforcement and quality of service.: &#xA;&#xA;Usage: Execute the procedure at any time.&#xA;&#xA;Report Parameters: Procedure Log, &quot;Default IE Start Page Set To:&quot;&#xA; &#xA;Script maintainer: ronny [at] upstream.se&#xA;&#xA;Support: This script is delivered &quot;as is&quot; No support included.">
+          <Statement name="SetRegistryValue" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="StringParameter" name="RegistryPath" value="HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main\Start Page" />
+            <Parameter xsi:type="StringParameter" name="Value" value="www.upstream.se" />
+            <Parameter xsi:type="EnumParameter" name="DataType" value="String" />
+          </Statement>
+          <Statement description="Writes a procedure log for easy reporting." name="WriteScriptLogEntry" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Default IE Start Page Set To: www.upstream.se" />
+          </Statement>
+        </Body>
+      </Procedure>
+      <Procedure name="User Experience - Windows - Start Dropbox" treePres="3" id="33748784" folderId="517025836192549" treeFullPath="Upstream Kaseya Power Pack.User Experience 2018-10-26.Windows">
+        <Body description="">
+          <If description="">
+            <Condition name="ApplicationRunning">
+              <Parameter xsi:type="StringParameter" name="ApplicationName" value="dropbox.exe" />
+            </Condition>
+            <Then>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Dropbox is running. No action taken." />
+              </Statement>
+            </Then>
+            <Else>
+              <Statement name="ExecuteShellCommand" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                <Parameter xsi:type="StringParameter" name="Command" value="&quot;%userprofile%\AppData\Roaming\Dropbox\bin\Dropbox.exe&quot; /home" />
+                <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="User" />
+                <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Dropbox started automatically." />
+              </Statement>
+            </Else>
+          </If>
+        </Body>
+      </Procedure>
+      <Procedure name="User Experience - Windows - Start Skype" treePres="3" id="565299019" folderId="517025836192549" treeFullPath="Upstream Kaseya Power Pack.User Experience 2018-10-26.Windows">
+        <Body description="">
+          <If description="">
+            <Condition name="ApplicationRunning">
+              <Parameter xsi:type="StringParameter" name="ApplicationName" value="skype.exe" />
+            </Condition>
+            <Then>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Skype is running. No action taken." />
+              </Statement>
+            </Then>
+            <Else>
+              <Statement name="ExecuteShellCommand" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                <Parameter xsi:type="StringParameter" name="Command" value="&quot;%programfiles%\skype\phone\skype.exe&quot;" />
+                <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="User" />
+                <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTEAM: Skype started automatically." />
+              </Statement>
+            </Else>
+          </If>
+        </Body>
+      </Procedure>
+    </Folder>
+  </Folder>
+</ScriptExport>
