@@ -6,6 +6,6 @@
 :: Script maintainer: powerpack@upstream.se
 :: https://www.upstream.com/powerpack"
 ::
-@ECHO UPSTREAM: Deploy Chocolatey: Deploying Chocolatey Framework from wwwchocolatey.org
+@ECHO UPSTREAM: Deploy Chocolatey: Deploying Chocolatey Framework from www.chocolatey.org
 @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
 @ECHO UPSTREAM: Deploy Chocolatey: End of script: Evaluate script output."
