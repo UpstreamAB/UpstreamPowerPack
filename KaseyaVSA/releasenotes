@@ -1,0 +1,739 @@
+UPSTREAM KASEYA POWER PACK MSP NOTES 2018-10-01 (Amsterdam 2018)
+
+Once again we are Power Packing (couldn't resist) for Kaseya Connect Europe 2018. Hope to see many of you there! Biggest news this time around is our new home, GitHub! This will be our method of distribution going forward. Any updates will be posted here.
+
+KASEYA AGENT PROCEDURES 2018-10-01
+
+NEW: Windows, Custom Field - Audit - Windows - Get Disk Encryption Status
+
+NEW: Windows, MS Office and Office 365 Specific, Repair Application  - Windows - Office 365 Full Online Repair - No User Interaction
+
+NEW: Windows, MS Office and Office 365 Specific, Repair Application  - Windows - Office 365 Quick Repair - No User Interaction
+
+NEW: Windows, Windows 10 Specific, Windows 10 System Management, Sys Mgmnt - Windows - Disable Storage Sense
+
+-------End of update-------
+
+UPSTREAM KASEYA POWER PACK MSP NOTES 2018-05-04 (Vegas 2018)
+
+Once again we are Power Packing (last time we use that lame joke, we promise) our bags for Las Vegas and Kaseya Connect 2018. Hope to see many of you there. Biggest news this time around is our Chocolatey Agent Procedures. If you are unfamiliar with Cholcolatey, think of it like  Debian “apt-get” for Windows. Done right it can save a LOT of time deploying and updating applications. Take it for a test run.
+
+Oh, we made a final name change to “Upstream Kaseya Power Pack MSP”. This better describes what Power Pack is all about. A free framework for setting up and maintaining a MSP business with Kaseya VSA in a hearbeat. Any other non MSP business can of course use the content if they want to. We also made a whole new set of Kaseya Policies to give you some BASIC and PREMIUM Managed Services offerings example. Upates and name changes to Views, Reports and Monitor Sets to fully reflect the Policies were also made.
+
+KASEYA AGENT PROCEDURES 2018-05-04
+
+NEW: Spring cleaning in the Agent Procedures structure with better overview of the content. Please give us feedback on this.
+
+NEW: New Folder under Windows called “Chocolatey Application Management Automation”. A lot of application deployment, upgrade and removal examples with the poular Chocolatey framework.
+
+NEW: New Folder called “Other MSP Vendors Partners”. Agent Procedurers to be used in collaboration with other vendors in the MSP/RMM space. Auvik, IT Glue and RapidfireTools are the first. Still under developent, but better to share right away. Please give feedback on tools you woul like to see here.
+
+UPDATED: Windows, MS Office And Office 365 Specific, Application Removal, Remove Application – Windows – Remove Office 2003/2007/2010/2013/2016. We now pull the VBS code directly from Github.
+
+KASEYA POLICIES 2018-05-04
+
+A new setup of Polices for a BASIC and PREMIUM Managed Services offering. The idea is to apply BASIC on all agents. No automation, but stuff that all customers should have. Then gradually add more automation in the PREMIUM tier where you focus on actual management.
+
+MONITOR SETS 2018-05-04
+
+Name changes on Monitor Sets to reflect the BASIC and PREMIUM tiers above.
+
+---------------------------------------------
+
+UPSTREAM KASEYA POWER PACK BASIC NOTES 2018-03-07 (Snow B Gone!)
+
+Latest cumulative update to Windows 10 version 1709 gave us all a surprise. No longer can Kaseya VSA (or any other RMM tool for that matter) control the Windows Update exclusively. This means Windows may patch whenever it pleases. We at Upstream actually recommend MSP’s to rethink management, packaging and offerings when it comes to Windows 10 (and Office 365). The rules of apply, schedule and control are no longer possible to maintain. Instead, focus on going with the flow, validate and keep the end user experience as smooth as possible. This is why we created two new Agent Procedures sub folder dedicated specifically to Windows 10 and Office 365. First out in this new setup is Agent Procedures focusing on Windows 10 patch management. And as usual we have updated all our app deploy and update Agent Procedures to latest version. Enjoy!
+
+KASEYA AGENT PROCEDURES 2018-03-07
+
+NEW: Folder Windows, Windows 10 Specific, Windows 10 Patch Managment
+
+NEW: Patch Mgmnt – Windows 10 – Audit Active Hours
+
+NEW: Patch Mgmnt – Windows 10 – Audit Version
+
+NEW: Patch Mgmnt – Windows 10 – Patch From Command Line – No Reboot
+
+NEW: Patch Mgmnt – Windows 10 – Set Active Hours
+
+NEW: Folder Windows, Windows 10 Specific, Windows 10 User Experience
+
+UPDATED: User Experience – Windows 10 – Remove Modern Apps for Current User
+
+UPDATED: User Experience – Windows 10 – Remove Annoying App Suggestions
+
+NEW: Folder Windows, Office 365 Specific, Application Deployment
+
+UPDATED: Application Deployment – Windows – Office365 For Business Example – *Language* – Deploy Latest
+
+UPDATED: Application Deployment – Windows – Office365 Pro Plus Example – *Language* – Deploy Latest
+
+INFO CENTER (REPORTS) 2017-12-05
+
+NEW: Logs – Agent Procedure – Executed Procedures By Admin
+
+NEW: Discovery – Asset Inventory – Non Windows – CSV IT Glue
+
+NEW: Discovery – Asset Inventory – Non Windows – PDF IT Glue
+
+NEW: Agent – Configuration – Agent Version NOT Latest
+
+NEW: Agent – Last Reboot Time
+
+--------------------------------------------- 
+
+UPSTREAM KASEYA POWER PACK BASIC NOTES 2017-12-05 (X-mas 2017)
+
+The Apple root bug has chocked by it’s simplicity. Be sure to patch your MAC machines. We provide some tools for that. Intel are in the doghouse together with Apple. Be sure to be proactive on any forthcoming Intel chiset updates by running the “Security – Windows – Scan for Intel Mgmnt Engine Vulnerability” Agent Procedure in combination with the report “Security – Windows – Scan For Intel Mgmnt Vulnerability”. As usual with Power Pack, the most common applications are updated to latest. We also invested in some deeper Office 2003/2007/2010 removal tools. Good to use when migrating to Offcie 365.
+
+KASEYA AGENT PROCEDURES 2017-12-05
+
+NEW: Security – Windows – Scan for Intel Mgmnt Engine Vulnerability
+
+NEW: Sys Mgmnt – Windows – Test Pinging A Internal Server
+
+NEW: Remove Application – Windows – Remove Office 2003
+
+NEW: Remove Application – Windows – Remove Office 2007
+
+NEW: Remove Application – Windows – Remove Office 2010
+
+UPDATED: User Experience – Windows – Always Show Kaseya Agent In System Tray
+
+UPDATED: Application Update – Windows – Adobe Reader 11.x – Update To Latest
+
+UPDATED: Application Update – Windows – Adobe Air – Update To Latest
+
+UPDATED: Application Update – Windows – Adobe Reader DC – Update To Latest
+
+UPDATED: Application Update – Windows – Java 8 32bit – Update To Latest
+
+INFO CENTER (REPORTS) 2017-12-05
+
+NEW: Security – Windows – Scan For Intel Mgmnt Vulnerability
+
+---------------------------------------------
+
+UPSTREAM KASEYA POWER PACK BASIC NOTES 2017-09-29 (KaseyaConnect Amsterdam)
+
+While we are Power Packing (never gets old) our bags for Kaseya Connect Amsterdam we are finalizing our latest release. Pleny of cool new Agent Procedures. As usual the application update Agent Procedures are newest versions to this day.
+
+KASEYA AGENT PROCEDURES 2017-09-29
+
+NEW: Custom Field – Audit – Windows – Get Current Temp On Drive(s)
+
+NEW: Audit – Windows – Is Current User Local Admin (Swedish/US English)
+
+NEW: Sys Mgmnt – Windows – Disk Cleanup (With Extensive Logging)
+
+NEW: Sys Mgmnt – Windows – Set Data Execution Policy To Opt In
+
+NEW: Sys Mgmnt – Windows – Power And Sleep Settings – Energy Policy Example
+
+NEW: Sys Mgmnt – Windows – Power And Sleep Settings – Disable Hibernation
+
+UPDATED: Patch Mgmnt – Mac OS X – List Missing Patches
+
+UPDATED: Patch Mgmnt – Mac OS X – Update System
+
+UPDATED: Application Update – Windows – Adobe Reader 11.x – Update To Latest
+
+UPDATED: Application Update – Windows – Adobe Air – Update To Latest
+
+UPDATED: Application Update – Windows – Adobe Reader DC 17.x – Update To Latest
+
+UPDATED: Application Update – Windows – Java 8 32bit – Update To Latest
+
+MOVED: “Windows\Security – Windows – Disable/Enable RDP” has moved to “Windows\Sys Mgmnt”.
+
+RENAMED: “Windows\Security” folder is now called “Windows\Security Bulletins”.
+
+---------------------------------------------
+
+UPSTREAM KASEYA POWER PACK BASIC NOTES 2017-06-28 (Petya/NotPetya Ransomware)
+
+This is just a quick update. Cybereason security researcher Amit Serper has found a way to prevent the Petya (NotPetya/SortaPetya/Petna) ransomware from infecting computers.
+
+KASEYA AGENT PROCEDURES 2017-06-28
+
+NEW: Security – Windows – Enable Petya Vaccine.
+
+---------------------------------------------
+
+UPSTREAM KASEYA POWER PACK BASIC NOTES 2017-06-22 (Midsummer Edition)
+
+As usual, all of Sweden will be shut down celebrating midsummer on Friday. Saturday and Sunday will be in recovery and bootup mode. We managed to get some updates out the door and ready for delivery. Worth mentioning is the Agent Procedure for fixing the Windows Update Cache. We have on-boarded many Kaseya customers previously running other RMM tools over the years and we sometimes see issues with Kaseya Patch Management not getting the the privileges to do its magic. This due to stuff left behind from prior Patch Management solutions and can be fixed by resetting the whole Patch Cache on the machine. This is something we now share with all of you.
+
+We also made a new NSA/WannaCry Patch Procedure as even more patches for 2003, 2008, XP, Vista and Windows 8.0 got released last week. This time it’s not just SMB but Windows Search Service that is affected. Better to be prepared for the next wave of WannaCry, right?
+
+Please, please please: Schedule recurring Patch Managment on ALL of your Windows Machines!
+
+As usual we try to stay as current as possible with all the Application Deployment and Update examples, but feel free to contact us if you find any application lagging behind. That’s all for now. Have a great Weekend!
+
+KASEYA AGENT PROCEDURES 2017-06-22
+
+NEW: Sys Mgmnt –  Windows – Reset Windows Update Cache. This will help you troubleshooting any Patch Management issues where patches won’t get applied by automation. It’s also good to use as a standard procedure when on-boarding new customers.
+
+NEW: Security – Windows – Patch NSA WannaCry Vulnerabilities Server 2003 (Unitl June 2017). Yes, even more patches to apply. We made an effort to catch them all in one single Agent Procedure, throwing them at the wall and see if they stick. Do try this out and give us feedback. You can also use the Server 2003 template to patch 2008.
+
+NEW: Security – Windows – Patch NSA WannaCry Vulnerability On XP (Until June 2017) Same as above. Yes, even more patches to apply. We made an effort to catch them all in one single Agent Procedure, throwing them at the wall and see if they stick. We focused on the Scandinavian languages and US English, but feel free to add any additional language. Do try this out and give us feedback. You can also create automation from the XP template to patch Windows Vista and Windows 8.0 if you still have any.
+
+NEW: Sys Mgmnt – Windows – Add SQL Tcp Port 1433 Allowed Firewall rule Example. This will help you setting Windows Firewall rules on Serves and Workstations.
+
+NEW: User Experience – Windows – Pin Outlook Word Excel 2016 On Taskbar. This example will pin Outlook, Word and Excel on the taskbar, as the name implies. Use it for standardization or in a help-desk call.
+
+INFO CENTER (REPORTS) 2017-06-22
+
+NEW: Audit – Software – Torrent And P2P Software Overview. We added a “hitlist” of Torrent applications based on Tom’s Guide.
+
+UPDATED: 1 – New Customer Audit Report – Servers And Computers. We added the Torrent datapart in the Security section and added Linux as Server in the aggregated “Servers under Management” count.
+
+UPDATED: 2 – Recurring Internal Weekly KPI Service And Performance. Some minor filter adjustments and added Linux as Server in the aggregated “Servers under Management” count.
+
+---------------------------------------------
+
+UPSTREAM KASEYA POWER PACK BASIC NOTES 2017-05-15 (WannaCry Edition)
+
+We just WannaCry! This is a short broadcast to all of you Power Packers out there. We have added additional Agent Procedures for patching unsupported Windows XP and Windows Server 2003. Unsupported Windows 8.0 and Vista is coming later on. Working on it. Just keep updating Windows OS’s still under Microsoft support with Kaseya as usual. If you are not aware of the Wannacry/SMB Ransomware havoc (have you lived under a rock this weekend) you really should read up on it. Quick links:
+
+https://en.wikipedia.org/wiki/WannaCry_ransomware_attack
+https://www.malwaretech.com/2017/05/how-to-accidentally-stop-a-global-cyber-attacks.html
+https://www.channele2e.com/2017/05/12/10-wannacry-facts-biggest-global-cyber-attack-ever
+
+KASEYA AGENT PROCEDURES 2017-05-15
+
+NEW: Security – Windows – Get SMB Server Configuration
+
+NEW: Security – Windows – Patch SMB Vulnerability 2003 (Wannacry)
+
+NEW: Security – Windows – Patch SMB Vulnerability XP (Wannacry)
+
+---------------------------------------------
+
+UPSTREAM KASEYA POWER PACK BASIC NOTES 2017-05-05 (KaseyaConnect Edition)
+
+KaseyaConnect is just around the corner and we at Upstream are Power Packing our bags. Funny, right? This update give you several new tools to use. A new Disk Cleanup, determine the OS Language, audit the MS SQL version and more. As usual we have updated all the commonly used applications to the current patched version and finally we introduce Adobe Acrobat Reader DC 17 to the family. One special note goes to the just announced Intel AMT vulnerability scan we provide. Combine this scan with the Report called “Security – Windows – Scan For Intel AMT Enabled And Version” and you will get a good insight in the risks you might be facing. It’s just a matter of time before hackers will exploit this so plan a major BIOS upgrade project.
+
+KASEYA AGENT PROCEDURES 2017-05-05
+
+NEW: Security – Windows – Scan For Intel AMT Enabled And Version. This Agent Procedure will scan Intel based systems for the AMT vulnerability.
+
+NEW: Sys Mgmnt – Windows – Disk Cleanup. This is a never-ending quest for the optimal disk cleanup. We are very interested to hear your feedback and sugestions on this. We have seen cleanups up to 40GB when running this. Do try it out.
+
+NEW: Custom Field – Audit – Windows – Get OS Language. Get the OS language for reporting and application deployment. We map hex to Scandinavian languages and US English, but you can very easy add any language.
+
+NEW: Custom Field – Audit – Windows – Get SQL Version. Determine the SQL version for reporting.
+
+NEW: Application Deployment – Windows – Adobe Acrobat Reader DC – *LANGUAGE* – Deploy Latest. We now deploy the latest Adobe Acrobat Reader DC in the Scandinavian languages and US English. This will also upgrade any other existing Adobe Reader DC or Adobe Reader on the system.
+
+NEW: Application Deployment – Windows – Update Upstream Power Pack Tools. This is a quick way to update any endpoint with the Upstream Kaseya Power Pack applications if used.
+
+UPDATED: Custom Field – Audit – Windows – Get OS Install Date. We now use WMI instead of SYSTEMINFO to get a language neutral result.
+
+UPDATED: Application Update – Windows – Adobe Acrobat Reader DC – Update To Latest. Current version is 17.009.20044
+
+UPDATED: Application Deployment – Windows – Java 8 32Bit – Deploy Or Force Update To Latest. Current version is 8.131
+
+UPDATED: Application Deployment – Windows – Adobe Reader 11.x – *LANGUAGE* – Deploy Latest. We now deploy the latest Adobe Reader 11.20 in the Scandinavian languages and US English. Current version is 11.20
+
+UPDATED: Deployment and version upgrades to Adobe AIR, 7-Zip, Greenshot and others.
+
+INFO CENTER (REPORTS) 2017-05-05
+
+NEW: New Folder called “Reports Based On Specific Agent Procedures Logs”. All Agent Procedure based reports for audit purposes will be placed here and named by the Agent Procedure name.
+
+NEW: Security – Windows – Scan For Intel AMT Enabled And Version. Placed in the folder above.
+
+UPDATED: Recurring Internal Weekly KPI And Service Performance. A correction to “AcroRd32.exe” spanning from Adobe Reader to Adobe Acrobat Reader DC.
+
+---------------------------------------------
+
+UPSTREAM KASEYA POWER PACK BASIC NOTES 2017-03-31
+
+This time around we are proudly introducing a new concept and name: Upstream Kaseya Power Pack BASIC. We aim to build a completely free (and openly distributed) baseline of content that will spin up a new or existing Kaseya VSA with a ready to go Kaseya Policy framework in minutes. The very basic foundation for any Kaseya VSA customer to get going is included, thus the name. We will continue with the same quality as previous years of Power Pack releases and gradually update and add more content coming releases making it easy for any Kaseya admin to pick and choose what to use. Much like Lego. We also made our final move from Dropbox to Dattodrive for all our file distribution.
+
+KASEYA AGENT PROCEDURES 2017-03-31
+
+NEW: We moved to DattoDrive for all our file distribution in Kaseya Agent Procedures.
+
+NEW: Sys Mgmnt – Windows – Defer Windows 10 Upgrades. Block the Creators Update.
+
+NEW: Application Deployment – Windows – Office365 For Business Example – *LANGUAGE* – Deploy Latest. Deploy Office 365 Click-2-Run silent over the Internet.
+
+NEW: Application Deployment – Windows – Office365 Pro Plus Example – *LANGUAGE* – Deploy Latest. Deploy Office 365 Click-2-Run silent over the Internet.
+
+NEW: Sys Mgmnt – Windows – Update Drivers From Command Line. Update drivers from Windows Update instantly from command line.
+
+NEW: Sys Mgmnt – Windows – Patch Windows From Command Line. Instantly patch any Windows system from the command line.
+
+NEW: Application Update – Windows – Adobe Reader DC – Update To Latest
+
+UPDATED: Custom Field – Audit – Windows – Get SMART Status For C. New scanning and alert parameters. New Smartctl.exe build in UPP-Tools folder.
+
+UPDATED: Create Ticket – Automatic – Windows – Low Disk – List 5 Largest Files on C. New free disk enumeration in MB.
+
+INFO CENTER (REPORTS) 2017-03-31
+
+NEW: Audit – HW – Machine Hardware – Excel List
+
+NEW: Audit – Software – Adobe Acrobat Reader Version Overview. This include all of “AcroRd32.exe” spanning from Adobe Reader to Adobe Acrobat Reader DC.
+
+UPDATED: New Customer Audit Report – Servers And Workstations. This now include all of “AcroRd32.exe” spanning from Adobe Reader to adobe Acrobat Reader DC.
+
+UPDATED: Recurring Internal Weekly KPI And Service Performance. This now include all of “AcroRd32.exe” spanning from Adobe Reader to Adobe Acrobat Reader DC.
+
+MONITOR SETS 2017-03-31
+
+NEW: The Upstream Kaseya Power Pack BASIC setup for Monitoring supporting the Scandinavian and English languages.
+
+POLICIES 2017-03-31
+
+NEW: Upstream Kaseya Power Pack BASIC Policies for setting up the BASIC framework.
+
+VIEWS 2017-03-31
+
+NEW: Upstream Kaseya Power Pack BASIC Views for setting up the BASIC framework.
+
+---------------------------------------------
+
+UPSTREAM KASEYA POWER PACK 2017-01-31
+
+New year, new challenges. We have decided to do some well needed house cleaning in our content pack. Several Agent Procedures and Reports have been retired due to being obsolete. Things move on and stuff gets old. We also made a new folder and naming structure for Agent Procedures, Reports and Monitor Sets. It was not all just cleaning. We still have some new stuff. Check out the list below. A special note to the “Pin Helpdesk Shortcut” Agent Procedure. It creates a shortcut on the user taskbar for contacting support. Look at the code and do test it out.
+
+2017_02_02_10_28_27_
+
+KASEYA AGENT PROCEDURES 2017-01-31
+
+NEW: Custom Field – Audit – Windows – Get Current WIFI Supported Radio Types
+
+NEW: User Experience – Windows – Pin Calculator On Taskbar Example
+
+NEW: User Experience – Windows – Pin Heldesk Shortcut (Requires Outlook)
+
+NEW: Custom Field – Audit – Windows – Get OS Install Date
+
+NEW: Sys Mgmnt – Windows – Create 3GB Dummy File Example
+
+UPDATED: Application Deployment – Windows – Java 8 32Bit – Deploy Or Force Update To Latest
+
+UPDATED: Application Update – Windows – Java 8 32bit – Update To Latest
+
+UPDATED: Application Update – Windows – Adobe Reader 11 – Update To Latest
+
+UPDATED: Application Deployment – Windows – Adobe Reader – Danish – Deploy Or Force Re-Deploy Latest
+
+UPDATED: Application Deployment – Windows – Adobe Reader – Norwegian – Deploy Or Force Re-Deploy Latest
+
+UPDATED: Application Deployment – Windows – Adobe Reader – Finnish – Deploy Or Force Re-Deploy Latest
+
+UPDATED: Application Deployment – Windows – Adobe Reader – Swedish – Deploy Or Force Re-Deploy Latest
+
+UPDATED: Application Deployment – Windows – Adobe Reader – English – Deploy Or Force Re-Deploy Latest
+
+INFO CENTER (REPORTS) 2017-01-31
+
+NEW: Audit – HW – Machine Hardware – Excel List
+
+MONITOR SETS 2017-01-31
+
+NEW: Windows Performance Counters is now named after the language they support.
+
+NEW: UPSTREAM – BASIC – Service – Kaseya Network Monitor Gateway
+
+NEW: UPSTREAM – BASIC – Low Disk – All Drives Below 10% – Servers ENG
+
+---------------------------------------------
+
+KASEYA AGENT PROCEDURES 2016-10-28
+
+NEW: Custom Field – Sys Mgmnt – Windows – Check If Windows Reboot Pending Says Yes
+
+NEW: Sys Mgmnt – Windows – Execute MS Refresh Windows Tool  (Home & Pro Only)
+
+UPDATED: Application Deployment – Windows – Java 8 32Bit – Deploy Or Force Update To Latest
+
+UPDATED: Application Update – Windows – Java 8 32bit – Update To Latest 8
+
+UPDATED: Application Update – Windows – Adobe Reader 11 – Update To Latest 11
+
+UPDATED: Application Deployment – Windows – Adobe Reader – Danish – Deploy Or Force Re-Deploy Latest
+
+UPDATED: Application Deployment – Windows – Adobe Reader – Norwegian – Deploy Or Force Re-Deploy Latest
+
+UPDATED: Application Deployment – Windows – Adobe Reader – Finnish – Deploy Or Force Re-Deploy Latest
+
+UPDATED: Application Deployment – Windows – Adobe Reader – Swedish – Deploy Or Force Re-Deploy Latest
+
+UPDATED: Application Deployment – Windows – Adobe Reader – English – Deploy Or Force Re-Deploy Latest
+
+INFO CENTER (REPORTS) 2016-10-28
+
+NEW: MS Patch – Installed patches last 30 days Sorted By Patch
+
+NEW: MS Patch – Installed patches last 30 days Sorted By Machine
+
+---------------------------------------------
+
+KASEYA AGENT PROCEDURES 2016-06-22
+
+NEW: Security – Windows – Remove Lenovo Accelerator Application (HIGH SECURITY RISK): Read more and remove it…. now!
+
+NEW: Security – Windows – Remove Lenovo Solution Center (HIGH SECURITY RISK): Read more and remove it…. now!
+
+NEW: Remove Application – Windows – Remove Office 365 (Requires User Interaction): This will help you to do a clean removal of Office 365. To be uses in conjunction with a remote control session to the end user.
+
+NEW: Remove Application – Windows – Remove TeamViewer: Hacked or not, why use it? ; )
+
+UPDATED: Application Update – Windows – Adobe AIR – Update To Latest, version 22.0.0.153
+
+UPDATED: Application Deployment – Windows – Adobe AIR – Deploy Or Force Update To Late, version 22.0.0.153
+
+INFO CENTER (REPORTS) 2016-06-22
+
+NEW: New Customer Audit Report – Workstations Only: We went overboard on this! 9 pages of metrics for new client audits and pre-sale. Make sure you run the report on a “All Workstations” view.
+
+NEW: Audit – Software – Anti-Virus Software Summary: This will give you heads up on the current Anti-Virus solutions out there.
+
+---------------------------------------------
+
+UPSTREAM KASEYA POWER PACK CHANGELOG 2016-05-19
+
+Application update bonanza! We have updated all popular software to represent the latest releases. Also, audit your customers for any Quicktime present. Apple no longer update the software, so please take action.
+
+KASEYA AGENT PROCEDURES 2016-05-19
+
+NEW: Remove application – Windows – Remove Quicktime Player
+
+UPDATED: Application Update – Windows – Java 8 32bit, version .91
+
+UPDATED: Application Update – Adobe Reader 11, version 11.0.0.15
+
+UPDATED: Application Update – Adobe AIR, version 21.0.0.215
+
+UPATED: All above applications available as “force deploy latest” option.
+
+INFO CENTER (REPORTS) 2016-05-19
+
+NEW: Audit, Audit – Software – Quicktime Player Version Overview: Audit Quicktime versions.
+
+---------------------------------------------
+
+UPSTREAM KASEYA POWER PACK NOTES 2016-04-13
+
+The focus for this release is Windows 10 and some cool management for that specific OS. Do try the new Agent Procedures for removing modern apps and more. A good way to clean the initial installation from unwanted bloatware. We will spend more time on tweaking Windows 10 in coming releases.
+
+The Badlock bug was more hype than hurt. We did spend some pro-active thinking on how to audit SMB servers, as that was the potential attack surface. As i turned out, this was not the problem at all. Anyhow, we learned a lot and you get the Powershell scripts needed to audit SMB connections and session on Windows 2012 servers. It may be of use to you anyhow.
+
+As usual, Agent Procedures for Java8, Adobe Reader, Adobe Air, Firefox, Chrome and many more are at the latest version available in our Agent Deploy and Update section.
+
+KASEYA AGENT PROCEDURES 2016-04-13
+
+NEW: Sys Mgmnt – Windows – Disable Windows 10 Upgrade (Never10 from Steve Gibson): Disable Winsows 10 upgrade and clean up disk space with this great tool from Steve Gibson.
+
+NEW: Sys Mgmnt – Windows – Enable Windows 10 Upgrade (Never10 from Steve Gibson): Enable Windows 10 again with the same tool as above.
+
+NEW: Sys Mgmnt – Windows – Remove Windows 10 Annoying App Suggestions: Get rid of the annoying App suggestions from Windows Store in the start menu. We decided to keep Windows Store and Calculator in this example.
+
+NEW: Sys Mgmnt – Windows – Remove Windows 10 Modern Apps for Current User: In this example we use Powershell to remove modern apps for the current user.
+
+Agent Procedrues realted to Windows 10 under Sys Mgmnt:
+
+2016_04_12_15_41_22_Managed_Services_Edition
+
+NEW: Sys Mgmnt – Windows – Set TS Shadowing For KRC ON: This registry hack enables shadowing a RDP session in a Windows Termial Server.
+
+NEW: Security – Windows – Get SMB Connections: Audit for any open SMB outbound connections with Powershell. You get the open session by user and the SMB protocol version called dialect in use. The Powershell cmdlet we use works on Server 2012.
+
+NEW: Security – Windows – Get SMB Server Configuration: Audit the current SMB settings with Powershell. Bells and whistles included.
+
+NEW: Security – Windows – Get SMB Shares: Audit the SMB shares and open inbound connections with Powershell.
+
+UPDATED: Sys Mgmnt – Windows – Remove Windows 10 GWX Upgrade Notification: Some cleanup in the statements.
+
+INFO CENTER (REPORTS) 2016-04-13
+
+UPDATED: The Upstream 3 Step Reporting Standard: We decided to remove Service Desk data parts from the Reports as some of you reported failed imports due to not having Kaseya Service Desk installed. We might add a separate Report set with Service Desk included in coming releases.
+
+---------------------------------------------
+
+UPSTREAM KASEYA POWER PACK NOTES 2016-02-19
+
+We have tweaked the Audit, Internal and External report sets. The idea of the 3 sets is a smooth workflow. The Audit report set is for pre-sales and client prospecting. The Internal report set is for getting the proper KPI’s and performance metrics on you and your services, not the end client. The External report set is to show and prove you value to your end customers. We call this the GOLD offering in this sample set. We also introduce a new concept of hashtagging the deploy and upgrade Agent Procedures for tracking purposes. You can see the end resultd on page 9 in the External report. Keep in mind, the report sets is depending on some Custom Fields (from our Power Pack) and they have to be adjusted on your system. Chances are that you have other Custom filed numbers in your database. As usual, Java8, Adobe Reader, Adobe Air and more Agent Procedures are the latest version available.
+
+2016_02_19_10_56_05_Managed_Services_Edition
+
+KASEYA AGENT PROCEDURES 2016-02-19
+
+---------------------------------------------
+
+NEW: Custom Field – Audit – Windows – Get Internet Explorer Version: This Audit Procedure will give you the current Internet Explorer version in use. This is good for security audits now that Microsoft dropped support for all Internet Explorer versions but 11.Expired IE Versions in use
+
+UPDATED: Application Update – Windows – Java 8 32bit, Adobe Reader 11, Adobe Flash Player: Updated with the new hastagging concept: “UPSTREAM: Hashtag: AppUpdate Java8”, “UPSTREAM: Hashtag: AppUpdate AdobeReader”, “UPSTREAM: Hashtag: AppUpdate AdobeFlash”
+
+UPDATED: Application Deploy – Windows – Java 8 32bit, Adobe Reader 11, Adobe Flash Player: Updated with the new hastagging concept: “UPSTREAM: Hashtag: AppDeploy Java8”, “UPSTREAM: Hashtag: AppDeploy AdobeReader”, “UPSTREAM: Hashtag: AppDeploy AdobeFlash”
+
+INFO CENTER (REPORTS) 2016-02-19
+
+NEW: The Upstream 3 Step Reporting Standard, Customer Audit Report
+
+NEW: The Upstream 3 Step Reporting Standard, Weekly KPI And Service Performance Report
+
+NEW: The Upstream 3 Step Reporting Standard, Recurring Customer Report – GOLD Offering
+
+NEW: Determine Custom Fields 0-9, 10-19, 20-29, 30-39: This will help you identify and document cryptic “Custom Field XX” tables when creating reports.
+
+INFO CENTER (REPORTS) 2016-01-28
+
+Updated: Weekly Internal KPI Summary
+
+With new content:
+
+KPI: Total number of new machines (check-ins)
+
+KPI: Total number of alarms (No filter)
+
+KPI: Total number of agent offline alarms
+
+KPI: Total number of remote control sessions
+
+Top 25 most remote controlled machine groups summary
+
+Top 25 most remote controlled machines summary
+
+Top 25 most remote control sessions by tech summary
+
+New: MS Patch – Installed Patches Last 30 Days
+
+Updated: Logs – Agent – Kaseya Remote Control Sessions
+
+With new content:
+
+Total Number Of Remote Control sessions Completed
+
+Top 25 most remote control sessions by machine group
+
+---------------------------------------------
+
+KASEYA AGENT PROCEDURES 2015-11-27
+
+NEW: Security – Windows – Remove eDellRoot Cert: Dell did a Lenovo. This means serious security implications and breaks the certifikate trust on a Dell machine. Run the quickfix to remove traces of Dell Root Cert on any “infected” system. There is more to come of this according to this link.
+
+NEW: Remove Application – Windows – Remove SPECIFIC Java 8 Versions Example: This removal example locks on to Java 8 version Update 60 and uninstall if present. You can  easily change to any specific version.
+
+NEW: Remove Application – Windows – Remove Java Auto Updater: Removes the Java Auto Updater service IF installed.
+
+Java Auto Updater Removal.
+
+---------------------------------------------
+
+KASEYA AGENT PROCEDURES 2015-10-22
+
+UPDATED: Custom Field – Audit – Windows – Get LENOVO Workstation Warranty: The API links stopped working in current VBS script. A big thanks to our awesome Finnish customer Jani Neuvonen and his team @ITAITO for fixing this.
+
+INFO CENTER (REPORTS) 2015-10-22
+
+NEW: Weekly KPIs, Weekly Internal KPI Summary: A way to measure the performance of automated service delivery to one or all customers.
+
+NEW: Audit, Audit – Software – MS Exchange Server Overview: A way to report on MS Exchange Server version.
+
+MONITOR SETS 2015-10-22
+
+New: Performance, UPSTREAM – Performance – CPU Usage Per Core: We now also monitor per core. Up to 16 cores are pre-configured. You can add more if needed.
+
+CPU Performance Per Core
+
+---------------------------------------------
+
+KASEYA AGENT PROCEDURES 2015-09-04
+
+NEW: Application Deployment – Windows – Datto – Deploy ownCloud Agent: Upstream welcomes Datto to Scandinavia and will of course add Kaseya Agent Procedures supporting this elegant Business Continuity solution. First off is the ownCloud filesync Agent. This is a clean and simple deployment example for Windows. More to come.
+
+NEW: Application Deployment – OS X – Datto – Deploy ownCloud Agent: Same as above but for Mac OS X.
+
+NEW: Application Update – Windows – Adobe Air – Update To Latest: We added Adobe AIR to the growing list of ”only update if exist” Agent Procedures.
+
+UPDATED: Application Deployment – Windows – Java 8 32Bit – Deploy Or Force Update To Latest: The Java Agent Procedures have been redesigned in general. Previously when executing the Java 8 32 bit EXE installer on a 64 bit Windows system we need to run as current user with local Admin rights. Not very secure. This is a limitation within the Java 8 32bit EXE installer package, not Kaseya. Running the MSI package with ”MSIEXEC /I” solves this issue, but Oracle does not provide MSI packages to be download without a Oracle Java SE Advanced Agreement. You can ”bake” your own MSI installer by following this link, but that is time consuming and impratical for most. To be able to provide the ”Import, click & Run” feature we strive for with our Agent Procedures, we turn to friends on Sourceforge.
+
+UPDATED: Application Update – Windows – Java 8 32bit – Update To Latest 8: Same changes as above but only updates to latest if Java 8 32Bit already exists.
+
+UPDATED: Application Update – Windows – Java 7 – Update Any 7 32/64Bit To Latest 8 32Bit: This is a good clean-up Agent Procedure for onboarding a client. Same changes as above but only updates to latest Java 8 32Bit if any Java 7 32/64Bit already exists. Any previous and older Java 7 32/64Bit or Java 8 32/64Bit will be removed in the process.
+
+---------------------------------------------
+
+KASEYA AGENT PROCEDURES 2015-07-28
+
+NEW: Sys Mgmnt – Windows – Remove Windows 10 Upgrade Notification: Removes the Windows 10 pop-up and upgrade helper on supported Workstations. Read more here.
+
+UPDATED: Custom Field – Audit – Windows – Get LENOVO Workstation Warranty: Get the warranty status on LENONVO workstations based on serial number. This is a perfect example how to use existing VB scripts to pull back the returned information to a custom field in Kaseya. Added error detection if warranty query is only partial. This is a perfect example how to use existing VB scripts to pull back the returned information to a custom field in Kaseya. DISCLAIMER: We take absolutely no credit for the awesome VB script used here. The script is run as-is without any modification. Please check the author’s blog.
+
+UPDATED: Custom Field – Audit – Windows – Get HP Workstation Warranty: Get the warranty status on HP workstations based on serial number. This is a perfect example how to use existing VB scripts to pull back the returned information to a custom field in Kaseya. Added error detection if warranty query is only partial. This is a perfect example how to use existing VB scripts to pull back the returned information to a custom field in Kaseya. DISCLAIMER: We take absolutely no credit for the awesome VB script used here. The script is run as-is without any modification. Please check the author’s blog.
+
+---------------------------------------------
+
+KASEYA AGENT PROCEDURES 2015-06-28
+
+NEW: Custom Field – Audit – Windows – Get DELL Workstation Warranty: The latest warranty audit Procedure in addition to HP and LENOVO. Get the warranty status on DELL workstations based on serial number. This is a perfect example how to use existing VB scripts to pull back the returned information to a custom field in Kaseya. DISCLAIMER 1: A big thank you from Upstream to one of our customers Jonas Haggren @Crossnet for finding the DELL warrany VB script. DISCLAIMER 2: We take absolutely no credit for the awesome VB script used here. The script is run as-is without any modification. Please check out the author’s blog.
+
+NEW: Sys Mgmnt – Windows – Restart Stopped Auto Services Except Blacklisted: Some Services marked Auto will be stopped by default. SPPSVC Service is a good example. This is by design. This WMIC based example will audit auto services with status stopped but ignore a blacklist. After auditing is complete a restart attempt followed by a final audit for verification will be executed. All this presented in the Kaseya Proecedure Log. You can add more services you would like to ignore in a static “blacklist” variable.
+
+NEW: Application Deployment – Windows – Java 8 32Bit – Deploy Or Force Update To Latest: As Java 7 is about to get retired for good and no more updates are released we figured it’s about time to migrate to Java 8. We cracked the nut when deploying 32Bit Java 8 on a 64Bit system without the complicated “extraxt MSI file” fuzz. Read more how we did it in the commentary lines in the Procedure. Just click and run, as you expect from Upstream Kaseya Power Pack.
+
+NEW: Application Update – Windows – Java 8 32Bit – Update To Latest 8: In addition to the Procedure above we made a Java 8 update Procedure. It will only affect machines already installed with Java 8. Please note that since Java 8 Update 20 a silent install will not remove any previous Java 8 version. We solved this by calling for uninstall before deploying the latest version (update 45 when writing this) keeping the version to only one, the latest.
+
+NEW: Application Update – Windows – Java 7 – Update Any 7 32/64Bit To Latest 8 32Bit: Force any Java 7 version (32 or 64Bit) to get updated to latest Java 8 32Bit (update 45 when writing this) and remove any older Java 7 or 8 intances.
+
+NEW: Sys Mgmnt – Windows – Sysinternals Sysmon – Install Service: Installs Sysmon as a service. Read more about Sysinternals Sysmon here. Baically it extends the application process logging. Great for troubleshooting.
+
+NEW: Sys Mgmnt – Windows – Sysinternals Sysmon – Remove Service: Removes Sysmon as a service.
+
+UPDATED: Custom Field – Audit – Windows – Get LENOVO Workstation Warranty: Get the warranty status on LENONVO workstations based on serial number. This is a perfect example how to use existing VB scripts to pull back the returned information to a custom field in Kaseya. Added error detection if warranty query is only partial. This is a perfect example how to use existing VB scripts to pull back the returned information to a custom field in Kaseya. DISCLAIMER: We take absolutely no credit for the awesome VB script used here. The script is run as-is without any modification. Please check the author’s blog.
+
+UPDATED: Custom Field – Audit – Windows – Get HP Workstation Warranty: Get the warranty status on HP workstations based on serial number. This is a perfect example how to use existing VB scripts to pull back the returned information to a custom field in Kaseya. Added error detection if warranty query is only partial. This is a perfect example how to use existing VB scripts to pull back the returned information to a custom field in Kaseya. DISCLAIMER: We take absolutely no credit for the awesome VB script used here. The script is run as-is without any modification. Please check the author’s blog.
+
+---------------------------------------------
+
+INFO CENTER (REPORTS) 2015-05-25
+
+NEW: Extended Audit  – Warranty Status Overview for HP, DELL & LENOVO: Use this report efter running any of the Warranty Expires Procedures. Keep in mind that the “Customfieled XX” we use may be completely different on your Kaseya system. Once you figure out the correct Custom Fields number your report can look something like this.
+
+NEW: Extended Audit – WIFI Quality Status Overview Based On Latest Audit: Use this report efter running the Wifi Quality Procedure. Keep in mind that the “Customfieled XX” we use may be completely different on your Kaseya system. Once you figure out the correct Custom Fields number your report can look something like this.
+
+NEW: Logs – Event – App Crash – MS Office Summary: This Report will give you the aggregated number of times MS Office crashes and a split table showing you Outlook, Word and Excel. We also added this part in “Summary – Windows Workstations”.
+
+UPDATED: Summary – Windows Workstations. Added MS Office crashes from above as a table. The report can look something like this.
+
+---------------------------------------------
+
+KASEYA AGENT PROCEDURES 2015-04-28
+
+New: Custom Field – Audit – Windows – Get LENOVO Workstation Warranty: Get the warranty status on LENONVO workstations based on serial number. This is a perfect example how to use existing VB scripts to pull back the returned information to a custom field in Kaseya. DISCLAIMER: We take absolutely no credit for the awesome VB script used here. The script is run as-is without any modification. Please check the author’s blog:https://sccmguru.wordpress.com/
+
+New: Custom Field – Audit – Windows – Get HP Workstation Warranty: Get the warranty status on HP workstations based on serial number. This is a perfect example how to use existing VB scripts to pull back the returned information to a custom field in Kaseya. DISCLAIMER: We take absolutely no credit for the awesome VB script used here. The script is run as-is without any modification. Please check the author’s blog: https://sccmguru.wordpress.com/
+
+New: Application Deployment – Windows – Java 8 32Bit – Deploy Or Force Update To Latest: As Java 7 is about to get retired and no more updates are released we figured it’s about time to migrate to Java 8. DISCLAIMER: When executing Java 8 32 bit EXE installer on a 64 bit Windows system we need to run as current user with local Admin rights. This is a limitation within the Java 8 32bit installer package, not Kaseya. You can extract and upload the MSI file to your Kaseya Server, write Java MSI File to Kworking and execute the installation with “MSIEXEC /I”. This only applies if you want to run the installation as system user without betting on current users having Admin rights. We will try crack this nut in future releases.
+
+New: Remove Application – Windows – Remove ALL Java 8 Versions: We added Java 8 to the family of removal tools. Same syntax as Java 7 but targeting Java 8 instead.
+
+Updated: Custom Field – Audit – Windows – Get Current WIFI Signal Strength: Added standard documentation and error handling. Audit the current WIFI SSID name and signal strength in a custom field on a Windows machine. Good for basic trouble shooting.
+
+INFO CENTER (REPORTS) 2015-04-28
+
+New: Customer Summary And Prospecting Examples, English, Extended Patch Status – MS Patch Java Reader And Flash: A way to show customers the state of four important security threats in on report.
+
+New: Customer Summary And Prospecting Examples, English, Summary – Bandwidth Usage: A way to show customers the bandwidth usage from agents over time. This report use data from the Agent, Protection, Network Access feature.
+
+New: Logs – Agent – Kaseya Remote Control Sessions: A way to show the most remote controlled computers over time. This report use data from the Kaeya Remote Control log.
+
+New: Agent – Configuration – Agent Checkin Summary: A way to get statistics on agent not checked in for a long period of time. Free up licenses by scheduling this report on a recurring basis.
+
+New: Free Disk Below 10GB Free On All Drives – Least First Grouped By Drive Name: Report on machines with any drive below 10GB.
+
+New: Agent – Configuration – Agent Version NOT 9.x: A way to get statistics on agent version.
+
+Updated: MS Patch – Current Status Overview. We added “Unscanned Machines” and “Failed Patches” in the summary report.
+
+---------------------------------------------
+
+KASEYA AGENT PROCEDURES 2015-02-25
+
+New: Custom Field – Audit – Windows – Get Current WIFI Signal Strength: Audit the current WIFI SSID name and signal strength in a custom field on a Windows machine. Good for basic trouble shooting.
+
+New: Custom Field – Audit – Mac OSX – Get Current WIFI Signal Strength: Audit the current WIFI SSID name and signal strength in a custom field on a OS X machine. Good for basic trouble shooting.
+
+New: Security – Windows – Remove Lenovo SuperFish Malware Silent: The official SailFish removal tool from Lenovo.
+
+New: Sys Mgmnt – Windows – Get Latest File Exaple: This example will scan a specific folder for the most recent updated file (newest) and upload the file to the Kaseya server. Excellent for archiving and auditing.
+
+New: Application Deployment – Windows – Adobe Flash Player ActiveX: Deploys only Adobe Flash Player ActiveX. We made a decision to split the budled Agent Procedure with both ActivX and Stand alone Plug-In to two separate deployments. You really only need the ActiveX version if running IE9 and below. We use our new ”STAGE” standard and more detailed workflow.
+
+New: Application Deployment – Windows – Adobe Flash Player Plug-In: Deploys only Adobe Flash Player Plug-In. We made a decision to split the budled Agent Procedure with both ActivX and Stand alone Plug-In to two separate deployments. You really only need the Plug-In version if running Firefox, Opera (and maybe some other not small browser). We use our new ”STAGE” standard and more detailed workflow.
+
+New: pplication Deployment – Windows – MS Lync Web App Plug-in – Deploy Or Force Update To Latest: This Agent Procedure will install the MS Lync Web app as the current user. Great to use if customers use the Office 365 Lync feauers for desktop sharing.
+
+New: Application Update – Windows – Java 7 32bit – Upgrade To Latest 7: Updates any existing Java 7 to latest. We use our new ”STAGE” standard and more detailed workflow.
+
+New: Application Update – Windows – Adobe Flash Player – Update To Latest
+
+Updated: Updates any existing Adobe Flash  Playser to latest. We use our new ”STAGE” standard and more detailed workflow.
+
+Updated: Application Deployment – Windows – Java 7 32Bit – Deploy Or Force Update To Latest: Update To Latest: Updated to Java 7 Update 75.
+
+---------------------------------------------
+
+KASEYA AGENT PROCEDURES 2015-01-19
+
+New: Sys Mgmnt – Windows – Reboot If Kaseya Patch Mgmnt Reboot Pending Say Yes: This example will reboot any machine with Reboot Pending. We get the Reboot Pending flag directly from the Kaseya database.
+
+Updated: Application Deployment – Windows – Chrome – Language Independent – Deploy Or Force Update To Latest. New ”STAGE” standard and more detailed workflow. We run MSIEXEC as file instead as shell command. No more pause needed making the procedure run faster.
+
+Updated: Application Update – Windows – Skype – Language Independent – Update To Latest: New ”STAGE” standard and more detailed workflow. We run MSIEXEC as file instead as shell command. No more pause needed making the procedure run faster.
+
+Updated: Application Deployment – Windows – Adobe Reader – <LANGUAGE> – Deploy Or Force Update To Latest: Update To Latest: New ”STAGE” standard and more detailed workflow. Patch 11.0.10 added. We run MSIEXEC as file instead as shell command. No more pause needed making the procedure run faster.
+
+Updated: Application Update – Windows – Adobe Flash Player – Language Independent – Update To Latest: Updated to version 16 family.
+
+Updated: Application Update – Windows – Adobe Reader 11 – Language Independent – Update To Latest: Patch 11.0.10 added.
+
+INFO CENTER (REPORTS) 2015-01-19
+
+New: Logs – Agent – Bandwidth Usage Overview: This report example will visualize the bandiwdth used by top 5 applications and machines. To use this make sure to activate the Network Access driver in the Agent tab.
+
+---------------------------------------------
+
+KASEYA AGENT PROCEDURES 2014-12-06
+
+New: Remove Application – Windows – Remove ALL Java 7 Versions: New ”stage” standard and more detailed workflow.
+
+New: Remove Application – Windows – Remove ALL Java 7 Versions: New ”stage” standard and more detailed workflow.
+
+New: Remove Application – Windows – Remove ALL Java 6 Versions: New ”stage” standard and more detailed workflow.
+
+New: Ninite – Update All Supported Apps Example: Cool example Using NinitePRO for logging and execution of application updates.
+
+New: Application Update – Windows – Adobe Flash Player – Language Independent – Update To Latest: New ”stage” standard and more detailed workflow.
+
+New: Application Update – Windows – Adobe Reader 11 – Language Independent – Update To Latest: New ”stage” standard and more detailed workflow.
+
+---------------------------------------------
+
+KASEYA AGENT PROCEDURES 2014-10-24
+
+New in the “Windows, Security” section: “Security – Windows – MSFixIt – Apply Microsoft Security Advisory 3010060”. Read more here.
+
+New in “Linux, Security” section: “Security – Linux – ShellShock Bash Exploit Test”
+
+New in “Mac OS X, Security” section: “Security – Mac OS X – ShellShock Bash Exploit Test”
+
+New in the “Windows, Sys Mgmnt” section: “Sys Mgmnt – Windows – AD – Add New User, Reset Existing User Password and Add User To Existing Group. Read more here.
+
+Updated: All Applications in the “Deploy Application” folders are current as for today. Java 7.71, Adobe Flash Player 15.0.0.189, Adobe Reader 11.0.0.9, and more.
+
+Updated: “Extended Audit Procedures – Custom Fields Required, Windows” section: “Custom Field – Audit – Get Office 2013 And 2010 Product Key Info” will give you the 5 last characters of the Office 2010 and 2013 license key and more. Read more here.
+
+Updated: “Windows, Deploy Application” section: The Adobe Reader deployment procedures for English, Swedish, Danish, Norwegian and Finnish now removes the Adobe desktop icon and disables auto update features by default.
+
+Updated: “Windows, Remove Application” section: Adobe Flash Player uninstall procedure using the uninstall command tool from Adobe now available.
+
+Updated: “Windows, Sys Mgmnt” section: Purge IIS Log Files Older Than 14 Days.
+
+Tip: Read our blog post on how to reset active Directory user passwords with Kaseya.
+
+Tip: In the “Mac OS X, Patch Mgmnt” section, try the procedures for patch features for Mac’s.
+
+INFO CENTER (REPORTS) 2014-10-24
+
+New: “Audit – Windows XP Overview” report will give you a nice view and count of existing Windows XP machines in all your Machine Groups.
+
+Updated: “Adobe Flash Payer NOT The latest Version” now looks for the “FlashPlayerApp.exe” for a cleaner version output.
+
+Updated: Single purpose reports like “Java NOT the latest vesion” updated to represent latest software versions.
+
+Updated: Update on the Customer Prospecting reports set.
+
+--------END OF FILE-------
+
+Still reading this far down? Awesome!
+
+Kind regards
+
+/The Upstream team
