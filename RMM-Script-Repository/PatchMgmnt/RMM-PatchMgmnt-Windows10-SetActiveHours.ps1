@@ -1,7 +1,7 @@
-# Script name: RMM-PatchMgmnt-Windows10-SetActiveHours.
-# Script type: PowerShell.
-# Script description: Deploy Webroot silently with associated Webroot MSP site key.
-# Dependencies: Webroot site key to be added as $WebrootKey variable.
+# Script name: RMM-PatchMgmnt-Windows10-SetActiveHours.ps1
+# Script type: PowerShell
+# Script description: Deploy Webroot silently with associated Webroot MSP site key
+# Dependencies: Windows 10
 # Script maintainer: powerpack@upstream.se
 # https://www.upstream.com/powerpack
 
