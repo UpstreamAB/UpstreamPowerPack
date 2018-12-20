@@ -1,6 +1,6 @@
 # Script name: RMM-PatchMgmnt-Windows10-DeferFeatureUpgrades.ps1
 # Script type: PowerShell
-# Script description: Deploy Webroot silently with associated Webroot MSP site key
+# Script description: Setting a 365 days waiting period for any new Windows 10 version upgrade
 # Dependencies: Windows 10
 # Script maintainer: powerpack@upstream.se
 # https://www.upstream.com/powerpack
