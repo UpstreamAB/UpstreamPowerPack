@@ -1,6 +1,6 @@
-# Script name: RMM-PatchMgmnt-Windows10-SetActiveHours.ps1
+o# Script name: RMM-PatchMgmnt-Windows10-SetActiveHours.ps1
 # Script type: PowerShell
-# Script description: Deploy Webroot silently with associated Webroot MSP site key
+# Script description: Apply active working hours between 06:00-20:00 where Windows wont bother you with updates.
 # Dependencies: Windows 10
 # Script maintainer: powerpack@upstream.se
 # https://www.upstream.com/powerpack
