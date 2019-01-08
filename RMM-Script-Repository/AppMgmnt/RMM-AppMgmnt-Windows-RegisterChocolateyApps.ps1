@@ -59,7 +59,7 @@ $LocalRegistryAppName = @(
 	"Spotify"
 	"Zoom"
 )
-# Step 3. Make some needed preparations with running web browsers.
+# Step 3. This step evaluates the need for closing running applications.
 # If Adobe Flash Player 32 NPAPI is installed on local machine but not yet managed with Chocolatey we need to close Firefox in order to install. This is a one time thing.
 if ($LocalRegistryAppName["Mozilla Firefox"] -NotMatch $ChocolateyPackageName["flashplayerplugin"])
 {
