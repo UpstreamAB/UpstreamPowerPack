@@ -4,7 +4,7 @@
 # Dependencies: Powershell 3.0
 # Supported OS: Windows Server 2012, Windows Server 2016, Windows Server 2019, Windows 7, Windows 10
 # Script maintainer: powerpack@upstream.se
-# https://www.upstream.com/powerpack"
+# https://www.upstream.com/powerpack
 # ------------------------------------------------------------------------------------------------------------------------------
 
 # Step 1. Check for dependecies.
