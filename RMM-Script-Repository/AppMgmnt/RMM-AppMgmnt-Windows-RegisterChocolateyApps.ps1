@@ -16,7 +16,7 @@ if (Test-Path "C:\ProgramData\Chocolatey\choco.exe")
 }
 else
 {
-	Write-Output "UPSTREAM: Whoops! Chocolatey is not installed on this machine. Let's install and continue."
+	Write-Output "UPSTREAM: Whoops! Chocolatey is missing on this machine. Let's install and continue."
 	Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 }
 
