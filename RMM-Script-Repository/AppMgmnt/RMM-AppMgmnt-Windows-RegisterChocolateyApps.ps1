@@ -1,5 +1,14 @@
 #Requires -Version 3
 
+# Script name: RMM-AppMgmnt-Windows-RegisterChocolateyApps.ps1
+# Script type: Powershell
+# Script description: Register local list of applications to be managed by the Chocolatey
+# Dependencies: Powershell 3.0
+# Supported OS: Windows Server 2012, Windows Server 2016, Windows Server 2019, Windows 7, Windows 10
+# Script maintainer: powerpack@upstream.se
+# https://www.upstream.com/powerpack"
+# ------------------------------------------------------------------------------------------------------------------------------
+
 # Check if Chocolatey is installed on local machine. If not, let's install.
 if (Test-Path "C:\ProgramData\Chocolatey\choco.exe")
 {
