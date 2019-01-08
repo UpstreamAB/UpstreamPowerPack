@@ -34,13 +34,29 @@ $ChocolateyPackageName = @(
 	"flashplayerplugin"
 	"firefox"
 	"googlechrome"
+	"adobereader"
+	"Adobe AIR"
+	"7-Zip"
+	"gotomeeting"
+	"microsoft-teams"
+	"skype"
+	"spotify"
+	"zoom"
 )
-# Let's create a local Add/Remove app list counterpart to above packages. It's important that the rows match. For example, "firefox" and "Mozilla Firefox" should both be represented in row 3.
+# Let's create a local Add/Remove app list counterpart to above packages. It's important that the rows match. For example, "firefox" and "Mozilla Firefoz" should be both bre represented in row 3.'
 $LocalRegistryAppName = @(
 	"Adobe Flash Player 32 PPAPI"
 	"Adobe Flash Player 32 NPAPI"
 	"Mozilla Firefox"
 	"Google Chrome"
+	"Adobe Acrobat Reader DC"
+	"Adobe AIR"
+	"7-Zip"
+	"GoToMeeting"
+	"Microsoft Teams"
+	"Skype version"
+	"Spotify"
+	"Zoom"
 )
 # Step 3. Make some needed preparations with running web browsers.
 # If Adobe Flash Player 32 NPAPI is installed on local machine but not yet managed with Chocolatey we need to close Chrome in order to install. This is a one time thing.
