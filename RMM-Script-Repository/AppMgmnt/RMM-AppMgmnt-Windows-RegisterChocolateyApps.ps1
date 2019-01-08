@@ -43,13 +43,13 @@ $LocalRegistryAppName = @(
 	"Google Chrome"
 )
 # Step 3. Make some needed preparations with running web browsers.
-# If Adobe Flash Player 32 NPAPI is installed on local machine but not yet managed with Chocolatey, we need to close Chrome in order to install. This is a one time thing.
+# If Adobe Flash Player 32 NPAPI is installed on local machine but not yet managed with Chocolatey we need to close Chrome in order to install. This is a one time thing.
 if ($LocalRegistryAppName["Mozilla Firefox"] -NotMatch $ChocolateyPackageName["flashplayerplugin"])
 {
 	Write-Output "UPSTREAM: Adobe Flash Player 32 NPAPI detected on local machine. In order to install properly with Choholatey we need to close Firefox during installation."
 	Stop-Process -processname "firefox"
 }
-# If Adobe Flash Player 32 PPAPI is installed on local machine but not yet managed with Chocolatey, we need to close Chrome in order to install. This is a one time thing.
+# If Adobe Flash Player 32 PPAPI is installed on local machine but not yet managed with Chocolatey we need to close Chrome in order to install. This is a one time thing.
 if ($LocalRegistryAppName["Google Chrome"] -NotMatch $ChocolateyPackageName["flashplayerppapi"])
 {
 	Write-Output "UPSTREAM: Adobe Flash Player 32 PPAPI detected on local machine. In order to install properly with Choholatey we need to close Chrome during installation."
