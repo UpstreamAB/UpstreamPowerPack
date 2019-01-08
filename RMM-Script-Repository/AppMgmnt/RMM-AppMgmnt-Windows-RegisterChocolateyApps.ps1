@@ -36,6 +36,7 @@ $ChocolateyPackageName = @(
 	"googlechrome"
 	"adobereader"
 	"adobeair"
+	"jre8"
 	"7zip"
 	"gotomeeting"
 	"microsoft-teams"
@@ -51,6 +52,7 @@ $LocalRegistryAppName = @(
 	"Google Chrome"
 	"Adobe Acrobat Reader DC"
 	"Adobe AIR"
+	"Java 8 update"
 	"7-Zip"
 	"GoToMeeting"
 	"Microsoft Teams"
@@ -59,7 +61,7 @@ $LocalRegistryAppName = @(
 	"Zoom"
 )
 # Step 3. Make some needed preparations with running web browsers.
-# If Adobe Flash Player 32 NPAPI is installed on local machine but not yet managed with Chocolatey we need to close Chrome in order to install. This is a one time thing.
+# If Adobe Flash Player 32 NPAPI is installed on local machine but not yet managed with Chocolatey we need to close Firefox in order to install. This is a one time thing.
 if ($LocalRegistryAppName["Mozilla Firefox"] -NotMatch $ChocolateyPackageName["flashplayerplugin"])
 {
 	Write-Output "UPSTREAM: Adobe Flash Player 32 NPAPI detected on local machine. In order to install properly with Choholatey we need to close Firefox during installation."
@@ -71,6 +73,12 @@ if ($LocalRegistryAppName["Google Chrome"] -NotMatch $ChocolateyPackageName["fla
 	Write-Output "UPSTREAM: Adobe Flash Player 32 PPAPI detected on local machine. In order to install properly with Choholatey we need to close Chrome during installation."
 	Stop-Process -processname "chrome"
 }
+# If Skype is installed on local machine but not yet managed with Chocolatey we need to close Skype in order to install. This is a one time thing.
+if ($LocalRegistryAppName["Skype"] -NotMatch $ChocolateyPackageName["skype"])
+{
+	Write-Output "UPSTREAM: Adobe Flash Player 32 PPAPI detected on local machine. In order to install properly with Choholatey we need to close Chrome during installation."
+	Stop-Process -processname "skype"
+}
 # Step 4: Compare list of local apps against aproved Chocolatey apps.
 # If any local Add/Remove app from $LocalRegistryAppName above are missing in $ChocolateyPackageName we will re-deploy the app with Chocolatey in order for it to register.
 for ($index = 0; $index -lt $ChocolateyPackageName.length; $index++)
@@ -81,12 +89,11 @@ for ($index = 0; $index -lt $ChocolateyPackageName.length; $index++)
 	}
 	else
 	{
-		Write-Output "UPSTREAM: $($LocalRegistryAppName[$index]) is installed but not managed with Chocolatey package $($ChocolateyPackageName[$index]). We will re-deploy with Chocolatey right now."
-		if ($InstalledAppsFromAddRemove -match $LocalRegistryAppName[$index])
+		if ($InstalledAppsFromAddRemove -Like $LocalRegistryAppName[$index])
 		{
-			Write-Output "UPSTREAM: Installing $($ChocolateyPackageName[$index]) with Chocolatey."
+			Write-Output "UPSTREAM: $($LocalRegistryAppName[$index]) is installed but not managed with Chocolatey package $($ChocolateyPackageName[$index]). We will re-deploy with Chocolatey right now."
 			C:\ProgramData\Chocolatey\choco install "$($ChocolateyPackageName[$index])" --limit-output --no-progress -y
 		}
-
+		
 	}
 }
