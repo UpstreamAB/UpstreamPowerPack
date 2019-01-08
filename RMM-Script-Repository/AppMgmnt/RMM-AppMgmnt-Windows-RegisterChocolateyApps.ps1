@@ -61,11 +61,11 @@ for ($index = 0; $index -lt $ChocolateyPackageName.length; $index++)
 {
 	if ($AppsCurrentlyManagedByChocolatey -match $ChocolateyPackageName[$index])
 	{
-		Write-Output "UPSTREAM: Choco package $($ChocolateyPackageName[$index]) is already managed by Chocolatey."
+		Write-Output "UPSTREAM: $($LocalRegistryAppName[$index]) is installed and already managed by Chocolatey package $($ChocolateyPackageName[$index])."
 	}
 	else
 	{
-		Write-Output "UPSTREAM: Choco package name $($ChocolateyPackageName[$index]) is installed on machine but not managed by Chocolatey. We will re-deploy with chocolatey right now."
+		Write-Output "UPSTREAM: $($LocalRegistryAppName[$index]) is installed but not managed with Chocolatey package $($ChocolateyPackageName[$index]). We will re-deploy with Chocolatey right now."
 		if ($InstalledAppsFromAddRemove -match $LocalRegistryAppName[$index])
 		{
 			Write-Output "UPSTREAM: Installing $($ChocolateyPackageName[$index]) with Chocolatey."
