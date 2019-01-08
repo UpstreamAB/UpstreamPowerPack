@@ -87,9 +87,6 @@ for ($index = 0; $index -lt $ChocolateyPackageName.length; $index++)
 			Write-Output "UPSTREAM: Installing $($ChocolateyPackageName[$index]) with Chocolatey."
 			C:\ProgramData\Chocolatey\choco install "$($ChocolateyPackageName[$index])" --limit-output --no-progress -y
 		}
-		else
-		{
-			Write-Output "UPSTREAM: Choco package $($ChocolateyPackageName[$index]) not installed and no local application counterpart identified."
-		}
+
 	}
 }
