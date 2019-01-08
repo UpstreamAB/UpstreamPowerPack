@@ -23,7 +23,7 @@ else
 # Step 2. Create some variables.
 # Let's get applications already managed with Chocolatey by getting a list and feed it to a varible.
 $AppsCurrentlyManagedByChocolatey = C:\ProgramData\Chocolatey\choco.exe list --local-only
-# Let's get installed applications from Add/Remove Programs to a variable.
+# Let's get installed applications from Add/Remove Programs and feed to a variable.
 # 32Bit Windows apps.
 $InstalledAppsFromAddRemove = Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*" | Select-Object -ExpandProperty DisplayName
 # 64Bit Windows apps.
