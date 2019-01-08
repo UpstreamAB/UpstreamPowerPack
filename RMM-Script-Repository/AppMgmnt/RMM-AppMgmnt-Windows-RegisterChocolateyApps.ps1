@@ -1,6 +1,6 @@
 # Script name: RMM-AppMgmnt-Windows-RegisterChocolateyApps.ps1
 # Script type: Powershell
-# Script description: Register local list of applications to be managed by the Chocolatey by re-deploying.
+# Script description: Register local list of applications to be managed with Chocolatey by re-deploying.
 # Dependencies: Powershell 3.0
 # Supported OS: Windows Server 2012, Windows Server 2016, Windows Server 2019, Windows 7, Windows 10
 # Script maintainer: powerpack@upstream.se
@@ -55,7 +55,7 @@ if ($LocalRegistryAppName["Google Chrome"] -NotMatch $ChocolateyPackageName["fla
 	Write-Output "UPSTREAM: Adobe Flash Player 32 PPAPI detected on local machine. In order to install properly with Choholatey we need to close Chrome during installation."
 	Stop-Process -processname "chrome"
 }
-#Step 4: Compare list of local apps against aproved Chocolatey apps.
+# Step 4: Compare list of local apps against aproved Chocolatey apps.
 # If any local Add/Remove app from $LocalRegistryAppName above are missing in $ChocolateyPackageName we will re-deploy the app with Chocolatey in order for it to register.
 for ($index = 0; $index -lt $ChocolateyPackageName.length; $index++)
 {
