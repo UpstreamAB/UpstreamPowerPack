@@ -1,1 +1,1 @@
-Placeholder for RMM neutral Powershell and Batch scripts.
+Placeholder for RMM neutral scripts.
