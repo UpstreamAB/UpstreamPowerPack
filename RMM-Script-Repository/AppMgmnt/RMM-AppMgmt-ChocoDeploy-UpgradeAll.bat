@@ -1,8 +1,7 @@
-:: Script name: RMM-AppMgmnt-Windows-Upgrade-All-With-Chocolatey-Framework.bat
+:: Script name: RMM-AppMgmnt-Windows-ChocoDeploy-UpgradeAll.bat
 :: Script type: Batch.
 :: Script description: Upgrade all supported applications with the Chocolatey application management framework.
-:: Dependencies: Powershell.
-:: Supported OS: Windows Server 2012, Windows Server 2016, Windows Server 2019, Windows 7, Windows 10.
+:: Dependencies: Chocolatey.
 :: Script maintainer: powerpack@upstream.se
 :: https://www.upstream.com/powerpack"
 ::
