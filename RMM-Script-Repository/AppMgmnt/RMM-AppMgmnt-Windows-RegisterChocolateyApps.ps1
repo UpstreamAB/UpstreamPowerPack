@@ -9,13 +9,14 @@
 # Step 1. Check for dependecies.
 #Requires -Version 3
 # Let's check if Chocolatey is installed on local machine. If not, install and continue.
+Write-Output "UPSTREAM: Checking for Chocolatey on this machine."
 if (Test-Path "C:\ProgramData\Chocolatey\choco.exe")
 {
-	Write-Output "UPSTREAM: Great! Chocolatey is already installed on this machine. Let's continue."
+	Write-Output "UPSTREAM: Great! Chocolatey is already installed on this machine. Let's go!"
 }
 else
 {
-	Write-Output "UPSTREAM: Whoops! Chocolatey is missing on this machine. Let's install and continue."
+	Write-Output "UPSTREAM: Whoops! Chocolatey is missing on this machine. Let's install and carry on."
 	Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 }
 
