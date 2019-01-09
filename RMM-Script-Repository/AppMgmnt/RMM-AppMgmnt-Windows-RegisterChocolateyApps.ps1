@@ -44,7 +44,7 @@ $ChocolateyPackageName = @(
 	"spotify"
 	"zoom"
 )
-# Let's create a local Add/Remove app list counterpart to above packages. It's important that the rows match. For example, "firefox" and "Mozilla Firefox" should be both bre represented in row 3.'
+# Let's create a local Add/Remove app list as counterpart to above packages. It's important that the rows match. For example, "firefox" and "Mozilla Firefox" should be both bre represented in row 3.'
 $LocalRegistryAppName = @(
 	"Adobe Flash Player 32 PPAPI"
 	"Adobe Flash Player 32 NPAPI"
