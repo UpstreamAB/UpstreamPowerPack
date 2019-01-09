@@ -1,4 +1,4 @@
-# Script name: RMM-PatchMgmnt-Win10-DeferFeatureUpgrades.ps1
+# Script name: RMM-PatchMgmt-Win10-DeferFeatureUpgrades.ps1
 # Script type: PowerShell
 # Script description: Setting a 365 days waiting period for any new Windows 10 release (like for example Windows 10 October release 2018)
 # Dependencies: Windows 10
