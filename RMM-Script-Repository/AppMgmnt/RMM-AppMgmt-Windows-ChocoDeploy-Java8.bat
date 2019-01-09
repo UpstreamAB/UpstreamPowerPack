@@ -1,4 +1,4 @@
-:: Script name: RMM-AppMgmnt-Windows-DeployChocolateyJava8.bat
+:: Script name: RMM-AppMgmnt-Windows-ChocoDeploy-Java8.bat
 :: Script type: Batch.
 :: Script description: Deploy latest Java 8 with the Chocolatey application management framework.
 :: Dependencies: Powershell.
