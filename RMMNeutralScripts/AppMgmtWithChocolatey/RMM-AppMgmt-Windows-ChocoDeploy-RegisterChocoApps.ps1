@@ -1,4 +1,4 @@
-# Script name: RMM-AppMgmnt-Windows-RegisterChocolateyApps.ps1
+# Script name: RMM-AppMgmt-Windows-ChocoDeploy-RegisterChocoApps.ps1
 # Script type: Powershell
 # Script description: Register local list of applications to be managed with Chocolatey by re-deploying.
 # Dependencies: Powershell 3.0
