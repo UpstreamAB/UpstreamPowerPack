@@ -1,13 +1,3 @@
-#   Description:
-# This script removes unwanted Apps that come with Windows. If you  do not want
-# to remove certain Apps comment out the corresponding lines below.
-
-Import-Module -DisableNameChecking $PSScriptRoot\..\lib\take-own.psm1
-Import-Module -DisableNameChecking $PSScriptRoot\..\lib\force-mkdir.psm1
-
-Write-Output "Elevating privileges for this process"
-do {} until (Elevate-Privileges SeTakeOwnershipPrivilege)
-
 Write-Output "Uninstalling default apps"
 $apps = @(
     # default Windows 10 apps
@@ -157,8 +147,8 @@ Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\ContentDeliver
 Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" "SystemPaneSuggestionsEnabled" 0
 
 force-mkdir "HKLM:\SOFTWARE\Policies\Microsoft\WindowsStore"
-Set-ItemProperty "HKLM:\SOFTWARE\Policies\Microsoft\WindowsStore" "AutoDownload" 2
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\WindowsStore" -Name AutoDownload -Value 2 -PassThru
 
 # Prevents "Suggested Applications" returning
 force-mkdir "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent"
-Set-ItemProperty "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent" "DisableWindowsConsumerFeatures" 1
+Set-ItemProperty "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent" -Name DisableWindowsConsumerFeatures -Value 1 -PassThru
