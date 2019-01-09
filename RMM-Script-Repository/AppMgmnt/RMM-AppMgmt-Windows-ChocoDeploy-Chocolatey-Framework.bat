@@ -1,4 +1,4 @@
-:: Script name: RMM-AppMgmnt-Windows-Deploy-Chocolatey-Framework.bat
+:: Script name: RMM-AppMgmnt-Windows-ChocoDeploy-Chocolatey-Framework.bat
 :: Script type: Batch.
 :: Script description: Deploy Chocolatey framewok for application management.
 :: Dependencies: Powershell 1.0.
