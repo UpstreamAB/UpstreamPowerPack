@@ -1,4 +1,12 @@
-Write-Output "Uninstalling default apps"
+
+# Script name: RMM-SysMgmt-Win10-RemoveDefaultApps.ps1
+# Script type: PowerShell
+# Script description: Removes a list of unwanted Windows default apps on Windows 10.
+# Dependencies: Windows 10
+# Script maintainer: powerpack@upstream.se
+# https://www.upstream.com/powerpackWrite-Output 
+
+# Uninstalling default apps
 $apps = @(
     # default Windows 10 apps
     "Microsoft.3DBuilder"
