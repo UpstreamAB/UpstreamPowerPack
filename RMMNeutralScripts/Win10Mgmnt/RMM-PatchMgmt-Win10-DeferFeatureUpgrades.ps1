@@ -5,7 +5,7 @@
 # Script maintainer: powerpack@upstream.se
 # https://www.upstream.com/powerpack
 
-Write-host "UPSTREAM: Executing Powershell script RMM-PatchMgmnt-Windows10-DeferFeatureUpgrades.ps1"
-Write-host "UPSTREAM: Setting a 365 days waiting period for any new Windows 10 version upgrade."
+Write-Output "UPSTREAM: Executing Powershell script RMM-PatchMgmnt-Windows10-DeferFeatureUpgrades.ps1"
+Write-Output "UPSTREAM: Setting a 365 days waiting period for any new Windows 10 version upgrade."
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" -Name DeferFeatureUpdatesPeriodInDays -Value 365 -PassThru
-Write-host "UPSTREAM: End of PowerShell script: Evaluate the console output."
+Write-Output "UPSTREAM: End of PowerShell script: Evaluate the console output."
