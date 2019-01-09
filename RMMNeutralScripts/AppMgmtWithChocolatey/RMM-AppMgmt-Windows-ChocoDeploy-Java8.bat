@@ -7,5 +7,5 @@
 ::
 @ECHO UPSTREAM: Script name: RMM-AppMgmnt-Windows-Deploy-Java8.bat
 @ECHO UPSTREAM: Deploy Java 8 with Chocolatey.
-c:\ProgramData\Chocolatey\choco.exe install jre8 --limit-output --no-progress -y
+c:\ProgramData\Chocolatey\choco.exe install jre8 /exclude:64 --limit-output --no-progress -y
 @ECHO UPSTREAM: Deploy Java 8 with Chocolatey: End of script: Evaluate the script output.
