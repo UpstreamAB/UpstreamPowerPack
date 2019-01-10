@@ -4,7 +4,7 @@
 # Dependencies: Powershell 3.0
 # Script maintainer: powerpack@upstream.se
 # https://www.upstream.com/powerpack
-# ------------------------------------------------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------------------------------
 
 #Requires -Version 3
 # Let's check if Chocolatey is installed on local machine. If not, install and continue.
