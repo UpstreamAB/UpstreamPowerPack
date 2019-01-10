@@ -49,46 +49,19 @@ $LocalRegistryAppName = @(
 	"7-Zip"
 )
 
-# Step 3. This step evaluates the need for closing running applications.
-# If Adobe Flash Player 32 NPAPI is installed on local machine but not yet managed with Chocolatey we need to close Firefox in order to install. This is a one time thing.
-if ($InstalledAppsFromAddRemove -Contains "Adobe Flash Player 32 NPAPI" -And $AppsCurrentlyManagedByChocolatey -NotContains "flashplayerplugin")
-{
-	Write-Output "UPSTREAM: Adobe Flash Player 32 NPAPI detected on local machine. In order to install properly with Choholatey we need to close Firefox during installation."
-	Stop-Process -processname "firefox"
-}
-# If Adobe Flash Player 32 PPAPI is installed on local machine but not yet managed with Chocolatey we need to close Chrome in order to install. This is a one time thing.
-if ($LocalRegistryAppName["Google Chrome"] -NotLike $ChocolateyPackageName["flashplayerppapi"])
-{
-	Write-Output "UPSTREAM: Adobe Flash Player 32 PPAPI detected on local machine. In order to install properly with Choholatey we need to close Chrome during installation."
-	Stop-Process -processname "chrome"
-}
-# If Skype is installed on local machine but not yet managed with Chocolatey we need to close Skype in order to install. This is a one time thing.
-if ($LocalRegistryAppName["Skype"] -NotLike $ChocolateyPackageName["skype"])
-{
-	Write-Output "UPSTREAM: Adobe Flash Player 32 PPAPI detected on local machine. In order to install properly with Choholatey we need to close Chrome during installation."
-	Stop-Process -processname "skype"
-}
-# If Skype is installed on local machine but not yet managed with Chocolatey we need to close Skype in order to install. This is a one time thing.
-if ($LocalRegistryAppName["Adobe Acrobat Reader DC"] -NotLike $ChocolateyPackageName["skype"])
-{
-	Write-Output "UPSTREAM: Adobe Flash Player 32 PPAPI detected on local machine. In order to install properly with Choholatey we need to close Chrome during installation."
-	Stop-Process -processname "AcroRd32"
-}
-
 # If any local Add/Remove app from $LocalRegistryAppName above are missing in $ChocolateyPackageName we will re-deploy the app with Chocolatey in order for it to register.
 for ($index = 0; $index -lt $ChocolateyPackageName.length; $index++)
 {
-	if ($AppsCurrentlyManagedByChocolatey -match $ChocolateyPackageName[$index])
+	if ($AppsCurrentlyManagedByChocolatey -Match $ChocolateyPackageName[$index])
 	{
 		Write-Output "UPSTREAM: $($LocalRegistryAppName[$index]) is installed and managed by Choco Package $($ChocolateyPackageName[$index])."
 	}
 	else
 	{
-		if ($InstalledAppsFromAddRemove -Contains $LocalRegistryAppName[$index])
+		if ($InstalledAppsFromAddRemove -Match $LocalRegistryAppName[$index])
 		{
 			Write-Output "UPSTREAM: $($LocalRegistryAppName[$index]) is installed but not managed with Choco Package $($ChocolateyPackageName[$index]). We need to re-deploy with Chocolatey."
 			C:\ProgramData\Chocolatey\choco.exe install "$($ChocolateyPackageName[$index])" --limit-output --no-progress -y
 		}
-		
 	}
 }
