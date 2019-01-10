@@ -5,7 +5,7 @@
 # Script maintainer: powerpack@upstream.se
 # https://www.upstream.com/powerpack
 # --------------------------------------------------------------------------------------------------------------------------------
-Set-ExecutionPolicy Bypass
+
 #Requires -Version 3
 # Let's check if Chocolatey is installed on local machine. If not, install and continue.
 Write-Output "UPSTREAM: Checking for Chocolatey on this machine."
