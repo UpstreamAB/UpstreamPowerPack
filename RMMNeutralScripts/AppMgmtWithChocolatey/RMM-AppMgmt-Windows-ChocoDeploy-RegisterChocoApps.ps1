@@ -41,7 +41,6 @@ $ChocolateyPackageName = @(
 	"gotomeeting"
 	"microsoft-teams"
 	"skype"
-	"spotify"
 	"zoom"
 )
 # Let's create a local Add/Remove app list as counterpart to above packages. It's important that the rows match. For example, "firefox" and "Mozilla Firefox" should be both bre represented in row 3.'
@@ -57,7 +56,6 @@ $LocalRegistryAppName = @(
 	"GoToMeeting"
 	"Microsoft Teams"
 	"Skype version"
-	"Spotify"
 	"Zoom"
 )
 # Step 3. This step evaluates the need for closing running applications.
