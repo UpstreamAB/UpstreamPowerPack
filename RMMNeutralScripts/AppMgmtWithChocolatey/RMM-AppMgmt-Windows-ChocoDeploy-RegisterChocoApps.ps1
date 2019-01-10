@@ -91,7 +91,7 @@ for ($index = 0; $index -lt $ChocolateyPackageName.length; $index++)
 	{
 		if ($InstalledAppsFromAddRemove -Like $LocalRegistryAppName[$index])
 		{
-			Write-Output "UPSTREAM: $($LocalRegistryAppName[$index]) is installed but not managed with Choco Package $($ChocolateyPackageName[$index]). We need to re-deploy with Chocolatey."ow."
+			Write-Output "UPSTREAM: $($LocalRegistryAppName[$index]) is installed but not managed with Choco Package $($ChocolateyPackageName[$index]). We need to re-deploy with Chocolatey."
 			C:\ProgramData\Chocolatey\choco install "$($ChocolateyPackageName[$index])" --limit-output --no-progress -y
 		}
 		
