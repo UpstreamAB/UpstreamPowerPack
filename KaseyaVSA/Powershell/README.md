@@ -1,1 +1,1 @@
-Placeholder for Kaseya VSA specific Powerhell scripts.
+Placeholder for Powershell scripts specifically designed to be executed with Kaseya VSA.
