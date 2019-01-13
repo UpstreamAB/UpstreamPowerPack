@@ -1,3 +1,11 @@
+# Script name: KaseyaVSA-Audit-GetCurrentFreeDisk.ps1
+# Related Kaseya Agent Procedure: "Audit - Windows 10 - Custom Field - Azure AD Info"
+# Script description: Audit the Azure tenant name on a Windows 10 computer
+# Dependencies: Existing registry values
+# Supported OS: Windows 10
+# Script maintainer: powerpack@upstream.se
+# https://www.upstream.com/powerpack
+
 $CurrentFreeDisk = Get-WmiObject Win32_logicaldisk -ComputerName LocalHost `
 | Format-Table @{ Name = "Size(GB)"; Expression = { [decimal]("{0:N0}" -f ($_.size/1gb)) } }, `
 			   @{ Name = "Free Space(GB)"; Expression = { [decimal]("{0:N0}" -f ($_.freespace/1gb)) } }, `
