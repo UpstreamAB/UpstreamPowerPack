@@ -1,6 +1,6 @@
 # Script name: RMM-AppMgmt-Windows-ChocoDeploy-UpgradeAll.ps1
 # Script type: Powershell
-# Script description: Installs Java 8 32Bit on local machine.
+# Script description: Upgrade all Choco deployed apps on local machine.
 # Dependencies: Powershell 3.0
 # Script maintainer: powerpack@upstream.se
 # https://en.upstream.se/powerpack/
@@ -15,7 +15,7 @@ if (Test-Path "C:\ProgramData\Chocolatey\choco.exe")
 }
 else
 {
-	Write-Output "UPSTREAM: Whoops! Chocolatey is missing on this machine. Installing. Don't expect much to happen here. You have to deploy apps with Choco first to be able to upgrade with Choco.."
+	Write-Output "UPSTREAM: Whoops! Chocolatey is missing on this machine. Installing, but not much will happen here. You have to deploy apps with Choco in order to upgrade with Choco."
 	Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 }
 c:\ProgramData\Chocolatey\choco.exe upgrade all --limit-output --no-progress -y
