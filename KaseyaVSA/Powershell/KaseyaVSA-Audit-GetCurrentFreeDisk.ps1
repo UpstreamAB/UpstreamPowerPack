@@ -9,4 +9,4 @@
 $DiskInfo = get-wmiobject -class "Win32_LogicalDisk" -namespace "root\CIMV2" | Where-Object DeviceID -Like C:
 $DiskFree = [math]::round($DiskInfo.FreeSpace/1GB, 0)
 # Let's write the current free disk infomation to the concole for Kaseya VSA to pick up as a variable.
-Write-Output "UPSTREAM: Free disk in GB: "$DiskFree
+Write-Output $DiskFree
