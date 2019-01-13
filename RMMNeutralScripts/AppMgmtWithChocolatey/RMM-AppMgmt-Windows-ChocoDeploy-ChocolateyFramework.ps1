@@ -1,4 +1,4 @@
-# Script name: RMM-AppMgmt-Windows-ChocoDeploy-DeployChocolateyFramework.ps1
+# Script name: RMM-AppMgmt-Windows-ChocoDeploy-ChocolateyFramework.ps1
 # Script type: Powershell
 # Script description: Installs the Chocolatey App Mgmt Framework if missin on local machine.
 # Dependencies: Powershell 3.0
