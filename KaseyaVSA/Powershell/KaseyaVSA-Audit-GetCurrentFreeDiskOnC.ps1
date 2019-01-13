@@ -6,7 +6,7 @@
 # Script maintainer: powerpack@upstream.se
 # https://en.upstream.se/powerpack
 
-$disk = get-wmiobject win32_logicaldisk |foreach-object {[math]::truncate($_.freespace / 1GB)}
+$FreeDisk = get-wmiobject win32_logicaldisk |foreach-object {[math]::truncate($_.freespace / 1GB)}
 
 # Let's write the current free disk in GB for Kaseya VSA to pick up as a variable.
-Write-Output $disk
+Write-Output $FreeDisk
