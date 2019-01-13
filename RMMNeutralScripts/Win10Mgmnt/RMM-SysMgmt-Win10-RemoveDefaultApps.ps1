@@ -91,7 +91,7 @@ $apps = @(
     "D52A8D61.FarmVille2CountryEscape"
     "TuneIn.TuneInRadio"
     "GAMELOFTSA.Asphalt8Airborne"
-    #"TheNewYorkTimes.NYTCrossword"
+    "TheNewYorkTimes.NYTCrossword"
     "DB6EA5DB.CyberLinkMediaSuiteEssentials"
     "Facebook.Facebook"
     "flaregamesGmbH.RoyalRevolt2"
