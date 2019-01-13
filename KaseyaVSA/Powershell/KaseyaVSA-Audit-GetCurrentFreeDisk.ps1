@@ -4,7 +4,7 @@
 # Dependencies: Existing registry values
 # Supported OS: Windows 10
 # Script maintainer: powerpack@upstream.se
-# https://www.upstream.com/powerpack
+# https://en.upstream.se/powerpack
 
 $CurrentFreeDisk = Get-WmiObject Win32_logicaldisk -ComputerName LocalHost `
 | Format-Table @{ Name = "Size(GB)"; Expression = { [decimal]("{0:N0}" -f ($_.size/1gb)) } }, `
