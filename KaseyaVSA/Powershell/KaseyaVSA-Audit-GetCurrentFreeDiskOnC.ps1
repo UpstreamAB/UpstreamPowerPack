@@ -1,5 +1,5 @@
 # Script name: KaseyaVSA-Audit-GetCurrentFreeDiskOnC.ps1
-# Related Kaseya Agent Procedure: "Audit - Windows - Get Current Free Disk"
+# Related Kaseya Agent Procedure: "Audit - Windows - Get Current Free Disk On C"
 # Script description: Audit the Azure tenant name on a Windows 10 computer
 # Dependencies: Existing registry values
 # Supported OS: Windows
