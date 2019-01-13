@@ -6,8 +6,8 @@
 # Script maintainer: powerpack@upstream.se
 # https://en.upstream.se/powerpack
 
-$disk = Get-WmiObject Win32_LogicalDisk -Filter "DeviceID='C:'" | Select-Object Size, FreeSpace
+$disk = Get-WmiObject Win32_LogicalDisk -Filter "DeviceID='C:'" | Select-Object FreeSpace
 
 # Let's write the current free disk in GB for Kaseya VSA to pick up as a variable.
 # Write-Host ("{0}GB total" -f [math]::truncate($disk.Size / 1GB))
-Write-Host ("{0}GB free" -f [math]::truncate($disk.FreeSpace / 1GB))
+Write-Output ("{0}GB" -f [math]::truncate($disk.FreeSpace / 1GB))
