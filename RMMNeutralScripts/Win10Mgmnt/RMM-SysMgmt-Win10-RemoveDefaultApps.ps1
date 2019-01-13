@@ -1,9 +1,9 @@
 # Script name: RMM-SysMgmt-Win10-RemoveDefaultApps.ps1
 # Script type: PowerShell
-# Script description: Removes a list of unwanted Windows default apps on Windows 10.
+# Script description: Removes a list of unwanted Windows default apps on Windows 10 and prevent from re-installing.
 # Dependencies: Windows 10
 # Script maintainer: powerpack@upstream.se
-# https://www.upstream.com/powerpackWrite-Output 
+# https://en.upstream.se/powerpack 
 
 # Uninstalling default apps
 $apps = @(
