@@ -1,6 +1,6 @@
 # Script name: RMM-AppMgmt-Windows-ChocoDeploy-RegisterChocoApps.ps1
 # Script type: Powershell
-# Script description: Register local list of applications to be managed with Chocolatey by re-deploying.
+# Script description: Register local list of applications to be managed by Chocolatey by re-deploying.
 # Dependencies: Powershell 3.0
 # Script maintainer: powerpack@upstream.se
 # https://en.upstream.se/powerpack/
@@ -37,7 +37,7 @@ $ChocolateyPackageName = @(
 	"jre8"
 	"7zip"
 )
-# Let's create a local Add/Remove app list as counterpart to above packages. It's important that the rows match. For example, "firefox" and "Mozilla Firefox" should be both bre represented in row 3.'
+# Let's create a local Add/Remove app list as counterpart to above packages. It's important that the lines match. For example, "firefox" and "Mozilla Firefox" should be both be represented in line 3.'
 $LocalRegistryAppName = @(
 	"Adobe Flash Player 32 PPAPI" # For Google Chrome
 	"Adobe Flash Player 32 NPAPI" # For Firefox
