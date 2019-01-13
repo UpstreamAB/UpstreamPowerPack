@@ -1,6 +1,6 @@
 # Script name: RMM-PatchMgmnt-Win10-SetActiveHours.ps1
 # Script type: PowerShell
-# Script description: Apply active working hours between 06:00-20:00 where Windows wont bother you with updates.
+# Script description: Apply active working hours between 06:00-20:00 where Windows won't bother you with updates.
 # Dependencies: Windows 10
 # Script maintainer: powerpack@upstream.se
 # https://en.upstream.se/powerpack
