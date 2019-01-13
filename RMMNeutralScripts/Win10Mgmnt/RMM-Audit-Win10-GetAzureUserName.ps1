@@ -5,6 +5,6 @@ $subKey = Get-Item "HKLM:/SYSTEM/CurrentControlSet/Control/CloudDomainJoin/JoinI
 $guids = $subKey.GetSubKeyNames()
 foreach($guid in $guids) {
     $guidSubKey = $subKey.OpenSubKey($guid);
-    $UserEmail = $guidSubKey.GetValue("UserEmail");
+    $AzureUserName = $guidSubKey.GetValue("UserEmail");
 }
-write-output $UserEmail
+write-output $AzureUserName
