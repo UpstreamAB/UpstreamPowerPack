@@ -9,4 +9,3 @@ Write-host "UPSTREAM: Script name: RMM-PatchMgmnt-Windows10-SetActiveHours.ps1"
 Write-host "UPSTREAM: Setting Active Hours to 06:00-22:00 in the registry."
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" -Name ActiveHoursStart -Value 6 -PassThru
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" -Name ActiveHoursEnd -Value 20 -PassThru
-Write-host "UPSTREAM: Deploy Webroot: End of PowerShell script: Evaluate the console output."
