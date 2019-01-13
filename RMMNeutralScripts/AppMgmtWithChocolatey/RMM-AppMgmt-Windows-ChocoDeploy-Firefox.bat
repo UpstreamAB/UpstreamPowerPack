@@ -1,11 +1,22 @@
-:: Script name: RMM-AppMgmnt-Windows-Deploy-Firefox.bat
-:: Script type: Batch.
-:: Script description: Deploy Firefox wit the help of Chocolatey framewok for application management.
-:: Dependencies: Powershell 1.0.
-:: Supported OS: Windows Server 2012, Windows Server 2016, Windows Server 2019, Windows 7, Windows 10.
-:: Script maintainer: powerpack@upstream.se
-:: https://www.upstream.com/powerpack"
-::
-@ECHO UPSTREAM: Deploy Firefox: Deploying Firefox with Chocolatey Framework from www.chocolatey.org
+# Script name: RMM-AppMgmt-Windows-ChocoDeploy-Firefox.ps1
+# Script type: Powershell
+# Script description: Installs Firefox on local machine.
+# Dependencies: Powershell 3.0
+# Script maintainer: powerpack@upstream.se
+# https://en.upstream.se/powerpack/
+# --------------------------------------------------------------------------------------------------------------------------------
+
+#Requires -Version 3
+# Let's check if Chocolatey is installed on local machine. If not, install.
+Write-Output "UPSTREAM: Checking for Chocolatey on this machine."
+if (Test-Path "C:\ProgramData\Chocolatey\choco.exe")
+{
+	Write-Output "UPSTREAM: Great! Chocolatey is already installed on this machine. Let's go!"
+}
+else
+{
+	Write-Output "UPSTREAM: Whoops! Chocolatey is missing on this machine. Let's install and carry on."
+	Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+}
+# This line will tell Chocolatey to install the Firefox package.
 c:\ProgramData\Chocolatey\choco.exe install firefox --limit-output --no-progress -y
-@ECHO UPSTREAM: Deploy Firefox: End of script: Evaluate script output."
