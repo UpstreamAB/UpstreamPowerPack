@@ -4,7 +4,7 @@
 # Dependencies: Existing registry values
 # Supported OS: Windows 10
 # Script maintainer: powerpack@upstream.se
-# https://www.upstream.com/powerpack
+# https://en.upstream.se/powerpack
 
 $subKey = Get-Item "HKLM:/SYSTEM/CurrentControlSet/Control/CloudDomainJoin/TenantInfo"
 
