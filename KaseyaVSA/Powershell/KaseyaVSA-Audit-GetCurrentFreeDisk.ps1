@@ -2,7 +2,7 @@
 # Related Kaseya Agent Procedure: "Audit - Windows 10 - Custom Field - Azure AD Info"
 # Script description: Audit the Azure tenant name on a Windows 10 computer
 # Dependencies: Existing registry values
-# Supported OS: Windows 10
+# Supported OS: Windows
 # Script maintainer: powerpack@upstream.se
 # https://en.upstream.se/powerpack
 
