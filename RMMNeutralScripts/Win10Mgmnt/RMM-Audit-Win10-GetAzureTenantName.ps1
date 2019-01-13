@@ -5,6 +5,6 @@ $subKey = Get-Item "HKLM:/SYSTEM/CurrentControlSet/Control/CloudDomainJoin/Tenan
 $guids = $subKey.GetSubKeyNames()
 foreach($guid in $guids) {
     $guidSubKey = $subKey.OpenSubKey($guid);
-    $DisplayName = $guidSubKey.GetValue("DisplayName");
+    $AzureTenantName = $guidSubKey.GetValue("DisplayName");
 }
-write-output $DisplayName
+write-output $AzureTenantName
