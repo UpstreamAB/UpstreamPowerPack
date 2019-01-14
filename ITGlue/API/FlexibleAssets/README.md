@@ -1,0 +1,1 @@
+Create Vendors with `Vendors.ps1` before running `CloudApplications.ps1`.
