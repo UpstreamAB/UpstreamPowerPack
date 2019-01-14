@@ -1,19 +1,5 @@
-[cmdletbinding(DefaultParameterSetName="typeName")]
-param(
-    [Parameter(ParameterSetName="typeName")]
-    [string]$TypeName = "Client",
-
-    [Parameter(ParameterSetName="typeID")]
-    [int]$TypeId
-)
-
-if($PsCmdlet.ParameterSetName -eq "typeName") {
-    $TypeId = (Get-ITGlueOrganizationTypes -filter_name $TypeName).data.id
-    if($TypeId.Count -eq 0 ) {
-        Write-Error "No type was wound with the name $TypeName"
-        exit
-    }
-}
+# Enter id of the type (types are Client etc.)
+[int]$TypeId =
 
 # Get all organizations..
 $data = Get-ITGlueOrganizations -page_size 1000

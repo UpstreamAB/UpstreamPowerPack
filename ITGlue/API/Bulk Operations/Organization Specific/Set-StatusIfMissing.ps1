@@ -1,19 +1,5 @@
-[cmdletbinding(DefaultParameterSetName="statusName")]
-param(
-    [Parameter(ParameterSetName="statusName")]
-    [string]$StatusName = "Active",
-
-    [Parameter(ParameterSetName="statusID")]
-    [int]$StatusId
-)
-
-if($PsCmdlet.ParameterSetName -eq "statusName") {
-    $StatusId = (Get-ITGlueOrganizationStatuses -filter_name $StatusName).data.id
-    if($StatusId.Count -eq 0 ) {
-        Write-Error "No status was wound with the name $StatusName"
-        exit
-    }
-}
+# Enter id of the status (statuses are Active, Inactive etc.)
+[int]$StatusId =
 
 # Get all organizations..
 $data = Get-ITGlueOrganizations -page_size 1000
