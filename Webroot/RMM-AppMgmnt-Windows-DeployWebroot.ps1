@@ -1,6 +1,6 @@
 # Script name: RMM-AppMgmnt-Windows-DeployWebroot.ps1
 # Script type: PowerShell.
-# Script description: Deploy Webroot silently with associated Webroot MSP site key.
+# Script description: Deploy Webroot silently with associated Webroot MSP site key using a RMM tool.
 # Dependencies: Webroot site key to be added as $WebrootKey variable.
 # Script maintainer: powerpack@upstream.se
 # https://en.upstream.se/powerpack"
