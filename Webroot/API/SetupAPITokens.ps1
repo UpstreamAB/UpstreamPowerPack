@@ -61,6 +61,7 @@ if(-not (test-path $token_path)) {
 }
 "@ | Out-File -FilePath "$config_path\$config_file" -Force
 
+# API Parameters
 $params = @{
     Headers = @{
         "Authorization" = "Basic $([Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($cliend_id + ":" +$client_secret)))"
@@ -76,7 +77,7 @@ $params = @{
     Method = "POST"
 }
 
-# API call & API Parameters
+# API call
 $resp = Invoke-RestMethod @params
 
 # Export token

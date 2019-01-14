@@ -43,7 +43,7 @@ $client_secret = [System.Management.Automation.PSCredential]::New('null', $($con
 $cliend_id = $config.cliend_id
 $scope = $tokens.scope
 
-
+# API Parameters
 $params = @{
     Headers = @{
         "Accept" = "application/json"
