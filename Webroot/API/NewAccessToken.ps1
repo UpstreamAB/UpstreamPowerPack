@@ -2,7 +2,7 @@
 # Scheduler task path
 $scheduler_task_path = "\Webroot\"
 # Schedule task name
-$access_scheduler_taskname = "NewRefreshToken"
+$access_scheduler_taskname = "NewAccessToken"
 # Script Name
 $access_token_script = "NewAccessToken.ps1"
 # Script path ($PSScriptRoot = execution path)
