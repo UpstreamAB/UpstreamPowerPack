@@ -1,1 +1,1 @@
-Placeholder for enything Office 365 specific.
+Placeholder for Office 365 management and automation.
