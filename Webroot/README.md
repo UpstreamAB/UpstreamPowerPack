@@ -1,1 +1,1 @@
-Placeholder for Powershell scripts to be used with Webroot.
+Placeholder for API Powershell & automation scripts to be used with Webroot.
