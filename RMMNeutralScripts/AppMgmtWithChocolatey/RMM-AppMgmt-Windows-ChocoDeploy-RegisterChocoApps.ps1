@@ -43,7 +43,7 @@ $LocalRegistryAppName = @(
 	"Adobe Flash Player 32 NPAPI" # For Firefox
 	"Mozilla Firefox"
 	"Google Chrome"
-	"Adobe Acrobat Reader DC"
+	"Adobe Acrobat Reader DC MUI"
 	"Adobe AIR"
 	"Java 8 update"
 	"7-Zip"
