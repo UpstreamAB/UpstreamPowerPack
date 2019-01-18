@@ -1,1 +1,1 @@
-Placeholder for Powershell scripts for IT-Automation to be used with any RMM tool.
+Placeholder for IT-Automation Powershell scripts to be used with any RMM tool.
