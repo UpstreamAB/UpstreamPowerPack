@@ -17,6 +17,7 @@ $CurrentFreeDiskInfo = Get-WmiObject Win32_logicaldisk -ComputerName LocalHost `
 Write-Output "UPSTREAM: Disk space before cleanup: "$CurrentFreeDiskInfo
 
 # Let's call Windows internal diskcleaner and let it it's thing.
+Write-Output "UPSTREAM: Attemtig to do some disk cleanup with Cleanmgr. Wait for it...
 Start-Process -FilePath Cleanmgr -ArgumentList '/autoclean' -Wait
 
 # Now, let's figure our if Cleanmgr did it's job.
