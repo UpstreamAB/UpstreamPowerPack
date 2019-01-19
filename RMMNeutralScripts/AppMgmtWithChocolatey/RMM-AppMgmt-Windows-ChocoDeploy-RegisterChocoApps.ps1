@@ -51,29 +51,32 @@ $LocalRegistryAppName = @(
 
 # Let's check for any processes needing to be closed during the Chocolatey package registration and re-installation. This is a on time thing.
 # If Adobe Flash Player 32 NPAPI is installed on local machine but not yet managed with Chocolatey we need to close Firefox in order to install.
-#if ($InstalledAppsFromAddRemove -Contains "Adobe Flash Player 32 PPAPI" -And $AppsCurrentlyManagedByChocolatey -NotContains "flashplayerppapi")
-#{
-#	Write-Output "UPSTREAM: In order to install properly with Choholatey we need to close Chrome during installation if running."
-#	Get-Process | Where-Object { $_.Name -eq "chrome" } | Select-Object -First 1 | Stop-Process
-#}
+if ($InstalledAppsFromAddRemove -Contains "Adobe Flash Player 32 PPAPI" -And $AppsCurrentlyManagedByChocolatey -NotContains "flashplayerppapi")
+{
+	Write-Output "UPSTREAM: In order to install properly with Choholatey we need to close Chrome during installation if running."
+	Get-Process | Where { $_.Name -Match "$chrome" } | Stop-Process -Force
+}
+
 # If Adobe Flash Player 32 PPAPI is installed on local machine but not yet managed with Chocolatey we need to close Chrome in order to install.
-#if ($InstalledAppsFromAddRemove -Contains "Adobe Flash Player 32 NPAPI" -And $AppsCurrentlyManagedByChocolatey -NotContains "flashplayerplugin")
-#{
-#	Write-Output "UPSTREAM: In order to install properly with Choholatey we need to close Firefox during installation if running."
-#	Get-Process | Where-Object { $_.Name -eq "firefox" } | Select-Object -First 1 | Stop-Process
-#}
+if ($InstalledAppsFromAddRemove -Contains "Adobe Flash Player 32 NPAPI" -And $AppsCurrentlyManagedByChocolatey -NotContains "flashplayerplugin")
+{
+	Write-Output "UPSTREAM: In order to install properly with Choholatey we need to close Firefox during installation if running."
+	Get-Process | Where { $_.Name -Match "firefox" } | Stop-Process -Force
+}
+
 # If Firefox is installed on local machine but not yet managed with Chocolatey we need to close Firefox in order to install.
-#if ($InstalledAppsFromAddRemove -Contains "Mozilla Firefox" -And $AppsCurrentlyManagedByChocolatey -NotContains "firefox")
-#{
-#	Write-Output "UPSTREAM: In order to install properly with Choholatey we need to close Firefox during installation if running."
-#	Get-Process | Where-Object { $_.Name -eq "firefox" } | Select-Object -First 1 | Stop-Process
-#}
+if ($InstalledAppsFromAddRemove -Contains "Mozilla Firefox" -And $AppsCurrentlyManagedByChocolatey -NotContains "firefox")
+{
+	Write-Output "UPSTREAM: In order to install properly with Choholatey we need to close Firefox during installation if running."
+	Get-Process | Where { $_.Name -Match "firefox" } | Stop-Process -Force
+}
+
 # If Chrome is installed on local machine but not yet managed with Chocolatey we need to close Chrome in order to install. This is a one time thing.
-#if ($InstalledAppsFromAddRemove -Contains "Google Chrome" -And $AppsCurrentlyManagedByChocolatey -NotContains "googlechrome")
-#{
-#	Write-Output "UPSTREAM: In order to install properly with Choholatey we need to close Chrome during installation if running."
-#	Get-Process | Where-Object { $_.Name -eq "chrome" } | Select-Object -First 1 | Stop-Process
-#}
+if ($InstalledAppsFromAddRemove -Contains "Google Chrome" -And $AppsCurrentlyManagedByChocolatey -NotContains "googlechrome")
+{
+	Write-Output "UPSTREAM: In order to install properly with Choholatey we need to close Chrome during installation if running."
+	Get-Process | Where { $_.Name -Match "chrome" } | Stop-Process -Force
+}
 
 # If any local Add/Remove app from $LocalRegistryAppName above are missing in $ChocolateyPackageName we will re-deploy the app with Chocolatey in order for it to register.
 for ($index = 0; $index -lt $ChocolateyPackageName.length; $index++)
