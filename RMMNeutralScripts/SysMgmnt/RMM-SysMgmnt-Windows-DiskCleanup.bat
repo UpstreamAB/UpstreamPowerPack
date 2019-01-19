@@ -6,6 +6,7 @@
 # https://en.upstream.se/powerpack/
 # --------------------------------------------------------------------------------------------------------------------------------
 
+# First, let's have a look at current disk space free.
 $CurrentFreeDiskInfo = Get-WmiObject Win32_logicaldisk -ComputerName LocalHost `
 | Format-Table DeviceID, MediaType, `
 			   @{ Name = "Size(GB)"; Expression = { [decimal]("{0:N0}" -f ($_.size/1gb)) } }, `
@@ -13,11 +14,12 @@ $CurrentFreeDiskInfo = Get-WmiObject Win32_logicaldisk -ComputerName LocalHost `
 			   @{ Name = "Free (%)"; Expression = { "{0,6:P0}" -f (($_.freespace/1gb) / ($_.size/1gb)) } } `
 			   -AutoSize
 
-Write-Output "UPSTREAM: This is the disk space before cleanup: "$CurrentFreeDiskInfo
+Write-Output "UPSTREAM: Disk space before cleanup: "$CurrentFreeDiskInfo
 
 # Let's call Windows internal diskcleaner and let it it's thing.
-Start-Process c:\windows\system32\cleanmgr.exe -ArgumentList "/verylowdisk /d c" -NoNewWindow -Wait
+Start-Process -FilePath Cleanmgr -ArgumentList '/autoclean' -Wait
 
+# Now, let's figure our if Cleanmgr did it's job.
 $CurrentFreeDiskInfo = Get-WmiObject Win32_logicaldisk -ComputerName LocalHost `
 | Format-Table DeviceID, MediaType, `
 			   @{ Name = "Size(GB)"; Expression = { [decimal]("{0:N0}" -f ($_.size/1gb)) } }, `
@@ -25,4 +27,4 @@ $CurrentFreeDiskInfo = Get-WmiObject Win32_logicaldisk -ComputerName LocalHost `
 			   @{ Name = "Free (%)"; Expression = { "{0,6:P0}" -f (($_.freespace/1gb) / ($_.size/1gb)) } } `
 			   -AutoSize
 
-Write-Output "UPSTREAM: This is the disk space after cleanup: "$CurrentFreeDiskInfo
+Write-Output "UPSTREAM: Disk space after cleanup: "$CurrentFreeDiskInfo
