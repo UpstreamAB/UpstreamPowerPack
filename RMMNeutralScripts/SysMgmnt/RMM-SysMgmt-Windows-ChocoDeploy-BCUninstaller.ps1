@@ -1,6 +1,6 @@
 # Script name: RMM-SysMgmt-Windows-ChocoDeploy-BCUninstaller.ps1
 # Script type: Powershell
-# Script description: Installs BC Uninstaller tool for application removal, troubleshooting and system cleanup.
+# Script description: Installs BC Uninstaller tool for ad-hoc bulk application removal, troubleshooting and system cleanup.
 # Dependencies: Powershell 3.0
 # Script maintainer: powerpack@upstream.se
 # https://en.upstream.se/powerpack/
