@@ -5,6 +5,10 @@
 	Dependencies: Powershell 3.0
 	Script maintainer: powerpack@upstream.se
 	https://en.upstream.se/powerpack/
+	
+	Additional notes:
+	Uses the System.Net.WebClient function fo grab the Google Chrome MSI package from URL and install
+	silently with msiexec command. Reports back success or failure based on Add/Remove programs list.
 #>
 
 # What file do you want to download? Enter the path here.
