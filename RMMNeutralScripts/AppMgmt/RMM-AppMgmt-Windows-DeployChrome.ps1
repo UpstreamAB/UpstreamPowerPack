@@ -7,14 +7,14 @@
 	===========================================================================
 	.DESCRIPTION
 		Uses the System.Net.WebClient function fo grab the Google Chrome MSI package from URL and install
-		silently with msiexec command. Reports back success or failure based on Add/Remove programs list
+		silently with msiexec command. Reports back success or failure based on Add/Remove Programs list
 	.NOTES
 		First release.
 #>
 
 # What file do you want to download? Enter the path here.
 $Url = "https://dl.google.com/tag/s/dl/chrome/install/googlechromestandaloneenterprise64.msi"
-# Where do you want to put the file on the local drive?
+# Where do you want to put the file on the local disk?
 $File = "c:\temp\googlechromestandaloneenterprise64.msi"
 # What is the application name? Use the name that will be presented in the Add/Remove Control Panel.
 $AppName = "Google Chrome"
