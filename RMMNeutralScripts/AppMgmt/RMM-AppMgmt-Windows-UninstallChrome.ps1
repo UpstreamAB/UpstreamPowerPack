@@ -1,5 +1,4 @@
 <#	
-	.NOTES
 	===========================================================================
 		Filename:     	RMM-AppMgmt-Windows-UninstallChrome.ps1
 		Latest update:  2019-01-19
@@ -7,7 +6,10 @@
 		Organization: 	Upstream AB, https://en.upstream.se/powerpack
 	===========================================================================
 	.DESCRIPTION
-		A description of the file.
+		Uses the Uninstall to remove Google Chrome from local machine silently. Reports back success or 
+		failure based on Add/Remove programs list.
+	.NOTES
+		First release.
 #>
 
 # What application do you want to uninstall? Use the name from the Add/Remove Control Panel.
