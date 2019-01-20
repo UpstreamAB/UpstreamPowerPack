@@ -1,4 +1,3 @@
-
 <#	
 	===========================================================================
 		Filename:     	RMM-Win10Mgmt-EnableStorageSense.ps1
@@ -7,8 +6,7 @@
 		Organization: 	Upstream AB, https://en.upstream.se/powerpack
 	===========================================================================
 	.DESCRIPTION
-		Uses the System.Net.WebClient function fo grab the Google Chrome MSI package from URL and install
-		silently with msiexec command. Reports back success or failure based on Add/Remove Programs list
+		 Enable and configure the built in disk cleanup tool called Storage Sense in Windows 10.
 	
 	.CHANGELOG
 		First release.
