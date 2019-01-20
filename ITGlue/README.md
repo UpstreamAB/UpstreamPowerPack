@@ -1,1 +1,1 @@
-Placeholder for API Powershell scripts for IT Glue.
+Placeholder for API and deployment Powerhell scripts to be used with IT Glue.
