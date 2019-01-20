@@ -1,13 +1,10 @@
 <#	
-	.NOTES
-	===========================================================================
-		Filename:     	RMM-AppMgmt-Windows-InstallChrome.ps1
-		Latest update:  2019-01-19
-		Created by:   	powerpack@upstream.se
-		Organization: 	Upstream AB, https://en.upstream.se/powerpack
-	===========================================================================
-	.DESCRIPTION
-		A description of the file.
+	Script name: RMM-AppMgmt-Windows-DeployChrome.ps1
+	Script type: Powershell
+	Script description: Deploys Google Chrome on local machine.
+	Dependencies: Powershell 3.0
+	Script maintainer: powerpack@upstream.se
+	https://en.upstream.se/powerpack/
 #>
 
 # What file do you want to download? Enter the path here.
