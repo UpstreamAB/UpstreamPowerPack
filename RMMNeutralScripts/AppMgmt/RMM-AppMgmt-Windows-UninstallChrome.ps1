@@ -8,7 +8,8 @@
 	.DESCRIPTION
 		Uses the Uninstall to remove Google Chrome from local machine silently. Reports back success or 
 		failure based on Add/Remove programs list.
-	.NOTES
+	
+	.CHANGELOG
 		First release.
 #>
 
