@@ -1,14 +1,15 @@
 <#	
-	Script name: RMM-AppMgmt-Windows-DeployChrome.ps1
-	Script type: Powershell
-	Script description: Deploys Google Chrome on local machine.
-	Dependencies: Powershell
-	Script maintainer: powerpack@upstream.se
-	https://en.upstream.se/powerpack/
-	
-	Notes:
-	Uses the System.Net.WebClient function fo grab the Google Chrome MSI package from URL and install
-	silently with msiexec command. Reports back success or failure based on Add/Remove programs list.
+	===========================================================================
+		Filename:     	RMM-AppMgmt-Windows-DeployChrome.ps1
+		Latest update:  2019-01-19
+		Created by:   	powerpack@upstream.se
+		Organization: 	Upstream AB, https://en.upstream.se/powerpack
+	===========================================================================
+	.DESCRIPTION
+		Uses the System.Net.WebClient function fo grab the Google Chrome MSI package from URL and install
+		silently with msiexec command. Reports back success or failure based on Add/Remove programs list
+	.NOTES
+		First release.
 #>
 
 # What file do you want to download? Enter the path here.
