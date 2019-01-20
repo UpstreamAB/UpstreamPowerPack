@@ -8,7 +8,8 @@
 	.DESCRIPTION
 		Uses the System.Net.WebClient function fo grab the Google Chrome MSI package from URL and install
 		silently with msiexec command. Reports back success or failure based on Add/Remove Programs list
-	.NOTES
+	
+	.CHANGELOG
 		First release.
 #>
 
