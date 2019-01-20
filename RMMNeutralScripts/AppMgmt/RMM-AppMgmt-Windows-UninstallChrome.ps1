@@ -44,5 +44,6 @@ if ($AppRemove -Match $AppName)
 }
 else
 {
+	# The application to be uninstalled isn't installed in the first place.
 	Write-Output "UPSTREAM: Application not found. Nothing to do."
 }
