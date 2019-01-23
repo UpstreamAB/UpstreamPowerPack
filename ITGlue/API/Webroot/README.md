@@ -1,1 +1,1 @@
-Placeholder for API realated Webroot conten for IT Glue.
+Placeholder for Webroot to IT Glue API realated automation.
