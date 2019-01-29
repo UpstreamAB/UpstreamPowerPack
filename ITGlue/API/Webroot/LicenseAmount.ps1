@@ -1,9 +1,9 @@
 # Webroot credentials
-$username =""
-$password = ""
-$cliend_id = ""
-$client_secret = ""
-$global_gsm_key = ""
+$username =''
+$password = ''
+$cliend_id = ''
+$client_secret = ''
+$global_gsm_key = ''
 
 # Flexible asset ID in IT Glue
 $flexible_asset_type_id = 
@@ -11,24 +11,32 @@ $flexible_asset_type_id =
 # Functions used in the script
 function Format-WebrootData {
     param (
-        [Object]
         [Parameter(Mandatory=$true, ValueFromPipeline=$true)]
         $webroot_data
     )
     process {
+        $DNSP = $false
+        $WSAT = $false
+
+        foreach($type in $webroot_data.Modules.Type) {
+            if($type -eq 'DNSP') { $DNSP = $true }
+            if($type -eq 'WSAT') { $WSAT = $true }
+        }
+
         return [PSCustomObject]@{
             SiteKey = $webroot_data.AccountKeyCode
             Volume = $webroot_data.TotalEndpoints
             Expiration = $webroot_data.EndDate
             BillingCycle = $webroot_data.BillingCycle
             BillingDate = $webroot_data.BillingDate
+            DNSP = $DNSP
+            WSAT = $WSAT
         }
     }
 }
 
 function Format-ITGlueData {
     param (
-        [Object]
         [Parameter(Mandatory=$true, ValueFromPipeline=$true)]
         $itglue_data
     )
@@ -48,11 +56,9 @@ function Format-ITGlueData {
 
 function Merge-ITGlueWebrootData {
     param (
-        [Object]
         [Parameter(Mandatory=$true, ValueFromPipeline=$true)]
         $foramted_webroot_data,
 
-        [Object]
         [Parameter(Mandatory=$true)]
         $formated_itglue_data
     )
@@ -68,8 +74,8 @@ function Merge-ITGlueWebrootData {
                     'configurations-with-webroot'         = $formated_itglue_data.'configurations-with-webroot'
                     'expiration-date'                     = $foramted_webroot_data.Expiration
                     'webroot-endpoint-protection'         = $formated_itglue_data.'webroot-endpoint-protection'
-                    'webroot-dns-protection'              = $formated_itglue_data.'webroot-dns-protection'
-                    'webroot-security-awareness-training' = $formated_itglue_data.'webroot-security-awareness-training'
+                    'webroot-dns-protection'              = $foramted_webroot_data.DNSP
+                    'webroot-security-awareness-training' = $foramted_webroot_data.WSAT
                     'main-contact-at-customer'            = $formated_itglue_data.'main-contact-at-customer'
                     'billing-cycle'                       = $foramted_webroot_data.BillingCycle
                     'billing-date'                        = $foramted_webroot_data.BillingDate
@@ -80,35 +86,35 @@ function Merge-ITGlueWebrootData {
 }
 
 # Don't touch, it's Von Dutch
-$scope = "Console.GSM"
+$scope = 'Console.GSM'
 
 # API URL and paths
-$API_URL = "https://unityapi.webrootcloudav.com"
-$API_refresh_path = "/auth/token"
+$API_URL = 'https://unityapi.webrootcloudav.com'
+$API_refresh_path = '/auth/token'
 
 $api_params = @{
     Headers = @{
-        "Authorization" = "Basic $([Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($cliend_id + ":" +$client_secret)))"
-        "Content-Type" = "application/x-www-form-urlencoded"
+        'Authorization' = ('Basic {0}' -f [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($cliend_id + ':' +$client_secret)))
+        'Content-Type' = 'application/x-www-form-urlencoded'
     }
     body = @{
-        "username" = $username
-        "password" = $password
-        "grant_type" = 'password'
-        "scope" = $scope
+        'username' = $username
+        'password' = $password
+        'grant_type' = 'password'
+        'scope' = $scope
     }
     URI = $API_URL + $API_refresh_path
-    Method = "POST"
+    Method = 'POST'
 }
 
 # API call
-$access_token = Invoke-RestMethod @api_params | Select-Object -ExpandProperty "access_token"
+$access_token = Invoke-RestMethod @api_params | Select-Object -ExpandProperty 'access_token'
 
 # Save access token in new headers
-$headers = @{'Authorization' = "Bearer $access_token"}
+$headers = @{'Authorization' = ('Bearer {0}' -f $access_token)}
 
 # Webroot data
-$sites = Invoke-RestMethod -URI "$API_URL/service/api/console/gsm/$global_gsm_key/sites" -Headers $headers | Select-Object -ExpandProperty Sites | Format-WebrootData
+$sites = Invoke-RestMethod -URI ('{0}/service/api/console/gsm/{1}/sites' -f $API_URL, $global_gsm_key) -Headers $headers | Select-Object -ExpandProperty Sites | Format-WebrootData
 
 # IT Glue data
 $organizations = Get-ITGlueFlexibleAssets -filter_flexible_asset_type_id $flexible_asset_type_id | Select-Object -ExpandProperty data | Format-ITGlueData
