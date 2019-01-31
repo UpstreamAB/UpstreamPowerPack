@@ -150,6 +150,9 @@ function Merge-ITGlueWebrootData {
                     'webroot-security-awareness-training'  = $foramted_webroot_data.SAT
                     'billing-cycle'                        = $foramted_webroot_data.BillingCycle
                     'billing-date'                         = $foramted_webroot_data.BillingDate
+
+                    # Update time logging
+                    'last-update'                          = $(Get-date -UFormat '%Y-%m-%d %T')
                 }
             }
         }
