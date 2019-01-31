@@ -19,11 +19,11 @@ $client_secret = ''
 $global_gsm_key = ''
 
 # Fill in the ID of the flexible asset ID in IT Glue. You create this asset with ITGlue-Webroot-CreateFlexibleAsset.ps1.
-$flexible_asset_type_id = 
+$flexible_asset_type_id = ''
 
 
 
-# ------------------------------- NO NEED THE BELOW CODE -------------------------------
+# ------------------------------- NO NEED EDIT THE BELOW CODE ----------------------------
 # These functions are used in the script
 function Format-WebrootData {
     param (
@@ -31,22 +31,47 @@ function Format-WebrootData {
         $webroot_data
     )
     process {
-        $DNSP = $false
-        $WSAT = $false
+        $DNSP = $false # DNS Protection
+        $SAT = $false # Security Awareness Training
+        $WEP = !$webroot_data.Deactivated # Webrood Endpoint protection. True if site is deactivated, i.e. false = active and true = inactive, thus invert it.
 
+        # Look for DNS Protection and Secruity Awareness Traning licenses
         foreach($type in $webroot_data.Modules.Type) {
             if($type -eq 'DNSP') { $DNSP = $true }
-            if($type -eq 'WSAT') { $WSAT = $true }
+            if($type -eq 'SAT') { $SAT = $true }
+        }
+
+
+        # Cannot get active endpoints if site is inactive
+        if($WEP) {
+            $endpoints_active = @()
+            $endpoints_inactive = @()
+
+            $pageNr = 1
+            # Get all endpoints with Webroot installed
+            $endpoints = Invoke-RestMethod -URI ('https://unityapi.webrootcloudav.com/service/api/console/gsm/{0}/sites/{1}/endpoints?pageSize=50&pageNr={2}' -f $global_gsm_key, $webroot_data.siteid, $pageNr) -Headers $headers
+            # Keep asking until there are not more endpoints
+            while($endpoints.TotalAvailable -ne 0) {
+                # All active (billed) endpoints
+                $endpoints_active += $endpoints.Endpoints | Where Deactivated -eq $false | Select-Object -ExpandProperty HostName
+                # All inactive (not billed) endpoints
+                $endpoints_inactive += $endpoints.Endpoints | Where Deactivated -eq $true | Select-Object -ExpandProperty HostName
+                # Get next set of data (if any)
+                $endpoints = Invoke-RestMethod -URI ('https://unityapi.webrootcloudav.com/service/api/console/gsm/{0}/sites/{1}/endpoints?pageSize=50&pageNr={2}' -f $global_gsm_key, $webroot_data.siteid, ++$pageNr) -Headers $headers
+            }
         }
 
         return [PSCustomObject]@{
-            SiteKey = $webroot_data.AccountKeyCode
-            Volume = $webroot_data.TotalEndpoints
-            Expiration = $webroot_data.EndDate
-            BillingCycle = $webroot_data.BillingCycle
-            BillingDate = $webroot_data.BillingDate
-            DNSP = $DNSP
-            WSAT = $WSAT
+            SiteKey              = $webroot_data.AccountKeyCode
+            Volume               = $webroot_data.TotalEndpoints
+            Expiration           = $webroot_data.EndDate
+            BillingCycle         = $webroot_data.BillingCycle
+            BillingDate          = $webroot_data.BillingDate
+            DNSP                 = $DNSP
+            SAT                  = $SAT
+            WEP                  = $WEP
+            endpoints_active     = $endpoints_active
+            endpoints_inactive   = $endpoints_inactive
         }
     }
 }
@@ -57,15 +82,25 @@ function Format-ITGlueData {
         $itglue_data
     )
     process {
+        # Get all configurations from current organisation, used for syncing active and inactive endpoints.
+        $itglue_configrations = Get-ITGlueConfigurations -organization_id $itglue_data.attributes.'organization-id' -page_size 1000 | Select-Object -ExpandProperty data
+
+        # If more than 1000s configurations
+        $page_number = 1
+        while($itglue_configrations.links.next) {
+            $itglue_configrations += Get-ITGlueConfigurations -organization_id $itglue_data.attributes.'organization-id' -page_size 1000 -page_number ++$page_number | Select-Object -ExpandProperty data
+        }
+
         return [PSCustomObject]@{
-            id = $itglue_data.id
-            SiteKey = $itglue_data.attributes.traits.'site-key'
+            flexible_asset_id                     = $itglue_data.id
+            SiteKey                               = $itglue_data.attributes.traits.'site-key'
             'log-in-to-gsm-portal'                = $itglue_data.attributes.traits.'log-in-to-gsm-portal'.values.id
             'configurations-with-webroot'         = $itglue_data.attributes.traits.'configurations-with-webroot'.values.id
             'webroot-endpoint-protection'         = $itglue_data.attributes.traits.'webroot-endpoint-protection'
             'webroot-dns-protection'              = $itglue_data.attributes.traits.'webroot-dns-protection'
             'webroot-security-awareness-training' = $itglue_data.attributes.traits.'webroot-security-awareness-training'
             'main-contact-at-customer'            = $itglue_data.attributes.traits.'main-contact-at-customer'.values.id
+            configurations                        = $itglue_configrations
         }
     }
 }
@@ -79,25 +114,42 @@ function Merge-ITGlueWebrootData {
         $formated_itglue_data
     )
     process {
+        # Cannot get active endpoints if site is inactive in Webroot, thus cannot match.
+        if($foramted_webroot_data.WEP){
+            $formated_active_endpoints = @()
+            $formated_inactive_endpoints = @()
+
+            foreach($config in $formated_itglue_data.configurations) {
+                # If endpoint is listed as active
+                if($foramted_webroot_data.endpoints_active -contains $config.attributes.name) {
+                    $formated_active_endpoints += $config.id
+                # If endpoint is listed as inactive
+                } elseif($foramted_webroot_data.endpoints_inactive -contains $config.attributes.name) {
+                    $formated_inactive_endpoints += $config.id
+                }
+            }
+        }
+
         return @{
             type = 'flexible_assets'
             attributes = @{
-                id = $formated_itglue_data.id
+                id = $formated_itglue_data.flexible_asset_id
                 traits = @{
                     # This is data kept from IT Glue.
-                    'site-key'                            = $formated_itglue_data.SiteKey
-                    'log-in-to-gsm-portal'                = $formated_itglue_data.'log-in-to-gsm-portal'
-                    'configurations-with-webroot'         = $formated_itglue_data.'configurations-with-webroot'
-                    'webroot-endpoint-protection'         = $formated_itglue_data.'webroot-endpoint-protection'
-                    'main-contact-at-customer'            = $formated_itglue_data.'main-contact-at-customer'
+                    'site-key'                             = $formated_itglue_data.SiteKey
+                    'log-in-to-gsm-portal'                 = $formated_itglue_data.'log-in-to-gsm-portal'
+                    'main-contact-at-customer'             = $formated_itglue_data.'main-contact-at-customer'
 
                     # This is data updated from Webroot.
-                    'volume'                              = $foramted_webroot_data.Volume
-                    'expiration-date'                     = $foramted_webroot_data.Expiration
-                    'webroot-dns-protection'              = $foramted_webroot_data.DNSP
-                    'webroot-security-awareness-training' = $foramted_webroot_data.WSAT
-                    'billing-cycle'                       = $foramted_webroot_data.BillingCycle
-                    'billing-date'                        = $foramted_webroot_data.BillingDate
+                    'volume-active-licenses'               = $foramted_webroot_data.Volume
+                    'active-configurations-with-webroot'   = $formated_active_endpoints
+                    'inactive-configurations-with-webroot' = $formated_inactive_endpoints
+                    'expiration-date'                      = $foramted_webroot_data.Expiration
+                    'webroot-endpoint-protection'          = $foramted_webroot_data.WEP
+                    'webroot-dns-protection'               = $foramted_webroot_data.DNSP
+                    'webroot-security-awareness-training'  = $foramted_webroot_data.SAT
+                    'billing-cycle'                        = $foramted_webroot_data.BillingCycle
+                    'billing-date'                         = $foramted_webroot_data.BillingDate
                 }
             }
         }
