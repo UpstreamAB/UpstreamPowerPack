@@ -1,3 +1,1 @@
-# Upstream Power Pack
-
-Releasenotes can be viewed here: https://en.upstream.se/powerpack
+Release notes and other resources can be viewed here: https://upstream.eu.itglue.com/DOC-1387150-967033369739445
