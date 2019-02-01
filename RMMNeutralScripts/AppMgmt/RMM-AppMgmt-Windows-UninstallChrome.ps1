@@ -1,17 +1,10 @@
-<#	
-	===========================================================================
-		Filename:     	RMM-AppMgmt-Windows-UninstallChrome.ps1
-		Latest update:  2019-01-19
-		Created by:   	powerpack@upstream.se
-		Organization: 	Upstream AB, https://en.upstream.se/powerpack
-	===========================================================================
-	.DESCRIPTION
-		Uses the Uninstall to remove Google Chrome from local machine silently. Reports back success or 
-		failure based on Add/Remove programs list.
-	
-	.CHANGELOG
-		First release.
-#>
+# Script name: RMM-AppMgmt-Windows-UninstallChrome.ps1
+# Script type: Powershell
+# Script description: Uninstalls Google Chrome on local machine.
+# Dependencies: Powershell 3.0
+# Script maintainer: powerpack@upstream.se
+# https://en.upstream.se/powerpack/
+# --------------------------------------------------------------------------------------------------------------------------------
 
 # What application do you want to uninstall? Use the name from the Add/Remove Control Panel.
 $AppName = "Google Chrome"
