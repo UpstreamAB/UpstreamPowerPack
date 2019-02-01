@@ -3,7 +3,7 @@ $data = @{
     attributes = @{
         icon = "crosshairs"
         description = "Webroot specific infromation"
-        name = "Webroot"
+        name = "Webroot clone"
         enabled = $true
     }
     relationships = @{
@@ -20,7 +20,6 @@ $data = @{
                         use_for_title = $false
                         expiration = $false
                         show_in_list = $true
-                        name_key = "site-key"
                     }
                 },
                 @{
@@ -34,21 +33,19 @@ $data = @{
                         use_for_title = $false
                         expiration = $false
                         show_in_list = $true
-                        name_key = "log-in-to-gsm-portal"
                     }
                 },
                 @{
                     type = "flexible_asset_fields"
                     attributes = @{
                         order = 3
-                        name = "Volume"
+                        name = "Volume (active licenses)"
                         kind = "Number"
                         hint = "How many licenses are in use?"
                         required = $false
                         use_for_title = $false
                         expiration = $false
                         show_in_list = $true
-                        name_key = "volume"
                         default_value = "0"
                     }
                 },
@@ -56,21 +53,32 @@ $data = @{
                     type = "flexible_asset_fields"
                     attributes = @{
                         order = 4
-                        name = "Configurations with Webroot"
+                        name = "Active configurations with Webroot"
                         kind = "Tag"
-                        hint = "Tag the configurations that Webroot is installed on."
                         tag_type = "Configurations"
                         required = $false
                         use_for_title = $false
                         expiration = $false
                         show_in_list = $true
-                        name_key = "configurations-with-webroot"
                     }
                 },
                 @{
                     type = "flexible_asset_fields"
                     attributes = @{
                         order = 5
+                        name = "Inactive configurations with Webroot"
+                        kind = "Tag"
+                        tag_type = "Configurations"
+                        required = $false
+                        use_for_title = $false
+                        expiration = $false
+                        show_in_list = $true
+                    }
+                },
+                @{
+                    type = "flexible_asset_fields"
+                    attributes = @{
+                        order = 6
                         name = "Expiration date"
                         kind = "Date"
                         hint = "When does the licenses expire?"
@@ -78,13 +86,12 @@ $data = @{
                         use_for_title = $false
                         expiration = $true
                         show_in_list = $true
-                        name_key = "expiration-date"
                     }
                 },
                 @{
                     type = "flexible_asset_fields"
                     attributes = @{
-                        order = 6
+                        order = 7
                         name = "Webroot Endpoint Protection"
                         kind = "Checkbox"
                         hint = "Is Webroot Endpoint Protection licensed?"
@@ -92,13 +99,12 @@ $data = @{
                         use_for_title = $false
                         expiration = $false
                         show_in_list = $true
-                        name_key = "webroot-endpoint-protection"
                     }
                 },
                 @{
                     type = "flexible_asset_fields"
                     attributes = @{
-                        order = 7
+                        order = 8
                         name = "Webroot DNS Protection"
                         kind = "Checkbox"
                         hint = "Is Webroot DNS Protection licensed?"
@@ -106,13 +112,12 @@ $data = @{
                         use_for_title = $false
                         expiration = $false
                         show_in_list = $true
-                        name_key = "webroot-dns-protection"
                     }
                 },
                 @{
                     type = "flexible_asset_fields"
                     attributes = @{
-                        order = 8
+                        order = 9
                         name = "Webroot Security Awareness Training"
                         kind = "Checkbox"
                         hint = "Is Webroot Security Awareness Training licensed?"
@@ -120,13 +125,12 @@ $data = @{
                         use_for_title = $false
                         expiration = $false
                         show_in_list = $true
-                        name_key = "webroot-security-awareness-training"
                     }
                 },
                 @{
                     type = "flexible_asset_fields"
                     attributes = @{
-                        order = 9
+                        order = 10
                         name = "Main contact at customer"
                         kind = "Tag"
                         hint = "Who is our main contact (if any) at the customer for any Webroot questions?"
@@ -135,33 +139,42 @@ $data = @{
                         use_for_title = $false
                         expiration = $false
                         show_in_list = $true
-                        name_key = "main-contact-at-customer"
                     }
                 },
                 @{
                     type = "flexible_asset_fields"
                     attributes = @{
-                        order = 12
+                        order = 11
                         name = "Billing Cycle"
                         kind = "Text"
                         required = $false
                         use_for_title = $false
                         expiration = $false
                         show_in_list = $false
-                        name_key = "billing-cycle"
-                    }
-                },
+                        }
+                    },
                 @{
                     type = "flexible_asset_fields"
                     attributes = @{
-                        order = 13
+                        order = 12
                         name = "Billing Date"
                         kind = "Text"
                         required = $false
                         use_for_title = $false
                         expiration = $false
                         show_in_list = $false
-                        name_key = "billing-date"
+                        }
+                    },
+                @{
+                    type = "flexible_asset_fields"
+                    attributes = @{
+                        order = 13
+                        name = "Last update"
+                        kind = "Text"
+                        required = $false
+                        use_for_title = $false
+                        expiration = $false
+                        show_in_list = $true
                         default_value = ""
                     }
                 }
@@ -169,5 +182,4 @@ $data = @{
         }
     }
 }
-
 New-ITGlueFlexibleAssetTypes -data $data
