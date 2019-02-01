@@ -1,7 +1,7 @@
 # Script name: RMM-Audit-Win10-GetAzureUserName.ps1
 # Script type: PowerShell
 # Script description: Audits the Windows 10 machine for Azure AD user name.
-# Dependencies: Windows 10
+# Dependencies: Powershell 3.0, Windows 10
 # Script maintainer: powerpack@upstream.se
 # https://en.upstream.se/powerpack
 
