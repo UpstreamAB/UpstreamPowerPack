@@ -1,1 +1,1 @@
-Placeholder for deployment Powerhell scripts to be used with Webroot.
+Placeholder for Webroot related content.
