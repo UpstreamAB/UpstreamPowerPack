@@ -108,23 +108,23 @@ function Format-ITGlueData {
 function Merge-ITGlueWebrootData {
     param (
         [Parameter(Mandatory=$true, ValueFromPipeline=$true)]
-        $foramted_webroot_data,
+        $formated_webroot_data,
 
         [Parameter(Mandatory=$true)]
         $formated_itglue_data
     )
     process {
         # Cannot get active endpoints if site is inactive in Webroot, thus cannot match.
-        if($foramted_webroot_data.WEP){
+        if($formated_webroot_data.WEP){
             $formated_active_endpoints = @()
             $formated_inactive_endpoints = @()
 
             foreach($config in $formated_itglue_data.configurations) {
                 # If endpoint is listed as active
-                if($foramted_webroot_data.endpoints_active -contains $config.attributes.name) {
+                if($formated_webroot_data.endpoints_active -contains $config.attributes.name) {
                     $formated_active_endpoints += $config.id
                 # If endpoint is listed as inactive
-                } elseif($foramted_webroot_data.endpoints_inactive -contains $config.attributes.name) {
+                } elseif($formated_webroot_data.endpoints_inactive -contains $config.attributes.name) {
                     $formated_inactive_endpoints += $config.id
                 }
             }
@@ -141,15 +141,15 @@ function Merge-ITGlueWebrootData {
                     'main-contact-at-customer'             = $formated_itglue_data.'main-contact-at-customer'
 
                     # This is data updated from Webroot.
-                    'volume-active-licenses'               = $foramted_webroot_data.Volume
+                    'volume-active-licenses'               = $formated_webroot_data.Volume
                     'active-configurations-with-webroot'   = $formated_active_endpoints
                     'inactive-configurations-with-webroot' = $formated_inactive_endpoints
-                    'expiration-date'                      = $foramted_webroot_data.Expiration
-                    'webroot-endpoint-protection'          = $foramted_webroot_data.WEP
-                    'webroot-dns-protection'               = $foramted_webroot_data.DNSP
-                    'webroot-security-awareness-training'  = $foramted_webroot_data.SAT
-                    'billing-cycle'                        = $foramted_webroot_data.BillingCycle
-                    'billing-date'                         = $foramted_webroot_data.BillingDate
+                    'expiration-date'                      = $formated_webroot_data.Expiration
+                    'webroot-endpoint-protection'          = $formated_webroot_data.WEP
+                    'webroot-dns-protection'               = $formated_webroot_data.DNSP
+                    'webroot-security-awareness-training'  = $formated_webroot_data.SAT
+                    'billing-cycle'                        = $formated_webroot_data.BillingCycle
+                    'billing-date'                         = $formated_webroot_data.BillingDate
 
                     # Update time logging
                     'last-update'                          = $(Get-date -UFormat '%Y-%m-%d %T')
