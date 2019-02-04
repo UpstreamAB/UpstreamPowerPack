@@ -21,7 +21,7 @@ $data = @{
                     type = "flexible_asset_fields"
                     attributes = @{
                         order = 1
-                        name = "Site Key"
+                        name = "Keycode"
                         kind = "Text"
                         hint = "Enter your GSM site here. This will be the"
                         required = $true
@@ -184,6 +184,18 @@ $data = @{
                         expiration = $false
                         show_in_list = $true
                         default_value = ""
+                    }
+                },
+                @{
+                    type = "flexible_asset_fields"
+                    attributes = @{
+                        order = 14
+                        name = "This automated documentation is powered by Upstream Power Pack"
+                        kind = "Header"
+                        required = $false
+                        use_for_title = $false
+                        expiration = $false
+                        show_in_list = $false
                     }
                 }
             )
