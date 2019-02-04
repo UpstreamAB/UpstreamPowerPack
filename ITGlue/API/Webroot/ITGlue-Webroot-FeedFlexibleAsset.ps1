@@ -62,7 +62,7 @@ function Format-WebrootData {
         }
 
         return [PSCustomObject]@{
-            SiteKey              = $webroot_data.AccountKeyCode
+            Keycode              = $webroot_data.AccountKeyCode
             Volume               = $webroot_data.TotalEndpoints
             Expiration           = $webroot_data.EndDate
             BillingCycle         = $webroot_data.BillingCycle
@@ -93,7 +93,7 @@ function Format-ITGlueData {
 
         return [PSCustomObject]@{
             flexible_asset_id                     = $itglue_data.id
-            SiteKey                               = $itglue_data.attributes.traits.'site-key'
+            Keycode                               = $itglue_data.attributes.traits.'keycode'
             'log-in-to-gsm-portal'                = $itglue_data.attributes.traits.'log-in-to-gsm-portal'.values.id
             'configurations-with-webroot'         = $itglue_data.attributes.traits.'configurations-with-webroot'.values.id
             'webroot-endpoint-protection'         = $itglue_data.attributes.traits.'webroot-endpoint-protection'
@@ -136,7 +136,7 @@ function Merge-ITGlueWebrootData {
                 id = $formated_itglue_data.flexible_asset_id
                 traits = @{
                     # This is data kept from IT Glue.
-                    'site-key'                             = $formated_itglue_data.SiteKey
+                    'keycode'                              = $formated_itglue_data.Keycode
                     'log-in-to-gsm-portal'                 = $formated_itglue_data.'log-in-to-gsm-portal'
                     'main-contact-at-customer'             = $formated_itglue_data.'main-contact-at-customer'
 
@@ -201,7 +201,7 @@ $data = @()
 foreach($org in $organizations) {
     # Match GSM keys and pass the releveant organization to Merge-ITGlueWebrootData.
     # Merge-ITGlueWebrootData will replace all data in IT Glue with what we get from Webroot.
-    $data += $sites | Where-Object 'SiteKey' -eq $org.SiteKey.Replace('-', '') | Merge-ITGlueWebrootData -formated_itglue_data $org
+    $data += $sites | Where-Object 'Keycode' -eq $org.Keycode.Replace('-', '') | Merge-ITGlueWebrootData -formated_itglue_data $org
 }
 
 # Upload all data to IT Glue.
