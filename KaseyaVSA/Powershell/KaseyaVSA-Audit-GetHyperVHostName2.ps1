@@ -6,6 +6,6 @@
 # Script maintainer: powerpack@upstream.se
 # https://en.upstream.se/powerpack"
 
-$HyperVHostName = (get-item "HKLM:\SOFTWARE\Microsoft\Virtual Machine\Guest\Parameters").GetValue("HostName")
+$HyperVHostName = (get-item "HKLM:\SOFTWARE\Microsoft\Virtual Machine\Guest\Parameters").GetValue("PhysicalHostName")
 # Let's write the Azure Tenant User Name to the concole for Kaseya VSA to pick up as a variable.
 Write-Output $HyperVHostName
