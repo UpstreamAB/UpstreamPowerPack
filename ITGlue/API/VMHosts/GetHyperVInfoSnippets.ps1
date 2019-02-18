@@ -1,7 +1,7 @@
 # Saker att använda i IT Glue integartionen
 
 # Senast updaterad dag & datum
-Get-Date -Date DateTime
+Get-Date -Format "dd-MMM-yyyy HH:mm"
 
 # Visa VM host supportade versioner
 Get-VMHostSupportedVersion
