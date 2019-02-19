@@ -3,7 +3,7 @@ In order to successfully execute the Agent Procedures in "Extended Audit Procedu
 Note from the coach: We @Upstream use the prefix "CF" before any created Custom Field. It's a good rule giving the list of Custom Fields a clear and crisp naming standard.
 
 Name					                            Type	        Notes
-CF Service Offering			                  String
+CF Service Offering			                  String	
 CF OS Install Date			                  String
 CF OS Language				                    String
 CF SMART Status				                    String
