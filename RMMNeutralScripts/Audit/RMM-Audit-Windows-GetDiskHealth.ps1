@@ -1,2 +1,2 @@
 $DiskHealth = Get-PhysicalDIsk |  Select-Object HealthStatus
-Write-Console = $DiskHealth
+Write-Output $DiskHealth
