@@ -11,7 +11,7 @@ $data = @{
     attributes = @{
         icon = "crosshairs"
         description = "Webroot specific infromation"
-        name = "Webroot clone"
+        name = "Webroot"
         enabled = $true
     }
     relationships = @{
