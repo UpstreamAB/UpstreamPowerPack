@@ -1,6 +1,7 @@
 # Script name: KaseyaVSA-Audit-GetAzureTenantName.ps1
 # Related Kaseya Agent Procedure: "Audit - Windows 10 - Custom Field - Azure AD Info"
 # Script description: Audit the Azure tenant name on a Windows 10 computer if present.
+# Upload this Powershell script to your Kaseya Agent Procedures folder "VSASharedFiles\UpstreamPowerPack\Powershell".
 # Supported OS: Windows 10
 # Script maintainer: powerpack@upstream.se
 # https://en.upstream.se/powerpack
