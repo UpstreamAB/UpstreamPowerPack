@@ -1,1 +1,1 @@
-Placeholder for Powershell scripts specifically designed to be executed with Kaseya VSA.
+Placeholder for Powershell scripts specifically designed to be executed with Kaseya VSA. Upload all of the Powershell scripts in this foler to your Kaseya VSA under "VSASharedFiles\UpstreamPowerPack\Powershell".
