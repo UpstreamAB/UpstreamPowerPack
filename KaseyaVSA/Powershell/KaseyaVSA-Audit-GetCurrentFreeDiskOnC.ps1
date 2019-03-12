@@ -1,6 +1,7 @@
 # Script name: KaseyaVSA-Audit-GetCurrentFreeDiskOnC.ps1
 # Related Kaseya Agent Procedure: "Audit - Windows - Get Current Free Disk On C"
-# Script description: Audit the Azure tenant name on a Windows 10 computer
+# Script description: Get the free disk on C in GB.
+# Upload this Powershell script to your Kaseya Agent Procedures folder "VSASharedFiles\UpstreamPowerPack\Powershell".
 # Dependencies: Existing registry values
 # Supported OS: Windows
 # Script maintainer: powerpack@upstream.se
