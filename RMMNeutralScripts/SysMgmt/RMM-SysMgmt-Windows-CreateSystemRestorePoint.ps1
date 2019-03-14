@@ -1,9 +1,7 @@
-# Script name: RMM-SysMgmt-Windows-DiskHealth.ps1
+# Script name: RMM-SysMgmt-Windows-CreateSystemRestorePoint.ps1
 # Script type: Powershell
-# Script description: .
-# Dependencies: Powershell 3.0
+# Script description: Creates system restore point
 # Script maintainer: powerpack@upstream.se
 # https://en.upstream.se/powerpack/
 # --------------------------------------------------------------------------------------------------------------------------------
-$DiskHealth = Get-PhysicalDIsk HealthStatus
-Write-Output $DiskHealth
+Checkpoint-Computer -Description UpstreamPowerPackRecoveryPoint
