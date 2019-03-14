@@ -5,3 +5,5 @@
 # Script maintainer: powerpack@upstream.se
 # https://en.upstream.se/powerpack/
 # --------------------------------------------------------------------------------------------------------------------------------
+$DiskHealth = Get-PhysicalDIsk HealthStatus
+Write-Output $DiskHealth
