@@ -143,7 +143,7 @@ $vmBiosSettingsTableData = (Get-VMBios * -ErrorAction SilentlyContinue).foreach{
         <td>{1}</td>
         <td>{2}</td>
         <td>Gen 1</td>
-    </tr>' -f $_.VMName, ($_.StartupOrder | Out-String).Replace([Environment]::NewLine, '<br>').TrimEnd('<br>'), $_.NumLockEnabled}
+    </tr>' -f $_.VMName, ($_.StartupOrder | Out-String).Replace([Environment]::NewLine, ', ').TrimEnd(', '), $_.NumLockEnabled}
 
 # Generation 2
 $vmBiosSettingsTableData += (Get-VMFirmware * -ErrorAction SilentlyContinue).foreach{
@@ -152,7 +152,7 @@ $vmBiosSettingsTableData += (Get-VMFirmware * -ErrorAction SilentlyContinue).for
         <td>{1}</td>
         <td>{2}</td>
         <td>Gen 2</td>
-    </tr>' -f $_.VMName, ($_.BootOrder.BootType | Out-String).Replace([Environment]::NewLine, '<br>').TrimEnd('<br>'), 'N/A'}
+    </tr>' -f $_.VMName, ($_.BootOrder.BootType | Out-String).Replace([Environment]::NewLine, ', ').TrimEnd(', '), 'N/A'}
 
 $vmBIOSSettingsHTML = '<div>
     <table>
