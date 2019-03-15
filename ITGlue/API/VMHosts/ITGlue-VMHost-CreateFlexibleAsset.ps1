@@ -205,7 +205,35 @@ $data = @{
         @{
           type = "flexible_asset_fields"
           Attributes = @{
-            order = 15
+            order = 16
+            Name = "VM guest snapshot information"
+            kind = "Textbox"
+            hint = "All snapshots found on the host"
+            required = $false
+            use_for_title = $false
+            expiration = $false
+            show_in_list = $false
+            default_value = ""
+          }
+        },
+        @{
+          type = "flexible_asset_fields"
+          Attributes = @{
+            order = 16
+            Name = "VM guest snapshot information"
+            kind = "Textbox"
+            hint = "All snapshots found on the host"
+            required = $false
+            use_for_title = $false
+            expiration = $false
+            show_in_list = $false
+            default_value = ""
+          }
+        },
+        @{
+          type = "flexible_asset_fields"
+          Attributes = @{
+            order = 17
             Name = "VM guests BIOS setting"
             kind = "Textbox"
             hint = "Specifies the BIOS boot settings in each each discovered guest on this VM host."
@@ -219,7 +247,7 @@ $data = @{
         @{
           type = "flexible_asset_fields"
           Attributes = @{
-            order = 16
+            order = 18
             Name = "General guest information"
             kind = "Textbox"
             hint = "Specifies number of vCPUs RAM and other infromation."
@@ -233,7 +261,7 @@ $data = @{
         @{
           type = "flexible_asset_fields"
           Attributes = @{
-            order = 17
+            order = 19
             Name = "Virtual switch name and IP"
             kind = "Textbox"
             required = $false
@@ -246,7 +274,7 @@ $data = @{
         @{
           type = "flexible_asset_fields"
           Attributes = @{
-            order = 18
+            order = 20
             Name = "This automated documentation is powered by Upstream Power Pack"
             kind = "Header"
             required = $false

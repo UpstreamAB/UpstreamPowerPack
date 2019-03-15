@@ -49,7 +49,13 @@ $diskDataHTML = '<div>
             {0}
         </tbody>
     </table>
-</div>' -f ((Get-PSDrive -PSProvider FileSystem).foreach{'<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td></tr>' -f $_.Root, [math]::round(($_.free+$_.used)/1GB), [math]::round($_.used/1GB), [math]::round($_.free/1GB)} | Out-String)
+</div>' -f ((Get-PSDrive -PSProvider FileSystem).foreach{
+    '<tr>
+        <td>{0}</td>
+        <td>{1}</td>
+        <td>{2}</td>
+        <td>{3}</td>
+    </tr>' -f $_.Root, [math]::round(($_.free+$_.used)/1GB), [math]::round($_.used/1GB), [math]::round($_.free/1GB)} | Out-String)
 
 # Support guest OS versions
 $supportedVersionsHTML = '<div>
@@ -63,7 +69,12 @@ $supportedVersionsHTML = '<div>
             {0}
         </tbody>
     </table>
-</div>' -f ((Get-VMHostSupportedVersion).foreach{'<tr><td>{0}</td><td>{1}</td><td>{2}</td></tr>' -f $_.Name, $_.Version, $_.IsDefault} | Out-String)
+</div>' -f ((Get-VMHostSupportedVersion).foreach{
+    '<tr>
+        <td>{0}</td>
+        <td>{1}</td>
+        <td>{2}</td>
+    </tr>' -f $_.Name, $_.Version, $_.IsDefault} | Out-String)
 
 # Virtual swtiches
 $virtualSwitchsHTML = '<div>
@@ -77,7 +88,12 @@ $virtualSwitchsHTML = '<div>
             {0}
         </tbody>
     </table>
-</div>' -f ((Get-VMSwitch).foreach{'<tr><td>{0}</td><td>{1}</td><td>{2}</td></tr>' -f $_.Name, $_.SwitchType, $_.NetAdapterInterfaceDescription} | Out-String)
+</div>' -f ((Get-VMSwitch).foreach{
+    '<tr>
+        <td>{0}</td>
+        <td>{1}</td>
+        <td>{2}</td>
+    </tr>' -f $_.Name, $_.SwitchType, $_.NetAdapterInterfaceDescription} | Out-String)
 
 # Virutal machines' disk file locations
 $virtualMachinePathsHTML = '<div>
@@ -90,13 +106,54 @@ $virtualMachinePathsHTML = '<div>
             {0}
         </tbody>
     </table>
-</div>' -f ($VMs.foreach{'<tr><td>{0}</td><td>{1}</td></tr>' -f $_.Name, ((Get-VHD -id $_.id).path | Out-String).Replace([Environment]::NewLine, '<br>').TrimEnd('<br>')} | Out-String)
+</div>' -f ($VMs.foreach{
+    '<tr>
+        <td>{0}</td>
+        <td>{1}</td>
+    </tr>' -f $_.Name, ((Get-VHD -id $_.id).path | Out-String).Replace([Environment]::NewLine, '<br>').TrimEnd('<br>')} | Out-String)
+
+# Snapshot data
+$vmSnapshotHTML = '<div>
+    <table>
+        <tbody>
+            <tr>
+                <td>VMName</td>
+                <td>Name</td>
+                <td>Snapshot type</td>
+                <td>Creation time</td>
+                <td>Parent snapshot name</td>
+            </tr>
+            {0}
+        </tbody>
+    </table>
+</div>' -f ((Get-VMSnapshot -VMName * | Sort VMName, CreationTime).foreach{
+    '<tr>
+    <td>{0}</td>
+    <td>{1}</td>
+    <td>{2}</td>
+    <td>{3}</td>
+    <td>{4}</td>
+    </tr>' -f $_.VMName, $_.Name, $_.SnapshotType, $_.CreationTime, $_.ParentSnapshotName} | Out-String)
 
 # Virutal machines' bios settings
 # Generation 1
-$vmBiosSettingsTableData = (Get-VMBios * -ErrorAction SilentlyContinue).foreach{'<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>Gen 1</td></tr>' -f $_.VMName, ($_.StartupOrder | Out-String).Replace([Environment]::NewLine, '<br>').TrimEnd('<br>'), $_.NumLockEnabled}
+$vmBiosSettingsTableData = (Get-VMBios * -ErrorAction SilentlyContinue).foreach{
+    '<tr>
+        <td>{0}</td>
+        <td>{1}</td>
+        <td>{2}</td>
+        <td>Gen 1</td>
+    </tr>' -f $_.VMName, ($_.StartupOrder | Out-String).Replace([Environment]::NewLine, '<br>').TrimEnd('<br>'), $_.NumLockEnabled}
+
 # Generation 2
-$vmBiosSettingsTableData += (Get-VMFirmware * -ErrorAction SilentlyContinue).foreach{'<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>Gen 2</td></tr>' -f $_.VMName, ($_.BootOrder.BootType | Out-String).Replace([Environment]::NewLine, '<br>').TrimEnd('<br>'), 'N/A'}
+$vmBiosSettingsTableData += (Get-VMFirmware * -ErrorAction SilentlyContinue).foreach{
+    '<tr>
+        <td>{0}</td>
+        <td>{1}</td>
+        <td>{2}</td>
+        <td>Gen 2</td>
+    </tr>' -f $_.VMName, ($_.BootOrder.BootType | Out-String).Replace([Environment]::NewLine, '<br>').TrimEnd('<br>'), 'N/A'}
+
 $vmBIOSSettingsHTML = '<div>
     <table>
         <tbody>
@@ -125,7 +182,14 @@ $guestInformationHTML = '<div>
             {0}
         </tbody>
     </table>
-</div>' -f ($VMs.foreach{'<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td></tr>' -f $_.VMName, $_.AutomaticStartAction, [Math]::Round($_.Memoryassigned/1GB), $_.ProcessorCount, [math]::round($_.FileSize/1GB)} | Out-String)
+</div>' -f ($VMs.foreach{
+    '<tr>
+        <td>{0}</td>
+        <td>{1}</td>
+        <td>{2}</td>
+        <td>{3}</td>
+        <td>{4}</td>
+    </tr>' -f $_.VMName, $_.AutomaticStartAction, [Math]::Round($_.Memoryassigned/1GB), $_.ProcessorCount, [math]::round($_.FileSize/1GB)} | Out-String)
 
 # Guest NICs and IPs
 $guestNICsIPs = '<div>
@@ -139,7 +203,12 @@ $guestNICsIPs = '<div>
             {0}
         </tbody>
     </table>
-</div>' -f ((Get-VMNetworkAdapter * | Sort 'VMName').foreach{'<tr><td>{0}</td><td>{1}</td><td>{2}</td></tr>' -f $_.vmname, $_.switchname, ($_.ipaddresses | Out-String).Replace([Environment]::NewLine, '<br>').TrimEnd('<br>')} | Out-String)
+</div>' -f ((Get-VMNetworkAdapter * | Sort 'VMName').foreach{
+    '<tr>
+        <td>{0}</td>
+        <td>{1}</td>
+        <td>{2}</td>
+    </tr>' -f $_.vmname, $_.switchname, ($_.ipaddresses | Out-String).Replace([Environment]::NewLine, '<br>').TrimEnd('<br>')} | Out-String)
 
 # IT Glue configration ID based on the name of the virtual machine guests
 $itgConfigs = (Get-ITGlueConfigurations -organization_id $organization_id).data.where{$VMs.Name -Contains $_.attributes.name}.id
@@ -173,6 +242,8 @@ $data = @{
             'current-number-of-guests-on-this-vm-host' = ($VMs | measure).Count
             # VMs' name and VHD paths
             'vm-guests-name-s-and-virtual-machine-path-s' = $virtualMachinePathsHTML
+            #Snapshop data
+            'vm-guest-snapshot-information' = $vmSnapshotHTML
             # VMs' bios settings
             'vm-guests-bios-setting' = $vmBIOSSettingsHTML
             # General VM data (start type, cpu, ram...)
