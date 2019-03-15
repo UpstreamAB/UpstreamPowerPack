@@ -150,36 +150,36 @@ $data = @{
         id = $flexible_asset_id
         traits = @{
             # Visible name
-            'vm-host-name'                   = $flexibleAsset.data.attributes.traits.'vm-host-name'
+            'vm-host-name' = $flexibleAsset.data.attributes.traits.'vm-host-name'
             # Tagged asset
-            'vm-host-it-glue-configuration'  = $flexibleAsset.data.attributes.traits.'vm-host-it-glue-configuration'.Values.id
+            'vm-host-it-glue-configuration' = $flexibleAsset.data.attributes.traits.'vm-host-it-glue-configuration'.Values.id
+            # Last updated
+            'documentation-automation-script-last-queried-this-vm-host-on' = Get-Date -Format 'yyyy-MM-dd HH:mm'
             # Host platform
-            'virtualization-platform'        = 'Hyper-V'
+            'virtualization-platform' = 'Hyper-V'
             # Supported OS versions
-            'vm-host-supported-version'      = $supportedVersionsHTML
+            'vm-host-supported-version' = $supportedVersionsHTML
             # Host CPU data
-            'cpu'                            = Get-VMHost | Select -ExpandProperty LogicalProcessorCount
+            'cpu' = Get-VMHost | Select -ExpandProperty LogicalProcessorCount
             # Host disk data
-            'disk-information'               = $diskDataHTML
+            'disk-information' = $diskDataHTML
             # Host RAM data
-            'ram'                            = ((Get-CimInstance CIM_PhysicalMemory).capacity | Measure -Sum).Sum/1GB
+            'ram' = ((Get-CimInstance CIM_PhysicalMemory).capacity | Measure -Sum).Sum/1GB
             # Virutal network cards (vNIC)
-            'virtual-switches'               = $virtualSwitchsHTML
+            'virtual-switches' = $virtualSwitchsHTML
             # Custom notes
-            'additional-notes'               = $flexibleAsset.data.attributes.traits.'additional-notes'
-            # VMs' bios settings
-            'vm-guests-bios-setting'         = $vmBIOSSettingsHTML
-            # General VM data (start type, cpu, ram...)
-            'general-guest-information'      = $guestInformationHTML
-            # NIC and IP assigned to each VM
-            'virtual-switch-name-and-ip'     = $guestNICsIPs
-
+            'additional-notes' = $flexibleAsset.data.attributes.traits.'additional-notes'
             # Number of VMs on host
             'current-number-of-guests-on-this-vm-host' = ($VMs | measure).Count
             # VMs' name and VHD paths
             'vm-guests-name-s-and-virtual-machine-path-s' = $virtualMachinePathsHTML
-            # Last updated
-            'documentation-automation-script-last-queried-this-vm-host-on' = Get-Date -Format 'dd-MMM-yyyy HH:mm'
+            # VMs' bios settings
+            'vm-guests-bios-setting' = $vmBIOSSettingsHTML
+            # General VM data (start type, cpu, ram...)
+            'general-guest-information' = $guestInformationHTML
+            # NIC and IP assigned to each VM
+            'virtual-switch-name-and-ip' = $guestNICsIPs
+
         }
     }
 }
