@@ -183,13 +183,17 @@ $guestInformationHTML = '<div>
         </tbody>
     </table>
 </div>' -f ($VMs.foreach{
+    $diskSize = 0
+    ($_.HardDrives | Get-VHD).FileSize.foreach{$diskSize += $_}
+    $diskSize = [Math]::Round($diskSize/1GB)
+
     '<tr>
         <td>{0}</td>
         <td>{1}</td>
         <td>{2}</td>
         <td>{3}</td>
         <td>{4}</td>
-    </tr>' -f $_.VMName, $_.AutomaticStartAction, [Math]::Round($_.Memoryassigned/1GB), $_.ProcessorCount, [math]::round($_.FileSize/1GB)} | Out-String)
+    </tr>' -f $_.VMName, $_.AutomaticStartAction, [Math]::Round($_.MemoryStartup/1GB), $_.ProcessorCount, $diskSize} | Out-String)
 
 # Guest NICs and IPs
 $guestNICsIPs = '<div>
