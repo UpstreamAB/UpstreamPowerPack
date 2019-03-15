@@ -11,21 +11,29 @@ param(
     $data_center
 )
 
+# If any parameter is missing
+# Cannot use mandatory because it would break setting parameters inside the script.
 if(!$flexible_asset_id -or !$api_key -or !$data_center) {
     return "One or more parameter(s) is missing. This script will not continue."
 }
 
+# Try to import the IT Glue wrapper module
 try{
     Import-Module ITGlueAPI -ErrorAction Stop
 } catch [Exception]{
     Write-Output "ITGlueAPI module missing. This script will not continue."
 }
 
+# Set API key for this sessions
 Add-ITGlueAPIKey -api_key $api_key
+# Set data center for this sessions
 Add-ITGlueBaseURI -data_center $data_center
 
+# Flexible asset to update
 $flexibleAsset = Get-ITGlueFlexibleAssets -id $flexible_asset_id
+# The asset's organization id
 $organization_id = $flexibleAsset.data.attributes.'organization-id'
+# All VMs on the host (with some data)
 $VMs = Get-VM
 
 # Hyper-V host's disk information
@@ -141,25 +149,36 @@ $data = @{
     attributes = @{
         id = $flexible_asset_id
         traits = @{
-            'disk-information'                  = $diskDataHTML
-            'vm-host-supported-version'         = $supportedVersionsHTML
-            'virtual-switches'                  = $virtualSwitchsHTML
-            'vm-guests-virtual-machine-path-s'  = $virtualMachinePathsHTML
-            'vm-guests-bios-setting'            = $vmBIOSSettingsHTML
-            'general-guest-information'         = $guestInformationHTML
-            'virtual-switch-name-and-ip'        = $guestNICsIPs
+            # Visible name
+            'vm-host-name'                   = $flexibleAsset.data.attributes.traits.'vm-host-name'
+            # Tagged asset
+            'vm-host-it-glue-configuration'  = $flexibleAsset.data.attributes.traits.'vm-host-it-glue-configuration'.Values.id
+            # Host platform
+            'virtualization-platform'        = 'Hyper-V'
+            # Supported OS versions
+            'vm-host-supported-version'      = $supportedVersionsHTML
+            # Host CPU data
+            'cpu'                            = Get-VMHost | Select -ExpandProperty LogicalProcessorCount
+            # Host disk data
+            'disk-information'               = $diskDataHTML
+            # Host RAM data
+            'ram'                            = ((Get-CimInstance CIM_PhysicalMemory).capacity | Measure -Sum).Sum/1GB
+            # Virutal network cards (vNIC)
+            'virtual-switches'               = $virtualSwitchsHTML
+            # Custom notes
+            'additional-notes'               = $flexibleAsset.data.attributes.traits.'additional-notes'
+            # Number of VMs on host
+            'current-guests-on-this-vm-host' = ($VMs | measure).Count
+            # VMs' bios settings
+            'vm-guests-bios-setting'         = $vmBIOSSettingsHTML
+            # General VM data (start type, cpu, ram...)
+            'general-guest-information'      = $guestInformationHTML
+            # NIC and IP assigned to each VM
+            'virtual-switch-name-and-ip'     = $guestNICsIPs
 
-            'vm-host-it-glue-configuration'     = $flexibleAsset.data.attributes.traits.'vm-host-it-glue-configuration'.Values.id
-
-            'vm-host-name'                      = $flexibleAsset.data.attributes.traits.'vm-host-name'
-            'additional-notes'                  = $flexibleAsset.data.attributes.traits.'additional-notes'
-            'associated-it-glue-configurations' = $itgConfigs
-
-            'virtualization-platform'           = 'Hyper-V'
-            'cpu'                               = Get-VMHost | Select -ExpandProperty LogicalProcessorCount
-            'ram'                               = ((Get-CimInstance CIM_PhysicalMemory).capacity | Measure -Sum).Sum/1GB
-            'current-guests-on-this-vm-host'    = ($VMs | measure).Count
-
+            # VMs' name and VHD paths
+            'vm-guests-name-s-and-virtual-machine-path-s' = $virtualMachinePathsHTML
+            # Last updated
             'documentation-automation-script-last-queried-this-vm-host-on' = Get-Date -Format 'dd-MMM-yyyy HH:mm'
         }
     }
