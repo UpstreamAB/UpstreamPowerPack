@@ -2,7 +2,7 @@
 <ScriptExport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.kaseya.com/vsa/2008/12/Scripting">
   <Folder name="Extended Audit (Custom Fields Required) 2019-03-15" treePres="3">
     <Folder name="Linux" treePres="3">
-      <Procedure name="Custom Field - Audit - Linux Generic - System - Get Linux Kernel Version" treePres="3" id="1288353127" folderId="496405472185651" treeFullPath="Upstream Power Pack.Extended Audit (Custom Fields Required) 2019-02-28.Linux">
+      <Procedure name="Custom Field - Audit - Linux Generic - System - Get Linux Kernel Version" treePres="3" id="1288353127" folderId="496405472185651" treeFullPath="Upstream Power Pack.Extended Audit (Custom Fields Required) 2019-03-15.Linux">
         <Body description="">
           <Statement description="Create a custom field named &quot;CF Linux Kernel&quot; and update step 5 before running." name="ExecuteShellCommand" continueOnFail="false" osType="Linux">
             <Parameter xsi:type="StringParameter" name="Command" value="uname -r  &gt;&gt; #vAgentConfiguration.agentTempDir#/linux-kernel.result" />
@@ -28,7 +28,7 @@
       </Procedure>
     </Folder>
     <Folder name="Mac" treePres="3">
-      <Procedure name="Custom Field - Audit - Mac OS X - Get Current WIFI Signal Strength" treePres="3" id="2126661294" folderId="138017608801842" treeFullPath="Upstream Power Pack.Extended Audit (Custom Fields Required) 2019-02-28.Mac">
+      <Procedure name="Custom Field - Audit - Mac OS X - Get Current WIFI Signal Strength" treePres="3" id="2126661294" folderId="138017608801842" treeFullPath="Upstream Power Pack.Extended Audit (Custom Fields Required) 2019-03-15.Mac">
         <Body description="Description: Detects current disk temperature and writes the results to a custom field and in the the script log.&#xA;&#xA;Kaseya customer value: Procedure to secure clients from unwanted downtime and data loss.&#xA;&#xA;End user value: Limiting the risks for unwanted downtime and data loss.&#xA;&#xA;Dependencies: Windows OS. Make sure you have created &quot;CF Disk Temp&quot; (string) under &quot;Audit, Custom Fields&quot;.&#xA;&#xA;Usage: Run at any given time.&#xA;&#xA;Report options: Procedure Log, content: &quot;GetDiskTemp:*&quot; and Aggregate Table, Diskt Temp.&#xA;&#xA;Script maintainer: ronny [at] upstream.se&#xA;&#xA;Support: This script is delivered &quot;as is&quot;. No support included.">
           <Statement name="ExecuteShellCommand" continueOnFail="false" osType="MacOS">
             <Parameter xsi:type="StringParameter" name="Command" value="/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | grep -w SSID | cut -c18- &gt;&gt;#vAgentConfiguration.agentTempDir#/current_wifi_ssid.result" />
@@ -69,7 +69,7 @@
           </Statement>
         </Body>
       </Procedure>
-      <Procedure name="Custom Field - Audit - Mac OS X - System - Get Kernel Version" treePres="3" id="1168866076" folderId="138017608801842" treeFullPath="Upstream Power Pack.Extended Audit (Custom Fields Required) 2019-02-28.Mac">
+      <Procedure name="Custom Field - Audit - Mac OS X - System - Get Kernel Version" treePres="3" id="1168866076" folderId="138017608801842" treeFullPath="Upstream Power Pack.Extended Audit (Custom Fields Required) 2019-03-15.Mac">
         <Body description="">
           <Statement description="Create a custom field named &quot;CF OS X Kernel&quot; and update step 5 before running." name="ExecuteShellCommand" continueOnFail="false" osType="MacOS">
             <Parameter xsi:type="StringParameter" name="Command" value="uname -r  &gt;&gt; #vAgentConfiguration.agentTempDir#/osx-kernel.result" />
@@ -95,7 +95,7 @@
       </Procedure>
     </Folder>
     <Folder name="Windows" treePres="3">
-      <Procedure name="Custom Field - Audit - Windows - Get .NET 4.5 Version Number" treePres="3" id="211070858" folderId="465226159042318" treeFullPath="Upstream Power Pack.Extended Audit (Custom Fields Required) 2019-02-28.Windows">
+      <Procedure name="Custom Field - Audit - Windows - Get .NET 4.5 Version Number" treePres="3" id="211070858" folderId="465226159042318" treeFullPath="Upstream Power Pack.Extended Audit (Custom Fields Required) 2019-03-15.Windows">
         <Body description="">
           <If description="Procedure description: Get version of .net 4.5&#xD;&#xA;Kaseya customer value: Procedure for pro-active support and troubleshooting. Knowing the age of the OS.&#xD;&#xA;End user value: Knowing the .net version&#xD;&#xA;Dependencies: Windows OS. CUT present i Kworking. Custom field &quot;CF_dotNET_Version&quot;&#xD;&#xA;Usage: Schedule once or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for &quot;Upstream: .NET Version&quot; before, during and after update deployment statements.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------&#xD;&#xA;Stage 1: We need GREP and CUT later on. Let's download if not present. Don't trust us? Look for GNU win32 on Sourceforge.">
             <Condition name="TestFile">
@@ -410,7 +410,7 @@
           </Statement>
         </Body>
       </Procedure>
-      <Procedure name="Custom Field - Audit - Windows - Get Current Temp On Drive(s)" treePres="3" id="1969820934" folderId="465226159042318" treeFullPath="Upstream Power Pack.Extended Audit (Custom Fields Required) 2019-02-28.Windows">
+      <Procedure name="Custom Field - Audit - Windows - Get Current Temp On Drive(s)" treePres="3" id="1969820934" folderId="465226159042318" treeFullPath="Upstream Power Pack.Extended Audit (Custom Fields Required) 2019-03-15.Windows">
         <Body description="">
           <If description="Procedure description: Get the disktemp on the drives on the machine.&#xD;&#xA;Kaseya customer value: Procedure for pro-active support and troubleshooting harddrive problems.&#xD;&#xA;End user value: Prevent any production and data loss tied to harddrive failure.&#xD;&#xA;Dependencies: Windows OS. Custom Field &quot;CF Disk Temp&quot;.&#xD;&#xA;Usage: Schedule once or Run Now.&#xD;&#xA;Report options: Agent Procedure log.&#xD;&#xA;Maintainer: powerpack@upstream.se Last change: 2017-09-28&#xD;&#xA;------------------------------------------------------------------------------------------------------------&#xD;&#xA;First we need a file.">
             <Condition name="TestFile">
@@ -468,7 +468,7 @@
           </Statement>
         </Body>
       </Procedure>
-      <Procedure name="Custom Field - Audit - Windows - Get Current WIFI Signal Strength" treePres="3" id="473384581" folderId="465226159042318" treeFullPath="Upstream Power Pack.Extended Audit (Custom Fields Required) 2019-02-28.Windows">
+      <Procedure name="Custom Field - Audit - Windows - Get Current WIFI Signal Strength" treePres="3" id="473384581" folderId="465226159042318" treeFullPath="Upstream Power Pack.Extended Audit (Custom Fields Required) 2019-03-15.Windows">
         <Body description="">
           <Statement description="Procedure description: Get current WIFI SSID and signal strength.&#xD;&#xA;Kaseya customer value: Procedure for pro-active support and troubleshooting.&#xD;&#xA;End user value: Limiting the risks for unwanted external Java related attacks, downtime and data loss.&#xD;&#xA;Dependencies: Windows OS. GREP and CUT present i Kworking. Custom fields &quot;CF Last Used Wifi SSID&quot; and &quot;CF Last Wifi Signal Strength&quot;.&#xD;&#xA;Usage: Schedule or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for &quot;UPSTREAM: Wifi Info:&quot; before, during and after update deployment statements.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------&#xD;&#xA;Stage 1: We need GREP and CUT later on. Let's download if not present. Don't trust us? Look for GNU win32 on Sourceforge." name="WriteScriptLogEntry" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
             <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Wifi Info: Entering Stage 1. Copy GREP and CUT if needed." />
@@ -636,7 +636,7 @@
           </Statement>
         </Body>
       </Procedure>
-      <Procedure name="Custom Field - Audit - Windows - Get Hyper-V Host Name" treePres="3" id="938611166" folderId="465226159042318" treeFullPath="Upstream Power Pack.Extended Audit (Custom Fields Required) 2019-02-28.Windows">
+      <Procedure name="Custom Field - Audit - Windows - Get Hyper-V Host Name" treePres="3" id="938611166" folderId="465226159042318" treeFullPath="Upstream Power Pack.Extended Audit (Custom Fields Required) 2019-03-15.Windows">
         <Body description="">
           <If description="Procedure description: Get Windows Hyper-V host from the registry.&#xD;&#xA;Kaseya customer value: Track the VM guests running on a Hyper-V hosts for auditing and managment.&#xD;&#xA;End user value: audit and compliance.&#xD;&#xA;Dependencies: Windows OS. Custom Field &quot;CF VM Host&quot; created. Run on a view based on manufacturer &quot;Microsoft*&quot;&#xD;&#xA;Usage: Schedule Recurringly or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for &quot;UPSTREAM: Get VM Host:&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
             <Condition name="Windows 32 or 64 Bit Check">
@@ -709,7 +709,7 @@
           </Statement>
         </Body>
       </Procedure>
-      <Procedure name="Custom Field - Audit - Windows - Get OS Install Date" treePres="3" id="466461793" folderId="465226159042318" treeFullPath="Upstream Power Pack.Extended Audit (Custom Fields Required) 2019-02-28.Windows">
+      <Procedure name="Custom Field - Audit - Windows - Get OS Install Date" treePres="3" id="466461793" folderId="465226159042318" treeFullPath="Upstream Power Pack.Extended Audit (Custom Fields Required) 2019-03-15.Windows">
         <Body description="">
           <If description="Procedure description: Get OS install date from command line.&#xD;&#xA;Kaseya customer value: Procedure for pro-active support and troubleshooting. Knowing the age of the OS.&#xD;&#xA;End user value: Knowing the age of the OS.&#xD;&#xA;Dependencies: Windows OS. CUT present i Kworking. Custom field &quot;CF OS Install Date&quot;.&#xD;&#xA;Usage: Schedule once or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for &quot;Upstream: OS Install Date&quot; before, during and after update deployment statements.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------&#xD;&#xA;Stage 1: We need GREP and CUT later on. Let's download if not present. Don't trust us? Look for GNU win32 on Sourceforge.">
             <Condition name="TestFile">
@@ -834,7 +834,7 @@
           </Statement>
         </Body>
       </Procedure>
-      <Procedure name="Custom Field - Audit - Windows - Get OS Language" treePres="3" id="1229895230" folderId="465226159042318" treeFullPath="Upstream Power Pack.Extended Audit (Custom Fields Required) 2019-02-28.Windows">
+      <Procedure name="Custom Field - Audit - Windows - Get OS Language" treePres="3" id="1229895230" folderId="465226159042318" treeFullPath="Upstream Power Pack.Extended Audit (Custom Fields Required) 2019-03-15.Windows">
         <Body description="">
           <If description="Procedure description: Get OS language from the registry&#xD;&#xA;Kaseya customer value: Extended auditing and troubleshooting.&#xD;&#xA;End user value: Understand the importance of consistency in language versions.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule Once or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for &quot;UPSTREAM: Get OS Language:&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
             <Condition name="CheckRegistryValue">
@@ -963,7 +963,7 @@
           </Statement>
         </Body>
       </Procedure>
-      <Procedure name="Custom Field - Audit - Windows - Get SMART Status For C" treePres="3" id="1574174584" folderId="465226159042318" treeFullPath="Upstream Power Pack.Extended Audit (Custom Fields Required) 2019-02-28.Windows">
+      <Procedure name="Custom Field - Audit - Windows - Get SMART Status For C" treePres="3" id="1574174584" folderId="465226159042318" treeFullPath="Upstream Power Pack.Extended Audit (Custom Fields Required) 2019-03-15.Windows">
         <Body description="Description: Detects current disk health and writes the results to the script log.&#xA;&#xA;Kaseya customer value: Procedure to secure clients from unwanted downtime and data loss.&#xA;&#xA;End user value: Limiting the risks for unwanted downtime and data loss.&#xA;&#xA;Dependencies: Windows OS.&#xA;&#xA;Usage: Run at any given time.&#xA;&#xA;Report options: Procedure Log, content: &quot;SMART:*&quot;, Aggregate Table, SMART.&#xA;&#xA;Script maintainer: ronny [at] upstream.se&#xA;&#xA;Support: This script is delivered &quot;as is&quot;. No support included.">
           <If description="Important! Create a custom field named &quot;CF SMART Health&quot;.  You need to reload the Agent Procedure Editor after creating the custom field.&#xD;&#xA;First, let's test if the files needed are present on the machine. Don't trust our Dropbox? You can upload these files to your own Kaseya server in &quot;Managed Files&quot;  and use the step writeFile to replace getURL.">
             <Condition name="TestFile">
@@ -1060,7 +1060,7 @@
           </Statement>
         </Body>
       </Procedure>
-      <Procedure name="Custom Field - Audit - Windows - Get SQL Version" treePres="3" id="2105724818" folderId="465226159042318" treeFullPath="Upstream Power Pack.Extended Audit (Custom Fields Required) 2019-02-28.Windows">
+      <Procedure name="Custom Field - Audit - Windows - Get SQL Version" treePres="3" id="2105724818" folderId="465226159042318" treeFullPath="Upstream Power Pack.Extended Audit (Custom Fields Required) 2019-03-15.Windows">
         <Body description="">
           <If description="Procedure description: Get the SQL version from the registry.&#xD;&#xA;Kaseya customer value: Knowing the SQL version and the associated costs.&#xD;&#xA;End user value: Knowing the SQL version and the associated costs.&#xD;&#xA;Dependencies: Windows OS. MS SQL present. Custom field CF SQL Version.&#xD;&#xA;Usage: Schedule once or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for &quot;UPSTREAM: Get SQL Version:&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------&#xD;&#xA;We do a REG query to get the SQL version regsitry information in a text text file.">
             <Condition name="Windows 32 or 64 Bit Check">
@@ -1154,7 +1154,7 @@
           </Statement>
         </Body>
       </Procedure>
-      <Procedure name="Custom Field - Audit - Windows - Get VMware Host Name" treePres="3" id="437616751" folderId="465226159042318" treeFullPath="Upstream Power Pack.Extended Audit (Custom Fields Required) 2019-02-28.Windows">
+      <Procedure name="Custom Field - Audit - Windows - Get VMware Host Name" treePres="3" id="437616751" folderId="465226159042318" treeFullPath="Upstream Power Pack.Extended Audit (Custom Fields Required) 2019-03-15.Windows">
         <Body description="">
           <If description="Procedure description: Get Windows VMware host from the registry.&#xD;&#xA;Kaseya customer value: Track the VM guests running on a VMware host for auditing and managment.&#xD;&#xA;End user value: audit and compliance.&#xD;&#xA;Dependencies: Windows OS. Custom Field &quot;CF VM Host&quot; created. Run on a view based on manufacturer &quot;VMware*&quot;&#xD;&#xA;Usage: Schedule Recurringly or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for &quot;UPSTREAM: Get VM Host:&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
             <Condition name="Windows 32 or 64 Bit Check">
@@ -1224,97 +1224,6 @@
           </If>
           <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
             <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Get Hyper-V Host Name: The Agent Procedure hit the last row and will now exit. Evaluate the Agent Procedure log output." />
-          </Statement>
-        </Body>
-      </Procedure>
-      <Procedure name="Custom Field - Audit - Windows - Scan for Intel Mgmnt Engine Vulnerability" treePres="3" id="227655803" folderId="465226159042318" treeFullPath="Upstream Power Pack.Extended Audit (Custom Fields Required) 2019-02-28.Windows">
-        <Body description="">
-          <Statement description="Procedure description: Evaluate if system has Intel vulnerability (Intel-SA-00086)&#xD;&#xA;More information: https://www.intel.com/content/www/us/en/support/articles/000025619/software.html&#xD;&#xA;Kaseya customer value: Procedure to quickly check system vurnability.&#xD;&#xA;End user value: Limiting the risk of secuirty breach.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule, Recurring or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for before, during and after update deployment statements.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------" name="WriteScriptLogEntry" continueOnFail="false">
-            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Downloading Intel vurnability detection tool." />
-          </Statement>
-          <Statement name="GetURL" continueOnFail="false">
-            <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/cR6uHCTyPZctKTf/download" />
-            <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\SA00086_Windows.zip" />
-            <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
-          </Statement>
-          <Statement name="WriteScriptLogEntry" continueOnFail="false">
-            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Unzipping..." />
-          </Statement>
-          <Statement name="Unzip file" continueOnFail="false" osType="Windows">
-            <Parameter xsi:type="StringParameter" name="Parameter1" value="#vAgentConfiguration.agentTempDir#\SA00086_Windows.zip" />
-            <Parameter xsi:type="StringParameter" name="Parameter2" value="#vAgentConfiguration.agentTempDir#\DetectionTool" />
-            <Parameter xsi:type="StringParameter" name="Parameter3" value="True" />
-          </Statement>
-          <Statement name="WriteScriptLogEntry" continueOnFail="false">
-            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Running detection tool. See next log entry for result." />
-          </Statement>
-          <Statement description="IMPORTANT: You have to cd to the same directory of the tool first and then execute it. It will NOT work if you execute with a path (ex C:\path\to\file\Intel-SA-00086.exe).&#xD;&#xA;&quot;findstr&quot; is to get the vulnerability string, pipe it to a file to later get it as a variale." name="ExecuteShellCommand" continueOnFail="false">
-            <Parameter xsi:type="StringParameter" name="Command" value="cd #vAgentConfiguration.agentTempDir#\DetectionTool\DiscoveryTool &amp;&amp; Intel-SA-00086-console.exe | findstr vulnerable &gt;&gt; #vAgentConfiguration.agentTempDir#\result.txt" />
-            <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
-            <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
-          </Statement>
-          <If description="">
-            <Condition name="TestFile">
-              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\result.txt" />
-              <Parameter xsi:type="EnumParameter" name="Condition" value="Contains" />
-              <Parameter xsi:type="StringParameter" name="Value" value="Based on the analysis performed by this tool:" />
-            </Condition>
-            <Then>
-              <If description="">
-                <Condition name="TestFile">
-                  <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\result.txt" />
-                  <Parameter xsi:type="EnumParameter" name="Condition" value="Contains" />
-                  <Parameter xsi:type="StringParameter" name="Value" value="This system is vulnerable." />
-                </Condition>
-                <Then>
-                  <Statement name="WriteScriptLogEntry" continueOnFail="false">
-                    <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: This system is vulnerable" />
-                  </Statement>
-                  <Statement name="UpdateSystemInfo" continueOnFail="false">
-                    <Parameter xsi:type="StringParameter" name="ColumnName" value="Intel vulnerability status" />
-                    <Parameter xsi:type="StringParameter" name="Value" value="Vulnerable" />
-                  </Statement>
-                </Then>
-              </If>
-              <If description="">
-                <Condition name="TestFile">
-                  <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\result.txt" />
-                  <Parameter xsi:type="EnumParameter" name="Condition" value="Contains" />
-                  <Parameter xsi:type="StringParameter" name="Value" value="This system is not vulnerable." />
-                </Condition>
-                <Then>
-                  <Statement name="WriteScriptLogEntry" continueOnFail="false">
-                    <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: This system is not vulnerable" />
-                  </Statement>
-                  <Statement name="UpdateSystemInfo" continueOnFail="false">
-                    <Parameter xsi:type="StringParameter" name="ColumnName" value="Intel vulnerability status" />
-                    <Parameter xsi:type="StringParameter" name="Value" value="Not vulnerable" />
-                  </Statement>
-                </Then>
-              </If>
-            </Then>
-            <Else>
-              <Statement name="WriteScriptLogEntry" continueOnFail="false">
-                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: This outputfile does not exist or does not conatin any data." />
-              </Statement>
-              <Statement name="UpdateSystemInfo" continueOnFail="false">
-                <Parameter xsi:type="StringParameter" name="ColumnName" value="Intel vulnerability status" />
-                <Parameter xsi:type="StringParameter" name="Value" value="Test failed" />
-              </Statement>
-            </Else>
-          </If>
-          <Statement description="House cleaning." name="Delete Directory" continueOnFail="false">
-            <Parameter xsi:type="StringParameter" name="Parameter1" value="#vAgentConfiguration.agentTempDir#\DetectionTool" />
-            <Parameter xsi:type="StringParameter" name="Parameter2" value="true" />
-          </Statement>
-          <Statement name="DeleteFile" continueOnFail="false">
-            <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\SA00086_Windows.zip" />
-          </Statement>
-          <Statement name="DeleteFile" continueOnFail="false">
-            <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\result.txt" />
-          </Statement>
-          <Statement name="WriteScriptLogEntry" continueOnFail="false">
-            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Vulnerability check complete." />
           </Statement>
         </Body>
       </Procedure>
