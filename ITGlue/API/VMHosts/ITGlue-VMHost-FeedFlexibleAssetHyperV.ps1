@@ -167,8 +167,6 @@ $data = @{
             'virtual-switches'               = $virtualSwitchsHTML
             # Custom notes
             'additional-notes'               = $flexibleAsset.data.attributes.traits.'additional-notes'
-            # Number of VMs on host
-            'current-guests-on-this-vm-host' = ($VMs | measure).Count
             # VMs' bios settings
             'vm-guests-bios-setting'         = $vmBIOSSettingsHTML
             # General VM data (start type, cpu, ram...)
@@ -176,6 +174,8 @@ $data = @{
             # NIC and IP assigned to each VM
             'virtual-switch-name-and-ip'     = $guestNICsIPs
 
+            # Number of VMs on host
+            'current-number-of-guests-on-this-vm-host' = ($VMs | measure).Count
             # VMs' name and VHD paths
             'vm-guests-name-s-and-virtual-machine-path-s' = $virtualMachinePathsHTML
             # Last updated
