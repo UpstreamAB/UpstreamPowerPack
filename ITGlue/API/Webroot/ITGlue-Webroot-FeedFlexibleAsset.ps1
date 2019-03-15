@@ -10,16 +10,16 @@
 
 # ----------------------------- UPDATE THE BELOW VARIABLES -----------------------------
 # Fill in your Webroot username, password, client ID and client secret. These will be uses for authentication.
-$username      = ''
-$password      = ''
-$client_id     = ''
-$client_secret = ''
-
-# Fill in your global GSM key (not site key), this is used to find all the sites.
-$global_gsm_key = ''
-
-# Fill in the ID of the flexible asset ID in IT Glue. You create this asset with ITGlue-Webroot-CreateFlexibleAsset.ps1.
-$flexible_asset_type_id = ''
+param(
+    $username      = '',
+    $password      = '',
+    $client_id     = '',
+    $client_secret = '',
+    # Fill in your global GSM key (not site key), this is used to find all the sites.
+    $global_gsm_key = '',
+    # Fill in the ID of the flexible asset ID in IT Glue. You create this asset with ITGlue-Webroot-CreateFlexibleAsset.ps1.
+    $flexible_asset_type_id = ''
+)
 
 
 
