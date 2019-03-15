@@ -1,18 +1,18 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <ScriptExport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.kaseya.com/vsa/2008/12/Scripting">
-  <Folder name="Windows 10 Specific Mgmnt 2018-12-19" treePres="3">
+  <Folder name="Windows 10 Specific 2019-03-15" treePres="3">
     <Folder name="Windows 10 Audit" treePres="3">
-      <Procedure name="Audit - Windows 10 - Custom Field - Azure AD Info" treePres="3" id="1331139952" folderId="911996210884305" treeFullPath="Upstream Kaseya Power Pack.Windows 10 Specific Mgmnt 2018-12-19.Windows 10 Audit">
+      <Procedure name="Audit - Windows 10 - Custom Field - Get Azure AD Info" treePres="3" id="1331139952" folderId="155813151158305" treeFullPath="Upstream Power Pack.Windows 10 Specific 2019-03-15.Windows 10 Audit">
         <Body description="">
-          <Statement description="Procedure description: Get Azure AD specific information from the registry.&#xD;&#xA;Kaseya customer value: Audit if the computer is Azure AD joined or not.&#xD;&#xA;End user value: Track non Azure AD joined computers for compliance.&#xD;&#xA;Dependencies: Windows 10. Custom Fields &quot;CF Azure AD Tenant&quot; &amp; &quot;CF Azure AD User&quot; created.&#xD;&#xA;Usage: Schedule from Kaseya Policy Manager or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for &quot;UPSTREAM: Get Azure Info:&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------" name="GetURL" continueOnFail="false" osType="10">
-            <Parameter xsi:type="StringParameter" name="URL" value="https://raw.githubusercontent.com/UpstreamAB/UpstreamPowerPack/master/KaseyaVSA/Powershell/KaseyaVSA-Audit-GetAzureTenantName.ps1?token=Akb5rmVSl0_Q7ntWH0rvtSCEOjFXFlKUks5cGjgPwA%3D%3D" />
-            <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\KaseyaVSA-Audit-GetAzureTenantName.ps1" />
-            <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+          <Statement description="Procedure description: Get Azure AD specific information from the registry.&#xD;&#xA;Kaseya customer value: Audit if the computer is Azure AD joined or not.&#xD;&#xA;End user value: Track non Azure AD joined computers for compliance.&#xD;&#xA;Dependencies: Windows 10. Custom Fields &quot;CF Azure AD Tenant&quot; &amp; &quot;CF Azure AD User&quot; created. Powershell files uploaded to Managed Files.&#xD;&#xA;Usage: Schedule from Kaseya Policy Manager or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for &quot;UPSTREAM: Get Azure Info:&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------&#xD;&#xA;Before executing this Agent Procedure, upload the Upstream Power Pack Powershell scripts below to &quot;VSASharedFiles\UpstreamPowerPack\Powershell&quot;." name="WriteFile" continueOnFail="false" osType="10">
+            <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\KaseyaVSA-Audit-GetAzureTenantName.ps1" />
+            <Parameter xsi:type="StringParameter" name="ManagedFile" value="VSASharedFiles\UpstreamPowerPack\Powershell\KaseyaVSA-Audit-GetAzureTenantName.ps1" />
+            <Parameter xsi:type="BooleanParameter" name="DeleteAfter" value="False" />
           </Statement>
-          <Statement name="GetURL" continueOnFail="false" osType="10">
-            <Parameter xsi:type="StringParameter" name="URL" value="https://raw.githubusercontent.com/UpstreamAB/UpstreamPowerPack/master/KaseyaVSA/Powershell/KaseyaVSA-Audit-GetAzureUserName.ps1?token=Akb5rnL4AMfI3mOTK7rj-7GMonczogkJks5cGjiswA%3D%3D" />
-            <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\KaseyaVSA-Audit-GetAzureUserName.ps1" />
-            <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+          <Statement name="WriteFile" continueOnFail="false" osType="10">
+            <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\KaseyaVSA-Audit-GetAzureUserName.ps1" />
+            <Parameter xsi:type="StringParameter" name="ManagedFile" value="VSASharedFiles\UpstreamPowerPack\Powershell\KaseyaVSA-Audit-GetAzureUserName.ps1" />
+            <Parameter xsi:type="BooleanParameter" name="DeleteAfter" value="False" />
           </Statement>
           <Statement description="Let's get the Azure AD tenant name." name="Execute Powershell" continueOnFail="false" osType="10">
             <Parameter xsi:type="StringParameter" name="Parameter1" value="#vAgentConfiguration.agentTempDir#\KaseyaVSA-Audit-GetAzureTenantName.ps1" />
@@ -76,7 +76,126 @@
           </Statement>
         </Body>
       </Procedure>
-      <Procedure name="Audit - Windows 10 - Custom Field - Get Version" treePres="3" id="1567706558" folderId="911996210884305" treeFullPath="Upstream Kaseya Power Pack.Windows 10 Specific Mgmnt 2018-12-19.Windows 10 Audit">
+      <Procedure name="Audit - Windows 10 - Custom Field - Get Disk Encryption Status" treePres="3" id="2032368826" folderId="155813151158305" treeFullPath="Upstream Power Pack.Windows 10 Specific 2019-03-15.Windows 10 Audit">
+        <Body description="">
+          <If description="Procedure description: Checks if Bitlocker is enabled and what level of encryption is provided.&#xD;&#xA;Kaseya customer value: Audit and compliance. Enforce encryption policies.&#xD;&#xA;End user value: Audit and compliance.&#xD;&#xA;Dependencies: Windows 10&#xD;&#xA;Usage: Schedule Once or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for &quot;UPSTREAM: Disk Encryption Status&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------&#xD;&#xA;Let's ask Windows for current disk encryption status.">
+            <Condition name="Windows 32 or 64 Bit Check">
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Exists" />
+            </Condition>
+            <Then>
+              <Statement name="ExecuteShellCommand" continueOnFail="false" osType="10">
+                <Parameter xsi:type="StringParameter" name="Command" value="manage-bde -status &gt;&gt;#vAgentConfiguration.agentTempDir#\bitlocker.status" />
+                <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="True" />
+              </Statement>
+            </Then>
+            <Else>
+              <Statement name="ExecuteShellCommand" continueOnFail="false" osType="10">
+                <Parameter xsi:type="StringParameter" name="Command" value="manage-bde -status &gt;&gt;#vAgentConfiguration.agentTempDir#\bitlocker.status" />
+                <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+                <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+              </Statement>
+            </Else>
+          </If>
+          <If description="Let's parse the result and update the Custom Field &quot;CF Encryption&quot; and update the Agent Procedure Log.">
+            <Condition name="TestFile">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\bitlocker.status" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Exists" />
+              <Parameter xsi:type="StringParameter" name="Value" value="" />
+            </Condition>
+            <Then>
+              <If description="">
+                <Condition name="TestFile">
+                  <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\bitlocker.status" />
+                  <Parameter xsi:type="EnumParameter" name="Condition" value="Contains" />
+                  <Parameter xsi:type="StringParameter" name="Value" value="Used Space Only Encrypted" />
+                </Condition>
+                <Then>
+                  <Statement name="UpdateSystemInfo" continueOnFail="false" osType="10">
+                    <Parameter xsi:type="StringParameter" name="ColumnName" value="CF Encryption" />
+                    <Parameter xsi:type="StringParameter" name="Value" value="Used Space Only Encrypted" />
+                  </Statement>
+                  <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Disk Encryption Status: Used Space Only Encrypted." />
+                  </Statement>
+                </Then>
+              </If>
+              <If description="">
+                <Condition name="TestFile">
+                  <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\bitlocker.status" />
+                  <Parameter xsi:type="EnumParameter" name="Condition" value="Contains" />
+                  <Parameter xsi:type="StringParameter" name="Value" value="Fully Encrypted" />
+                </Condition>
+                <Then>
+                  <Statement name="UpdateSystemInfo" continueOnFail="false" osType="10">
+                    <Parameter xsi:type="StringParameter" name="ColumnName" value="CF Encryption" />
+                    <Parameter xsi:type="StringParameter" name="Value" value="Fully Encrypted" />
+                  </Statement>
+                  <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Disk Encryption Status: Fully Encrypted." />
+                  </Statement>
+                </Then>
+              </If>
+              <If description="">
+                <Condition name="TestFile">
+                  <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\bitlocker.status" />
+                  <Parameter xsi:type="EnumParameter" name="Condition" value="Contains" />
+                  <Parameter xsi:type="StringParameter" name="Value" value="Fully Decrypted" />
+                </Condition>
+                <Then>
+                  <Statement name="UpdateSystemInfo" continueOnFail="false" osType="10">
+                    <Parameter xsi:type="StringParameter" name="ColumnName" value="CF Encryption" />
+                    <Parameter xsi:type="StringParameter" name="Value" value="Fully Decrypted" />
+                  </Statement>
+                  <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="10">
+                    <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Disk Encryption Status: Fully Decrypted." />
+                  </Statement>
+                </Then>
+              </If>
+            </Then>
+            <Else>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="10">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Disk Encryption Status: The bitlocker.status is either empty or does not contain any useful information. Try running &quot;manage-bde -status&quot; from the command line." />
+              </Statement>
+            </Else>
+          </If>
+          <Statement name="DeleteFile" continueOnFail="true" osType="10">
+            <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\bitlocker.status" />
+          </Statement>
+          <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="10">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Disk Encryption Status: The Agent Procedure hit the last row and will now exit. Evaluate the Agent Procedure log output." />
+          </Statement>
+        </Body>
+      </Procedure>
+      <Procedure name="Audit - Windows 10 - Custom Field - Get OneDrive Version" treePres="3" id="723433494" folderId="155813151158305" treeFullPath="Upstream Power Pack.Windows 10 Specific 2019-03-15.Windows 10 Audit">
+        <Body description="">
+          <If description="Procedure description: Get OneDrive Version from the registry.&#xD;&#xA;Kaseya customer value: For compliance and troubleshooting.&#xD;&#xA;End user value: Ensure compliance and  OneDrive feature support.&#xD;&#xA;Dependencies: Windows 10. Custom Field &quot;CF OneDrive Version&quot;.&#xD;&#xA;Usage: Schedule recurringly from Kaseya Policy Manager or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for &quot;UPSTREAM: Get OneDrive Version:&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
+            <Condition name="CheckRegistryValue">
+              <Parameter xsi:type="StringParameter" name="RegistryPath" value="HKEY_CURRENT_USER\Software\Microsoft\OneDrive\Version" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Exists" />
+              <Parameter xsi:type="StringParameter" name="Value" value="" />
+            </Condition>
+            <Then>
+              <Statement name="GetVariable" continueOnFail="false" osType="10">
+                <Parameter xsi:type="EnumParameter" name="VariableType" value="RegistryValue" />
+                <Parameter xsi:type="StringParameter" name="SourceContent" value="HKEY_CURRENT_USER\Software\Microsoft\OneDrive\Version" />
+                <Parameter xsi:type="StringParameter" name="VariableName" value="OneDriveVersion" />
+              </Statement>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="10">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Get OneDrive Version: #OneDriveVersion#" />
+              </Statement>
+              <Statement name="UpdateSystemInfo" continueOnFail="false" osType="10">
+                <Parameter xsi:type="StringParameter" name="ColumnName" value="CF OneDrive Version" />
+                <Parameter xsi:type="StringParameter" name="Value" value="#OneDriveVersion#" />
+              </Statement>
+            </Then>
+          </If>
+          <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Get Win 10 Version: The Agent Procedure hit the last row and will now exit. Evaluate the Agent Procedure log output." />
+          </Statement>
+        </Body>
+      </Procedure>
+      <Procedure name="Audit - Windows 10 - Custom Field - Get Version" treePres="3" id="1567706558" folderId="155813151158305" treeFullPath="Upstream Power Pack.Windows 10 Specific 2019-03-15.Windows 10 Audit">
         <Body description="">
           <If description="Procedure description: Get Windows 10 Version from the registry&#xD;&#xA;Kaseya customer value: Patching, compliance and troubleshooting.&#xD;&#xA;End user value: Ensure to meet any compliande.&#xD;&#xA;Dependencies: Windows OS. Custom Field &quot;CF Win 10 Version&quot; created.&#xD;&#xA;Usage: Schedule recurringly from Kaseya Policy Manager or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for &quot;UPSTREAM: Get Win 10 Version:&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
             <Condition name="CheckRegistryValue">
@@ -106,7 +225,7 @@
       </Procedure>
     </Folder>
     <Folder name="Windows 10 Patch Management" treePres="3">
-      <Procedure name="Patch Mgmnt - Windows 10 - Audit Active Hours" treePres="3" id="139054035" folderId="203412543471629" treeFullPath="Upstream Kaseya Power Pack.Windows 10 Specific Mgmnt 2018-12-19.Windows 10 Patch Management">
+      <Procedure name="Patch Mgmnt - Windows 10 - Audit Active Hours" treePres="3" id="139054035" folderId="433852593197418" treeFullPath="Upstream Power Pack.Windows 10 Specific 2019-03-15.Windows 10 Patch Management">
         <Body description="">
           <If description="Procedure description: Get Windows 10 Active hours from the registry.&#xD;&#xA;Kaseya customer value: Patching, compliance and troubleshooting.&#xD;&#xA;End user value: Ensure to meet any agreed compliande.&#xD;&#xA;Dependencies: Windows 10 OS.&#xD;&#xA;Usage: Schedule recurringly from Kaseya Policy Manager or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for &quot;UPSTREAM: Current Windows 10 Active Hours Is:&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
             <Condition name="Windows 32 or 64 Bit Check">
@@ -145,7 +264,7 @@
           </Statement>
         </Body>
       </Procedure>
-      <Procedure name="Patch Mgmnt - Windows 10 - Patch From Command Line - No Reboot" treePres="3" id="715216591" folderId="203412543471629" treeFullPath="Upstream Kaseya Power Pack.Windows 10 Specific Mgmnt 2018-12-19.Windows 10 Patch Management">
+      <Procedure name="Patch Mgmnt - Windows 10 - Patch From Command Line - No Reboot" treePres="3" id="715216591" folderId="433852593197418" treeFullPath="Upstream Power Pack.Windows 10 Specific 2019-03-15.Windows 10 Patch Management">
         <Body description="">
           <If description="Procedure description: Kaseya can not patch post Windows 10 Anniversary Eedition that good. This Freeware from Flemming Varmer at ABC-Deploy.com do the trick.&#xD;&#xA;Kaseya customer value: Ensures that Windows 10 Anniversary Edition gets patched.&#xD;&#xA;End user value: Secure Windows 10 Anniversary Edition (Any Win 10) with the latest patches.&#xD;&#xA;Dependencies: Windows 10.&#xD;&#xA;Usage: Recurring schedule or Run Now.&#xD;&#xA;Report options: Agent Procedure log.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
             <Condition name="TestFile">
@@ -199,7 +318,7 @@
           </Statement>
         </Body>
       </Procedure>
-      <Procedure name="Patch Mgmnt - Windows 10 - Set Active Hours" treePres="3" id="1366253877" folderId="203412543471629" treeFullPath="Upstream Kaseya Power Pack.Windows 10 Specific Mgmnt 2018-12-19.Windows 10 Patch Management">
+      <Procedure name="Patch Mgmnt - Windows 10 - Set Active Hours" treePres="3" id="1366253877" folderId="433852593197418" treeFullPath="Upstream Power Pack.Windows 10 Specific 2019-03-15.Windows 10 Patch Management">
         <Body description="">
           <If description="Procedure description: Set Windows 10 Active hours in the registry.&#xD;&#xA;Kaseya customer value: Patching, compliance and troubleshooting.&#xD;&#xA;End user value: Ensure to meet any agreed compliande.&#xD;&#xA;Dependencies: Windows 10 OS.&#xD;&#xA;Usage: Schedule recurringly from Kaseya Policy Manager or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for &quot;UPSTREAM: Windows 10 Active Hours Is Now Set To:&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
             <Condition name="Windows 32 or 64 Bit Check">
@@ -255,7 +374,7 @@
           </Statement>
         </Body>
       </Procedure>
-      <Procedure name="Patch Mgmnt - Windows 10 - Test For Reboot Pending" treePres="3" id="463189573" folderId="203412543471629" treeFullPath="Upstream Kaseya Power Pack.Windows 10 Specific Mgmnt 2018-12-19.Windows 10 Patch Management">
+      <Procedure name="Patch Mgmnt - Windows 10 - Test For Reboot Pending" treePres="3" id="463189573" folderId="433852593197418" treeFullPath="Upstream Power Pack.Windows 10 Specific 2019-03-15.Windows 10 Patch Management">
         <Body description="">
           <If description="https://gallery.technet.microsoft.com/scriptcenter/Get-PendingReboot-Query-bdb79542">
             <Condition name="TestFile">
@@ -340,7 +459,36 @@
       </Procedure>
     </Folder>
     <Folder name="Windows 10 System Management" treePres="3">
-      <Procedure name="Sys Mgmnt - Windows - Disable Storage Sense" treePres="3" id="2071087211" folderId="881167117544061" treeFullPath="Upstream Kaseya Power Pack.Windows 10 Specific Mgmnt 2018-12-19.Windows 10 System Management">
+      <Procedure name="Sys Mgmt - Windows 10 - Create System Restore Point" treePres="3" id="991702532" folderId="161983539891422" treeFullPath="Upstream Power Pack.Windows 10 Specific 2019-03-15.Windows 10 System Management">
+        <Body description="">
+          <Statement description="Procedure description: Creates a system restore point&#xD;&#xA;Kaseya customer value: Ensure that a system restore point exists for troubleshoot ing, rollbacks and prodictivity.&#xD;&#xA;End user value: Ensure that a system restore point exists for troubleshoot ing, rollbacks and prodictivity.&#xD;&#xA;Usage: Schedule from Kaseya Policy Manager or Run Now. Use in conjuction with Patch Managment.&#xD;&#xA;Report options: Agent Procedure log. Look for &quot;UPSTREAM: Create System Restore Point:&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------" name="Execute Shell Command - Get Results to Variable" continueOnFail="false" osType="10">
+            <Parameter xsi:type="StringParameter" name="Parameter1" value="wmic.exe /Namespace:\\root\default Path SystemRestore Call CreateRestorePoint UpstreamPowerPackRestorePoint, 100, 7" />
+            <Parameter xsi:type="StringParameter" name="Parameter2" value="True" />
+            <Parameter xsi:type="StringParameter" name="Parameter3" value="System" />
+          </Statement>
+          <If description="">
+            <Condition name="CheckVariable">
+              <Parameter xsi:type="StringParameter" name="VariableName" value="#global:cmdresults#" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Contains" />
+              <Parameter xsi:type="StringParameter" name="Value" value="Method execution successful." />
+            </Condition>
+            <Then>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="10">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Create System Restore Point: Successful: #global:cmdresults#" />
+              </Statement>
+            </Then>
+            <Else>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="10">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Create System Restore Point: Failed: #global:cmdresults#" />
+              </Statement>
+            </Else>
+          </If>
+          <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="10">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Crate System Restore Point: The Agent Procedure hit the last row and will now exit. Evaluate the Agent Procedure log output." />
+          </Statement>
+        </Body>
+      </Procedure>
+      <Procedure name="Sys Mgmt - Windows 10 - Disable Storage Sense" treePres="3" id="2071087211" folderId="161983539891422" treeFullPath="Upstream Power Pack.Windows 10 Specific 2019-03-15.Windows 10 System Management">
         <Body description="Description: This procedure will enable RDP for remote control.&#xA;&#xA;Kaseya customer value: This procedure enables RDP in the registry and enables RDP connections from Kaseya Live Connect. Security, support and control.&#xA;&#xA;End user value: Security, support and control.&#xA;&#xA;Dependencies: Windows.&#xA;&#xA;Usage: Execute the procedure at any time.&#xA;&#xA;Report options: Procedure Log, content: &quot;RDP is now enabled.&quot;&#xA; &#xA;Script maintainer: ronny [at] upstream.se&#xA;&#xA;Support: This script is delivered &quot;as is&quot; No support included.">
           <Statement description="Procedure description: Disable the built in disk cleanup tool in Windows 10.&#xD;&#xA;Kaseya customer value: Ensure Storge Sense is Disabled.&#xD;&#xA;End user value: Ensure Storge Sense is Disabled.&#xD;&#xA;Dependencies: Windows 10.&#xD;&#xA;Usage: Schedule recurringly for compliance.&#xD;&#xA;Report options: Agent Procedure log. Look for &quot;UPSTREAM: Enable Storage Sense&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------&#xD;&#xA;Let's disable Storage Sense.&#xD;&#xA;Registry settings can be reviewed here: https://stealthpuppy.com/windows-10-storage-sense-intune/#.W446jPZuJPY" name="SetRegistryValue" continueOnFail="false" osType="10">
             <Parameter xsi:type="StringParameter" name="RegistryPath" value="HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\StorageSense\Parameters\StoragePolicy\01" />
@@ -352,7 +500,7 @@
           </Statement>
         </Body>
       </Procedure>
-      <Procedure name="Sys Mgmnt - Windows - Enable Storage Sense" treePres="3" id="1795254147" folderId="881167117544061" treeFullPath="Upstream Kaseya Power Pack.Windows 10 Specific Mgmnt 2018-12-19.Windows 10 System Management">
+      <Procedure name="Sys Mgmt - Windows 10 - Enable Storage Sense" treePres="3" id="1795254147" folderId="161983539891422" treeFullPath="Upstream Power Pack.Windows 10 Specific 2019-03-15.Windows 10 System Management">
         <Body description="">
           <Statement description="Procedure description: Enable and configure the built in disk cleanup tool in Windows 10.&#xD;&#xA;Kaseya customer value: Ensure disk usage is optimal without any additional automation procedures.&#xD;&#xA;End user value: Ensure disk usage is optimal.&#xD;&#xA;Dependencies: Windows 10.&#xD;&#xA;Usage: Schedule recurringly for compliance.&#xD;&#xA;Report options: Agent Procedure log. Look for &quot;UPSTREAM: Enable Storage Sense&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------&#xD;&#xA;Let's enable Storage Sense and configure the disk cleanup.&#xD;&#xA;Settings can be reviewed here: https://stealthpuppy.com/windows-10-storage-sense-intune/#.W446jPZuJPY" name="SetRegistryValue" continueOnFail="false" osType="10">
             <Parameter xsi:type="StringParameter" name="RegistryPath" value="HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\StorageSense\Parameters\StoragePolicy\01" />
@@ -396,7 +544,7 @@
       </Procedure>
     </Folder>
     <Folder name="Windows 10 User Experience" treePres="3">
-      <Procedure name="User Experience -  Windows 10 - Remove Modern Apps for Current User" treePres="3" id="1246766826" folderId="487889136694327" treeFullPath="Upstream Kaseya Power Pack.Windows 10 Specific Mgmnt 2018-12-19.Windows 10 User Experience">
+      <Procedure name="User Experience -  Windows 10 - Remove Modern Apps for Current User" treePres="3" id="1246766826" folderId="534163518591862" treeFullPath="Upstream Power Pack.Windows 10 Specific 2019-03-15.Windows 10 User Experience">
         <Body description="">
           <If description="Procedure description: Removes the Windows 10 modern apps for the current user.&#xD;&#xA;Kaseya customer value: Streamline the Windows 10 current user start menu.&#xD;&#xA;End user value: Removes non business and unwanted apps from the Windows 10 start menu for a clean look and feel.&#xD;&#xA;Dependencies: Windows 10.&#xD;&#xA;Usage: Schedule, Recurring or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for before, during and after statements.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
             <Condition name="UserIsLoggedIn">
@@ -727,7 +875,7 @@
           </Statement>
         </Body>
       </Procedure>
-      <Procedure name="User Experience - Windows 10 - Remove Annoying App Suggestions" treePres="3" id="445980080" folderId="487889136694327" treeFullPath="Upstream Kaseya Power Pack.Windows 10 Specific Mgmnt 2018-12-19.Windows 10 User Experience">
+      <Procedure name="User Experience - Windows 10 - Remove Annoying App Suggestions" treePres="3" id="445980080" folderId="534163518591862" treeFullPath="Upstream Power Pack.Windows 10 Specific 2019-03-15.Windows 10 User Experience">
         <Body description="">
           <If description="Procedure description: Removes the annoying Windows 10 app suggestion feature in start menu.&#xD;&#xA;Kaseya customer value: Streamline the Windows 10 current user start menu.&#xD;&#xA;End user value: Removes non business and unwanted clutter from the Windows 10 start menu for a clean look and feel.&#xD;&#xA;Dependencies: Windows 10.&#xD;&#xA;Usage: Schedule, Recurring or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for before, during and after statements.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
             <Condition name="UserIsLoggedIn">
