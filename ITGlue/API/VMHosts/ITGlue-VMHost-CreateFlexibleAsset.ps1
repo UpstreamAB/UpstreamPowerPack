@@ -11,7 +11,7 @@ $data = @{
   attributes = @{
     icon = "cubes"
     description = "This Flexible Asset is to be used to automate VM host documentation."
-    name = "VM Host 3"
+    name = "VM Host"
     enabled = $true
   }
   relationships = @{
