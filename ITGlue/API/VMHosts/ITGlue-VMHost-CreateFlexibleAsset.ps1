@@ -5,12 +5,13 @@
 # Script maintainer: powerpack@upstream.se
 # https://en.upstream.se/powerpack/
 # --------------------------------------------------------------------------------------------------------------------------------
+
 $data = @{
   type = "flexible_asset_types"
-  Attributes = @{
+  attributes = @{
     icon = "cubes"
     description = "This Flexible Asset is to be used to automate VM host documentation."
-    Name = "VM Host"
+    name = "VM Host 3"
     enabled = $true
   }
   relationships = @{
@@ -18,9 +19,9 @@ $data = @{
       data = @(
         @{
           type = "flexible_asset_fields"
-          Attributes = @{
+          attributes = @{
             order = 1
-            Name = "VM host name"
+            name = "VM host name"
             kind = "Text"
             hint = "This is the unique name and identifier of this Flexible Asset. It has to match the actual name of the VM Host to be docuemented with the associated Powershell script."
             required = $true
@@ -31,9 +32,9 @@ $data = @{
         },
         @{
           type = "flexible_asset_fields"
-          Attributes = @{
+          attributes = @{
             order = 2
-            Name = "VM host IT Glue configuration"
+            name = "VM host IT Glue configuration"
             kind = "Tag"
             tag_type = "Configurations"
             required = $true
@@ -44,9 +45,9 @@ $data = @{
         },
         @{
           type = "flexible_asset_fields"
-          Attributes = @{
+          attributes = @{
             order = 3
-            Name = "Documentation automation script last queried this VM host on"
+            name = "Documentation automation script last queried this VM host on"
             kind = "Text"
             hint = "Specifies the last time the VM host was queried for updated documentation."
             required = $false
@@ -58,9 +59,9 @@ $data = @{
         },
         @{
           type = "flexible_asset_fields"
-          Attributes = @{
+          attributes = @{
             order = 4
-            Name = "VM host configuration"
+            name = "VM host configuration"
             kind = "Header"
             required = $false
             use_for_title = $false
@@ -71,9 +72,9 @@ $data = @{
         },
         @{
           type = "flexible_asset_fields"
-          Attributes = @{
+          attributes = @{
             order = 5
-            Name = "Virtualization platform"
+            name = "Virtualization platform"
             kind = "Select"
             required = $false
             use_for_title = $false
@@ -84,9 +85,9 @@ $data = @{
         },
         @{
           type = "flexible_asset_fields"
-          Attributes = @{
+          attributes = @{
             order = 6
-            Name = "VM Host supported version"
+            name = "VM Host supported version"
             kind = "Textbox"
             required = $false
             use_for_title = $false
@@ -97,9 +98,9 @@ $data = @{
         },
         @{
           type = "flexible_asset_fields"
-          Attributes = @{
+          attributes = @{
             order = 7
-            Name = "CPU"
+            name = "CPU"
             kind = "Number"
             required = $false
             use_for_title = $false
@@ -110,9 +111,9 @@ $data = @{
         },
         @{
           type = "flexible_asset_fields"
-          Attributes = @{
+          attributes = @{
             order = 8
-            Name = "Disk information"
+            name = "Disk information"
             kind = "Textbox"
             required = $false
             use_for_title = $false
@@ -123,9 +124,9 @@ $data = @{
         },
         @{
           type = "flexible_asset_fields"
-          Attributes = @{
+          attributes = @{
             order = 9
-            Name = "RAM"
+            name = "RAM"
             kind = "Number"
             required = $false
             use_for_title = $false
@@ -136,9 +137,9 @@ $data = @{
         },
         @{
           type = "flexible_asset_fields"
-          Attributes = @{
+          attributes = @{
             order = 10
-            Name = "Virtual switches"
+            name = "Virtual switches"
             kind = "Textbox"
             required = $false
             use_for_title = $false
@@ -149,9 +150,9 @@ $data = @{
         },
         @{
           type = "flexible_asset_fields"
-          Attributes = @{
+          attributes = @{
             order = 11
-            Name = "Additional notes"
+            name = "Additional notes"
             kind = "Textbox"
             hint = "Additional notes about this VM host."
             required = $false
@@ -163,9 +164,9 @@ $data = @{
         },
         @{
           type = "flexible_asset_fields"
-          Attributes = @{
+          attributes = @{
             order = 12
-            Name = "VM guest configuration"
+            name = "VM guest configuration"
             kind = "Header"
             required = $false
             use_for_title = $false
@@ -176,9 +177,9 @@ $data = @{
         },
         @{
           type = "flexible_asset_fields"
-          Attributes = @{
+          attributes = @{
             order = 13
-            Name = "Current number of guests on this VM host"
+            name = "Current number of guests on this VM host"
             kind = "Number"
             hint = "Number of guests detected on this VM host based on latest execution of the ducumentation atutomation script."
             required = $false
@@ -190,9 +191,9 @@ $data = @{
         },
         @{
           type = "flexible_asset_fields"
-          Attributes = @{
+          attributes = @{
             order = 14
-            Name = "VM guests name(s) and virtual machine path(s)"
+            name = "VM guests name(s) and virtual machine path(s)"
             kind = "Textbox"
             hint = "VM guests and virtual disk paths discovered on this VM host."
             required = $false
@@ -204,9 +205,9 @@ $data = @{
         },
         @{
           type = "flexible_asset_fields"
-          Attributes = @{
-            order = 16
-            Name = "VM guest snapshot information"
+          attributes = @{
+            order = 15
+            name = "VM guest snapshot information"
             kind = "Textbox"
             hint = "All snapshots found on the host"
             required = $false
@@ -215,26 +216,12 @@ $data = @{
             show_in_list = $false
             default_value = ""
           }
-        },
+        }
         @{
           type = "flexible_asset_fields"
-          Attributes = @{
+          attributes = @{
             order = 16
-            Name = "VM guest snapshot information"
-            kind = "Textbox"
-            hint = "All snapshots found on the host"
-            required = $false
-            use_for_title = $false
-            expiration = $false
-            show_in_list = $false
-            default_value = ""
-          }
-        },
-        @{
-          type = "flexible_asset_fields"
-          Attributes = @{
-            order = 17
-            Name = "VM guests BIOS setting"
+            name = "VM guests BIOS setting"
             kind = "Textbox"
             hint = "Specifies the BIOS boot settings in each each discovered guest on this VM host."
             required = $false
@@ -246,9 +233,9 @@ $data = @{
         },
         @{
           type = "flexible_asset_fields"
-          Attributes = @{
-            order = 18
-            Name = "General guest information"
+          attributes = @{
+            order = 17
+            name = "General guest information"
             kind = "Textbox"
             hint = "Specifies number of vCPUs RAM and other infromation."
             required = $false
@@ -260,9 +247,9 @@ $data = @{
         },
         @{
           type = "flexible_asset_fields"
-          Attributes = @{
-            order = 19
-            Name = "Virtual switch name and IP"
+          attributes = @{
+            order = 18
+            name = "Virtual switch name and IP"
             kind = "Textbox"
             required = $false
             use_for_title = $false
@@ -273,9 +260,9 @@ $data = @{
         },
         @{
           type = "flexible_asset_fields"
-          Attributes = @{
-            order = 20
-            Name = "This automated documentation is powered by Upstream Power Pack"
+          attributes = @{
+            order = 19
+            name = "This automated documentation is powered by Upstream Power Pack"
             kind = "Header"
             required = $false
             use_for_title = $false
