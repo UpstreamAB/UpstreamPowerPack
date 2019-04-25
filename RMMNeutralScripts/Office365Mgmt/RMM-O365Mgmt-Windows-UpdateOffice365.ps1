@@ -6,6 +6,6 @@
 # https://en.upstream.se/powerpack/
 # --------------------------------------------------------------------------------------------------------------------------------
 
-$OfficeC2RClient = "%ProgramFiles%\Common Files\Microsoft Shared\ClickToRun\OfficeC2RClient.exe"
+$OfficeC2RClient = "C:\Program Files\Common Files\Microsoft Shared\ClickToRun\OfficeC2RClient.exe"
 $Arguments = "/update user updatepromptuser=true forceappshutdown=true displaylevel=true"
 Start-Process $OfficeC2RClient $Arguments
