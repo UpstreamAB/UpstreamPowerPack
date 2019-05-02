@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<event_sets>
+  <set_elements setName="__[UPSTREAM] - User Experience - Unexpected Shutdowns And Bluescreens" eventSetId="272013620" snmpTraps="0">
+    <element_data ignore="0" source="*" category="*" eventId="6008" username="*" description="*"/>
+    <element_data ignore="0" source="BugCheck" category="*" eventId="1001" username="*" description="*"/>
+  </set_elements>
+</event_sets>
