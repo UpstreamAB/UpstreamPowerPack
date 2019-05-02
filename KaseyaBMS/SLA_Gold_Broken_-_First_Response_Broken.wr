@@ -1,0 +1,316 @@
+<report>
+  <main>
+    <id>ec3a389b-8990-4407-b36f-3d1f151067c8</id>
+    <version>1</version>
+    <type>Standard</type>
+    <sql_stmt />
+    <show_execute_form>False</show_execute_form>
+    <filter_execution_window>Default</filter_execution_window>
+    <fit_page_width>False</fit_page_width>
+    <suppress_formatting>False</suppress_formatting>
+    <report_tree_shortcut>0</report_tree_shortcut>
+    <output_mode>6</output_mode>
+    <prevent_output />
+    <page_size>Letter</page_size>
+    <page_orientation>Portrait</page_orientation>
+    <include_setup_info>No</include_setup_info>
+    <description />
+    <filter_description />
+    <show_grid>True</show_grid>
+    <pdf_template />
+    <embedded_pdf_template />
+    <simulate_pdf>True</simulate_pdf>
+    <no_data_render_type>ShowMessage</no_data_render_type>
+    <show_interactive_sorts>True</show_interactive_sorts>
+    <allow_column_hide>True</allow_column_hide>
+    <groups_on_separate_worksheets>False</groups_on_separate_worksheets>
+    <enable_cartesian_processing>Default</enable_cartesian_processing>
+    <visualization_report>false</visualization_report>
+    <use_cache_execution>false</use_cache_execution>
+    <excel_freeze_rows>1</excel_freeze_rows>
+    <excel_freeze_columns>1</excel_freeze_columns>
+    <excel_show_gridlines>True</excel_show_gridlines>
+    <suppressfiltersinterface>False</suppressfiltersinterface>
+    <suppresssortsinterface>False</suppresssortsinterface>
+  </main>
+  <entity>
+    <entity_name>Exago_Tickets</entity_name>
+    <group_by_flag>False</group_by_flag>
+    <category>Service Desk</category>
+  </entity>
+  <cell>
+    <id>2103765993</id>
+    <cell_text>SLA Silver Broken - First Response Broken</cell_text>
+    <cell_type>text</cell_type>
+    <cell_row>0</cell_row>
+    <cell_col>0</cell_col>
+    <cell_horizontal_align>Center</cell_horizontal_align>
+    <cell_colspan>2</cell_colspan>
+    <wrap_text_flag>True</wrap_text_flag>
+    <font_name>Arial</font_name>
+    <font_size>14</font_size>
+    <font_bold_flag>True</font_bold_flag>
+  </cell>
+  <cell>
+    <id>1756664611</id>
+    <cell_text />
+    <cell_type>text</cell_type>
+    <cell_row>1</cell_row>
+    <cell_col>0</cell_col>
+    <cell_colspan>2</cell_colspan>
+    <wrap_text_flag>True</wrap_text_flag>
+    <font_name>Arial</font_name>
+    <font_size>8</font_size>
+  </cell>
+  <cell>
+    <id>842915762</id>
+    <cell_text>Client Name</cell_text>
+    <cell_type>text</cell_type>
+    <cell_row>2</cell_row>
+    <cell_col>0</cell_col>
+    <cell_horizontal_align>Center</cell_horizontal_align>
+    <wrap_text_flag>True</wrap_text_flag>
+    <font_name>Arial</font_name>
+    <font_size>8</font_size>
+    <font_bold_flag>True</font_bold_flag>
+  </cell>
+  <cell>
+    <id>1913549543</id>
+    <cell_text>Ticket Number</cell_text>
+    <cell_type>text</cell_type>
+    <cell_row>2</cell_row>
+    <cell_col>1</cell_col>
+    <cell_horizontal_align>Center</cell_horizontal_align>
+    <wrap_text_flag>True</wrap_text_flag>
+    <font_name>Arial</font_name>
+    <font_size>8</font_size>
+    <font_bold_flag>True</font_bold_flag>
+  </cell>
+  <cell>
+    <id>1983035337</id>
+    <cell_text>Ticket Title</cell_text>
+    <cell_type>text</cell_type>
+    <cell_row>2</cell_row>
+    <cell_col>2</cell_col>
+    <wrap_text_flag>True</wrap_text_flag>
+    <font_name>Arial</font_name>
+    <font_size>8</font_size>
+    <font_bold_flag>True</font_bold_flag>
+  </cell>
+  <cell>
+    <id>878008119</id>
+    <cell_text>First Response Time Hours</cell_text>
+    <cell_type>text</cell_type>
+    <cell_row>2</cell_row>
+    <cell_col>3</cell_col>
+    <wrap_text_flag>True</wrap_text_flag>
+    <font_name>Arial</font_name>
+    <font_size>8</font_size>
+    <font_bold_flag>True</font_bold_flag>
+  </cell>
+  <cell>
+    <id>13323676</id>
+    <cell_text>Resolution Time Hours</cell_text>
+    <cell_type>text</cell_type>
+    <cell_row>2</cell_row>
+    <cell_col>4</cell_col>
+    <wrap_text_flag>True</wrap_text_flag>
+    <font_name>Arial</font_name>
+    <font_size>8</font_size>
+    <font_bold_flag>True</font_bold_flag>
+  </cell>
+  <cell>
+    <id>993465179</id>
+    <cell_text>SLA Name</cell_text>
+    <cell_type>text</cell_type>
+    <cell_row>2</cell_row>
+    <cell_col>5</cell_col>
+    <wrap_text_flag>True</wrap_text_flag>
+    <font_name>Arial</font_name>
+    <font_size>8</font_size>
+    <font_bold_flag>True</font_bold_flag>
+  </cell>
+  <cell>
+    <id>1445675780</id>
+    <cell_text>Exago_Tickets.Client Name</cell_text>
+    <cell_type>data</cell_type>
+    <cell_row>4</cell_row>
+    <cell_col>0</cell_col>
+    <wrap_text_flag>True</wrap_text_flag>
+    <font_name>Arial</font_name>
+    <font_size>8</font_size>
+  </cell>
+  <cell>
+    <id>870910183</id>
+    <cell_text>Exago_Tickets.Ticket Number</cell_text>
+    <cell_type>data</cell_type>
+    <cell_row>5</cell_row>
+    <cell_col>1</cell_col>
+    <wrap_text_flag>True</wrap_text_flag>
+    <font_name>Arial</font_name>
+    <font_size>8</font_size>
+  </cell>
+  <cell>
+    <id>731167275</id>
+    <cell_text>Exago_Tickets.Title</cell_text>
+    <cell_type>data</cell_type>
+    <cell_row>5</cell_row>
+    <cell_col>2</cell_col>
+    <wrap_text_flag>True</wrap_text_flag>
+    <font_name>Arial</font_name>
+    <font_size>8</font_size>
+  </cell>
+  <cell>
+    <id>1326176928</id>
+    <cell_text>={Exago_Tickets.Actual First Response Minutes}/60</cell_text>
+    <cell_type>formula</cell_type>
+    <cell_row>5</cell_row>
+    <cell_col>3</cell_col>
+    <wrap_text_flag>True</wrap_text_flag>
+    <font_name>Arial</font_name>
+    <font_size>8</font_size>
+  </cell>
+  <cell>
+    <id>1649031812</id>
+    <cell_text>={Exago_Tickets.Actual Resolution Minutes}/60</cell_text>
+    <cell_type>formula</cell_type>
+    <cell_row>5</cell_row>
+    <cell_col>4</cell_col>
+    <wrap_text_flag>True</wrap_text_flag>
+    <font_name>Arial</font_name>
+    <font_size>8</font_size>
+  </cell>
+  <cell>
+    <id>1539787520</id>
+    <cell_text>Exago_Tickets.SLA Name</cell_text>
+    <cell_type>data</cell_type>
+    <cell_row>5</cell_row>
+    <cell_col>5</cell_col>
+    <wrap_text_flag>True</wrap_text_flag>
+    <font_name>Arial</font_name>
+    <font_size>8</font_size>
+  </cell>
+  <cell>
+    <id>292814067</id>
+    <cell_text>Tickets per client</cell_text>
+    <cell_type>text</cell_type>
+    <cell_row>6</cell_row>
+    <cell_col>0</cell_col>
+    <wrap_text_flag>True</wrap_text_flag>
+    <font_name>Arial</font_name>
+    <font_size>8</font_size>
+  </cell>
+  <cell>
+    <id>1992905867</id>
+    <cell_text>=aggcount({Exago_Tickets.Ticket Number})</cell_text>
+    <cell_type>formula</cell_type>
+    <cell_row>6</cell_row>
+    <cell_col>1</cell_col>
+    <wrap_text_flag>True</wrap_text_flag>
+    <font_name>Arial</font_name>
+    <font_size>8</font_size>
+  </cell>
+  <cell>
+    <id>352156264</id>
+    <cell_text>Total</cell_text>
+    <cell_type>text</cell_type>
+    <cell_row>7</cell_row>
+    <cell_col>0</cell_col>
+    <wrap_text_flag>True</wrap_text_flag>
+    <font_name>Arial</font_name>
+    <font_size>8</font_size>
+  </cell>
+  <cell>
+    <id>1517373862</id>
+    <cell_text>=aggcount({Exago_Tickets.Ticket Number})</cell_text>
+    <cell_type>formula</cell_type>
+    <cell_row>7</cell_row>
+    <cell_col>1</cell_col>
+    <wrap_text_flag>True</wrap_text_flag>
+    <font_name>Arial</font_name>
+    <font_size>8</font_size>
+  </cell>
+  <row>
+    <group_type>Page Header</group_type>
+  </row>
+  <row>
+    <group_type>Page Header</group_type>
+  </row>
+  <row>
+    <group_type>Page Header</group_type>
+  </row>
+  <row>
+    <group_type>Report Header</group_type>
+  </row>
+  <row>
+    <group_type>Header</group_type>
+    <group_field>Exago_Tickets.Client Name</group_field>
+  </row>
+  <row>
+    <group_type>Detail</group_type>
+  </row>
+  <row>
+    <group_type>Footer</group_type>
+    <group_field>Exago_Tickets.Client Name</group_field>
+  </row>
+  <row>
+    <group_type>Report Footer</group_type>
+  </row>
+  <column>
+    <column_width>100</column_width>
+    <column_label>Client Name</column_label>
+  </column>
+  <column>
+    <column_width>100</column_width>
+    <column_label>Ticket Number</column_label>
+  </column>
+  <column>
+    <column_width>100</column_width>
+  </column>
+  <column>
+    <column_width>100</column_width>
+  </column>
+  <column>
+    <column_width>100</column_width>
+  </column>
+  <column>
+    <column_width>100</column_width>
+  </column>
+  <sort>
+    <sort_name>Exago_Tickets.Client Name</sort_name>
+    <sort_title />
+    <order_num>0</order_num>
+    <ascending_flag>True</ascending_flag>
+  </sort>
+  <filter>
+    <filter_name>Exago_Tickets.Actual First Response Minutes</filter_name>
+    <order_num>0</order_num>
+    <operator>&gt;=</operator>
+    <prompt_flag>False</prompt_flag>
+    <and_flag>True</and_flag>
+    <group_with_next_flag>False</group_with_next_flag>
+    <filter_ref_id>769762283</filter_ref_id>
+    <values>
+      <value>60</value>
+    </values>
+  </filter>
+  <filter>
+    <filter_name>Exago_Tickets.SLA Name</filter_name>
+    <order_num>1</order_num>
+    <operator>ct</operator>
+    <prompt_flag>False</prompt_flag>
+    <and_flag>True</and_flag>
+    <group_with_next_flag>False</group_with_next_flag>
+    <filter_ref_id>695654989</filter_ref_id>
+    <values>
+      <value>Gold</value>
+    </values>
+  </filter>
+  <topn>
+    <action>top</action>
+    <use_topn_item>False</use_topn_item>
+    <num_items>10</num_items>
+    <cellId>-1</cellId>
+  </topn>
+  <dynamicfilters />
+</report>
