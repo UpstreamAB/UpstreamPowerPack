@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<event_sets>
+  <set_elements setName="__[UPSTREAM] - User Experience - Application Crashes" eventSetId="81042891" snmpTraps="0">
+    <element_data ignore="0" source="*" category="*" eventId="1000" username="*" description="winword.exe"/>
+    <element_data ignore="0" source="*" category="*" eventId="1000" username="*" description="excel.exe"/>
+    <element_data ignore="0" source="*" category="*" eventId="1000" username="*" description="groove.exe"/>
+    <element_data ignore="0" source="*" category="*" eventId="1000" username="*" description="powerpnt.exe"/>
+    <element_data ignore="0" source="*" category="*" eventId="1000" username="*" description="outlook.exe"/>
+    <element_data ignore="0" source="*" category="*" eventId="1000" username="*" description="onenote.exe"/>
+    <element_data ignore="0" source="*" category="*" eventId="1000" username="*" description="msaccess.exe"/>
+    <element_data ignore="0" source="*" category="*" eventId="1000" username="*" description="lync.exe"/>
+    <element_data ignore="0" source="*" category="*" eventId="1000" username="*" description="zoom.exe"/>
+    <element_data ignore="0" source="*" category="*" eventId="1000" username="*" description="java.exe"/>
+    <element_data ignore="0" source="*" category="*" eventId="1000" username="*" description="chrome.exe"/>
+    <element_data ignore="0" source="*" category="*" eventId="1000" username="*" description="acrord32.exe"/>
+    <element_data ignore="0" source="*" category="*" eventId="1000" username="*" description="firefox.exe"/>
+    <element_data ignore="0" source="*" category="*" eventId="1000" username="*" description="iexplore.exe"/>
+  </set_elements>
+</event_sets>
