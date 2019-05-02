@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<event_sets>
+  <set_elements setName="__[UPSTREAM] - Hardware - Disk Errors" eventSetId="99616127" snmpTraps="0">
+    <element_data ignore="0" source="*" category="*" eventId="129" username="*" description="*"/>
+    <element_data ignore="0" source="cissesrv" category="*" eventId="-1" username="*" description="*"/>
+    <element_data ignore="0" source="cissesrv" category="*" eventId="24645" username="*" description="*"/>
+    <element_data ignore="0" source="cissesrv" category="*" eventId="24600" username="*" description="*"/>
+    <element_data ignore="0" source="disk" category="*" eventId="-1" username="*" description="*"/>
+    <element_data ignore="0" source="disk" category="*" eventId="11" username="*" description="*"/>
+    <element_data ignore="0" source="disk" category="*" eventId="51" username="*" description="*"/>
+    <element_data ignore="0" source="disk" category="*" eventId="157" username="*" description="*"/>
+    <element_data ignore="0" source="HpCISSs2" category="*" eventId="129" username="*" description="*"/>
+    <element_data ignore="0" source="lsi_sas" category="*" eventId="-1" username="*" description="*"/>
+    <element_data ignore="0" source="lsi_sas" category="*" eventId="11" username="*" description="*"/>
+    <element_data ignore="0" source="lsi_sas" category="*" eventId="129" username="*" description="*"/>
+    <element_data ignore="0" source="storage agents" category="*" eventId="-1" username="*" description="*"/>
+    <element_data ignore="0" source="storage agents" category="*" eventId="1223" username="*" description="*"/>
+  </set_elements>
+</event_sets>
