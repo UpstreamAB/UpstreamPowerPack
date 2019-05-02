@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<event_sets>
+  <set_elements setName="__[UPSTREAM] - User Experience - Application Hang" eventSetId="80224211" snmpTraps="0">
+    <element_data ignore="0" source="Application Hang" category="*" eventId="1002" username="*" description="iexplore.exe"/>
+    <element_data ignore="0" source="Application Hang" category="*" eventId="1002" username="*" description="chrome.exe"/>
+    <element_data ignore="0" source="Application Hang" category="*" eventId="1002" username="*" description="winword.exe"/>
+    <element_data ignore="0" source="Application Hang" category="*" eventId="1002" username="*" description="excel.exe"/>
+    <element_data ignore="0" source="Application Hang" category="*" eventId="1002" username="*" description="outlook.exe"/>
+    <element_data ignore="0" source="Application Hang" category="*" eventId="1002" username="*" description="skype.exe"/>
+    <element_data ignore="0" source="Application Hang" category="*" eventId="1002" username="*" description="powerpnt.exe"/>
+    <element_data ignore="0" source="Application Hang" category="*" eventId="1002" username="*" description="acrord32.exe"/>
+    <element_data ignore="0" source="Application Hang" category="*" eventId="1002" username="*" description="java.exe"/>
+    <element_data ignore="0" source="Application Hang" category="*" eventId="1002" username="*" description="firefox.exe"/>
+    <element_data ignore="0" source="Application Hang" category="*" eventId="1002" username="*" description="zoom.exe"/>
+    <element_data ignore="0" source="Application Hang" category="*" eventId="1002" username="*" description="onenote.exe"/>
+    <element_data ignore="0" source="Application Hang" category="*" eventId="1002" username="*" description="groove.exe"/>
+    <element_data ignore="0" source="Application Hang" category="*" eventId="1002" username="*" description="msaccess.exe"/>
+    <element_data ignore="0" source="Application Hang" category="*" eventId="1002" username="*" description="lync.exe"/>
+  </set_elements>
+</event_sets>
