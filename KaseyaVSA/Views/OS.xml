@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Views>
+  <View viewId="13735781" name="__[UPSTREAM] - OS - All Linux" readWrite="0" shareAll="0" useMachFil="0" overMachFil="*" useGroupFil="0" groupIdFil="" showCheckin="0" onLineMin="43200" showReboot="0" rebootMin="1440" useGateway="0" onlyGateway="" useIpFil="0" ipFil="" useOs="17" useOsVer="0" osVer="*" useScriptPending="0" scriptId="0" useScriptResult="0" useScriptSince="0" scriptMin="1440" useViewColFil="0" useColFil="0" colIdFil="0" useAppName="0" appFilter="" useAppVer="0" verFilter="0" usePatchFil="0" missingPatches="0" usePatchPolicy="0" usePatchScanPending="0" usePatchScanResult="0" usePatchScanSince="0" patchScanMin="1440" advFilter="0" advFilterId="91594539" usePatchRebootPending="0" usePatchAutoUpdateConfig="0" patchAutoUpdateConfig="0" usePatchRebootConfig="0" patchRebootConfig="0" usePatchTestStatus="0" patchTestStatus="-2" usePatchFileSrcConfig="0" patchFileSrcConfig="0,4" usePatchUnscanned="0" usePatchMissingKB="0" patchMissingKB="" showSuspended="0" useAgentCredentialStatus="0" agentCredentialStatus="-1" useMonsetFilter="0" MonsetID="0" useSNMPsetFilter="0" SNMPsetID="0" Override="0" andMachineLabelsFlag="False" colIdFilName="">
+    <Filters>
+      <ReportFilters filterId="91594539" colId="4" showCol="1" filter="2003 or 2008 or 2000 or NT4 or 2012" itemId="47" />
+    </Filters>
+    <viewDefApp />
+    <viewDeflabels />
+    <viewShare />
+  </View>
+  <View viewId="47393011" name="__[UPSTREAM] - OS - All Mac OS X" readWrite="0" shareAll="0" useMachFil="0" overMachFil="*" useGroupFil="0" groupIdFil="" showCheckin="0" onLineMin="43200" showReboot="0" rebootMin="1440" useGateway="0" onlyGateway="" useIpFil="0" ipFil="" useOs="13" useOsVer="0" osVer="*" useScriptPending="0" scriptId="0" useScriptResult="0" useScriptSince="0" scriptMin="1440" useViewColFil="0" useColFil="0" colIdFil="0" useAppName="0" appFilter="" useAppVer="0" verFilter="0" usePatchFil="0" missingPatches="0" usePatchPolicy="0" usePatchScanPending="0" usePatchScanResult="0" usePatchScanSince="0" patchScanMin="1440" advFilter="0" advFilterId="73274307" usePatchRebootPending="0" usePatchAutoUpdateConfig="0" patchAutoUpdateConfig="0" usePatchRebootConfig="0" patchRebootConfig="0" usePatchTestStatus="0" patchTestStatus="-2" usePatchFileSrcConfig="0" patchFileSrcConfig="0,4" usePatchUnscanned="0" usePatchMissingKB="0" patchMissingKB="" showSuspended="0" useAgentCredentialStatus="0" agentCredentialStatus="-1" useMonsetFilter="0" MonsetID="0" useSNMPsetFilter="0" SNMPsetID="0" Override="0" andMachineLabelsFlag="False" colIdFilName="">
+    <Filters>
+      <ReportFilters filterId="73274307" colId="4" showCol="1" filter="2003 or 2008 or 2000 or NT4 or 2012" itemId="48" />
+    </Filters>
+    <viewDefApp />
+    <viewDeflabels />
+    <viewShare />
+  </View>
+  <View viewId="65636291" name="__[UPSTREAM] - OS - All Windows 10" readWrite="1" shareAll="1" useMachFil="0" overMachFil="*" useGroupFil="0" groupIdFil="" showCheckin="0" onLineMin="43200" showReboot="0" rebootMin="1440" useGateway="0" onlyGateway="" useIpFil="0" ipFil="" useOs="21" useOsVer="0" osVer="*" useScriptPending="0" scriptId="0" useScriptResult="0" useScriptSince="0" scriptMin="1440" useViewColFil="0" useColFil="0" colIdFil="0" useAppName="0" appFilter="" useAppVer="0" verFilter="0" usePatchFil="0" missingPatches="0" usePatchPolicy="0" usePatchScanPending="0" usePatchScanResult="0" usePatchScanSince="0" patchScanMin="1440" advFilter="0" advFilterId="51183375" usePatchRebootPending="0" usePatchAutoUpdateConfig="0" patchAutoUpdateConfig="0" usePatchRebootConfig="0" patchRebootConfig="0" usePatchTestStatus="0" patchTestStatus="-2" usePatchFileSrcConfig="0" patchFileSrcConfig="0,4" usePatchUnscanned="0" usePatchMissingKB="0" patchMissingKB="" showSuspended="0" useAgentCredentialStatus="0" agentCredentialStatus="-1" useMonsetFilter="0" MonsetID="0" useSNMPsetFilter="0" SNMPsetID="0" Override="0" andMachineLabelsFlag="False" colIdFilName="">
+    <Filters>
+      <ReportFilters filterId="51183375" colId="4" showCol="1" filter="2003 or 2008 or 2000 or NT4 or 2012" itemId="16" />
+    </Filters>
+    <viewDefApp />
+    <viewDeflabels />
+    <viewShare>
+      <viewAcl viewId="65636291" adminId="2" partitionId="1" adminGroupName="Master" internalCode="1" />
+    </viewShare>
+  </View>
+  <View viewId="22463434" name="__[UPSTREAM] - OS - All Windows 7" readWrite="0" shareAll="0" useMachFil="0" overMachFil="*" useGroupFil="0" groupIdFil="" showCheckin="0" onLineMin="43200" showReboot="0" rebootMin="1440" useGateway="0" onlyGateway="" useIpFil="0" ipFil="" useOs="16" useOsVer="0" osVer="*" useScriptPending="0" scriptId="0" useScriptResult="0" useScriptSince="0" scriptMin="1440" useViewColFil="0" useColFil="0" colIdFil="0" useAppName="0" appFilter="" useAppVer="0" verFilter="0" usePatchFil="0" missingPatches="0" usePatchPolicy="0" usePatchScanPending="0" usePatchScanResult="0" usePatchScanSince="0" patchScanMin="1440" advFilter="0" advFilterId="86001599" usePatchRebootPending="0" usePatchAutoUpdateConfig="0" patchAutoUpdateConfig="0" usePatchRebootConfig="0" patchRebootConfig="0" usePatchTestStatus="0" patchTestStatus="-2" usePatchFileSrcConfig="0" patchFileSrcConfig="0,4" usePatchUnscanned="0" usePatchMissingKB="0" patchMissingKB="" showSuspended="0" useAgentCredentialStatus="0" agentCredentialStatus="-1" useMonsetFilter="0" MonsetID="0" useSNMPsetFilter="0" SNMPsetID="0" Override="0" andMachineLabelsFlag="False" colIdFilName="">
+    <Filters>
+      <ReportFilters filterId="86001599" colId="4" showCol="1" filter="2003 or 2008 or 2000 or NT4 or 2012" itemId="17" />
+    </Filters>
+    <viewDefApp />
+    <viewDeflabels />
+    <viewShare>
+      <viewAcl viewId="22463434" adminId="2" partitionId="1" adminGroupName="Master" internalCode="1" />
+    </viewShare>
+  </View>
+  <View viewId="17348411" name="__[UPSTREAM] - OS - All Windows 8.1" readWrite="0" shareAll="0" useMachFil="0" overMachFil="*" useGroupFil="0" groupIdFil="" showCheckin="0" onLineMin="43200" showReboot="0" rebootMin="1440" useGateway="0" onlyGateway="" useIpFil="0" ipFil="" useOs="20" useOsVer="0" osVer="*" useScriptPending="0" scriptId="0" useScriptResult="0" useScriptSince="0" scriptMin="1440" useViewColFil="0" useColFil="0" colIdFil="0" useAppName="0" appFilter="" useAppVer="0" verFilter="0" usePatchFil="0" missingPatches="0" usePatchPolicy="0" usePatchScanPending="0" usePatchScanResult="0" usePatchScanSince="0" patchScanMin="1440" advFilter="0" advFilterId="70348692" usePatchRebootPending="0" usePatchAutoUpdateConfig="0" patchAutoUpdateConfig="0" usePatchRebootConfig="0" patchRebootConfig="0" usePatchTestStatus="0" patchTestStatus="-2" usePatchFileSrcConfig="0" patchFileSrcConfig="0,4" usePatchUnscanned="0" usePatchMissingKB="0" patchMissingKB="" showSuspended="0" useAgentCredentialStatus="0" agentCredentialStatus="-1" useMonsetFilter="0" MonsetID="0" useSNMPsetFilter="0" SNMPsetID="0" Override="0" andMachineLabelsFlag="False" colIdFilName="">
+    <Filters>
+      <ReportFilters filterId="70348692" colId="4" showCol="1" filter="2003 or 2008 or 2000 or NT4 or 2012" itemId="18" />
+    </Filters>
+    <viewDefApp />
+    <viewDeflabels />
+    <viewShare>
+      <viewAcl viewId="17348411" adminId="2" partitionId="1" adminGroupName="Master" internalCode="1" />
+    </viewShare>
+  </View>
+  <View viewId="79401255" name="__[UPSTREAM] - OS - All Windows Server 2008" readWrite="0" shareAll="0" useMachFil="0" overMachFil="*" useGroupFil="0" groupIdFil="" showCheckin="0" onLineMin="43200" showReboot="0" rebootMin="1440" useGateway="0" onlyGateway="" useIpFil="0" ipFil="" useOs="15" useOsVer="0" osVer="*" useScriptPending="0" scriptId="0" useScriptResult="0" useScriptSince="0" scriptMin="1440" useViewColFil="0" useColFil="0" colIdFil="0" useAppName="0" appFilter="" useAppVer="0" verFilter="0" usePatchFil="0" missingPatches="0" usePatchPolicy="0" usePatchScanPending="0" usePatchScanResult="0" usePatchScanSince="0" patchScanMin="1440" advFilter="0" advFilterId="94111113" usePatchRebootPending="0" usePatchAutoUpdateConfig="0" patchAutoUpdateConfig="0" usePatchRebootConfig="0" patchRebootConfig="0" usePatchTestStatus="0" patchTestStatus="-2" usePatchFileSrcConfig="0" patchFileSrcConfig="0,4" usePatchUnscanned="0" usePatchMissingKB="0" patchMissingKB="" showSuspended="0" useAgentCredentialStatus="0" agentCredentialStatus="-1" useMonsetFilter="0" MonsetID="0" useSNMPsetFilter="0" SNMPsetID="0" Override="0" andMachineLabelsFlag="False" colIdFilName="">
+    <Filters>
+      <ReportFilters filterId="94111113" colId="4" showCol="1" filter="2003 or 2008 or 2000 or NT4 or 2012" itemId="20" />
+    </Filters>
+    <viewDefApp />
+    <viewDeflabels />
+    <viewShare>
+      <viewAcl viewId="79401255" adminId="2" partitionId="1" adminGroupName="Master" internalCode="1" />
+    </viewShare>
+  </View>
+  <View viewId="97284644" name="__[UPSTREAM] - OS - All Windows Server 2012" readWrite="0" shareAll="0" useMachFil="0" overMachFil="*" useGroupFil="0" groupIdFil="" showCheckin="0" onLineMin="43200" showReboot="0" rebootMin="1440" useGateway="0" onlyGateway="" useIpFil="0" ipFil="" useOs="19" useOsVer="0" osVer="*" useScriptPending="0" scriptId="0" useScriptResult="0" useScriptSince="0" scriptMin="1440" useViewColFil="0" useColFil="0" colIdFil="0" useAppName="0" appFilter="" useAppVer="0" verFilter="0" usePatchFil="0" missingPatches="0" usePatchPolicy="0" usePatchScanPending="0" usePatchScanResult="0" usePatchScanSince="0" patchScanMin="1440" advFilter="0" advFilterId="60454254" usePatchRebootPending="0" usePatchAutoUpdateConfig="0" patchAutoUpdateConfig="0" usePatchRebootConfig="0" patchRebootConfig="0" usePatchTestStatus="0" patchTestStatus="-2" usePatchFileSrcConfig="0" patchFileSrcConfig="0,4" usePatchUnscanned="0" usePatchMissingKB="0" patchMissingKB="" showSuspended="0" useAgentCredentialStatus="0" agentCredentialStatus="-1" useMonsetFilter="0" MonsetID="0" useSNMPsetFilter="0" SNMPsetID="0" Override="0" andMachineLabelsFlag="False" colIdFilName="">
+    <Filters>
+      <ReportFilters filterId="60454254" colId="4" showCol="1" filter="2003 or 2008 or 2000 or NT4 or 2012" itemId="21" />
+    </Filters>
+    <viewDefApp />
+    <viewDeflabels />
+    <viewShare>
+      <viewAcl viewId="97284644" adminId="2" partitionId="1" adminGroupName="Master" internalCode="1" />
+    </viewShare>
+  </View>
+  <View viewId="51865634" name="__[UPSTREAM] - OS - All Windows Server 2016" readWrite="0" shareAll="0" useMachFil="0" overMachFil="*" useGroupFil="0" groupIdFil="" showCheckin="0" onLineMin="43200" showReboot="0" rebootMin="1440" useGateway="0" onlyGateway="" useIpFil="0" ipFil="" useOs="22" useOsVer="0" osVer="*" useScriptPending="0" scriptId="0" useScriptResult="0" useScriptSince="0" scriptMin="1440" useViewColFil="0" useColFil="0" colIdFil="0" useAppName="0" appFilter="" useAppVer="0" verFilter="0" usePatchFil="0" missingPatches="0" usePatchPolicy="0" usePatchScanPending="0" usePatchScanResult="0" usePatchScanSince="0" patchScanMin="1440" advFilter="0" advFilterId="85234572" usePatchRebootPending="0" usePatchAutoUpdateConfig="0" patchAutoUpdateConfig="0" usePatchRebootConfig="0" patchRebootConfig="0" usePatchTestStatus="0" patchTestStatus="-2" usePatchFileSrcConfig="0" patchFileSrcConfig="0,4" usePatchUnscanned="0" usePatchMissingKB="0" patchMissingKB="" showSuspended="0" useAgentCredentialStatus="0" agentCredentialStatus="-1" useMonsetFilter="0" MonsetID="0" useSNMPsetFilter="0" SNMPsetID="0" Override="0" andMachineLabelsFlag="False" colIdFilName="">
+    <Filters>
+      <ReportFilters filterId="85234572" colId="4" showCol="1" filter="2003 or 2008 or 2000 or NT4 or 2012" itemId="22" />
+    </Filters>
+    <viewDefApp />
+    <viewDeflabels />
+    <viewShare>
+      <viewAcl viewId="51865634" adminId="2" partitionId="1" adminGroupName="Master" internalCode="1" />
+    </viewShare>
+  </View>
+  <View viewId="77825635" name="__[UPSTREAM] - OS - All Windows Server 2019" readWrite="0" shareAll="0" useMachFil="0" overMachFil="*" useGroupFil="0" groupIdFil="" showCheckin="0" onLineMin="43200" showReboot="0" rebootMin="1440" useGateway="0" onlyGateway="" useIpFil="0" ipFil="" useOs="23" useOsVer="0" osVer="*" useScriptPending="0" scriptId="0" useScriptResult="0" useScriptSince="0" scriptMin="1440" useViewColFil="0" useColFil="0" colIdFil="0" useAppName="0" appFilter="" useAppVer="0" verFilter="0" usePatchFil="0" missingPatches="0" usePatchPolicy="0" usePatchScanPending="0" usePatchScanResult="0" usePatchScanSince="0" patchScanMin="1440" advFilter="0" advFilterId="5040924" usePatchRebootPending="0" usePatchAutoUpdateConfig="0" patchAutoUpdateConfig="0" usePatchRebootConfig="0" patchRebootConfig="0" usePatchTestStatus="0" patchTestStatus="-2" usePatchFileSrcConfig="0" patchFileSrcConfig="0,4" usePatchUnscanned="0" usePatchMissingKB="0" patchMissingKB="" showSuspended="0" useAgentCredentialStatus="0" agentCredentialStatus="-1" useMonsetFilter="0" MonsetID="0" useSNMPsetFilter="0" SNMPsetID="0" Override="0" andMachineLabelsFlag="False" colIdFilName="">
+    <Filters>
+      <ReportFilters filterId="5040924" colId="4" showCol="1" filter="2003 or 2008 or 2000 or NT4 or 2012" itemId="41" />
+    </Filters>
+    <viewDefApp />
+    <viewDeflabels />
+    <viewShare />
+  </View>
+  <View viewId="52599194" name="__[UPSTREAM] - OS - All Windows Servers" readWrite="1" shareAll="1" useMachFil="0" overMachFil="*" useGroupFil="0" groupIdFil="" showCheckin="0" onLineMin="43200" showReboot="0" rebootMin="1440" useGateway="0" onlyGateway="" useIpFil="0" ipFil="" useOs="11" useOsVer="0" osVer="*" useScriptPending="0" scriptId="0" useScriptResult="0" useScriptSince="0" scriptMin="1440" useViewColFil="0" useColFil="0" colIdFil="0" useAppName="0" appFilter="*" useAppVer="0" verFilter="0" usePatchFil="0" missingPatches="0" usePatchPolicy="0" usePatchScanPending="0" usePatchScanResult="0" usePatchScanSince="0" patchScanMin="1440" advFilter="1" advFilterId="15135769" usePatchRebootPending="0" usePatchAutoUpdateConfig="0" patchAutoUpdateConfig="0" usePatchRebootConfig="0" patchRebootConfig="0" usePatchTestStatus="0" patchTestStatus="-2" usePatchFileSrcConfig="0" patchFileSrcConfig="0,4" usePatchUnscanned="0" usePatchMissingKB="0" patchMissingKB="" showSuspended="0" useAgentCredentialStatus="0" agentCredentialStatus="-1" useMonsetFilter="0" MonsetID="0" useSNMPsetFilter="0" SNMPsetID="0" Override="0" andMachineLabelsFlag="False" colIdFilName="">
+    <Filters>
+      <ReportFilters filterId="15135769" colId="4" showCol="1" filter="2008 or 2012 or 2016 or 2019" itemId="44" />
+    </Filters>
+    <viewDefApp />
+    <viewDeflabels />
+    <viewShare>
+      <viewAcl viewId="52599194" adminId="2" partitionId="1" adminGroupName="Master" internalCode="1" />
+    </viewShare>
+  </View>
+  <View viewId="63544057" name="__[UPSTREAM] - OS - All Windows Workstations" readWrite="1" shareAll="1" useMachFil="0" overMachFil="*" useGroupFil="0" groupIdFil="" showCheckin="0" onLineMin="43200" showReboot="0" rebootMin="1440" useGateway="0" onlyGateway="" useIpFil="0" ipFil="" useOs="10" useOsVer="0" osVer="*" useScriptPending="0" scriptId="0" useScriptResult="0" useScriptSince="0" scriptMin="1440" useViewColFil="0" useColFil="0" colIdFil="0" useAppName="0" appFilter="java.exe" useAppVer="0" verFilter="0" usePatchFil="0" missingPatches="0" usePatchPolicy="0" usePatchScanPending="0" usePatchScanResult="0" usePatchScanSince="0" patchScanMin="1440" advFilter="1" advFilterId="60805763" usePatchRebootPending="0" usePatchAutoUpdateConfig="0" patchAutoUpdateConfig="0" usePatchRebootConfig="0" patchRebootConfig="0" usePatchTestStatus="0" patchTestStatus="-2" usePatchFileSrcConfig="0" patchFileSrcConfig="0,4" usePatchUnscanned="0" usePatchMissingKB="0" patchMissingKB="" showSuspended="0" useAgentCredentialStatus="0" agentCredentialStatus="-1" useMonsetFilter="0" MonsetID="0" useSNMPsetFilter="0" SNMPsetID="0" Override="0" andMachineLabelsFlag="False" colIdFilName="">
+    <Filters>
+      <ReportFilters filterId="60805763" colId="4" showCol="1" filter="10 or 8.1 or 7" itemId="45" />
+    </Filters>
+    <viewDefApp />
+    <viewDeflabels />
+    <viewShare>
+      <viewAcl viewId="63544057" adminId="2" partitionId="1" adminGroupName="Master" internalCode="1" />
+    </viewShare>
+  </View>
+</Views>
