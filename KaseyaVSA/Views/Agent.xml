@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Views>
+  <View viewId="37537374" name="__[UPSTREAM] - Agent - All Computers Rebooted 14+ Days Ago" readWrite="1" shareAll="1" useMachFil="0" overMachFil="*" useGroupFil="0" groupIdFil="" showCheckin="0" onLineMin="1440" showReboot="2" rebootMin="20160" useGateway="0" onlyGateway="" useIpFil="0" ipFil="" useOs="10" useOsVer="0" osVer="*" useScriptPending="0" scriptId="0" useScriptResult="0" useScriptSince="0" scriptMin="1440" useViewColFil="0" useColFil="0" colIdFil="0" useAppName="0" appFilter="*" useAppVer="0" verFilter="0" usePatchFil="0" missingPatches="0" usePatchPolicy="0" usePatchScanPending="0" usePatchScanResult="0" usePatchScanSince="0" patchScanMin="1440" advFilter="0" advFilterId="92385077" usePatchRebootPending="0" usePatchAutoUpdateConfig="0" patchAutoUpdateConfig="0" usePatchRebootConfig="0" patchRebootConfig="0" usePatchTestStatus="0" patchTestStatus="-2" usePatchFileSrcConfig="0" patchFileSrcConfig="0,4" usePatchUnscanned="0" usePatchMissingKB="0" patchMissingKB="" showSuspended="0" useAgentCredentialStatus="0" agentCredentialStatus="-1" useMonsetFilter="0" MonsetID="0" useSNMPsetFilter="0" SNMPsetID="0" Override="0" andMachineLabelsFlag="False" colIdFilName="">
+    <Filters />
+    <viewDefApp />
+    <viewDeflabels />
+    <viewShare>
+      <viewAcl viewId="37537374" adminId="2" partitionId="1" adminGroupName="Master" internalCode="1" />
+    </viewShare>
+  </View>
+  <View viewId="16184367" name="__[UPSTREAM] - Agent - All Agents Checkd In" readWrite="1" shareAll="1" useMachFil="1" overMachFil="*" useGroupFil="0" groupIdFil="" showCheckin="1" onLineMin="129600" showReboot="0" rebootMin="1440" useGateway="0" onlyGateway="" useIpFil="0" ipFil="" useOs="0" useOsVer="0" osVer="*" useScriptPending="0" scriptId="0" useScriptResult="0" useScriptSince="0" scriptMin="1440" useViewColFil="0" useColFil="0" colIdFil="0" useAppName="0" appFilter="*" useAppVer="0" verFilter="0" usePatchFil="0" missingPatches="0" usePatchPolicy="0" usePatchScanPending="0" usePatchScanResult="0" usePatchScanSince="0" patchScanMin="1440" advFilter="0" advFilterId="22268805" usePatchRebootPending="0" usePatchAutoUpdateConfig="0" patchAutoUpdateConfig="0" usePatchRebootConfig="0" patchRebootConfig="0" usePatchTestStatus="0" patchTestStatus="-2" usePatchFileSrcConfig="0" patchFileSrcConfig="0,4" usePatchUnscanned="0" usePatchMissingKB="0" patchMissingKB="" showSuspended="0" useAgentCredentialStatus="0" agentCredentialStatus="-1" useMonsetFilter="0" MonsetID="0" useSNMPsetFilter="0" SNMPsetID="0" Override="0" andMachineLabelsFlag="False" colIdFilName="">
+    <Filters />
+    <viewDefApp />
+    <viewDeflabels />
+    <viewShare>
+      <viewAcl viewId="16184367" adminId="2" partitionId="1" adminGroupName="Master" internalCode="1" />
+    </viewShare>
+  </View>
+  <View viewId="31062626" name="__[UPSTREAM] - Agent - All Servers Rebooted 14+ Days Ago" readWrite="1" shareAll="1" useMachFil="0" overMachFil="*" useGroupFil="0" groupIdFil="" showCheckin="0" onLineMin="1440" showReboot="2" rebootMin="20160" useGateway="0" onlyGateway="" useIpFil="0" ipFil="" useOs="11" useOsVer="0" osVer="*" useScriptPending="0" scriptId="0" useScriptResult="0" useScriptSince="0" scriptMin="1440" useViewColFil="0" useColFil="0" colIdFil="0" useAppName="0" appFilter="*" useAppVer="0" verFilter="0" usePatchFil="0" missingPatches="0" usePatchPolicy="0" usePatchScanPending="0" usePatchScanResult="0" usePatchScanSince="0" patchScanMin="1440" advFilter="0" advFilterId="94400833" usePatchRebootPending="0" usePatchAutoUpdateConfig="0" patchAutoUpdateConfig="0" usePatchRebootConfig="0" patchRebootConfig="0" usePatchTestStatus="0" patchTestStatus="-2" usePatchFileSrcConfig="0" patchFileSrcConfig="0,4" usePatchUnscanned="0" usePatchMissingKB="0" patchMissingKB="" showSuspended="0" useAgentCredentialStatus="0" agentCredentialStatus="-1" useMonsetFilter="0" MonsetID="0" useSNMPsetFilter="0" SNMPsetID="0" Override="0" andMachineLabelsFlag="False" colIdFilName="">
+    <Filters />
+    <viewDefApp />
+    <viewDeflabels />
+    <viewShare>
+      <viewAcl viewId="31062626" adminId="2" partitionId="1" adminGroupName="Master" internalCode="1" />
+    </viewShare>
+  </View>
+  <View viewId="99610619" name="__[UPSTREAM] - Agent - Offline 60+ Days" readWrite="1" shareAll="1" useMachFil="0" overMachFil="*" useGroupFil="0" groupIdFil="" showCheckin="2" onLineMin="129600" showReboot="0" rebootMin="1440" useGateway="0" onlyGateway="" useIpFil="0" ipFil="" useOs="0" useOsVer="0" osVer="*" useScriptPending="0" scriptId="0" useScriptResult="0" useScriptSince="0" scriptMin="1440" useViewColFil="0" useColFil="0" colIdFil="0" useAppName="0" appFilter="*" useAppVer="0" verFilter="0" usePatchFil="0" missingPatches="0" usePatchPolicy="0" usePatchScanPending="0" usePatchScanResult="0" usePatchScanSince="0" patchScanMin="1440" advFilter="0" advFilterId="35554508" usePatchRebootPending="0" usePatchAutoUpdateConfig="0" patchAutoUpdateConfig="0" usePatchRebootConfig="0" patchRebootConfig="0" usePatchTestStatus="0" patchTestStatus="-2" usePatchFileSrcConfig="0" patchFileSrcConfig="0,4" usePatchUnscanned="0" usePatchMissingKB="0" patchMissingKB="" showSuspended="0" useAgentCredentialStatus="0" agentCredentialStatus="-1" useMonsetFilter="0" MonsetID="0" useSNMPsetFilter="0" SNMPsetID="0" Override="0" andMachineLabelsFlag="False" colIdFilName="">
+    <Filters />
+    <viewDefApp />
+    <viewDeflabels />
+    <viewShare>
+      <viewAcl viewId="99610619" adminId="2" partitionId="1" adminGroupName="Master" internalCode="1" />
+    </viewShare>
+  </View>
+  <View viewId="37976779" name="__[UPSTREAM] - Agent - Online Within 30 Days" readWrite="1" shareAll="1" useMachFil="0" overMachFil="*" useGroupFil="0" groupIdFil="" showCheckin="1" onLineMin="43200" showReboot="0" rebootMin="1440" useGateway="0" onlyGateway="" useIpFil="0" ipFil="" useOs="0" useOsVer="0" osVer="*" useScriptPending="0" scriptId="0" useScriptResult="0" useScriptSince="0" scriptMin="1440" useViewColFil="0" useColFil="0" colIdFil="0" useAppName="0" appFilter="*" useAppVer="0" verFilter="0" usePatchFil="0" missingPatches="0" usePatchPolicy="0" usePatchScanPending="0" usePatchScanResult="0" usePatchScanSince="0" patchScanMin="1440" advFilter="0" advFilterId="93663813" usePatchRebootPending="0" usePatchAutoUpdateConfig="0" patchAutoUpdateConfig="0" usePatchRebootConfig="0" patchRebootConfig="0" usePatchTestStatus="0" patchTestStatus="-2" usePatchFileSrcConfig="0" patchFileSrcConfig="0,4" usePatchUnscanned="0" usePatchMissingKB="0" patchMissingKB="" showSuspended="0" useAgentCredentialStatus="0" agentCredentialStatus="-1" useMonsetFilter="0" MonsetID="0" useSNMPsetFilter="0" SNMPsetID="0" Override="0" andMachineLabelsFlag="False" colIdFilName="">
+    <Filters />
+    <viewDefApp />
+    <viewDeflabels />
+    <viewShare>
+      <viewAcl viewId="37976779" adminId="2" partitionId="1" adminGroupName="Master" internalCode="1" />
+    </viewShare>
+  </View>
+</Views>
