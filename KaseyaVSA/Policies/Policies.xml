@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Policies>
+  <Policy id="355730361750224" ref="MSP - BASIC - Windows Servers" partitionid="1" rowDesc="MSP - BASIC - Windows Servers" policyTypeFK="0" markedForDelete="False" viewFK="52599194" viewName="__[UPSTREAM] - OS - All Windows Servers" treeFullPath="Upstream Power Pack 2019-05-03.MSP Basic OS Based Policies (For All Customers)" sortOrder="-1" Override="0">
+    <agentMenu id="505003102498596" partitionid="1" contactUrl="" userWebServer="" urlMenuName="" enableMenuItems="00000000" tooltipTitle="" contactMenuItemName="" />
+    <agentProcedures />
+    <alerts>
+      <alert id="474399016319964" partitionId="1" policyObjectDataFK="580664601214539" createAlarm="True" createTicket="False" runScript="False" scriptId="" scriptName="" machineId="" machName="" emailRecipients="False" emailAddresses="" alertType="alertAgentOffline" alertTypeValue="Agent Status">
+        <alertItems>
+          <alertItem id="19246222212516319413116324" partitionid="1" alertFK="474399016319964" itemName="alertDisableRemoteControl" itemValue="0" objectName="" />
+          <alertItem id="39154341381211216213197263" partitionid="1" alertFK="474399016319964" itemName="rearmAfterTime" itemValue="3" objectName="" />
+          <alertItem id="49781252321187112622115641" partitionid="1" alertFK="474399016319964" itemName="notCheckedIn" itemValue="1" objectName="" />
+          <alertItem id="51352118131851168113781591" partitionid="1" alertFK="474399016319964" itemName="rearmAfterUnits" itemValue="1" objectName="" />
+          <alertItem id="72132544184311932492451211" partitionid="1" alertFK="474399016319964" itemName="notCheckedInUnits" itemValue="0" objectName="" />
+          <alertItem id="81128822211192416211352224" partitionid="1" alertFK="474399016319964" itemName="alertAgentOnline" itemValue="0" objectName="" />
+          <alertItem id="91373814512222199571224413" partitionid="1" alertFK="474399016319964" itemName="notCheckedInTime" itemValue="5" objectName="" />
+        </alertItems>
+      </alert>
+    </alerts>
+    <checkin />
+    <credential />
+    <distributeFiles />
+    <logging id="797226756064792" partitionid="1" configDays="30" configArchive="True" netDays="30" netArchive="True" scriptDays="90" scriptArchive="True" remoteDays="90" remoteArchive="True" alarmDays="30" alarmArchive="True" monitorActionDays="30" monitorActionArchive="True" sysLogDays="30" sysLogArchive="True" eventDays="" eventArchive="" monitorDays="" monitorArchive="" snmpDays="" snmpArchive="" agentDays="" agentArchive="" errorDays="90" errorArchive="True" />
+    <machProfile />
+    <monitorSets>
+      <monitorSet id="253411175102652" partitionid="1" policyObjectDataId="902138962411386" monitorSetId="1175" createAlarm="True" createTicket="False" runScript="False" scriptId="0" machineId="0" emailRecipients="False" emailAddresses="" name="UPSTREAM - BASIC - Performance - Memory Usage - Servers ENG" scriptName="" machName="" />
+      <monitorSet id="376979288448104" partitionid="1" policyObjectDataId="902138962411386" monitorSetId="1171" createAlarm="True" createTicket="False" runScript="False" scriptId="0" machineId="0" emailRecipients="False" emailAddresses="" name="UPSTREAM - BASIC - Performance - CPU Total Usage - Servers ENG" scriptName="" machName="" />
+      <monitorSet id="681615961008526" partitionid="1" policyObjectDataId="902138962411386" monitorSetId="1164" createAlarm="True" createTicket="False" runScript="False" scriptId="0" machineId="0" emailRecipients="False" emailAddresses="" name="UPSTREAM - BASIC - Low Disk - Drive C Below 4GB - Servers ENG" scriptName="" machName="" />
+      <monitorSet id="699755977792551" partitionid="1" policyObjectDataId="902138962411386" monitorSetId="1174" createAlarm="False" createTicket="False" runScript="False" scriptId="0" machineId="0" emailRecipients="False" emailAddresses="" name="UPSTREAM - BASIC - Performance - CPU Usage Per Core - Servers ENG" scriptName="" machName="" />
+      <monitorSet id="828587099876527" partitionid="1" policyObjectDataId="902138962411386" monitorSetId="1169" createAlarm="True" createTicket="False" runScript="False" scriptId="0" machineId="0" emailRecipients="False" emailAddresses="" name="UPSTREAM - BASIC - Low Disk - Drive D-Z Below 5% - Servers ENG" scriptName="" machName="" />
+    </monitorSets>
+    <patchSettings />
+    <protectionPolicy />
+    <workingDir />
+    <remoteControl id="595848811509017" partitionid="1" remoteControlNotify="1" notifyTerminate="" requireRCNote="True" notifyMsgText="Administratör &lt;admin&gt; begär åtkomst till din dator i ett supportärende." notifyAskText="The system administrator &lt;admin&gt; is asking to remotely control your computer. OK to allow remote control?" notifyTerminateText="Administratör &lt;admin&gt; har avslutat supportärendet." />
+    <patchFileSource />
+    <patchProcedureSchedule id="234809569844422" partitionid="1" patchScanSchedule="{&quot;startdatefrom&quot;:&quot;2017-03-01T06:00:00+01:00&quot;,&quot;starttimefrom&quot;:&quot;2017-03-01T06:00:00+01:00&quot;,&quot;startdateto&quot;:&quot;2017-03-01T07:00:00+01:00&quot;,&quot;starttimeto&quot;:&quot;2017-03-01T07:00:00+01:00&quot;,&quot;recurrencetype&quot;:&quot;WEEKLY&quot;,&quot;rangeofrecurrencetype&quot;:&quot;1&quot;,&quot;skipifoffline&quot;:&quot;N&quot;,&quot;powerupifoffline&quot;:&quot;N&quot;,&quot;scheduleid&quot;:&quot;0&quot;,&quot;excludetimerange&quot;:&quot;N&quot;,&quot;recurringminutesinterval&quot;:60,&quot;recurringhoursinterval&quot;:1,&quot;recurringdaysinterval&quot;:1,&quot;recurringweeksinterval&quot;:1,&quot;sundayflag&quot;:&quot;N&quot;,&quot;mondayflag&quot;:&quot;N&quot;,&quot;tuesdayflag&quot;:&quot;N&quot;,&quot;wednesdayflag&quot;:&quot;Y&quot;,&quot;thursdayflag&quot;:&quot;N&quot;,&quot;fridayflag&quot;:&quot;N&quot;,&quot;saturdayflag&quot;:&quot;N&quot;,&quot;recurringmonthsinterval&quot;:1,&quot;monthlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;monthlyspecificday&quot;:&quot;DAY&quot;,&quot;monthlyintervaltype&quot;:1,&quot;monthday&quot;:1,&quot;yearlyintervaltype&quot;:1,&quot;yearlyspecificmonth&quot;:1,&quot;yearday&quot;:1,&quot;yearlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;yearlyspecificday&quot;:&quot;DAY&quot;,&quot;yearlyspecificmonth2&quot;:1,&quot;rangeofrecurrenceendafterinterval&quot;:1,&quot;rangeofrecurrenceenddatetime&quot;:&quot;2017-03-01T15:26:12+01:00&quot;,&quot;excludetimefrom&quot;:&quot;2017-03-01T15:26:12+01:00&quot;,&quot;excludetimeto&quot;:&quot;2017-03-01T15:26:12+01:00&quot;,&quot;createdatetime&quot;:&quot;2017-03-01T15:26:12+01:00&quot;,&quot;execwhennextonline&quot;:&quot;N&quot;,&quot;schedinagenttime&quot;:&quot;Y&quot;,&quot;distribution&quot;:60}" autoUpdateSchedule="" patchScanScheduleDescription="every 1 week(s) within 60 minute(s) of 04:00:00 am  starting on 04:00:00 am 01-Mar-17 no end date" autoUpdateScheduleDescription="" />
+    <patchRebootAction id="419287433810202" partitionid="1" rebootRadioSelect="2" rebootTime="2019-03-05 00:00:00" rebootDay="-1" rebootWarnMin="1" rebootAskMin="1" rebootNoResponseMin="1" rebootDoNothingMin="1" rebootEmail="False" rebootEmailAddress="" rebootPreScriptId="0" rebootPostScriptId="0" />
+    <auditSchedule id="143721794403965" partitionid="1" auditSchedule="" auditScheduleDescription="" auditType="" latestAuditSchedule="{&quot;startdatefrom&quot;:&quot;2017-03-01T06:00:00+01:00&quot;,&quot;starttimefrom&quot;:&quot;2017-03-01T06:00:00+01:00&quot;,&quot;startdateto&quot;:&quot;2017-03-01T07:00:00+01:00&quot;,&quot;starttimeto&quot;:&quot;2017-03-01T07:00:00+01:00&quot;,&quot;recurrencetype&quot;:&quot;DAILY&quot;,&quot;rangeofrecurrencetype&quot;:&quot;1&quot;,&quot;skipifoffline&quot;:&quot;N&quot;,&quot;powerupifoffline&quot;:&quot;N&quot;,&quot;scheduleid&quot;:&quot;0&quot;,&quot;excludetimerange&quot;:&quot;N&quot;,&quot;recurringminutesinterval&quot;:60,&quot;recurringhoursinterval&quot;:1,&quot;recurringdaysinterval&quot;:1,&quot;recurringweeksinterval&quot;:1,&quot;sundayflag&quot;:&quot;N&quot;,&quot;mondayflag&quot;:&quot;Y&quot;,&quot;tuesdayflag&quot;:&quot;N&quot;,&quot;wednesdayflag&quot;:&quot;N&quot;,&quot;thursdayflag&quot;:&quot;N&quot;,&quot;fridayflag&quot;:&quot;N&quot;,&quot;saturdayflag&quot;:&quot;N&quot;,&quot;recurringmonthsinterval&quot;:1,&quot;monthlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;monthlyspecificday&quot;:&quot;DAY&quot;,&quot;monthlyintervaltype&quot;:1,&quot;monthday&quot;:1,&quot;yearlyintervaltype&quot;:1,&quot;yearlyspecificmonth&quot;:1,&quot;yearday&quot;:1,&quot;yearlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;yearlyspecificday&quot;:&quot;DAY&quot;,&quot;yearlyspecificmonth2&quot;:1,&quot;rangeofrecurrenceendafterinterval&quot;:1,&quot;rangeofrecurrenceenddatetime&quot;:&quot;2017-03-01T15:23:37+01:00&quot;,&quot;excludetimefrom&quot;:&quot;2017-03-01T15:23:37+01:00&quot;,&quot;excludetimeto&quot;:&quot;2017-03-01T15:23:37+01:00&quot;,&quot;createdatetime&quot;:&quot;2017-03-01T15:23:37+01:00&quot;,&quot;execwhennextonline&quot;:&quot;N&quot;,&quot;schedinagenttime&quot;:&quot;Y&quot;,&quot;distribution&quot;:60}" latestAuditScheduleDescription="every 1 day(s) within 60 minute(s) of 04:00:00 am  starting on 04:00:00 am 01-Mar-17 no end date" baselineAuditSchedule="{&quot;startdatefrom&quot;:&quot;2017-03-01T16:27:40+01:00&quot;,&quot;starttimefrom&quot;:&quot;2017-03-01T16:27:40+01:00&quot;,&quot;startdateto&quot;:&quot;2017-03-01T16:27:40+01:00&quot;,&quot;starttimeto&quot;:&quot;2017-03-01T16:27:40+01:00&quot;,&quot;recurrencetype&quot;:&quot;ONCE&quot;,&quot;rangeofrecurrencetype&quot;:&quot;1&quot;,&quot;skipifoffline&quot;:&quot;N&quot;,&quot;powerupifoffline&quot;:&quot;N&quot;,&quot;scheduleid&quot;:&quot;0&quot;,&quot;excludetimerange&quot;:&quot;N&quot;,&quot;recurringminutesinterval&quot;:60,&quot;recurringhoursinterval&quot;:1,&quot;recurringdaysinterval&quot;:1,&quot;recurringweeksinterval&quot;:1,&quot;sundayflag&quot;:&quot;N&quot;,&quot;mondayflag&quot;:&quot;Y&quot;,&quot;tuesdayflag&quot;:&quot;N&quot;,&quot;wednesdayflag&quot;:&quot;N&quot;,&quot;thursdayflag&quot;:&quot;N&quot;,&quot;fridayflag&quot;:&quot;N&quot;,&quot;saturdayflag&quot;:&quot;N&quot;,&quot;recurringmonthsinterval&quot;:1,&quot;monthlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;monthlyspecificday&quot;:&quot;DAY&quot;,&quot;monthlyintervaltype&quot;:1,&quot;monthday&quot;:1,&quot;yearlyintervaltype&quot;:1,&quot;yearlyspecificmonth&quot;:1,&quot;yearday&quot;:1,&quot;yearlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;yearlyspecificday&quot;:&quot;DAY&quot;,&quot;yearlyspecificmonth2&quot;:1,&quot;rangeofrecurrenceendafterinterval&quot;:1,&quot;rangeofrecurrenceenddatetime&quot;:&quot;2017-03-01T15:27:40+01:00&quot;,&quot;excludetimefrom&quot;:&quot;2017-03-01T15:27:40+01:00&quot;,&quot;excludetimeto&quot;:&quot;2017-03-01T15:27:40+01:00&quot;,&quot;createdatetime&quot;:&quot;2017-03-01T15:27:40+01:00&quot;,&quot;execwhennextonline&quot;:&quot;N&quot;,&quot;schedinagenttime&quot;:&quot;Y&quot;,&quot;distribution&quot;:0}" baselineAuditScheduleDescription="at 02:27:40 pm  starting on 02:27:40 pm 01-Mar-17 end after 1 occurrences" systemAuditSchedule="{&quot;startdatefrom&quot;:&quot;2017-03-01T16:27:51+01:00&quot;,&quot;starttimefrom&quot;:&quot;2017-03-01T16:27:51+01:00&quot;,&quot;startdateto&quot;:&quot;2017-03-01T16:27:51+01:00&quot;,&quot;starttimeto&quot;:&quot;2017-03-01T16:27:51+01:00&quot;,&quot;recurrencetype&quot;:&quot;ONCE&quot;,&quot;rangeofrecurrencetype&quot;:&quot;1&quot;,&quot;skipifoffline&quot;:&quot;N&quot;,&quot;powerupifoffline&quot;:&quot;N&quot;,&quot;scheduleid&quot;:&quot;0&quot;,&quot;excludetimerange&quot;:&quot;N&quot;,&quot;recurringminutesinterval&quot;:60,&quot;recurringhoursinterval&quot;:1,&quot;recurringdaysinterval&quot;:1,&quot;recurringweeksinterval&quot;:1,&quot;sundayflag&quot;:&quot;N&quot;,&quot;mondayflag&quot;:&quot;Y&quot;,&quot;tuesdayflag&quot;:&quot;N&quot;,&quot;wednesdayflag&quot;:&quot;N&quot;,&quot;thursdayflag&quot;:&quot;N&quot;,&quot;fridayflag&quot;:&quot;N&quot;,&quot;saturdayflag&quot;:&quot;N&quot;,&quot;recurringmonthsinterval&quot;:1,&quot;monthlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;monthlyspecificday&quot;:&quot;DAY&quot;,&quot;monthlyintervaltype&quot;:1,&quot;monthday&quot;:1,&quot;yearlyintervaltype&quot;:1,&quot;yearlyspecificmonth&quot;:1,&quot;yearday&quot;:1,&quot;yearlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;yearlyspecificday&quot;:&quot;DAY&quot;,&quot;yearlyspecificmonth2&quot;:1,&quot;rangeofrecurrenceendafterinterval&quot;:1,&quot;rangeofrecurrenceenddatetime&quot;:&quot;2017-03-01T15:27:51+01:00&quot;,&quot;excludetimefrom&quot;:&quot;2017-03-01T15:27:51+01:00&quot;,&quot;excludetimeto&quot;:&quot;2017-03-01T15:27:51+01:00&quot;,&quot;createdatetime&quot;:&quot;2017-03-01T15:27:51+01:00&quot;,&quot;execwhennextonline&quot;:&quot;N&quot;,&quot;schedinagenttime&quot;:&quot;Y&quot;,&quot;distribution&quot;:0}" systemAuditScheduleDescription="at 02:27:51 pm  starting on 02:27:51 pm 01-Mar-17 end after 1 occurrences" />
+    <eventlogsettings>
+      <eventlogsetting id="705886456931888" partitionid="1" eventAssignValue="3" eventAssignString="EW-----" eventLogTypeId="1380569194" />
+      <eventlogsetting id="766738819175743" partitionid="1" eventAssignValue="3" eventAssignString="EW-----" eventLogTypeId="796450521" />
+    </eventlogsettings>
+    <updatelistbyscan />
+    <windowsUpdate />
+  </Policy>
+  <Policy id="856134110668736" ref="MSP - BASIC - Windows Workstations" partitionid="1" rowDesc="MSP - BASIC - Windows Workstations" policyTypeFK="0" markedForDelete="False" viewFK="63544057" viewName="__[UPSTREAM] - OS - All Windows Workstations" treeFullPath="Upstream Power Pack 2019-05-03.MSP Basic OS Based Policies (For All Customers)" sortOrder="-1" Override="0">
+    <agentMenu id="174776268319588" partitionid="1" contactUrl="" userWebServer="" urlMenuName="" enableMenuItems="00000000" tooltipTitle="" contactMenuItemName="" />
+    <agentProcedures>
+      <agentProcedure id="124118691274952" partitionId="1" procedureId="1795254147" procedureSchedule="{&quot;startdatefrom&quot;:&quot;2019-05-02T09:00:00+02:00&quot;,&quot;starttimefrom&quot;:&quot;2019-05-02T09:00:00+02:00&quot;,&quot;startdateto&quot;:&quot;2019-05-02T15:00:00+02:00&quot;,&quot;starttimeto&quot;:&quot;2019-05-02T15:00:00+02:00&quot;,&quot;recurrencetype&quot;:&quot;MONTHLY&quot;,&quot;rangeofrecurrencetype&quot;:&quot;1&quot;,&quot;skipifoffline&quot;:&quot;N&quot;,&quot;powerupifoffline&quot;:&quot;N&quot;,&quot;scheduleid&quot;:&quot;0&quot;,&quot;excludetimerange&quot;:&quot;N&quot;,&quot;recurringminutesinterval&quot;:60,&quot;recurringhoursinterval&quot;:1,&quot;recurringdaysinterval&quot;:1,&quot;recurringweeksinterval&quot;:1,&quot;sundayflag&quot;:&quot;N&quot;,&quot;mondayflag&quot;:&quot;N&quot;,&quot;tuesdayflag&quot;:&quot;N&quot;,&quot;wednesdayflag&quot;:&quot;N&quot;,&quot;thursdayflag&quot;:&quot;N&quot;,&quot;fridayflag&quot;:&quot;N&quot;,&quot;saturdayflag&quot;:&quot;N&quot;,&quot;recurringmonthsinterval&quot;:1,&quot;monthlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;monthlyspecificday&quot;:&quot;MONDAY&quot;,&quot;monthlyintervaltype&quot;:1,&quot;monthday&quot;:1,&quot;yearlyintervaltype&quot;:1,&quot;yearlyspecificmonth&quot;:1,&quot;yearday&quot;:1,&quot;yearlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;yearlyspecificday&quot;:&quot;DAY&quot;,&quot;yearlyspecificmonth2&quot;:1,&quot;rangeofrecurrenceendafterinterval&quot;:1,&quot;rangeofrecurrenceenddatetime&quot;:&quot;2019-05-02T14:03:17+02:00&quot;,&quot;excludetimefrom&quot;:&quot;2019-05-02T00:00:00+02:00&quot;,&quot;excludetimeto&quot;:&quot;2019-05-02T00:00:00+02:00&quot;,&quot;createdatetime&quot;:&quot;2019-05-02T14:03:17&quot;,&quot;execwhennextonline&quot;:&quot;N&quot;,&quot;schedinagenttime&quot;:&quot;N&quot;,&quot;distribution&quot;:360}" procedureParameters="" policyObjectDataFK="101864654944215" procedureScheduleDescription="every 1 month(s) within 360 minute(s) of 08:00:00  starting on 08:00:00 02-May-19 no end date " procedureName="Sys Mgmt - Windows 10 - Enable Storage Sense" />
+      <agentProcedure id="139512097108882" partitionId="1" procedureId="48038366" procedureSchedule="{&quot;startdatefrom&quot;:&quot;2019-05-02T09:00:00+02:00&quot;,&quot;starttimefrom&quot;:&quot;2019-05-02T09:00:00+02:00&quot;,&quot;startdateto&quot;:&quot;2019-05-02T15:00:00+02:00&quot;,&quot;starttimeto&quot;:&quot;2019-05-02T15:00:00+02:00&quot;,&quot;recurrencetype&quot;:&quot;MONTHLY&quot;,&quot;rangeofrecurrencetype&quot;:&quot;1&quot;,&quot;skipifoffline&quot;:&quot;N&quot;,&quot;powerupifoffline&quot;:&quot;N&quot;,&quot;scheduleid&quot;:&quot;0&quot;,&quot;excludetimerange&quot;:&quot;N&quot;,&quot;recurringminutesinterval&quot;:60,&quot;recurringhoursinterval&quot;:1,&quot;recurringdaysinterval&quot;:1,&quot;recurringweeksinterval&quot;:1,&quot;sundayflag&quot;:&quot;N&quot;,&quot;mondayflag&quot;:&quot;N&quot;,&quot;tuesdayflag&quot;:&quot;N&quot;,&quot;wednesdayflag&quot;:&quot;N&quot;,&quot;thursdayflag&quot;:&quot;N&quot;,&quot;fridayflag&quot;:&quot;N&quot;,&quot;saturdayflag&quot;:&quot;N&quot;,&quot;recurringmonthsinterval&quot;:1,&quot;monthlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;monthlyspecificday&quot;:&quot;MONDAY&quot;,&quot;monthlyintervaltype&quot;:1,&quot;monthday&quot;:1,&quot;yearlyintervaltype&quot;:1,&quot;yearlyspecificmonth&quot;:1,&quot;yearday&quot;:1,&quot;yearlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;yearlyspecificday&quot;:&quot;DAY&quot;,&quot;yearlyspecificmonth2&quot;:1,&quot;rangeofrecurrenceendafterinterval&quot;:1,&quot;rangeofrecurrenceenddatetime&quot;:&quot;2019-05-02T14:01:53+02:00&quot;,&quot;excludetimefrom&quot;:&quot;2019-05-02T00:00:00+02:00&quot;,&quot;excludetimeto&quot;:&quot;2019-05-02T00:00:00+02:00&quot;,&quot;createdatetime&quot;:&quot;2019-05-02T14:01:53&quot;,&quot;execwhennextonline&quot;:&quot;N&quot;,&quot;schedinagenttime&quot;:&quot;N&quot;,&quot;distribution&quot;:360}" procedureParameters="" policyObjectDataFK="101864654944215" procedureScheduleDescription="every 1 month(s) within 360 minute(s) of 08:00:00  starting on 08:00:00 02-May-19 no end date " procedureName="Application Update - Windows - Update Office 365 - User Inforamtional" />
+      <agentProcedure id="153227716243466" partitionId="1" procedureId="1246766826" procedureSchedule="{&quot;startdatefrom&quot;:&quot;2019-05-02T14:05:53+02:00&quot;,&quot;starttimefrom&quot;:&quot;2019-05-02T14:05:53+02:00&quot;,&quot;startdateto&quot;:&quot;2019-05-02T14:05:53+02:00&quot;,&quot;starttimeto&quot;:&quot;2019-05-02T14:05:53+02:00&quot;,&quot;recurrencetype&quot;:&quot;ONCE&quot;,&quot;rangeofrecurrencetype&quot;:&quot;1&quot;,&quot;skipifoffline&quot;:&quot;N&quot;,&quot;powerupifoffline&quot;:&quot;N&quot;,&quot;scheduleid&quot;:&quot;0&quot;,&quot;excludetimerange&quot;:&quot;N&quot;,&quot;recurringminutesinterval&quot;:60,&quot;recurringhoursinterval&quot;:1,&quot;recurringdaysinterval&quot;:1,&quot;recurringweeksinterval&quot;:1,&quot;sundayflag&quot;:&quot;N&quot;,&quot;mondayflag&quot;:&quot;N&quot;,&quot;tuesdayflag&quot;:&quot;N&quot;,&quot;wednesdayflag&quot;:&quot;N&quot;,&quot;thursdayflag&quot;:&quot;N&quot;,&quot;fridayflag&quot;:&quot;N&quot;,&quot;saturdayflag&quot;:&quot;N&quot;,&quot;recurringmonthsinterval&quot;:1,&quot;monthlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;monthlyspecificday&quot;:&quot;DAY&quot;,&quot;monthlyintervaltype&quot;:1,&quot;monthday&quot;:1,&quot;yearlyintervaltype&quot;:1,&quot;yearlyspecificmonth&quot;:1,&quot;yearday&quot;:1,&quot;yearlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;yearlyspecificday&quot;:&quot;DAY&quot;,&quot;yearlyspecificmonth2&quot;:1,&quot;rangeofrecurrenceendafterinterval&quot;:1,&quot;rangeofrecurrenceenddatetime&quot;:&quot;2019-05-02T14:05:53+02:00&quot;,&quot;excludetimefrom&quot;:&quot;2019-05-02T00:00:00+02:00&quot;,&quot;excludetimeto&quot;:&quot;2019-05-02T00:00:00+02:00&quot;,&quot;createdatetime&quot;:&quot;2019-05-02T14:05:53&quot;,&quot;execwhennextonline&quot;:&quot;N&quot;,&quot;schedinagenttime&quot;:&quot;N&quot;,&quot;distribution&quot;:0}" procedureParameters="" policyObjectDataFK="101864654944215" procedureScheduleDescription="at 13:05:53  starting on 13:05:53 02-May-19 end after 1 occurrences " procedureName="User Experience -  Windows 10 - Remove Modern Apps for Current User" />
+      <agentProcedure id="275619551015842" partitionId="1" procedureId="473384581" procedureSchedule="{&quot;startdatefrom&quot;:&quot;2019-05-02T12:00:00+02:00&quot;,&quot;starttimefrom&quot;:&quot;2019-05-02T12:00:00+02:00&quot;,&quot;startdateto&quot;:&quot;2019-05-02T13:00:00+02:00&quot;,&quot;starttimeto&quot;:&quot;2019-05-02T13:00:00+02:00&quot;,&quot;recurrencetype&quot;:&quot;WEEKLY&quot;,&quot;rangeofrecurrencetype&quot;:&quot;1&quot;,&quot;skipifoffline&quot;:&quot;N&quot;,&quot;powerupifoffline&quot;:&quot;N&quot;,&quot;scheduleid&quot;:&quot;0&quot;,&quot;excludetimerange&quot;:&quot;N&quot;,&quot;recurringminutesinterval&quot;:60,&quot;recurringhoursinterval&quot;:1,&quot;recurringdaysinterval&quot;:1,&quot;recurringweeksinterval&quot;:1,&quot;sundayflag&quot;:&quot;N&quot;,&quot;mondayflag&quot;:&quot;Y&quot;,&quot;tuesdayflag&quot;:&quot;Y&quot;,&quot;wednesdayflag&quot;:&quot;Y&quot;,&quot;thursdayflag&quot;:&quot;Y&quot;,&quot;fridayflag&quot;:&quot;Y&quot;,&quot;saturdayflag&quot;:&quot;N&quot;,&quot;recurringmonthsinterval&quot;:1,&quot;monthlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;monthlyspecificday&quot;:&quot;DAY&quot;,&quot;monthlyintervaltype&quot;:1,&quot;monthday&quot;:1,&quot;yearlyintervaltype&quot;:1,&quot;yearlyspecificmonth&quot;:1,&quot;yearday&quot;:1,&quot;yearlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;yearlyspecificday&quot;:&quot;DAY&quot;,&quot;yearlyspecificmonth2&quot;:1,&quot;rangeofrecurrenceendafterinterval&quot;:1,&quot;rangeofrecurrenceenddatetime&quot;:&quot;2019-05-02T14:01:01+02:00&quot;,&quot;excludetimefrom&quot;:&quot;2019-05-02T00:00:00+02:00&quot;,&quot;excludetimeto&quot;:&quot;2019-05-02T00:00:00+02:00&quot;,&quot;createdatetime&quot;:&quot;2019-05-02T14:01:01&quot;,&quot;execwhennextonline&quot;:&quot;N&quot;,&quot;schedinagenttime&quot;:&quot;N&quot;,&quot;distribution&quot;:60}" procedureParameters="" policyObjectDataFK="101864654944215" procedureScheduleDescription="every 1 week(s) within 60 minute(s) of 11:00:00  starting on 11:00:00 02-May-19 no end date " procedureName="Custom Field - Audit - Windows - Get Current WIFI Signal Strength" />
+      <agentProcedure id="425088533072308" partitionId="1" procedureId="1229895230" procedureSchedule="{&quot;startdatefrom&quot;:&quot;2019-05-02T14:00:39+02:00&quot;,&quot;starttimefrom&quot;:&quot;2019-05-02T14:00:39+02:00&quot;,&quot;startdateto&quot;:&quot;2019-05-02T14:00:39+02:00&quot;,&quot;starttimeto&quot;:&quot;2019-05-02T14:00:39+02:00&quot;,&quot;recurrencetype&quot;:&quot;ONCE&quot;,&quot;rangeofrecurrencetype&quot;:&quot;1&quot;,&quot;skipifoffline&quot;:&quot;N&quot;,&quot;powerupifoffline&quot;:&quot;N&quot;,&quot;scheduleid&quot;:&quot;0&quot;,&quot;excludetimerange&quot;:&quot;N&quot;,&quot;recurringminutesinterval&quot;:60,&quot;recurringhoursinterval&quot;:1,&quot;recurringdaysinterval&quot;:1,&quot;recurringweeksinterval&quot;:1,&quot;sundayflag&quot;:&quot;N&quot;,&quot;mondayflag&quot;:&quot;N&quot;,&quot;tuesdayflag&quot;:&quot;N&quot;,&quot;wednesdayflag&quot;:&quot;N&quot;,&quot;thursdayflag&quot;:&quot;N&quot;,&quot;fridayflag&quot;:&quot;N&quot;,&quot;saturdayflag&quot;:&quot;N&quot;,&quot;recurringmonthsinterval&quot;:1,&quot;monthlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;monthlyspecificday&quot;:&quot;DAY&quot;,&quot;monthlyintervaltype&quot;:1,&quot;monthday&quot;:1,&quot;yearlyintervaltype&quot;:1,&quot;yearlyspecificmonth&quot;:1,&quot;yearday&quot;:1,&quot;yearlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;yearlyspecificday&quot;:&quot;DAY&quot;,&quot;yearlyspecificmonth2&quot;:1,&quot;rangeofrecurrenceendafterinterval&quot;:1,&quot;rangeofrecurrenceenddatetime&quot;:&quot;2019-05-02T14:00:39+02:00&quot;,&quot;excludetimefrom&quot;:&quot;2019-05-02T00:00:00+02:00&quot;,&quot;excludetimeto&quot;:&quot;2019-05-02T00:00:00+02:00&quot;,&quot;createdatetime&quot;:&quot;2019-05-02T14:00:39&quot;,&quot;execwhennextonline&quot;:&quot;N&quot;,&quot;schedinagenttime&quot;:&quot;N&quot;,&quot;distribution&quot;:0}" procedureParameters="" policyObjectDataFK="101864654944215" procedureScheduleDescription="at 13:00:39  starting on 13:00:39 02-May-19 end after 1 occurrences " procedureName="Custom Field - Audit - Windows - Get OS Language" />
+      <agentProcedure id="480088168978732" partitionId="1" procedureId="445980080" procedureSchedule="{&quot;startdatefrom&quot;:&quot;2019-05-02T14:06:59+02:00&quot;,&quot;starttimefrom&quot;:&quot;2019-05-02T14:06:59+02:00&quot;,&quot;startdateto&quot;:&quot;2019-05-02T14:06:59+02:00&quot;,&quot;starttimeto&quot;:&quot;2019-05-02T14:06:59+02:00&quot;,&quot;recurrencetype&quot;:&quot;ONCE&quot;,&quot;rangeofrecurrencetype&quot;:&quot;1&quot;,&quot;skipifoffline&quot;:&quot;N&quot;,&quot;powerupifoffline&quot;:&quot;N&quot;,&quot;scheduleid&quot;:&quot;0&quot;,&quot;excludetimerange&quot;:&quot;N&quot;,&quot;recurringminutesinterval&quot;:60,&quot;recurringhoursinterval&quot;:1,&quot;recurringdaysinterval&quot;:1,&quot;recurringweeksinterval&quot;:1,&quot;sundayflag&quot;:&quot;N&quot;,&quot;mondayflag&quot;:&quot;N&quot;,&quot;tuesdayflag&quot;:&quot;N&quot;,&quot;wednesdayflag&quot;:&quot;N&quot;,&quot;thursdayflag&quot;:&quot;N&quot;,&quot;fridayflag&quot;:&quot;N&quot;,&quot;saturdayflag&quot;:&quot;N&quot;,&quot;recurringmonthsinterval&quot;:1,&quot;monthlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;monthlyspecificday&quot;:&quot;DAY&quot;,&quot;monthlyintervaltype&quot;:1,&quot;monthday&quot;:1,&quot;yearlyintervaltype&quot;:1,&quot;yearlyspecificmonth&quot;:1,&quot;yearday&quot;:1,&quot;yearlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;yearlyspecificday&quot;:&quot;DAY&quot;,&quot;yearlyspecificmonth2&quot;:1,&quot;rangeofrecurrenceendafterinterval&quot;:1,&quot;rangeofrecurrenceenddatetime&quot;:&quot;2019-05-02T14:06:59+02:00&quot;,&quot;excludetimefrom&quot;:&quot;2019-05-02T00:00:00+02:00&quot;,&quot;excludetimeto&quot;:&quot;2019-05-02T00:00:00+02:00&quot;,&quot;createdatetime&quot;:&quot;2019-05-02T14:06:59&quot;,&quot;execwhennextonline&quot;:&quot;N&quot;,&quot;schedinagenttime&quot;:&quot;N&quot;,&quot;distribution&quot;:0}" procedureParameters="" policyObjectDataFK="101864654944215" procedureScheduleDescription="at 13:06:59  starting on 13:06:59 02-May-19 end after 1 occurrences " procedureName="User Experience - Windows 10 - Remove Annoying App Suggestions" />
+      <agentProcedure id="514783034201144" partitionId="1" procedureId="1366253877" procedureSchedule="{&quot;startdatefrom&quot;:&quot;2019-05-02T09:00:00+02:00&quot;,&quot;starttimefrom&quot;:&quot;2019-05-02T09:00:00+02:00&quot;,&quot;startdateto&quot;:&quot;2019-05-02T15:00:00+02:00&quot;,&quot;starttimeto&quot;:&quot;2019-05-02T15:00:00+02:00&quot;,&quot;recurrencetype&quot;:&quot;WEEKLY&quot;,&quot;rangeofrecurrencetype&quot;:&quot;1&quot;,&quot;skipifoffline&quot;:&quot;N&quot;,&quot;powerupifoffline&quot;:&quot;N&quot;,&quot;scheduleid&quot;:&quot;0&quot;,&quot;excludetimerange&quot;:&quot;N&quot;,&quot;recurringminutesinterval&quot;:60,&quot;recurringhoursinterval&quot;:1,&quot;recurringdaysinterval&quot;:1,&quot;recurringweeksinterval&quot;:1,&quot;sundayflag&quot;:&quot;N&quot;,&quot;mondayflag&quot;:&quot;N&quot;,&quot;tuesdayflag&quot;:&quot;N&quot;,&quot;wednesdayflag&quot;:&quot;Y&quot;,&quot;thursdayflag&quot;:&quot;N&quot;,&quot;fridayflag&quot;:&quot;N&quot;,&quot;saturdayflag&quot;:&quot;N&quot;,&quot;recurringmonthsinterval&quot;:1,&quot;monthlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;monthlyspecificday&quot;:&quot;DAY&quot;,&quot;monthlyintervaltype&quot;:1,&quot;monthday&quot;:1,&quot;yearlyintervaltype&quot;:1,&quot;yearlyspecificmonth&quot;:1,&quot;yearday&quot;:1,&quot;yearlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;yearlyspecificday&quot;:&quot;DAY&quot;,&quot;yearlyspecificmonth2&quot;:1,&quot;rangeofrecurrenceendafterinterval&quot;:1,&quot;rangeofrecurrenceenddatetime&quot;:&quot;2019-05-02T14:05:07+02:00&quot;,&quot;excludetimefrom&quot;:&quot;2019-05-02T00:00:00+02:00&quot;,&quot;excludetimeto&quot;:&quot;2019-05-02T00:00:00+02:00&quot;,&quot;createdatetime&quot;:&quot;2019-05-02T14:05:07&quot;,&quot;execwhennextonline&quot;:&quot;N&quot;,&quot;schedinagenttime&quot;:&quot;N&quot;,&quot;distribution&quot;:360}" procedureParameters="" policyObjectDataFK="101864654944215" procedureScheduleDescription="every 1 week(s) within 360 minute(s) of 08:00:00  starting on 08:00:00 02-May-19 no end date " procedureName="Patch Mgmnt - Windows 10 - Set Active Hours" />
+      <agentProcedure id="535721974650268" partitionId="1" procedureId="1366253877" procedureSchedule="{&quot;startdatefrom&quot;:&quot;2019-05-02T09:00:00+02:00&quot;,&quot;starttimefrom&quot;:&quot;2019-05-02T09:00:00+02:00&quot;,&quot;startdateto&quot;:&quot;2019-05-02T15:00:00+02:00&quot;,&quot;starttimeto&quot;:&quot;2019-05-02T15:00:00+02:00&quot;,&quot;recurrencetype&quot;:&quot;WEEKLY&quot;,&quot;rangeofrecurrencetype&quot;:&quot;1&quot;,&quot;skipifoffline&quot;:&quot;N&quot;,&quot;powerupifoffline&quot;:&quot;N&quot;,&quot;scheduleid&quot;:&quot;0&quot;,&quot;excludetimerange&quot;:&quot;N&quot;,&quot;recurringminutesinterval&quot;:60,&quot;recurringhoursinterval&quot;:1,&quot;recurringdaysinterval&quot;:1,&quot;recurringweeksinterval&quot;:1,&quot;sundayflag&quot;:&quot;N&quot;,&quot;mondayflag&quot;:&quot;Y&quot;,&quot;tuesdayflag&quot;:&quot;N&quot;,&quot;wednesdayflag&quot;:&quot;N&quot;,&quot;thursdayflag&quot;:&quot;N&quot;,&quot;fridayflag&quot;:&quot;N&quot;,&quot;saturdayflag&quot;:&quot;N&quot;,&quot;recurringmonthsinterval&quot;:1,&quot;monthlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;monthlyspecificday&quot;:&quot;DAY&quot;,&quot;monthlyintervaltype&quot;:1,&quot;monthday&quot;:1,&quot;yearlyintervaltype&quot;:1,&quot;yearlyspecificmonth&quot;:1,&quot;yearday&quot;:1,&quot;yearlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;yearlyspecificday&quot;:&quot;DAY&quot;,&quot;yearlyspecificmonth2&quot;:1,&quot;rangeofrecurrenceendafterinterval&quot;:1,&quot;rangeofrecurrenceenddatetime&quot;:&quot;2019-05-02T13:59:40+02:00&quot;,&quot;excludetimefrom&quot;:&quot;2019-05-02T00:00:00+02:00&quot;,&quot;excludetimeto&quot;:&quot;2019-05-02T00:00:00+02:00&quot;,&quot;createdatetime&quot;:&quot;2019-05-02T13:59:40&quot;,&quot;execwhennextonline&quot;:&quot;N&quot;,&quot;schedinagenttime&quot;:&quot;N&quot;,&quot;distribution&quot;:360}" procedureParameters="" policyObjectDataFK="101864654944215" procedureScheduleDescription="every 1 week(s) within 360 minute(s) of 08:00:00  starting on 08:00:00 02-May-19 no end date " procedureName="Patch Mgmnt - Windows 10 - Set Active Hours" />
+      <agentProcedure id="548242590878271" partitionId="1" procedureId="1436509215" procedureSchedule="{&quot;startdatefrom&quot;:&quot;2019-05-02T09:00:00+02:00&quot;,&quot;starttimefrom&quot;:&quot;2019-05-02T09:00:00+02:00&quot;,&quot;startdateto&quot;:&quot;2019-05-02T15:00:00+02:00&quot;,&quot;starttimeto&quot;:&quot;2019-05-02T15:00:00+02:00&quot;,&quot;recurrencetype&quot;:&quot;WEEKLY&quot;,&quot;rangeofrecurrencetype&quot;:&quot;1&quot;,&quot;skipifoffline&quot;:&quot;N&quot;,&quot;powerupifoffline&quot;:&quot;N&quot;,&quot;scheduleid&quot;:&quot;0&quot;,&quot;excludetimerange&quot;:&quot;N&quot;,&quot;recurringminutesinterval&quot;:60,&quot;recurringhoursinterval&quot;:1,&quot;recurringdaysinterval&quot;:1,&quot;recurringweeksinterval&quot;:2,&quot;sundayflag&quot;:&quot;N&quot;,&quot;mondayflag&quot;:&quot;Y&quot;,&quot;tuesdayflag&quot;:&quot;N&quot;,&quot;wednesdayflag&quot;:&quot;Y&quot;,&quot;thursdayflag&quot;:&quot;N&quot;,&quot;fridayflag&quot;:&quot;N&quot;,&quot;saturdayflag&quot;:&quot;N&quot;,&quot;recurringmonthsinterval&quot;:1,&quot;monthlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;monthlyspecificday&quot;:&quot;DAY&quot;,&quot;monthlyintervaltype&quot;:1,&quot;monthday&quot;:1,&quot;yearlyintervaltype&quot;:1,&quot;yearlyspecificmonth&quot;:1,&quot;yearday&quot;:1,&quot;yearlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;yearlyspecificday&quot;:&quot;DAY&quot;,&quot;yearlyspecificmonth2&quot;:1,&quot;rangeofrecurrenceendafterinterval&quot;:1,&quot;rangeofrecurrenceenddatetime&quot;:&quot;2019-05-02T13:56:53+02:00&quot;,&quot;excludetimefrom&quot;:&quot;2019-05-02T00:00:00+02:00&quot;,&quot;excludetimeto&quot;:&quot;2019-05-02T00:00:00+02:00&quot;,&quot;createdatetime&quot;:&quot;2019-05-02T13:56:53&quot;,&quot;execwhennextonline&quot;:&quot;N&quot;,&quot;schedinagenttime&quot;:&quot;N&quot;,&quot;distribution&quot;:360}" procedureParameters="" policyObjectDataFK="101864654944215" procedureScheduleDescription="every 2 week(s) within 360 minute(s) of 08:00:00  starting on 08:00:00 02-May-19 no end date " procedureName="Audit - Windows - Is Windows Activated" />
+      <agentProcedure id="587377308303207" partitionId="1" procedureId="466461793" procedureSchedule="{&quot;startdatefrom&quot;:&quot;2019-05-02T14:00:14+02:00&quot;,&quot;starttimefrom&quot;:&quot;2019-05-02T14:00:14+02:00&quot;,&quot;startdateto&quot;:&quot;2019-05-02T14:00:14+02:00&quot;,&quot;starttimeto&quot;:&quot;2019-05-02T14:00:14+02:00&quot;,&quot;recurrencetype&quot;:&quot;ONCE&quot;,&quot;rangeofrecurrencetype&quot;:&quot;1&quot;,&quot;skipifoffline&quot;:&quot;N&quot;,&quot;powerupifoffline&quot;:&quot;N&quot;,&quot;scheduleid&quot;:&quot;0&quot;,&quot;excludetimerange&quot;:&quot;N&quot;,&quot;recurringminutesinterval&quot;:60,&quot;recurringhoursinterval&quot;:1,&quot;recurringdaysinterval&quot;:1,&quot;recurringweeksinterval&quot;:1,&quot;sundayflag&quot;:&quot;N&quot;,&quot;mondayflag&quot;:&quot;N&quot;,&quot;tuesdayflag&quot;:&quot;N&quot;,&quot;wednesdayflag&quot;:&quot;N&quot;,&quot;thursdayflag&quot;:&quot;N&quot;,&quot;fridayflag&quot;:&quot;N&quot;,&quot;saturdayflag&quot;:&quot;N&quot;,&quot;recurringmonthsinterval&quot;:1,&quot;monthlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;monthlyspecificday&quot;:&quot;DAY&quot;,&quot;monthlyintervaltype&quot;:1,&quot;monthday&quot;:1,&quot;yearlyintervaltype&quot;:1,&quot;yearlyspecificmonth&quot;:1,&quot;yearday&quot;:1,&quot;yearlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;yearlyspecificday&quot;:&quot;DAY&quot;,&quot;yearlyspecificmonth2&quot;:1,&quot;rangeofrecurrenceendafterinterval&quot;:1,&quot;rangeofrecurrenceenddatetime&quot;:&quot;2019-05-02T14:00:14+02:00&quot;,&quot;excludetimefrom&quot;:&quot;2019-05-02T00:00:00+02:00&quot;,&quot;excludetimeto&quot;:&quot;2019-05-02T00:00:00+02:00&quot;,&quot;createdatetime&quot;:&quot;2019-05-02T14:00:14&quot;,&quot;execwhennextonline&quot;:&quot;N&quot;,&quot;schedinagenttime&quot;:&quot;N&quot;,&quot;distribution&quot;:0}" procedureParameters="" policyObjectDataFK="101864654944215" procedureScheduleDescription="at 13:00:14  starting on 13:00:14 02-May-19 end after 1 occurrences " procedureName="Custom Field - Audit - Windows - Get OS Install Date" />
+      <agentProcedure id="705459713286468" partitionId="1" procedureId="2032368826" procedureSchedule="{&quot;startdatefrom&quot;:&quot;2019-05-02T09:00:00+02:00&quot;,&quot;starttimefrom&quot;:&quot;2019-05-02T09:00:00+02:00&quot;,&quot;startdateto&quot;:&quot;2019-05-02T15:00:00+02:00&quot;,&quot;starttimeto&quot;:&quot;2019-05-02T15:00:00+02:00&quot;,&quot;recurrencetype&quot;:&quot;WEEKLY&quot;,&quot;rangeofrecurrencetype&quot;:&quot;1&quot;,&quot;skipifoffline&quot;:&quot;N&quot;,&quot;powerupifoffline&quot;:&quot;N&quot;,&quot;scheduleid&quot;:&quot;0&quot;,&quot;excludetimerange&quot;:&quot;N&quot;,&quot;recurringminutesinterval&quot;:60,&quot;recurringhoursinterval&quot;:1,&quot;recurringdaysinterval&quot;:1,&quot;recurringweeksinterval&quot;:1,&quot;sundayflag&quot;:&quot;N&quot;,&quot;mondayflag&quot;:&quot;N&quot;,&quot;tuesdayflag&quot;:&quot;N&quot;,&quot;wednesdayflag&quot;:&quot;Y&quot;,&quot;thursdayflag&quot;:&quot;N&quot;,&quot;fridayflag&quot;:&quot;N&quot;,&quot;saturdayflag&quot;:&quot;N&quot;,&quot;recurringmonthsinterval&quot;:1,&quot;monthlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;monthlyspecificday&quot;:&quot;DAY&quot;,&quot;monthlyintervaltype&quot;:1,&quot;monthday&quot;:1,&quot;yearlyintervaltype&quot;:1,&quot;yearlyspecificmonth&quot;:1,&quot;yearday&quot;:1,&quot;yearlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;yearlyspecificday&quot;:&quot;DAY&quot;,&quot;yearlyspecificmonth2&quot;:1,&quot;rangeofrecurrenceendafterinterval&quot;:1,&quot;rangeofrecurrenceenddatetime&quot;:&quot;2019-05-02T13:58:56+02:00&quot;,&quot;excludetimefrom&quot;:&quot;2019-05-02T00:00:00+02:00&quot;,&quot;excludetimeto&quot;:&quot;2019-05-02T00:00:00+02:00&quot;,&quot;createdatetime&quot;:&quot;2019-05-02T13:58:56&quot;,&quot;execwhennextonline&quot;:&quot;N&quot;,&quot;schedinagenttime&quot;:&quot;N&quot;,&quot;distribution&quot;:360}" procedureParameters="" policyObjectDataFK="101864654944215" procedureScheduleDescription="every 1 week(s) within 360 minute(s) of 08:00:00  starting on 08:00:00 02-May-19 no end date " procedureName="Audit - Windows 10 - Custom Field - Get Disk Encryption Status" />
+      <agentProcedure id="742824541564483" partitionId="1" procedureId="1331139952" procedureSchedule="{&quot;startdatefrom&quot;:&quot;2019-05-02T09:00:00+02:00&quot;,&quot;starttimefrom&quot;:&quot;2019-05-02T09:00:00+02:00&quot;,&quot;startdateto&quot;:&quot;2019-05-02T15:00:00+02:00&quot;,&quot;starttimeto&quot;:&quot;2019-05-02T15:00:00+02:00&quot;,&quot;recurrencetype&quot;:&quot;WEEKLY&quot;,&quot;rangeofrecurrencetype&quot;:&quot;1&quot;,&quot;skipifoffline&quot;:&quot;N&quot;,&quot;powerupifoffline&quot;:&quot;N&quot;,&quot;scheduleid&quot;:&quot;0&quot;,&quot;excludetimerange&quot;:&quot;N&quot;,&quot;recurringminutesinterval&quot;:60,&quot;recurringhoursinterval&quot;:1,&quot;recurringdaysinterval&quot;:1,&quot;recurringweeksinterval&quot;:1,&quot;sundayflag&quot;:&quot;N&quot;,&quot;mondayflag&quot;:&quot;N&quot;,&quot;tuesdayflag&quot;:&quot;N&quot;,&quot;wednesdayflag&quot;:&quot;Y&quot;,&quot;thursdayflag&quot;:&quot;N&quot;,&quot;fridayflag&quot;:&quot;N&quot;,&quot;saturdayflag&quot;:&quot;N&quot;,&quot;recurringmonthsinterval&quot;:1,&quot;monthlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;monthlyspecificday&quot;:&quot;DAY&quot;,&quot;monthlyintervaltype&quot;:1,&quot;monthday&quot;:1,&quot;yearlyintervaltype&quot;:1,&quot;yearlyspecificmonth&quot;:1,&quot;yearday&quot;:1,&quot;yearlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;yearlyspecificday&quot;:&quot;DAY&quot;,&quot;yearlyspecificmonth2&quot;:1,&quot;rangeofrecurrenceendafterinterval&quot;:1,&quot;rangeofrecurrenceenddatetime&quot;:&quot;2019-05-02T13:57:24+02:00&quot;,&quot;excludetimefrom&quot;:&quot;2019-05-02T00:00:00+02:00&quot;,&quot;excludetimeto&quot;:&quot;2019-05-02T00:00:00+02:00&quot;,&quot;createdatetime&quot;:&quot;2019-05-02T13:57:24&quot;,&quot;execwhennextonline&quot;:&quot;N&quot;,&quot;schedinagenttime&quot;:&quot;N&quot;,&quot;distribution&quot;:360}" procedureParameters="" policyObjectDataFK="101864654944215" procedureScheduleDescription="every 1 week(s) within 360 minute(s) of 08:00:00  starting on 08:00:00 02-May-19 no end date " procedureName="Audit - Windows 10 - Custom Field - Get Azure AD Info" />
+    </agentProcedures>
+    <alerts>
+      <alert id="146841537089479" partitionId="1" policyObjectDataFK="999083691183054" createAlarm="True" createTicket="False" runScript="False" scriptId="" scriptName="" machineId="" machName="" emailRecipients="False" emailAddresses="" alertType="alertNtEvent" alertTypeValue="Event Log">
+        <alertItems>
+          <alertItem id="199402842996364" partitionid="1" alertFK="146841537089479" itemName="critical" itemValue="0" objectName="" />
+          <alertItem id="208962920731382" partitionid="1" alertFK="146841537089479" itemName="successAudit" itemValue="0" objectName="" />
+          <alertItem id="247365349832627" partitionid="1" alertFK="146841537089479" itemName="ignoreAlarmsUnit" itemValue="0" objectName="" />
+          <alertItem id="247403805585309" partitionid="1" alertFK="146841537089479" itemName="warning" itemValue="0" objectName="" />
+          <alertItem id="291257609935132" partitionid="1" alertFK="146841537089479" itemName="alertOccursTime" itemValue="1" objectName="" />
+          <alertItem id="305272866182622" partitionid="1" alertFK="146841537089479" itemName="ignoreAlarmsTime" itemValue="1" objectName="" />
+          <alertItem id="308677298533114" partitionid="1" alertFK="146841537089479" itemName="error" itemValue="1" objectName="" />
+          <alertItem id="338614510855923" partitionid="1" alertFK="146841537089479" itemName="alertOccursCount" itemValue="3" objectName="" />
+          <alertItem id="358297392939356" partitionid="1" alertFK="146841537089479" itemName="alertNotOccurTime" itemValue="0" objectName="" />
+          <alertItem id="364673512971342" partitionid="1" alertFK="146841537089479" itemName="information" itemValue="0" objectName="" />
+          <alertItem id="392644996332305" partitionid="1" alertFK="146841537089479" itemName="alertWhen" itemValue="1" objectName="" />
+          <alertItem id="502862227383471" partitionid="1" alertFK="146841537089479" itemName="verbose" itemValue="0" objectName="" />
+          <alertItem id="554646713172386" partitionid="1" alertFK="146841537089479" itemName="alertNotOccurUnit" itemValue="0" objectName="" />
+          <alertItem id="559350208500097" partitionid="1" alertFK="146841537089479" itemName="alertOccursUnit" itemValue="2" objectName="" />
+          <alertItem id="736439613828644" partitionid="1" alertFK="146841537089479" itemName="eventSetId" itemValue="81042891" objectName="__[UPSTREAM] - User Experience - Application Crashes" />
+          <alertItem id="895669097917002" partitionid="1" alertFK="146841537089479" itemName="eventLogType" itemValue="796450521" objectName="Application" />
+          <alertItem id="951626868337218" partitionid="1" alertFK="146841537089479" itemName="failureAudit" itemValue="0" objectName="" />
+        </alertItems>
+      </alert>
+      <alert id="372190631726845" partitionId="1" policyObjectDataFK="999083691183054" createAlarm="True" createTicket="False" runScript="False" scriptId="" scriptName="" machineId="" machName="" emailRecipients="False" emailAddresses="" alertType="alertAgentOffline" alertTypeValue="Agent Status">
+        <alertItems>
+          <alertItem id="368163563529105" partitionid="1" alertFK="372190631726845" itemName="alertAgentOnline" itemValue="0" objectName="" />
+          <alertItem id="460618592920069" partitionid="1" alertFK="372190631726845" itemName="rearmAfterUnits" itemValue="2" objectName="" />
+          <alertItem id="491033764412176" partitionid="1" alertFK="372190631726845" itemName="alertDisableRemoteControl" itemValue="0" objectName="" />
+          <alertItem id="521513487036113" partitionid="1" alertFK="372190631726845" itemName="notCheckedInTime" itemValue="45" objectName="" />
+          <alertItem id="606506326378558" partitionid="1" alertFK="372190631726845" itemName="notCheckedInUnits" itemValue="2" objectName="" />
+          <alertItem id="887766212545226" partitionid="1" alertFK="372190631726845" itemName="rearmAfterTime" itemValue="7" objectName="" />
+          <alertItem id="950044719572199" partitionid="1" alertFK="372190631726845" itemName="notCheckedIn" itemValue="1" objectName="" />
+        </alertItems>
+      </alert>
+      <alert id="685100844542077" partitionId="1" policyObjectDataFK="999083691183054" createAlarm="True" createTicket="False" runScript="False" scriptId="" scriptName="" machineId="" machName="" emailRecipients="False" emailAddresses="" alertType="alertNtEvent" alertTypeValue="Event Log">
+        <alertItems>
+          <alertItem id="140328803351302" partitionid="1" alertFK="685100844542077" itemName="eventLogType" itemValue="796450521" objectName="Application" />
+          <alertItem id="198334428201585" partitionid="1" alertFK="685100844542077" itemName="critical" itemValue="0" objectName="" />
+          <alertItem id="214219028649022" partitionid="1" alertFK="685100844542077" itemName="successAudit" itemValue="0" objectName="" />
+          <alertItem id="236479229031354" partitionid="1" alertFK="685100844542077" itemName="error" itemValue="1" objectName="" />
+          <alertItem id="305326580351836" partitionid="1" alertFK="685100844542077" itemName="eventSetId" itemValue="80224211" objectName="__[UPSTREAM] - User Experience - Application Hang" />
+          <alertItem id="324584212025899" partitionid="1" alertFK="685100844542077" itemName="alertNotOccurTime" itemValue="0" objectName="" />
+          <alertItem id="336111435683496" partitionid="1" alertFK="685100844542077" itemName="alertNotOccurUnit" itemValue="0" objectName="" />
+          <alertItem id="451774151181697" partitionid="1" alertFK="685100844542077" itemName="information" itemValue="0" objectName="" />
+          <alertItem id="509846542081724" partitionid="1" alertFK="685100844542077" itemName="verbose" itemValue="0" objectName="" />
+          <alertItem id="537828219932424" partitionid="1" alertFK="685100844542077" itemName="alertOccursUnit" itemValue="0" objectName="" />
+          <alertItem id="555959484752248" partitionid="1" alertFK="685100844542077" itemName="alertOccursTime" itemValue="0" objectName="" />
+          <alertItem id="703308478558113" partitionid="1" alertFK="685100844542077" itemName="warning" itemValue="0" objectName="" />
+          <alertItem id="717815911778162" partitionid="1" alertFK="685100844542077" itemName="alertWhen" itemValue="0" objectName="" />
+          <alertItem id="725482742220853" partitionid="1" alertFK="685100844542077" itemName="ignoreAlarmsTime" itemValue="0" objectName="" />
+          <alertItem id="811532106628423" partitionid="1" alertFK="685100844542077" itemName="failureAudit" itemValue="0" objectName="" />
+          <alertItem id="843018003386919" partitionid="1" alertFK="685100844542077" itemName="ignoreAlarmsUnit" itemValue="0" objectName="" />
+          <alertItem id="928470930423806" partitionid="1" alertFK="685100844542077" itemName="alertOccursCount" itemValue="0" objectName="" />
+        </alertItems>
+      </alert>
+      <alert id="776972112514531" partitionId="1" policyObjectDataFK="999083691183054" createAlarm="True" createTicket="False" runScript="False" scriptId="" scriptName="" machineId="" machName="" emailRecipients="False" emailAddresses="" alertType="alertNtEvent" alertTypeValue="Event Log">
+        <alertItems>
+          <alertItem id="168308679931009" partitionid="1" alertFK="776972112514531" itemName="critical" itemValue="0" objectName="" />
+          <alertItem id="174874265340564" partitionid="1" alertFK="776972112514531" itemName="alertOccursCount" itemValue="0" objectName="" />
+          <alertItem id="186475186043645" partitionid="1" alertFK="776972112514531" itemName="information" itemValue="0" objectName="" />
+          <alertItem id="239050231147115" partitionid="1" alertFK="776972112514531" itemName="successAudit" itemValue="0" objectName="" />
+          <alertItem id="287493640457975" partitionid="1" alertFK="776972112514531" itemName="eventLogType" itemValue="1380569194" objectName="System" />
+          <alertItem id="369258624813174" partitionid="1" alertFK="776972112514531" itemName="ignoreAlarmsUnit" itemValue="0" objectName="" />
+          <alertItem id="373514472448041" partitionid="1" alertFK="776972112514531" itemName="eventSetId" itemValue="272013620" objectName="__[UPSTREAM] - User Experience - Unexpected Shutdowns And Bluescreens" />
+          <alertItem id="494866797418737" partitionid="1" alertFK="776972112514531" itemName="verbose" itemValue="0" objectName="" />
+          <alertItem id="526740583091387" partitionid="1" alertFK="776972112514531" itemName="ignoreAlarmsTime" itemValue="0" objectName="" />
+          <alertItem id="624908036657104" partitionid="1" alertFK="776972112514531" itemName="alertNotOccurTime" itemValue="0" objectName="" />
+          <alertItem id="652112589707652" partitionid="1" alertFK="776972112514531" itemName="alertOccursTime" itemValue="0" objectName="" />
+          <alertItem id="670218362226252" partitionid="1" alertFK="776972112514531" itemName="warning" itemValue="0" objectName="" />
+          <alertItem id="671054062699458" partitionid="1" alertFK="776972112514531" itemName="alertOccursUnit" itemValue="0" objectName="" />
+          <alertItem id="933193021841902" partitionid="1" alertFK="776972112514531" itemName="error" itemValue="1" objectName="" />
+          <alertItem id="953306932818752" partitionid="1" alertFK="776972112514531" itemName="alertWhen" itemValue="0" objectName="" />
+          <alertItem id="977647143126304" partitionid="1" alertFK="776972112514531" itemName="alertNotOccurUnit" itemValue="0" objectName="" />
+          <alertItem id="991650663871154" partitionid="1" alertFK="776972112514531" itemName="failureAudit" itemValue="0" objectName="" />
+        </alertItems>
+      </alert>
+      <alert id="952959264466985" partitionId="1" policyObjectDataFK="999083691183054" createAlarm="True" createTicket="False" runScript="False" scriptId="" scriptName="" machineId="" machName="" emailRecipients="False" emailAddresses="" alertType="alertNtEvent" alertTypeValue="Event Log">
+        <alertItems>
+          <alertItem id="118431005449235" partitionid="1" alertFK="952959264466985" itemName="alertOccursUnit" itemValue="0" objectName="" />
+          <alertItem id="127424321522668" partitionid="1" alertFK="952959264466985" itemName="warning" itemValue="0" objectName="" />
+          <alertItem id="294336541972282" partitionid="1" alertFK="952959264466985" itemName="alertOccursTime" itemValue="0" objectName="" />
+          <alertItem id="300596698792929" partitionid="1" alertFK="952959264466985" itemName="error" itemValue="1" objectName="" />
+          <alertItem id="370689819273866" partitionid="1" alertFK="952959264466985" itemName="verbose" itemValue="0" objectName="" />
+          <alertItem id="381179570351345" partitionid="1" alertFK="952959264466985" itemName="eventSetId" itemValue="99616127" objectName="__[UPSTREAM] - Hardware - Disk Errors" />
+          <alertItem id="471180170621341" partitionid="1" alertFK="952959264466985" itemName="alertOccursCount" itemValue="0" objectName="" />
+          <alertItem id="477327388002224" partitionid="1" alertFK="952959264466985" itemName="critical" itemValue="0" objectName="" />
+          <alertItem id="558911529862746" partitionid="1" alertFK="952959264466985" itemName="alertNotOccurTime" itemValue="0" objectName="" />
+          <alertItem id="627494217142227" partitionid="1" alertFK="952959264466985" itemName="information" itemValue="0" objectName="" />
+          <alertItem id="676992188476487" partitionid="1" alertFK="952959264466985" itemName="successAudit" itemValue="0" objectName="" />
+          <alertItem id="721244630693106" partitionid="1" alertFK="952959264466985" itemName="ignoreAlarmsTime" itemValue="0" objectName="" />
+          <alertItem id="806281400847379" partitionid="1" alertFK="952959264466985" itemName="failureAudit" itemValue="0" objectName="" />
+          <alertItem id="828012306256225" partitionid="1" alertFK="952959264466985" itemName="eventLogType" itemValue="1380569194" objectName="System" />
+          <alertItem id="888145772362195" partitionid="1" alertFK="952959264466985" itemName="ignoreAlarmsUnit" itemValue="0" objectName="" />
+          <alertItem id="980235264441107" partitionid="1" alertFK="952959264466985" itemName="alertNotOccurUnit" itemValue="0" objectName="" />
+          <alertItem id="992889510836866" partitionid="1" alertFK="952959264466985" itemName="alertWhen" itemValue="0" objectName="" />
+        </alertItems>
+      </alert>
+    </alerts>
+    <checkin />
+    <credential />
+    <distributeFiles />
+    <logging id="883239458027872" partitionid="1" configDays="30" configArchive="True" netDays="30" netArchive="True" scriptDays="90" scriptArchive="True" remoteDays="90" remoteArchive="True" alarmDays="30" alarmArchive="True" monitorActionDays="30" monitorActionArchive="True" sysLogDays="30" sysLogArchive="True" eventDays="" eventArchive="" monitorDays="" monitorArchive="" snmpDays="" snmpArchive="" agentDays="" agentArchive="" errorDays="90" errorArchive="True" />
+    <machProfile />
+    <monitorSets>
+      <monitorSet id="182033781093561" partitionid="1" policyObjectDataId="287514301011112" monitorSetId="1179" createAlarm="True" createTicket="False" runScript="False" scriptId="0" machineId="0" emailRecipients="False" emailAddresses="" name="UPSTREAM - BASIC - Performance - Memory Usage - Workstations SWE" scriptName="" machName="" />
+      <monitorSet id="276563630754393" partitionid="1" policyObjectDataId="287514301011112" monitorSetId="1163" createAlarm="True" createTicket="False" runScript="False" scriptId="0" machineId="0" emailRecipients="False" emailAddresses="" name="UPSTREAM - BASIC - Low Disk - Drive C Below 2GB - Workstations SWE" scriptName="" machName="" />
+      <monitorSet id="301580810081955" partitionid="1" policyObjectDataId="287514301011112" monitorSetId="1173" createAlarm="True" createTicket="False" runScript="False" scriptId="0" machineId="0" emailRecipients="False" emailAddresses="" name="UPSTREAM - BASIC - Performance - CPU Total Usage - Workstations SWE" scriptName="" machName="" />
+      <monitorSet id="460133474348175" partitionid="1" policyObjectDataId="287514301011112" monitorSetId="1172" createAlarm="True" createTicket="False" runScript="False" scriptId="0" machineId="0" emailRecipients="False" emailAddresses="" name="UPSTREAM - BASIC - Performance - CPU Total Usage - Workstations ENG" scriptName="" machName="" />
+      <monitorSet id="515262300528242" partitionid="1" policyObjectDataId="287514301011112" monitorSetId="1161" createAlarm="True" createTicket="False" runScript="False" scriptId="0" machineId="0" emailRecipients="False" emailAddresses="" name="UPSTREAM - BASIC - Low Disk - Drive C Below 2GB - Workstations ENG" scriptName="" machName="" />
+      <monitorSet id="517062051881599" partitionid="1" policyObjectDataId="287514301011112" monitorSetId="1177" createAlarm="True" createTicket="False" runScript="False" scriptId="0" machineId="0" emailRecipients="False" emailAddresses="" name="UPSTREAM - BASIC - Performance - Memory Usage - Workstations ENG" scriptName="" machName="" />
+    </monitorSets>
+    <patchSettings />
+    <protectionPolicy />
+    <workingDir />
+    <remoteControl id="283575306499179" partitionid="1" remoteControlNotify="2" notifyTerminate="" requireRCNote="True" notifyMsgText="Dear customer. &lt;admin&gt; is asking for permission to remote control your computer." notifyAskText="The system administrator &lt;admin&gt; is asking to remotely control your computer. OK to allow remote control?" notifyTerminateText="Administratör &lt;admin&gt; har avslutat supportärendet." />
+    <patchFileSource />
+    <patchProcedureSchedule id="847770631754663" partitionid="1" patchScanSchedule="{&quot;startdatefrom&quot;:&quot;2017-03-01T09:00:00+01:00&quot;,&quot;starttimefrom&quot;:&quot;2017-03-01T09:00:00+01:00&quot;,&quot;startdateto&quot;:&quot;2017-03-01T15:00:00+01:00&quot;,&quot;starttimeto&quot;:&quot;2017-03-01T15:00:00+01:00&quot;,&quot;recurrencetype&quot;:&quot;WEEKLY&quot;,&quot;rangeofrecurrencetype&quot;:&quot;1&quot;,&quot;skipifoffline&quot;:&quot;N&quot;,&quot;powerupifoffline&quot;:&quot;N&quot;,&quot;scheduleid&quot;:&quot;0&quot;,&quot;excludetimerange&quot;:&quot;N&quot;,&quot;recurringminutesinterval&quot;:60,&quot;recurringhoursinterval&quot;:1,&quot;recurringdaysinterval&quot;:1,&quot;recurringweeksinterval&quot;:1,&quot;sundayflag&quot;:&quot;N&quot;,&quot;mondayflag&quot;:&quot;N&quot;,&quot;tuesdayflag&quot;:&quot;N&quot;,&quot;wednesdayflag&quot;:&quot;Y&quot;,&quot;thursdayflag&quot;:&quot;N&quot;,&quot;fridayflag&quot;:&quot;N&quot;,&quot;saturdayflag&quot;:&quot;N&quot;,&quot;recurringmonthsinterval&quot;:1,&quot;monthlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;monthlyspecificday&quot;:&quot;DAY&quot;,&quot;monthlyintervaltype&quot;:1,&quot;monthday&quot;:1,&quot;yearlyintervaltype&quot;:1,&quot;yearlyspecificmonth&quot;:1,&quot;yearday&quot;:1,&quot;yearlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;yearlyspecificday&quot;:&quot;DAY&quot;,&quot;yearlyspecificmonth2&quot;:1,&quot;rangeofrecurrenceendafterinterval&quot;:1,&quot;rangeofrecurrenceenddatetime&quot;:&quot;2017-03-01T15:26:12+01:00&quot;,&quot;excludetimefrom&quot;:&quot;2017-03-01T15:26:12+01:00&quot;,&quot;excludetimeto&quot;:&quot;2017-03-01T15:26:12+01:00&quot;,&quot;createdatetime&quot;:&quot;2017-03-01T15:26:12+01:00&quot;,&quot;execwhennextonline&quot;:&quot;N&quot;,&quot;schedinagenttime&quot;:&quot;Y&quot;,&quot;distribution&quot;:360}" autoUpdateSchedule="" patchScanScheduleDescription="every 1 week(s) within 360 minute(s) of 07:00:00 am  starting on 07:00:00 am 01-Mar-17 no end date" autoUpdateScheduleDescription="" />
+    <patchRebootAction id="896032394327238" partitionid="1" rebootRadioSelect="2" rebootTime="2019-05-03 00:00:00" rebootDay="-1" rebootWarnMin="1" rebootAskMin="1" rebootNoResponseMin="1" rebootDoNothingMin="1" rebootEmail="False" rebootEmailAddress="" rebootPreScriptId="0" rebootPostScriptId="0" />
+    <auditSchedule id="270029010190642" partitionid="1" auditSchedule="" auditScheduleDescription="" auditType="" latestAuditSchedule="{&quot;startdatefrom&quot;:&quot;2017-03-01T08:00:00+01:00&quot;,&quot;starttimefrom&quot;:&quot;2017-03-01T08:00:00+01:00&quot;,&quot;startdateto&quot;:&quot;2017-03-01T11:00:00+01:00&quot;,&quot;starttimeto&quot;:&quot;2017-03-01T11:00:00+01:00&quot;,&quot;recurrencetype&quot;:&quot;DAILY&quot;,&quot;rangeofrecurrencetype&quot;:&quot;1&quot;,&quot;skipifoffline&quot;:&quot;N&quot;,&quot;powerupifoffline&quot;:&quot;N&quot;,&quot;scheduleid&quot;:&quot;0&quot;,&quot;excludetimerange&quot;:&quot;N&quot;,&quot;recurringminutesinterval&quot;:60,&quot;recurringhoursinterval&quot;:1,&quot;recurringdaysinterval&quot;:1,&quot;recurringweeksinterval&quot;:1,&quot;sundayflag&quot;:&quot;N&quot;,&quot;mondayflag&quot;:&quot;Y&quot;,&quot;tuesdayflag&quot;:&quot;N&quot;,&quot;wednesdayflag&quot;:&quot;N&quot;,&quot;thursdayflag&quot;:&quot;N&quot;,&quot;fridayflag&quot;:&quot;N&quot;,&quot;saturdayflag&quot;:&quot;N&quot;,&quot;recurringmonthsinterval&quot;:1,&quot;monthlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;monthlyspecificday&quot;:&quot;DAY&quot;,&quot;monthlyintervaltype&quot;:1,&quot;monthday&quot;:1,&quot;yearlyintervaltype&quot;:1,&quot;yearlyspecificmonth&quot;:1,&quot;yearday&quot;:1,&quot;yearlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;yearlyspecificday&quot;:&quot;DAY&quot;,&quot;yearlyspecificmonth2&quot;:1,&quot;rangeofrecurrenceendafterinterval&quot;:1,&quot;rangeofrecurrenceenddatetime&quot;:&quot;2017-03-01T15:23:37+01:00&quot;,&quot;excludetimefrom&quot;:&quot;2017-03-01T00:00:00+01:00&quot;,&quot;excludetimeto&quot;:&quot;2017-03-01T00:00:00+01:00&quot;,&quot;createdatetime&quot;:&quot;2017-03-01T15:23:37+01:00&quot;,&quot;execwhennextonline&quot;:&quot;N&quot;,&quot;schedinagenttime&quot;:&quot;Y&quot;,&quot;distribution&quot;:180}" latestAuditScheduleDescription="every 1 day(s) within 180 minute(s) of 06:00:00 am  starting on 06:00:00 am 01-Mar-17 no end date" baselineAuditSchedule="{&quot;startdatefrom&quot;:&quot;2017-03-01T16:27:40+01:00&quot;,&quot;starttimefrom&quot;:&quot;2017-03-01T16:27:40+01:00&quot;,&quot;startdateto&quot;:&quot;2017-03-01T16:27:40+01:00&quot;,&quot;starttimeto&quot;:&quot;2017-03-01T16:27:40+01:00&quot;,&quot;recurrencetype&quot;:&quot;ONCE&quot;,&quot;rangeofrecurrencetype&quot;:&quot;1&quot;,&quot;skipifoffline&quot;:&quot;N&quot;,&quot;powerupifoffline&quot;:&quot;N&quot;,&quot;scheduleid&quot;:&quot;0&quot;,&quot;excludetimerange&quot;:&quot;N&quot;,&quot;recurringminutesinterval&quot;:60,&quot;recurringhoursinterval&quot;:1,&quot;recurringdaysinterval&quot;:1,&quot;recurringweeksinterval&quot;:1,&quot;sundayflag&quot;:&quot;N&quot;,&quot;mondayflag&quot;:&quot;Y&quot;,&quot;tuesdayflag&quot;:&quot;N&quot;,&quot;wednesdayflag&quot;:&quot;N&quot;,&quot;thursdayflag&quot;:&quot;N&quot;,&quot;fridayflag&quot;:&quot;N&quot;,&quot;saturdayflag&quot;:&quot;N&quot;,&quot;recurringmonthsinterval&quot;:1,&quot;monthlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;monthlyspecificday&quot;:&quot;DAY&quot;,&quot;monthlyintervaltype&quot;:1,&quot;monthday&quot;:1,&quot;yearlyintervaltype&quot;:1,&quot;yearlyspecificmonth&quot;:1,&quot;yearday&quot;:1,&quot;yearlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;yearlyspecificday&quot;:&quot;DAY&quot;,&quot;yearlyspecificmonth2&quot;:1,&quot;rangeofrecurrenceendafterinterval&quot;:1,&quot;rangeofrecurrenceenddatetime&quot;:&quot;2017-03-01T15:27:40+01:00&quot;,&quot;excludetimefrom&quot;:&quot;2017-03-01T15:27:40+01:00&quot;,&quot;excludetimeto&quot;:&quot;2017-03-01T15:27:40+01:00&quot;,&quot;createdatetime&quot;:&quot;2017-03-01T15:27:40+01:00&quot;,&quot;execwhennextonline&quot;:&quot;N&quot;,&quot;schedinagenttime&quot;:&quot;Y&quot;,&quot;distribution&quot;:0}" baselineAuditScheduleDescription="at 02:27:40 pm  starting on 02:27:40 pm 01-Mar-17 end after 1 occurrences" systemAuditSchedule="{&quot;startdatefrom&quot;:&quot;2017-03-01T16:27:51+01:00&quot;,&quot;starttimefrom&quot;:&quot;2017-03-01T16:27:51+01:00&quot;,&quot;startdateto&quot;:&quot;2017-03-01T16:27:51+01:00&quot;,&quot;starttimeto&quot;:&quot;2017-03-01T16:27:51+01:00&quot;,&quot;recurrencetype&quot;:&quot;ONCE&quot;,&quot;rangeofrecurrencetype&quot;:&quot;1&quot;,&quot;skipifoffline&quot;:&quot;N&quot;,&quot;powerupifoffline&quot;:&quot;N&quot;,&quot;scheduleid&quot;:&quot;0&quot;,&quot;excludetimerange&quot;:&quot;N&quot;,&quot;recurringminutesinterval&quot;:60,&quot;recurringhoursinterval&quot;:1,&quot;recurringdaysinterval&quot;:1,&quot;recurringweeksinterval&quot;:1,&quot;sundayflag&quot;:&quot;N&quot;,&quot;mondayflag&quot;:&quot;Y&quot;,&quot;tuesdayflag&quot;:&quot;N&quot;,&quot;wednesdayflag&quot;:&quot;N&quot;,&quot;thursdayflag&quot;:&quot;N&quot;,&quot;fridayflag&quot;:&quot;N&quot;,&quot;saturdayflag&quot;:&quot;N&quot;,&quot;recurringmonthsinterval&quot;:1,&quot;monthlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;monthlyspecificday&quot;:&quot;DAY&quot;,&quot;monthlyintervaltype&quot;:1,&quot;monthday&quot;:1,&quot;yearlyintervaltype&quot;:1,&quot;yearlyspecificmonth&quot;:1,&quot;yearday&quot;:1,&quot;yearlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;yearlyspecificday&quot;:&quot;DAY&quot;,&quot;yearlyspecificmonth2&quot;:1,&quot;rangeofrecurrenceendafterinterval&quot;:1,&quot;rangeofrecurrenceenddatetime&quot;:&quot;2017-03-01T15:27:51+01:00&quot;,&quot;excludetimefrom&quot;:&quot;2017-03-01T15:27:51+01:00&quot;,&quot;excludetimeto&quot;:&quot;2017-03-01T15:27:51+01:00&quot;,&quot;createdatetime&quot;:&quot;2017-03-01T15:27:51+01:00&quot;,&quot;execwhennextonline&quot;:&quot;N&quot;,&quot;schedinagenttime&quot;:&quot;Y&quot;,&quot;distribution&quot;:0}" systemAuditScheduleDescription="at 02:27:51 pm  starting on 02:27:51 pm 01-Mar-17 end after 1 occurrences" />
+    <eventlogsettings>
+      <eventlogsetting id="296305933406719" partitionid="1" eventAssignValue="1" eventAssignString="E------" eventLogTypeId="1380569194" />
+      <eventlogsetting id="949386154696993" partitionid="1" eventAssignValue="1" eventAssignString="E------" eventLogTypeId="796450521" />
+    </eventlogsettings>
+    <updatelistbyscan />
+    <windowsUpdate />
+  </Policy>
+  <Policy id="392903073873791" ref="MSP - PREMIUM - Set PREMIUM Tag On Agents" partitionid="1" rowDesc="MSP - PREMIUM - Set PREMIUM Tag On Agents" policyTypeFK="0" markedForDelete="False" viewFK="16184367" viewName="__[UPSTREAM] - Agent - All Agents Checkd In" treeFullPath="Upstream Power Pack 2019-05-03.UPSTREAM MSP PREMIUM" sortOrder="-1" Override="0">
+    <agentMenu />
+    <agentProcedures />
+    <alerts />
+    <checkin />
+    <credential />
+    <distributeFiles />
+    <logging />
+    <machProfile />
+    <monitorSets />
+    <patchSettings />
+    <protectionPolicy />
+    <workingDir />
+    <remoteControl />
+    <patchFileSource />
+    <patchProcedureSchedule />
+    <patchRebootAction />
+    <auditSchedule />
+    <eventlogsettings />
+    <updatelistbyscan />
+    <windowsUpdate />
+  </Policy>
+  <Policy id="390326968855376" ref="MSP - PREMIUM - Weekly Windows 7 Patch And Management" partitionid="1" rowDesc="MSP - PREMIUM - Weekly Windows 7 Patch And Management" policyTypeFK="0" markedForDelete="False" viewFK="0" viewName="" treeFullPath="Upstream Power Pack 2019-05-03.UPSTREAM MSP PREMIUM.MSP Premium OS Based Policies (For Fully Managed Customers)" sortOrder="-1" Override="0">
+    <agentMenu />
+    <agentProcedures />
+    <alerts />
+    <checkin />
+    <credential />
+    <distributeFiles />
+    <logging />
+    <machProfile />
+    <monitorSets />
+    <patchSettings />
+    <protectionPolicy />
+    <workingDir />
+    <remoteControl />
+    <patchFileSource />
+    <patchProcedureSchedule />
+    <patchRebootAction />
+    <auditSchedule />
+    <eventlogsettings />
+    <updatelistbyscan />
+    <windowsUpdate />
+  </Policy>
+  <Policy id="661889869376034" ref="MSP - PREMIUM - Weekly Windows 10 Patch And Management" partitionid="1" rowDesc="MSP - PREMIUM - Weekly Windows 10 Patch And Management" policyTypeFK="0" markedForDelete="False" viewFK="0" viewName="" treeFullPath="Upstream Power Pack 2019-05-03.UPSTREAM MSP PREMIUM.MSP Premium OS Based Policies (For Fully Managed Customers)" sortOrder="-1" Override="0">
+    <agentMenu />
+    <agentProcedures />
+    <alerts />
+    <checkin />
+    <credential />
+    <distributeFiles />
+    <logging />
+    <machProfile />
+    <monitorSets />
+    <patchSettings />
+    <protectionPolicy />
+    <workingDir />
+    <remoteControl />
+    <patchFileSource />
+    <patchProcedureSchedule />
+    <patchRebootAction />
+    <auditSchedule />
+    <eventlogsettings />
+    <updatelistbyscan />
+    <windowsUpdate />
+  </Policy>
+  <Policy id="507255844588976" ref="MSP - PREMIUM - Role - Domain Controllers" partitionid="1" rowDesc="MSP - PREMIUM - Role - Domain Controllers" policyTypeFK="0" markedForDelete="False" viewFK="67518677" viewName="__[UPSTREAM] - Policy - All Domain Controllers" treeFullPath="Upstream Power Pack 2019-05-03.UPSTREAM MSP PREMIUM.MSP Premium Role Based Policies (For Fully Managed Customers)" sortOrder="-1" Override="0">
+    <agentMenu />
+    <agentProcedures />
+    <alerts />
+    <checkin />
+    <credential />
+    <distributeFiles />
+    <logging />
+    <machProfile />
+    <monitorSets>
+      <monitorSet id="684349877566262" partitionid="1" policyObjectDataId="978155208415423" monitorSetId="1180" createAlarm="False" createTicket="False" runScript="False" scriptId="0" machineId="0" emailRecipients="False" emailAddresses="" name="UPSTREAM - PREMIUM - Performance - MS Domain Controller ENG" scriptName="" machName="" />
+      <monitorSet id="953267685395324" partitionid="1" policyObjectDataId="978155208415423" monitorSetId="1188" createAlarm="True" createTicket="False" runScript="False" scriptId="0" machineId="0" emailRecipients="False" emailAddresses="" name="UPSTREAM - PREMIUM - Services - MS Domain Controller" scriptName="" machName="" />
+    </monitorSets>
+    <patchSettings />
+    <protectionPolicy />
+    <workingDir />
+    <remoteControl />
+    <patchFileSource />
+    <patchProcedureSchedule />
+    <patchRebootAction />
+    <auditSchedule />
+    <eventlogsettings />
+    <updatelistbyscan />
+    <windowsUpdate />
+  </Policy>
+  <Policy id="599863995425339" ref="MSP - PREMIUM - Role - Kaseya Network Monitor Gateways" partitionid="1" rowDesc="MSP - PREMIUM - Role - Kaseya Network Monitor Gateways" policyTypeFK="0" markedForDelete="False" viewFK="0" viewName="" treeFullPath="Upstream Power Pack 2019-05-03.UPSTREAM MSP PREMIUM.MSP Premium Role Based Policies (For Fully Managed Customers)" sortOrder="-1" Override="0">
+    <agentMenu />
+    <agentProcedures />
+    <alerts />
+    <checkin />
+    <credential />
+    <distributeFiles />
+    <logging />
+    <machProfile />
+    <monitorSets>
+      <monitorSet id="973385114676032" partitionid="1" policyObjectDataId="742742103870372" monitorSetId="1187" createAlarm="True" createTicket="False" runScript="False" scriptId="0" machineId="0" emailRecipients="False" emailAddresses="" name="UPSTREAM - PREMIUM - Services - IIS Server - Services - Kaseya Network Monitor Gateway" scriptName="" machName="" />
+    </monitorSets>
+    <patchSettings />
+    <protectionPolicy />
+    <workingDir />
+    <remoteControl />
+    <patchFileSource />
+    <patchProcedureSchedule />
+    <patchRebootAction />
+    <auditSchedule />
+    <eventlogsettings />
+    <updatelistbyscan />
+    <windowsUpdate />
+  </Policy>
+  <Policy id="427536853462242" ref="MSP - PREMIUM - Role - Web Server" partitionid="1" rowDesc="MSP - PREMIUM - Role - Web Server" policyTypeFK="0" markedForDelete="False" viewFK="0" viewName="" treeFullPath="Upstream Power Pack 2019-05-03.UPSTREAM MSP PREMIUM.MSP Premium Role Based Policies (For Fully Managed Customers)" sortOrder="-1" Override="0">
+    <agentMenu />
+    <agentProcedures />
+    <alerts />
+    <checkin />
+    <credential />
+    <distributeFiles />
+    <logging />
+    <machProfile />
+    <monitorSets />
+    <patchSettings />
+    <protectionPolicy />
+    <workingDir />
+    <remoteControl />
+    <patchFileSource />
+    <patchProcedureSchedule />
+    <patchRebootAction />
+    <auditSchedule />
+    <eventlogsettings />
+    <updatelistbyscan />
+    <windowsUpdate />
+  </Policy>
+  <Policy id="423742844920485" ref="MSP - PREMIUM - Role - Exchange Server" partitionid="1" rowDesc="MSP - PREMIUM - Role - Exchange Server" policyTypeFK="0" markedForDelete="False" viewFK="71670856" viewName="__[UPSTREAM] - Policy - All Exchange Servers" treeFullPath="Upstream Power Pack 2019-05-03.UPSTREAM MSP PREMIUM.MSP Premium Role Based Policies (For Fully Managed Customers)" sortOrder="-1" Override="0">
+    <agentMenu />
+    <agentProcedures />
+    <alerts />
+    <checkin />
+    <credential />
+    <distributeFiles />
+    <logging />
+    <machProfile />
+    <monitorSets>
+      <monitorSet id="309485029433614" partitionid="1" policyObjectDataId="411868906771703" monitorSetId="1189" createAlarm="True" createTicket="False" runScript="False" scriptId="0" machineId="0" emailRecipients="False" emailAddresses="" name="UPSTREAM - PREMIUM - Services - MS Exchange Server" scriptName="" machName="" />
+      <monitorSet id="438589267031564" partitionid="1" policyObjectDataId="411868906771703" monitorSetId="1181" createAlarm="False" createTicket="False" runScript="False" scriptId="0" machineId="0" emailRecipients="False" emailAddresses="" name="UPSTREAM - PREMIUM - Performance - MS Exchange Server ENG" scriptName="" machName="" />
+    </monitorSets>
+    <patchSettings />
+    <protectionPolicy />
+    <workingDir />
+    <remoteControl />
+    <patchFileSource />
+    <patchProcedureSchedule />
+    <patchRebootAction />
+    <auditSchedule />
+    <eventlogsettings />
+    <updatelistbyscan />
+    <windowsUpdate />
+  </Policy>
+  <Policy id="254168039166447" ref="MSP - PREMIUM - Role - SQL Servers" partitionid="1" rowDesc="MSP - PREMIUM - Role - SQL Servers" policyTypeFK="0" markedForDelete="False" viewFK="76619252" viewName="__[UPSTREAM] - Policy - All MS SQL Servers" treeFullPath="Upstream Power Pack 2019-05-03.UPSTREAM MSP PREMIUM.MSP Premium Role Based Policies (For Fully Managed Customers)" sortOrder="-1" Override="0">
+    <agentMenu />
+    <agentProcedures />
+    <alerts />
+    <checkin />
+    <credential />
+    <distributeFiles />
+    <logging />
+    <machProfile />
+    <monitorSets>
+      <monitorSet id="242281968631913" partitionid="1" policyObjectDataId="309950842806115" monitorSetId="1182" createAlarm="False" createTicket="False" runScript="False" scriptId="0" machineId="0" emailRecipients="False" emailAddresses="" name="UPSTREAM - PREMIUM - Performance - MS SQL Server (Default Instance) ENG" scriptName="" machName="" />
+      <monitorSet id="532368788836695" partitionid="1" policyObjectDataId="309950842806115" monitorSetId="1190" createAlarm="True" createTicket="False" runScript="False" scriptId="0" machineId="0" emailRecipients="False" emailAddresses="" name="UPSTREAM - PREMIUM - Services - MS SQL Server (All Instances)" scriptName="" machName="" />
+    </monitorSets>
+    <patchSettings />
+    <protectionPolicy />
+    <workingDir />
+    <remoteControl />
+    <patchFileSource />
+    <patchProcedureSchedule />
+    <patchRebootAction />
+    <auditSchedule />
+    <eventlogsettings />
+    <updatelistbyscan />
+    <windowsUpdate />
+  </Policy>
+  <Policy id="289265267173417" ref="MSP - PREMIUM - Role - Terminal Servers" partitionid="1" rowDesc="MSP - PREMIUM - Role - Terminal Servers" policyTypeFK="0" markedForDelete="False" viewFK="94940568" viewName="__[UPSTREAM] - Policy - All Terminal Servers" treeFullPath="Upstream Power Pack 2019-05-03.UPSTREAM MSP PREMIUM.MSP Premium Role Based Policies (For Fully Managed Customers)" sortOrder="-1" Override="0">
+    <agentMenu />
+    <agentProcedures />
+    <alerts />
+    <checkin />
+    <credential />
+    <distributeFiles />
+    <logging />
+    <machProfile />
+    <monitorSets>
+      <monitorSet id="603216977139576" partitionid="1" policyObjectDataId="559617095002726" monitorSetId="1192" createAlarm="True" createTicket="False" runScript="False" scriptId="0" machineId="0" emailRecipients="False" emailAddresses="" name="UPSTREAM - PREMIUM - Services - Terminal Server" scriptName="" machName="" />
+      <monitorSet id="765531512054396" partitionid="1" policyObjectDataId="559617095002726" monitorSetId="1184" createAlarm="False" createTicket="False" runScript="False" scriptId="0" machineId="0" emailRecipients="False" emailAddresses="" name="UPSTREAM - PREMIUM - Performance - Terminal Server ENG" scriptName="" machName="" />
+    </monitorSets>
+    <patchSettings />
+    <protectionPolicy />
+    <workingDir />
+    <remoteControl />
+    <patchFileSource />
+    <patchProcedureSchedule />
+    <patchRebootAction />
+    <auditSchedule />
+    <eventlogsettings />
+    <updatelistbyscan />
+    <windowsUpdate />
+  </Policy>
+  <Policy id="954979841669545" ref="MSP - PREMIUM - Role - Print Servers" partitionid="1" rowDesc="MSP - PREMIUM - Role - Print Servers" policyTypeFK="0" markedForDelete="False" viewFK="83203478" viewName="__[UPSTREAM] - Policy - All Print Servers" treeFullPath="Upstream Power Pack 2019-05-03.UPSTREAM MSP PREMIUM.MSP Premium Role Based Policies (For Fully Managed Customers)" sortOrder="-1" Override="0">
+    <agentMenu />
+    <agentProcedures />
+    <alerts />
+    <checkin />
+    <credential />
+    <distributeFiles />
+    <logging />
+    <machProfile />
+    <monitorSets>
+      <monitorSet id="293660906513063" partitionid="1" policyObjectDataId="543766610996688" monitorSetId="1191" createAlarm="True" createTicket="False" runScript="False" scriptId="0" machineId="0" emailRecipients="False" emailAddresses="" name="UPSTREAM - PREMIUM - Services - Print Server" scriptName="" machName="" />
+      <monitorSet id="301520957425945" partitionid="1" policyObjectDataId="543766610996688" monitorSetId="1183" createAlarm="False" createTicket="False" runScript="False" scriptId="0" machineId="0" emailRecipients="False" emailAddresses="" name="UPSTREAM - PREMIUM - Performance - Print Server ENG" scriptName="" machName="" />
+    </monitorSets>
+    <patchSettings />
+    <protectionPolicy />
+    <workingDir />
+    <remoteControl />
+    <patchFileSource />
+    <patchProcedureSchedule />
+    <patchRebootAction />
+    <auditSchedule />
+    <eventlogsettings />
+    <updatelistbyscan />
+    <windowsUpdate />
+  </Policy>
+  <Policy id="891720816256348" ref="MSP - PREMIUM - MS Patch - Every Sunday 20:00 - Reboot Mondays 05:00 - All Windows Servers" partitionid="1" rowDesc="View: __[UPSTREAM] - Policy - PREMIUM - All Windows Servers&#xA;Patch Scan: Every Wednesday, Saturday between 03:00 - 09:00.&#xA;Automatic Update: Every Sunday 20:00. Skip if offline.&#xA;Patch Reboot Action: Reboot Mondays 05:00" policyTypeFK="0" markedForDelete="False" viewFK="0" viewName="" treeFullPath="Upstream Power Pack 2019-05-03.UPSTREAM MSP PREMIUM.MSP Premium Windows Server Patch Policies (For Fully Managed Customers)" sortOrder="3" Override="0">
+    <agentMenu />
+    <agentProcedures />
+    <alerts />
+    <checkin />
+    <credential />
+    <distributeFiles />
+    <logging />
+    <machProfile />
+    <monitorSets />
+    <patchSettings id="165358655278272" partitionid="1" rebootRadioSelect="0" rebootTime="1900-01-01 00:00:00" rebootDay="0" rebootWarnMin="0" rebootAskMin="0" rebootNoResponseMin="0" rebootDoNothingMin="0" rebootEmail="False" rebootEmailAddress="" rebootPreScriptId="0" rebootPreScriptName="" rebootPostScriptId="0" rebootPostScriptName="" fileCopyPackages="False" fileDeletePackages="False" fileRadioSelect="0" fileSourcePath="" fileSourceLocal="" fileSourceAgentGuid="0" fileSourceAgentName="" filePatchSource="0" fileUseInternet="0" fileUseInternetSrcFallback="False" initBeforeScriptId="0" initBeforeScriptName="" initAfterScriptId="0" initAfterScriptName="" autoBeforeScriptId="0" autoBeforeScriptName="" autoAfterScriptId="0" autoAfterScriptName="" patchScanSchedule="" autoUpdateSchedule="" patchScanScheduleDescription="" autoUpdateScheduleDescription="">
+      <patchCollections />
+      <patchAlerts>
+        <patchAlert id="746871419133092" partitionId="1" policyObjectDataFK="165358655278272" createAlarm="False" createTicket="False" runScript="False" scriptId="0" scriptName="" machineId="0" machName="" emailRecipients="False" emailAddresses="" alertType="alertPatchSettting">
+          <patchAlertItems />
+        </patchAlert>
+      </patchAlerts>
+    </patchSettings>
+    <protectionPolicy />
+    <workingDir />
+    <remoteControl />
+    <patchFileSource />
+    <patchProcedureSchedule id="718438324247697" partitionid="1" patchScanSchedule="{&quot;startdatefrom&quot;:&quot;2014-07-08T03:00:00+02:00&quot;,&quot;starttimefrom&quot;:&quot;2014-07-08T03:00:00+02:00&quot;,&quot;startdateto&quot;:&quot;2014-07-08T09:00:00+02:00&quot;,&quot;starttimeto&quot;:&quot;2014-07-08T09:00:00+02:00&quot;,&quot;recurrencetype&quot;:&quot;WEEKLY&quot;,&quot;rangeofrecurrencetype&quot;:&quot;1&quot;,&quot;skipifoffline&quot;:&quot;N&quot;,&quot;powerupifoffline&quot;:&quot;N&quot;,&quot;scheduleid&quot;:&quot;0&quot;,&quot;excludetimerange&quot;:&quot;N&quot;,&quot;recurringminutesinterval&quot;:60,&quot;recurringhoursinterval&quot;:1,&quot;recurringdaysinterval&quot;:1,&quot;recurringweeksinterval&quot;:1,&quot;sundayflag&quot;:&quot;N&quot;,&quot;mondayflag&quot;:&quot;N&quot;,&quot;tuesdayflag&quot;:&quot;N&quot;,&quot;wednesdayflag&quot;:&quot;Y&quot;,&quot;thursdayflag&quot;:&quot;N&quot;,&quot;fridayflag&quot;:&quot;N&quot;,&quot;saturdayflag&quot;:&quot;Y&quot;,&quot;recurringmonthsinterval&quot;:1,&quot;monthlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;monthlyspecificday&quot;:&quot;DAY&quot;,&quot;monthlyintervaltype&quot;:1,&quot;monthday&quot;:1,&quot;yearlyintervaltype&quot;:1,&quot;yearlyspecificmonth&quot;:1,&quot;yearday&quot;:1,&quot;yearlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;yearlyspecificday&quot;:&quot;DAY&quot;,&quot;yearlyspecificmonth2&quot;:1,&quot;rangeofrecurrenceendafterinterval&quot;:1,&quot;rangeofrecurrenceenddatetime&quot;:&quot;2013-09-13T09:44:42+02:00&quot;,&quot;excludetimefrom&quot;:&quot;2013-09-13T09:44:42+02:00&quot;,&quot;excludetimeto&quot;:&quot;2013-09-13T09:44:42+02:00&quot;,&quot;createdatetime&quot;:&quot;2013-09-13T09:44:42+02:00&quot;,&quot;execwhennextonline&quot;:&quot;N&quot;,&quot;schedinagenttime&quot;:&quot;Y&quot;}" autoUpdateSchedule="{&quot;startdatefrom&quot;:&quot;2013-05-27T20:00:00+02:00&quot;,&quot;starttimefrom&quot;:&quot;2013-05-27T20:00:00+02:00&quot;,&quot;startdateto&quot;:&quot;2013-05-27T20:01:00+02:00&quot;,&quot;starttimeto&quot;:&quot;2013-05-27T20:01:00+02:00&quot;,&quot;recurrencetype&quot;:&quot;WEEKLY&quot;,&quot;rangeofrecurrencetype&quot;:&quot;1&quot;,&quot;skipifoffline&quot;:&quot;Y&quot;,&quot;powerupifoffline&quot;:&quot;N&quot;,&quot;scheduleid&quot;:&quot;0&quot;,&quot;excludetimerange&quot;:&quot;N&quot;,&quot;recurringminutesinterval&quot;:60,&quot;recurringhoursinterval&quot;:1,&quot;recurringdaysinterval&quot;:1,&quot;recurringweeksinterval&quot;:1,&quot;sundayflag&quot;:&quot;Y&quot;,&quot;mondayflag&quot;:&quot;N&quot;,&quot;tuesdayflag&quot;:&quot;N&quot;,&quot;wednesdayflag&quot;:&quot;N&quot;,&quot;thursdayflag&quot;:&quot;N&quot;,&quot;fridayflag&quot;:&quot;N&quot;,&quot;saturdayflag&quot;:&quot;N&quot;,&quot;recurringmonthsinterval&quot;:1,&quot;monthlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;monthlyspecificday&quot;:&quot;DAY&quot;,&quot;monthlyintervaltype&quot;:1,&quot;monthday&quot;:1,&quot;yearlyintervaltype&quot;:1,&quot;yearlyspecificmonth&quot;:1,&quot;yearday&quot;:1,&quot;yearlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;yearlyspecificday&quot;:&quot;DAY&quot;,&quot;yearlyspecificmonth2&quot;:1,&quot;rangeofrecurrenceendafterinterval&quot;:1,&quot;rangeofrecurrenceenddatetime&quot;:&quot;2013-05-27T14:40:06+02:00&quot;,&quot;excludetimefrom&quot;:&quot;2018-05-03T00:00:00+02:00&quot;,&quot;excludetimeto&quot;:&quot;2018-05-03T00:00:00+02:00&quot;,&quot;createdatetime&quot;:&quot;2013-05-27T14:40:06+02:00&quot;,&quot;execwhennextonline&quot;:&quot;N&quot;,&quot;schedinagenttime&quot;:&quot;Y&quot;,&quot;distribution&quot;:1}" patchScanScheduleDescription="every 1 week(s) within 360 minute(s) of 03:00:00  starting on 03:00:00 08-Jul-14 no end date" autoUpdateScheduleDescription="every 1 week(s) within 1 minute(s) of 19:00:00  starting on 19:00:00 27-May-13 no end date" />
+    <patchRebootAction id="549100027302792" partitionid="1" rebootRadioSelect="6" rebootTime="2018-05-03 03:00:00" rebootDay="1" rebootWarnMin="1" rebootAskMin="1" rebootNoResponseMin="1" rebootDoNothingMin="1" rebootEmail="False" rebootEmailAddress="" rebootPreScriptId="0" rebootPostScriptId="0" />
+    <auditSchedule />
+    <eventlogsettings />
+    <updatelistbyscan />
+    <windowsUpdate id="307861137952591" partitionid="1" disableWindowsUpdate="1" />
+  </Policy>
+  <Policy id="771086779316461" ref="MSP - PREMIUM - MS Patch - Every Thursday 20:00 - Reboot Fridays 05:00 - All Windows Servers" partitionid="1" rowDesc="View: __[UPSTREAM] - Policy - PREMIUM - All Windows Servers&#xA;Patch Scan: Every Wednesday, Saturday between 03:00 - 09:00.&#xA;Automatic Update: Every Sunday 20:00. Skip if offline.&#xA;Patch Reboot Action: Reboot Fridays 05:00" policyTypeFK="0" markedForDelete="False" viewFK="0" viewName="" treeFullPath="Upstream Power Pack 2019-05-03.UPSTREAM MSP PREMIUM.MSP Premium Windows Server Patch Policies (For Fully Managed Customers)" sortOrder="-1" Override="0">
+    <agentMenu />
+    <agentProcedures />
+    <alerts />
+    <checkin />
+    <credential />
+    <distributeFiles />
+    <logging />
+    <machProfile />
+    <monitorSets />
+    <patchSettings id="680983849838834" partitionid="1" rebootRadioSelect="0" rebootTime="1900-01-01 00:00:00" rebootDay="0" rebootWarnMin="0" rebootAskMin="0" rebootNoResponseMin="0" rebootDoNothingMin="0" rebootEmail="False" rebootEmailAddress="" rebootPreScriptId="0" rebootPreScriptName="" rebootPostScriptId="0" rebootPostScriptName="" fileCopyPackages="False" fileDeletePackages="False" fileRadioSelect="0" fileSourcePath="" fileSourceLocal="" fileSourceAgentGuid="0" fileSourceAgentName="" filePatchSource="0" fileUseInternet="0" fileUseInternetSrcFallback="False" initBeforeScriptId="0" initBeforeScriptName="" initAfterScriptId="0" initAfterScriptName="" autoBeforeScriptId="0" autoBeforeScriptName="" autoAfterScriptId="0" autoAfterScriptName="" patchScanSchedule="" autoUpdateSchedule="" patchScanScheduleDescription="" autoUpdateScheduleDescription="">
+      <patchCollections />
+      <patchAlerts>
+        <patchAlert id="236967435077283" partitionId="1" policyObjectDataFK="680983849838834" createAlarm="False" createTicket="False" runScript="False" scriptId="0" scriptName="" machineId="0" machName="" emailRecipients="False" emailAddresses="" alertType="alertPatchSettting">
+          <patchAlertItems />
+        </patchAlert>
+      </patchAlerts>
+    </patchSettings>
+    <protectionPolicy />
+    <workingDir />
+    <remoteControl />
+    <patchFileSource />
+    <patchProcedureSchedule id="542195333140993" partitionid="1" patchScanSchedule="{&quot;startdatefrom&quot;:&quot;2014-07-08T03:00:00+02:00&quot;,&quot;starttimefrom&quot;:&quot;2014-07-08T03:00:00+02:00&quot;,&quot;startdateto&quot;:&quot;2014-07-08T09:00:00+02:00&quot;,&quot;starttimeto&quot;:&quot;2014-07-08T09:00:00+02:00&quot;,&quot;recurrencetype&quot;:&quot;WEEKLY&quot;,&quot;rangeofrecurrencetype&quot;:&quot;1&quot;,&quot;skipifoffline&quot;:&quot;N&quot;,&quot;powerupifoffline&quot;:&quot;N&quot;,&quot;scheduleid&quot;:&quot;0&quot;,&quot;excludetimerange&quot;:&quot;N&quot;,&quot;recurringminutesinterval&quot;:60,&quot;recurringhoursinterval&quot;:1,&quot;recurringdaysinterval&quot;:1,&quot;recurringweeksinterval&quot;:1,&quot;sundayflag&quot;:&quot;N&quot;,&quot;mondayflag&quot;:&quot;N&quot;,&quot;tuesdayflag&quot;:&quot;N&quot;,&quot;wednesdayflag&quot;:&quot;Y&quot;,&quot;thursdayflag&quot;:&quot;N&quot;,&quot;fridayflag&quot;:&quot;N&quot;,&quot;saturdayflag&quot;:&quot;Y&quot;,&quot;recurringmonthsinterval&quot;:1,&quot;monthlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;monthlyspecificday&quot;:&quot;DAY&quot;,&quot;monthlyintervaltype&quot;:1,&quot;monthday&quot;:1,&quot;yearlyintervaltype&quot;:1,&quot;yearlyspecificmonth&quot;:1,&quot;yearday&quot;:1,&quot;yearlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;yearlyspecificday&quot;:&quot;DAY&quot;,&quot;yearlyspecificmonth2&quot;:1,&quot;rangeofrecurrenceendafterinterval&quot;:1,&quot;rangeofrecurrenceenddatetime&quot;:&quot;2013-09-13T09:44:42+02:00&quot;,&quot;excludetimefrom&quot;:&quot;2013-09-13T09:44:42+02:00&quot;,&quot;excludetimeto&quot;:&quot;2013-09-13T09:44:42+02:00&quot;,&quot;createdatetime&quot;:&quot;2013-09-13T09:44:42+02:00&quot;,&quot;execwhennextonline&quot;:&quot;N&quot;,&quot;schedinagenttime&quot;:&quot;Y&quot;}" autoUpdateSchedule="{&quot;startdatefrom&quot;:&quot;2013-05-27T20:00:00+02:00&quot;,&quot;starttimefrom&quot;:&quot;2013-05-27T20:00:00+02:00&quot;,&quot;startdateto&quot;:&quot;2013-05-27T20:01:00+02:00&quot;,&quot;starttimeto&quot;:&quot;2013-05-27T20:01:00+02:00&quot;,&quot;recurrencetype&quot;:&quot;WEEKLY&quot;,&quot;rangeofrecurrencetype&quot;:&quot;1&quot;,&quot;skipifoffline&quot;:&quot;Y&quot;,&quot;powerupifoffline&quot;:&quot;N&quot;,&quot;scheduleid&quot;:&quot;0&quot;,&quot;excludetimerange&quot;:&quot;N&quot;,&quot;recurringminutesinterval&quot;:60,&quot;recurringhoursinterval&quot;:1,&quot;recurringdaysinterval&quot;:1,&quot;recurringweeksinterval&quot;:1,&quot;sundayflag&quot;:&quot;Y&quot;,&quot;mondayflag&quot;:&quot;N&quot;,&quot;tuesdayflag&quot;:&quot;N&quot;,&quot;wednesdayflag&quot;:&quot;N&quot;,&quot;thursdayflag&quot;:&quot;N&quot;,&quot;fridayflag&quot;:&quot;N&quot;,&quot;saturdayflag&quot;:&quot;N&quot;,&quot;recurringmonthsinterval&quot;:1,&quot;monthlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;monthlyspecificday&quot;:&quot;DAY&quot;,&quot;monthlyintervaltype&quot;:1,&quot;monthday&quot;:1,&quot;yearlyintervaltype&quot;:1,&quot;yearlyspecificmonth&quot;:1,&quot;yearday&quot;:1,&quot;yearlyspecificoccurrence&quot;:&quot;FIRST&quot;,&quot;yearlyspecificday&quot;:&quot;DAY&quot;,&quot;yearlyspecificmonth2&quot;:1,&quot;rangeofrecurrenceendafterinterval&quot;:1,&quot;rangeofrecurrenceenddatetime&quot;:&quot;2013-05-27T14:40:06+02:00&quot;,&quot;excludetimefrom&quot;:&quot;2018-05-03T00:00:00+02:00&quot;,&quot;excludetimeto&quot;:&quot;2018-05-03T00:00:00+02:00&quot;,&quot;createdatetime&quot;:&quot;2013-05-27T14:40:06+02:00&quot;,&quot;execwhennextonline&quot;:&quot;N&quot;,&quot;schedinagenttime&quot;:&quot;Y&quot;,&quot;distribution&quot;:1}" patchScanScheduleDescription="every 1 week(s) within 360 minute(s) of 03:00:00  starting on 03:00:00 08-Jul-14 no end date" autoUpdateScheduleDescription="every 1 week(s) within 1 minute(s) of 19:00:00  starting on 19:00:00 27-May-13 no end date" />
+    <patchRebootAction id="111122564231568" partitionid="1" rebootRadioSelect="6" rebootTime="2018-05-03 03:00:00" rebootDay="1" rebootWarnMin="1" rebootAskMin="1" rebootNoResponseMin="1" rebootDoNothingMin="1" rebootEmail="False" rebootEmailAddress="" rebootPreScriptId="0" rebootPostScriptId="0" />
+    <auditSchedule />
+    <eventlogsettings />
+    <updatelistbyscan />
+    <windowsUpdate id="217964303129336" partitionid="1" disableWindowsUpdate="1" />
+  </Policy>
+</Policies>
