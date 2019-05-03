@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScriptExport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.kaseya.com/vsa/2008/12/Scripting">
+  <Folder name="Monitoring (2019-05-03)" treePres="3">
+    <Folder name="Windows" treePres="3">
+      <Procedure name="Monitoring - Windows - Send Event Log Alert With Attitional Current User Info" treePres="3" id="728777687" folderId="613342622953162" treeFullPath="Upstream Power Pack 2019-05-03.Monitoring (2019-05-03).Windows">
+        <Body description="">
+          <Statement description="Procedure description: Get Azure AD specific information from the registry.&#xD;&#xA;Kaseya customer value: Audit if the computer is Azure AD joined or not.&#xD;&#xA;End user value: Track non Azure AD joined computers for compliance.&#xD;&#xA;Dependencies: &quot;UPSTREAM - Event Set - User Experience - Application Crashes/Hang&quot;.&#xD;&#xA;Usage: Associate this with &quot;UPSTREAM - Event Set - User Experience - Application Crashes/Hang&quot; to additionally extract the current user when triggering alarms.&#xD;&#xA;Report options: Agent Alert Log.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------" name="SendEmail" continueOnFail="false" osType="Windows">
+            <Parameter xsi:type="StringParameter" name="To" value="yoursupportemail@here.int" />
+            <Parameter xsi:type="StringParameter" name="Subject" value="#subject#" />
+            <Parameter xsi:type="MultiLineStringParameter" name="Body" value="This message indicates applicacion Crash or Application hang on a mchine. The following informaion is to be used for ticket creatin and troubleshooting.&#xA;&#xA;Currently logged in user: #vAgentConfiguration.currentUser#&#xA;&#xA;#body#" />
+          </Statement>
+        </Body>
+      </Procedure>
+      <Procedure name="Monitoring - Windows - Simulated Event Log Error" treePres="3" id="166680604" folderId="613342622953162" treeFullPath="Upstream Power Pack 2019-05-03.Monitoring (2019-05-03).Windows">
+        <Body description="">
+          <Statement description="Procedure description: Use this as template for creating customer Event Logs for auditing and tracking.&#xD;&#xA;Kaseya customer value: To be used in combination with automation, auditing and tracking.&#xD;&#xA;End user value: Auditing and tracking.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule from Kaseya Policy Manager or Run Now.&#xD;&#xA;Report options: Windows Event Log. Look for &quot; UPSTREAM: Simulated Event Log For Application Informational&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------" name="Create Event Log Entry" continueOnFail="false" osType="Windows">
+            <Parameter xsi:type="StringParameter" name="Parameter1" value="UPSTREAM: Simulated Event Log For Application Informational" />
+            <Parameter xsi:type="EnumParameter" name="Parameter2" value="Information" />
+            <Parameter xsi:type="EnumParameter" name="Parameter3" value="Application" />
+          </Statement>
+        </Body>
+      </Procedure>
+    </Folder>
+  </Folder>
+</ScriptExport>
