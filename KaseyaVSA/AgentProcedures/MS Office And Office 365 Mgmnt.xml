@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScriptExport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.kaseya.com/vsa/2008/12/Scripting">
-  <Folder name="MS Office And Office 365 Mgmnt 2019-05-03" treePres="3">
+  <Folder name="MS Office And Office 365 Mgmt 2019-05-03" treePres="3">
     <Folder name="Mac" treePres="3">
       <Folder name="MS Office 365 Deployment" treePres="3">
-        <Procedure name="Application Deployment - Mac - Office 2016 for Mac (O365) - Deploy Latest" treePres="3" id="1629967232" folderId="966932206352674" treeFullPath="Upstream Power Pack 2019-05-03.MS Office And Office 365 Mgmnt 2019-05-03.Mac.MS Office 365 Deployment">
+        <Procedure name="Application Deployment - Mac - Office 2016 for Mac (O365) - Deploy Latest" treePres="3" id="1629967232" folderId="966932206352674" treeFullPath="Upstream Power Pack 2019-05-03.MS Office And Office 365 Mgmt 2019-05-03.Mac.MS Office 365 Deployment">
           <Body description="">
             <Statement description="Under development." name="GetURL" continueOnFail="false" osType="MacOS">
               <Parameter xsi:type="StringParameter" name="URL" value="https://go.microsoft.com/fwlink/?LinkId=525133" />
@@ -28,7 +28,7 @@
     <Folder name="Windows" treePres="3">
       <Folder name="MS Office 365 Deployment" treePres="3">
         <Folder name="Danish" treePres="3">
-          <Procedure name="Application Deployment - Windows - Office365 For Business Example - Danish - Deploy Latest" treePres="3" id="726659021" folderId="818856781077969" treeFullPath="Upstream Power Pack 2019-05-03.MS Office And Office 365 Mgmnt 2019-05-03.Windows.MS Office 365 Deployment.Danish">
+          <Procedure name="Application Deployment - Windows - Office365 For Business Example - Danish - Deploy Latest" treePres="3" id="726659021" folderId="818856781077969" treeFullPath="Upstream Power Pack 2019-05-03.MS Office And Office 365 Mgmt 2019-05-03.Windows.MS Office 365 Deployment.Danish">
             <Body description="">
               <Statement description="Procedure description: Deploy latest Office 365 For Business Premium build. Components: Outlook, Skype For Business, OneDrive, Word, Excel, Powerpoint, Publisher, Access&#xD;&#xA;Kaseya customer value: Standardize the Office 365 deployment process.&#xD;&#xA;End user value: Quick and standardized software deployment process.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for before, during and after update deployment statements.&#xD;&#xA;Maintainer: powerpack@upstream.se Last change: 2017-03-31&#xD;&#xA;------------------------------------------------------------------------------------------------------------" name="GetURL" continueOnFail="false" osType="Windows">
                 <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/VCU88s3Uvn4CRsk/download" />
@@ -61,7 +61,7 @@
               </Statement>
             </Body>
           </Procedure>
-          <Procedure name="Application Deployment - Windows - Office365 Pro Plus Example - Danish - Deploy Latest" treePres="3" id="1916337441" folderId="818856781077969" treeFullPath="Upstream Power Pack 2019-05-03.MS Office And Office 365 Mgmnt 2019-05-03.Windows.MS Office 365 Deployment.Danish">
+          <Procedure name="Application Deployment - Windows - Office365 Pro Plus Example - Danish - Deploy Latest" treePres="3" id="1916337441" folderId="818856781077969" treeFullPath="Upstream Power Pack 2019-05-03.MS Office And Office 365 Mgmt 2019-05-03.Windows.MS Office 365 Deployment.Danish">
             <Body description="">
               <Statement description="Procedure description: Deploy latest Office 365 ProPlus build. Components: Outlook, OneDrive, Word, Excel, Powerpoint.&#xD;&#xA;Kaseya customer value: Standardize the Office 365 deploymen process.&#xD;&#xA;End user value: Quick and standardized software deployment process.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for before, during and after update deployment statements.&#xD;&#xA;Maintainer: powerpack@upstream.se Last change: 2017-03-31&#xD;&#xA;------------------------------------------------------------------------------------------------------------" name="GetURL" continueOnFail="false" osType="Windows">
                 <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/bG5vJE14DzMga5G/download" />
@@ -96,7 +96,7 @@
           </Procedure>
         </Folder>
         <Folder name="Finnish" treePres="3">
-          <Procedure name="Application Deployment - Windows - Office365 For Business Example - Finnish - Deploy Latest" treePres="3" id="958542223" folderId="641066163750861" treeFullPath="Upstream Power Pack 2019-05-03.MS Office And Office 365 Mgmnt 2019-05-03.Windows.MS Office 365 Deployment.Finnish">
+          <Procedure name="Application Deployment - Windows - Office365 For Business Example - Finnish - Deploy Latest" treePres="3" id="958542223" folderId="641066163750861" treeFullPath="Upstream Power Pack 2019-05-03.MS Office And Office 365 Mgmt 2019-05-03.Windows.MS Office 365 Deployment.Finnish">
             <Body description="">
               <Statement description="Procedure description: Deploy latest Office 365 For Business Premium build. Components: Outlook, Skype For Business, OneDrive, Word, Excel, Powerpoint, Publisher, Access&#xD;&#xA;Kaseya customer value: Standardize the Office 365 deployment process.&#xD;&#xA;End user value: Quick and standardized software deployment process.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for before, during and after update deployment statements.&#xD;&#xA;Maintainer: powerpack@upstream.se Last change: 2017-03-31&#xD;&#xA;------------------------------------------------------------------------------------------------------------" name="GetURL" continueOnFail="false" osType="Windows">
                 <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/43lLkn4c2Lsiaz8/download" />
@@ -129,7 +129,7 @@
               </Statement>
             </Body>
           </Procedure>
-          <Procedure name="Application Deployment - Windows - Office365 Pro Plus Example - Finnish - Deploy Latest" treePres="3" id="747005" folderId="641066163750861" treeFullPath="Upstream Power Pack 2019-05-03.MS Office And Office 365 Mgmnt 2019-05-03.Windows.MS Office 365 Deployment.Finnish">
+          <Procedure name="Application Deployment - Windows - Office365 Pro Plus Example - Finnish - Deploy Latest" treePres="3" id="747005" folderId="641066163750861" treeFullPath="Upstream Power Pack 2019-05-03.MS Office And Office 365 Mgmt 2019-05-03.Windows.MS Office 365 Deployment.Finnish">
             <Body description="">
               <Statement description="Procedure description: Deploy latest Office 365 ProPlus build. Components: Outlook, OneDrive, Word, Excel, Powerpoint.&#xD;&#xA;Kaseya customer value: Standardize the Office 365 deploymen process.&#xD;&#xA;End user value: Quick and standardized software deployment process.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for before, during and after update deployment statements.&#xD;&#xA;Maintainer: powerpack@upstream.se Last change: 2017-03-31&#xD;&#xA;------------------------------------------------------------------------------------------------------------" name="GetURL" continueOnFail="false" osType="Windows">
                 <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/pWtCzyPbAOC4SsR/download" />
@@ -164,7 +164,7 @@
           </Procedure>
         </Folder>
         <Folder name="Norwegian" treePres="3">
-          <Procedure name="Application Deployment - Windows - Office365 For Business Example - Norwegian - Deploy Latest" treePres="3" id="1190425425" folderId="241696765526056" treeFullPath="Upstream Power Pack 2019-05-03.MS Office And Office 365 Mgmnt 2019-05-03.Windows.MS Office 365 Deployment.Norwegian">
+          <Procedure name="Application Deployment - Windows - Office365 For Business Example - Norwegian - Deploy Latest" treePres="3" id="1190425425" folderId="241696765526056" treeFullPath="Upstream Power Pack 2019-05-03.MS Office And Office 365 Mgmt 2019-05-03.Windows.MS Office 365 Deployment.Norwegian">
             <Body description="">
               <Statement description="Procedure description: Deploy latest Office 365 For Business Premium build. Components: Outlook, Skype For Business, OneDrive, Word, Excel, Powerpoint, Publisher, Access&#xD;&#xA;Kaseya customer value: Standardize the Office 365 deployment process.&#xD;&#xA;End user value: Quick and standardized software deployment process.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for before, during and after update deployment statements.&#xD;&#xA;Maintainer: powerpack@upstream.se Last change: 2017-03-31&#xD;&#xA;------------------------------------------------------------------------------------------------------------" name="GetURL" continueOnFail="false" osType="Windows">
                 <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/lpcVRwBJVmYTSEx/download" />
@@ -197,7 +197,7 @@
               </Statement>
             </Body>
           </Procedure>
-          <Procedure name="Application Deployment - Windows - Office365 Pro Plus Example - Norwegian - Deploy Latest" treePres="3" id="232630207" folderId="241696765526056" treeFullPath="Upstream Power Pack 2019-05-03.MS Office And Office 365 Mgmnt 2019-05-03.Windows.MS Office 365 Deployment.Norwegian">
+          <Procedure name="Application Deployment - Windows - Office365 Pro Plus Example - Norwegian - Deploy Latest" treePres="3" id="232630207" folderId="241696765526056" treeFullPath="Upstream Power Pack 2019-05-03.MS Office And Office 365 Mgmt 2019-05-03.Windows.MS Office 365 Deployment.Norwegian">
             <Body description="">
               <Statement description="Procedure description: Deploy latest Office 365 ProPlus build. Components: Outlook, OneDrive, Word, Excel, Powerpoint.&#xD;&#xA;Kaseya customer value:Standardize the Office 365 deploymen process.&#xD;&#xA;End user value: Quick and standardized software deployment process.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for before, during and after update deployment statements.&#xD;&#xA;Maintainer: powerpack@upstream.se Last change: 2017-03-31&#xD;&#xA;------------------------------------------------------------------------------------------------------------" name="GetURL" continueOnFail="false" osType="Windows">
                 <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/qfBzzYu5GFYAjGB/download" />
@@ -232,7 +232,7 @@
           </Procedure>
         </Folder>
         <Folder name="Swedish" treePres="3">
-          <Procedure name="Application Deployment - Windows - Office365 For Business Example - Swedish - Deploy Latest" treePres="3" id="1422308627" folderId="585853253670899" treeFullPath="Upstream Power Pack 2019-05-03.MS Office And Office 365 Mgmnt 2019-05-03.Windows.MS Office 365 Deployment.Swedish">
+          <Procedure name="Application Deployment - Windows - Office365 For Business Example - Swedish - Deploy Latest" treePres="3" id="1422308627" folderId="585853253670899" treeFullPath="Upstream Power Pack 2019-05-03.MS Office And Office 365 Mgmt 2019-05-03.Windows.MS Office 365 Deployment.Swedish">
             <Body description="">
               <Statement description="Procedure description: Deploy latest Office 365 For Business Premium build. Components: Outlook, Skype For Business, OneDrive, Word, Excel, Powerpoint, Publisher, Access&#xD;&#xA;Kaseya customer value: Standardize the Office 365 deployment process.&#xD;&#xA;End user value: Quick and standardized software deployment process.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for before, during and after update deployment statements.&#xD;&#xA;Maintainer: powerpack@upstream.se Last change: 2017-03-31&#xD;&#xA;------------------------------------------------------------------------------------------------------------" name="GetURL" continueOnFail="false" osType="Windows">
                 <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/WLkhmhUJP90poID/download" />
@@ -265,7 +265,7 @@
               </Statement>
             </Body>
           </Procedure>
-          <Procedure name="Application Deployment - Windows - Office365 Pro Plus Example - Swedish - Deploy Latest" treePres="3" id="1490092457" folderId="585853253670899" treeFullPath="Upstream Power Pack 2019-05-03.MS Office And Office 365 Mgmnt 2019-05-03.Windows.MS Office 365 Deployment.Swedish">
+          <Procedure name="Application Deployment - Windows - Office365 Pro Plus Example - Swedish - Deploy Latest" treePres="3" id="1490092457" folderId="585853253670899" treeFullPath="Upstream Power Pack 2019-05-03.MS Office And Office 365 Mgmt 2019-05-03.Windows.MS Office 365 Deployment.Swedish">
             <Body description="">
               <Statement description="Procedure description: Deploy latest Office 365 ProPlus build. Components: Outlook, OneDrive, Word, Excel, Powerpoint.&#xD;&#xA;Kaseya customer value:Standardize the Office 365 deploymen process.&#xD;&#xA;End user value: Quick and standardized software deployment process.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for before, during and after update deployment statements.&#xD;&#xA;Maintainer: powerpack@upstream.se Last change: 2017-03-31&#xD;&#xA;------------------------------------------------------------------------------------------------------------" name="GetURL" continueOnFail="false" osType="Windows">
                 <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/1l6anXSH8owrpHk/download" />
@@ -300,7 +300,7 @@
           </Procedure>
         </Folder>
         <Folder name="US English" treePres="3">
-          <Procedure name="Application Deployment - Windows - Office365 For Business Example - US English - Deploy Latest" treePres="3" id="532297240" folderId="385818354452875" treeFullPath="Upstream Power Pack 2019-05-03.MS Office And Office 365 Mgmnt 2019-05-03.Windows.MS Office 365 Deployment.US English">
+          <Procedure name="Application Deployment - Windows - Office365 For Business Example - US English - Deploy Latest" treePres="3" id="532297240" folderId="385818354452875" treeFullPath="Upstream Power Pack 2019-05-03.MS Office And Office 365 Mgmt 2019-05-03.Windows.MS Office 365 Deployment.US English">
             <Body description="">
               <Statement description="Procedure description: Deploy latest Office 365 For Business Premium build. Components: Outlook, Skype For Business, OneDrive, Word, Excel, Powerpoint, Publisher, Access&#xD;&#xA;Kaseya customer value: Standardize the Office 365 deployment process.&#xD;&#xA;End user value: Quick and standardized software deployment process.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for before, during and after update deployment statements.&#xD;&#xA;Maintainer: powerpack@upstream.se Last change: 2017-03-31&#xD;&#xA;------------------------------------------------------------------------------------------------------------" name="GetURL" continueOnFail="false" osType="Windows">
                 <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/E4HsQ81wKYv2KhZ/download" />
@@ -333,7 +333,7 @@
               </Statement>
             </Body>
           </Procedure>
-          <Procedure name="Application Deployment - Windows - Office365 Pro Plus Example - US English - Deploy Latest" treePres="3" id="345026358" folderId="385818354452875" treeFullPath="Upstream Power Pack 2019-05-03.MS Office And Office 365 Mgmnt 2019-05-03.Windows.MS Office 365 Deployment.US English">
+          <Procedure name="Application Deployment - Windows - Office365 Pro Plus Example - US English - Deploy Latest" treePres="3" id="345026358" folderId="385818354452875" treeFullPath="Upstream Power Pack 2019-05-03.MS Office And Office 365 Mgmt 2019-05-03.Windows.MS Office 365 Deployment.US English">
             <Body description="">
               <Statement description="Procedure description: Deploy latest Office 365 ProPlus build. Components: Outlook, OneDrive, Word, Excel, Powerpoint.&#xD;&#xA;Kaseya customer value:Standardize the Office 365 deploymen process.&#xD;&#xA;End user value: Quick and standardized software deployment process.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for before, during and after update deployment statements.&#xD;&#xA;Maintainer: powerpack@upstream.se Last change: 2017-03-31&#xD;&#xA;------------------------------------------------------------------------------------------------------------" name="GetURL" continueOnFail="false" osType="Windows">
                 <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/7UP93NLGjT3IhbM/download" />
@@ -369,7 +369,7 @@
         </Folder>
       </Folder>
       <Folder name="MS Office 365 Repair" treePres="3">
-        <Procedure name="Repair Application  - Windows - Office 365 Full Online Repair - No User Interaction" treePres="3" id="1512117268" folderId="816017078615732" treeFullPath="Upstream Power Pack 2019-05-03.MS Office And Office 365 Mgmnt 2019-05-03.Windows.MS Office 365 Repair">
+        <Procedure name="Repair Application  - Windows - Office 365 Full Online Repair - No User Interaction" treePres="3" id="1512117268" folderId="816017078615732" treeFullPath="Upstream Power Pack 2019-05-03.MS Office And Office 365 Mgmt 2019-05-03.Windows.MS Office 365 Repair">
           <Body description="">
             <If description="Procedure description: Full online repair for Office 365 installation silently without user interaction.&#xD;&#xA;Kaseya customer value: Enhanced support experience. Quickly troubleshooting Office 365 realted problems.&#xD;&#xA;End user value: Enhanced support experience.&#xD;&#xA;Dependencies: Office 365.&#xD;&#xA;Usage: Schedule Once or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for &quot;UPSTREAM: Office 365 Online Repair&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
               <Condition name="TestFile">
@@ -399,7 +399,7 @@
             </Statement>
           </Body>
         </Procedure>
-        <Procedure name="Repair Application  - Windows - Office 365 Quick Repair - No User Interaction" treePres="3" id="1651685516" folderId="816017078615732" treeFullPath="Upstream Power Pack 2019-05-03.MS Office And Office 365 Mgmnt 2019-05-03.Windows.MS Office 365 Repair">
+        <Procedure name="Repair Application  - Windows - Office 365 Quick Repair - No User Interaction" treePres="3" id="1651685516" folderId="816017078615732" treeFullPath="Upstream Power Pack 2019-05-03.MS Office And Office 365 Mgmt 2019-05-03.Windows.MS Office 365 Repair">
           <Body description="">
             <If description="Procedure description: Quick repair for Office 365 installation silently without user interaction.&#xD;&#xA;Kaseya customer value: Enhanced support experience. Quickly troubleshooting Office 365 realted problems.&#xD;&#xA;End user value: Enhanced support experience.&#xD;&#xA;Dependencies: Office 365.&#xD;&#xA;Usage: Schedule Once or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for &quot;UPSTREAM: Office 365 Quick Repair&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
               <Condition name="TestFile">
@@ -431,7 +431,7 @@
         </Procedure>
       </Folder>
       <Folder name="MS Office 365 Update" treePres="3">
-        <Procedure name="Application Update - Windows - Update Office 365 - Silent" treePres="3" id="1852485724" folderId="345840419663973" treeFullPath="Upstream Power Pack 2019-05-03.MS Office And Office 365 Mgmnt 2019-05-03.Windows.MS Office 365 Update">
+        <Procedure name="Application Update - Windows - Update Office 365 - Silent" treePres="3" id="1852485724" folderId="345840419663973" treeFullPath="Upstream Power Pack 2019-05-03.MS Office And Office 365 Mgmt 2019-05-03.Windows.MS Office 365 Update">
           <Body description="">
             <If description="Procedure description: Update Office 365 installation silently.&#xD;&#xA;Kaseya customer value: Procedure to secure clients with the latest software.&#xD;&#xA;End user value: Limiting the risks for Office 365 exploits, phishing attacks, downtime and possible data loss.&#xD;&#xA;Dependencies: Office 365.&#xD;&#xA;Usage: Schedule Once or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for &quot;UPSTREAM: Office 365 Update:&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
               <Condition name="TestFile">
@@ -440,45 +440,15 @@
                 <Parameter xsi:type="StringParameter" name="Value" value="" />
               </Condition>
               <Then>
-                <Statement name="GetVariable" continueOnFail="false" osType="Windows">
-                  <Parameter xsi:type="EnumParameter" name="VariableType" value="RegistryValue" />
-                  <Parameter xsi:type="StringParameter" name="SourceContent" value="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Office\ClickToRun\Configuration\VersionToReport" />
-                  <Parameter xsi:type="StringParameter" name="VariableName" value="O365VersionBefore" />
-                </Statement>
-                <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
-                  <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 Update: Office 365 Version: #O365Version#" />
-                </Statement>
                 <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
                   <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 Update: Scanning for updates." />
                 </Statement>
-                <Statement name="ExecuteFile" continueOnFail="false" osType="None">
+                <Statement name="ExecuteFile" continueOnFail="false" osType="Windows">
                   <Parameter xsi:type="StringParameter" name="Path" value="&quot;C:\Program Files\Common Files\Microsoft Shared\ClickToRun\OfficeC2RClient.exe&quot;" />
                   <Parameter xsi:type="StringParameter" name="Arguments" value="/update user updatepromptuser=false forceappshutdown=true displaylevel=truee" />
                   <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
                   <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
                 </Statement>
-                <Statement name="GetVariable" continueOnFail="false" osType="Windows">
-                  <Parameter xsi:type="EnumParameter" name="VariableType" value="RegistryValue" />
-                  <Parameter xsi:type="StringParameter" name="SourceContent" value="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Office\ClickToRun\Configuration\VersionToReport" />
-                  <Parameter xsi:type="StringParameter" name="VariableName" value="O365VersionAfter" />
-                </Statement>
-                <If description="">
-                  <Condition name="EvaluateExpression">
-                    <Parameter xsi:type="StringParameter" name="ExpressionText" value="#O365VersionBefore#" />
-                    <Parameter xsi:type="EnumParameter" name="Condition" value="Equals" />
-                    <Parameter xsi:type="StringParameter" name="Value" value="#O365VersionAfter#" />
-                  </Condition>
-                  <Then>
-                    <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
-                      <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 Update: Update scan completed. Nothing to update." />
-                    </Statement>
-                  </Then>
-                  <Else>
-                    <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
-                      <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 Update: Office 365 updated to version: #O365Version#" />
-                    </Statement>
-                  </Else>
-                </If>
               </Then>
               <Else>
                 <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
@@ -488,7 +458,7 @@
             </If>
           </Body>
         </Procedure>
-        <Procedure name="Application Update - Windows - Update Office 365 - User Inforamtional" treePres="3" id="48038366" folderId="345840419663973" treeFullPath="Upstream Power Pack 2019-05-03.MS Office And Office 365 Mgmnt 2019-05-03.Windows.MS Office 365 Update">
+        <Procedure name="Application Update - Windows - Update Office 365 - User Informational" treePres="3" id="48038366" folderId="345840419663973" treeFullPath="Upstream Power Pack 2019-05-03.MS Office And Office 365 Mgmt 2019-05-03.Windows.MS Office 365 Update">
           <Body description="">
             <If description="Procedure description: Update Office 365 installation with user informational prompts.&#xD;&#xA;Kaseya customer value: Procedure to secure clients with the latest software.&#xD;&#xA;End user value: Limiting the risks for Office 365 exploits, phishing attacks, downtime and possible data loss.&#xD;&#xA;Dependencies: Office 365.&#xD;&#xA;Usage: Schedule Once or Run Now.&#xD;&#xA;Report options: Agent Procedure log. Look for &quot;UPSTREAM: Office 365 Update:&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
               <Condition name="TestFile">
@@ -497,45 +467,15 @@
                 <Parameter xsi:type="StringParameter" name="Value" value="" />
               </Condition>
               <Then>
-                <Statement name="GetVariable" continueOnFail="false" osType="Windows">
-                  <Parameter xsi:type="EnumParameter" name="VariableType" value="RegistryValue" />
-                  <Parameter xsi:type="StringParameter" name="SourceContent" value="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Office\ClickToRun\Configuration\VersionToReport" />
-                  <Parameter xsi:type="StringParameter" name="VariableName" value="O365VersionBefore" />
-                </Statement>
-                <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
-                  <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 Update: Office 365 Version: #O365Version#" />
-                </Statement>
                 <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
                   <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 Update: Scanning for updates." />
                 </Statement>
-                <Statement name="ExecuteFile" continueOnFail="false" osType="None">
+                <Statement name="ExecuteFile" continueOnFail="false" osType="Windows">
                   <Parameter xsi:type="StringParameter" name="Path" value="&quot;C:\Program Files\Common Files\Microsoft Shared\ClickToRun\OfficeC2RClient.exe&quot;" />
                   <Parameter xsi:type="StringParameter" name="Arguments" value="/update user updatepromptuser=true forceappshutdown=true displaylevel=truee" />
                   <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
                   <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
                 </Statement>
-                <Statement name="GetVariable" continueOnFail="false" osType="Windows">
-                  <Parameter xsi:type="EnumParameter" name="VariableType" value="RegistryValue" />
-                  <Parameter xsi:type="StringParameter" name="SourceContent" value="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Office\ClickToRun\Configuration\VersionToReport" />
-                  <Parameter xsi:type="StringParameter" name="VariableName" value="O365VersionAfter" />
-                </Statement>
-                <If description="">
-                  <Condition name="EvaluateExpression">
-                    <Parameter xsi:type="StringParameter" name="ExpressionText" value="#O365VersionBefore#" />
-                    <Parameter xsi:type="EnumParameter" name="Condition" value="Equals" />
-                    <Parameter xsi:type="StringParameter" name="Value" value="#O365VersionAfter#" />
-                  </Condition>
-                  <Then>
-                    <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
-                      <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 Update: Update scan completed. Nothing to update." />
-                    </Statement>
-                  </Then>
-                  <Else>
-                    <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
-                      <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Office 365 Update: Office 365 updated to version: #O365Version#" />
-                    </Statement>
-                  </Else>
-                </If>
               </Then>
               <Else>
                 <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
@@ -547,7 +487,7 @@
         </Procedure>
       </Folder>
       <Folder name="MS Office Application Removal" treePres="3">
-        <Procedure name="Remove Application - Windows - Remove Office 2003" treePres="3" id="141170532" folderId="361719869012814" treeFullPath="Upstream Power Pack 2019-05-03.MS Office And Office 365 Mgmnt 2019-05-03.Windows.MS Office Application Removal">
+        <Procedure name="Remove Application - Windows - Remove Office 2003" treePres="3" id="141170532" folderId="361719869012814" treeFullPath="Upstream Power Pack 2019-05-03.MS Office And Office 365 Mgmt 2019-05-03.Windows.MS Office Application Removal">
           <Body description="">
             <Statement description="Procedure description: Procedure to completely remove specific Offic product without user interaction.&#xD;&#xA;Kaseya customer value: Removes any manual interaction when uninstalling Microsoft Office.&#xD;&#xA;End user value: No end user interaction needed.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule or Run Now.&#xD;&#xA;Report options: Look for log #vAgentConfiguration.agentTempDir#\OfficeRemoval.log&#xD;&#xA;Maintainer: powerpack@upstream.se Last change: 2018-05-04&#xD;&#xA;------------------------------------------------------------------------------------------------------------&#xD;&#xA;https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/tree/master/Office-ProPlus-Deployment/Remove-PreviousOfficeInstalls" name="GetURL" continueOnFail="false" osType="Windows">
               <Parameter xsi:type="StringParameter" name="URL" value="https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/blob/master/Office-ProPlus-Deployment/Remove-PreviousOfficeInstalls/OffScrub03.vbs" />
@@ -570,7 +510,7 @@
             </Statement>
           </Body>
         </Procedure>
-        <Procedure name="Remove Application - Windows - Remove Office 2007" treePres="3" id="1330848952" folderId="361719869012814" treeFullPath="Upstream Power Pack 2019-05-03.MS Office And Office 365 Mgmnt 2019-05-03.Windows.MS Office Application Removal">
+        <Procedure name="Remove Application - Windows - Remove Office 2007" treePres="3" id="1330848952" folderId="361719869012814" treeFullPath="Upstream Power Pack 2019-05-03.MS Office And Office 365 Mgmt 2019-05-03.Windows.MS Office Application Removal">
           <Body description="">
             <Statement description="Procedure description: Procedure to completely remove specific Offic product without user interaction.&#xD;&#xA;Kaseya customer value: Removes any manual interaction when uninstalling Microsoft Office.&#xD;&#xA;End user value: No end user interaction needed.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule or Run Now.&#xD;&#xA;Report options: Look for log #vAgentConfiguration.agentTempDir#\OfficeRemoval.log&#xD;&#xA;Maintainer: powerpack@upstream.se Last change: 2018-05-04&#xD;&#xA;------------------------------------------------------------------------------------------------------------&#xD;&#xA;https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/tree/master/Office-ProPlus-Deployment/Remove-PreviousOfficeInstalls" name="GetURL" continueOnFail="false" osType="Windows">
               <Parameter xsi:type="StringParameter" name="URL" value="https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/blob/master/Office-ProPlus-Deployment/Remove-PreviousOfficeInstalls/OffScrub07.vbs" />
@@ -593,7 +533,7 @@
             </Statement>
           </Body>
         </Procedure>
-        <Procedure name="Remove Application - Windows - Remove Office 2010" treePres="3" id="373053734" folderId="361719869012814" treeFullPath="Upstream Power Pack 2019-05-03.MS Office And Office 365 Mgmnt 2019-05-03.Windows.MS Office Application Removal">
+        <Procedure name="Remove Application - Windows - Remove Office 2010" treePres="3" id="373053734" folderId="361719869012814" treeFullPath="Upstream Power Pack 2019-05-03.MS Office And Office 365 Mgmt 2019-05-03.Windows.MS Office Application Removal">
           <Body description="">
             <Statement description="Procedure description: Procedure to completely remove specific Offic product without user interaction.&#xD;&#xA;Kaseya customer value: Removes any manual interaction when uninstalling Microsoft Office.&#xD;&#xA;End user value: No end user interaction needed.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule or Run Now.&#xD;&#xA;Report options: Look for log #vAgentConfiguration.agentTempDir#\OfficeRemoval.log&#xD;&#xA;Maintainer: powerpack@upstream.se Last change: 2018-05-04&#xD;&#xA;------------------------------------------------------------------------------------------------------------&#xD;&#xA;https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/tree/master/Office-ProPlus-Deployment/Remove-PreviousOfficeInstalls" name="GetURL" continueOnFail="false" osType="Windows">
               <Parameter xsi:type="StringParameter" name="URL" value="https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/blob/master/Office-ProPlus-Deployment/Remove-PreviousOfficeInstalls/OffScrub10.vbs" />
@@ -616,7 +556,7 @@
             </Statement>
           </Body>
         </Procedure>
-        <Procedure name="Remove Application - Windows - Remove Office 2013" treePres="3" id="475039199" folderId="361719869012814" treeFullPath="Upstream Power Pack 2019-05-03.MS Office And Office 365 Mgmnt 2019-05-03.Windows.MS Office Application Removal">
+        <Procedure name="Remove Application - Windows - Remove Office 2013" treePres="3" id="475039199" folderId="361719869012814" treeFullPath="Upstream Power Pack 2019-05-03.MS Office And Office 365 Mgmt 2019-05-03.Windows.MS Office Application Removal">
           <Body description="">
             <Statement description="Procedure description: Procedure to completely remove specific Offic product without user interaction.&#xD;&#xA;Kaseya customer value: Removes any manual interaction when uninstalling Microsoft Office.&#xD;&#xA;End user value: No end user interaction needed.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule or Run Now.&#xD;&#xA;Report options: Look for log #vAgentConfiguration.agentTempDir#\OfficeRemoval.log&#xD;&#xA;Maintainer: powerpack@upstream.se Last change: 2018-05-04&#xD;&#xA;------------------------------------------------------------------------------------------------------------&#xD;&#xA;https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/tree/master/Office-ProPlus-Deployment/Remove-PreviousOfficeInstalls" name="GetURL" continueOnFail="false" osType="Windows">
               <Parameter xsi:type="StringParameter" name="URL" value="https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/blob/master/Office-ProPlus-Deployment/Remove-PreviousOfficeInstalls/OffScrub_O15msi.vbs" />
@@ -639,7 +579,7 @@
             </Statement>
           </Body>
         </Procedure>
-        <Procedure name="Remove Application - Windows - Remove Office 2016" treePres="3" id="1880169454" folderId="361719869012814" treeFullPath="Upstream Power Pack 2019-05-03.MS Office And Office 365 Mgmnt 2019-05-03.Windows.MS Office Application Removal">
+        <Procedure name="Remove Application - Windows - Remove Office 2016" treePres="3" id="1880169454" folderId="361719869012814" treeFullPath="Upstream Power Pack 2019-05-03.MS Office And Office 365 Mgmt 2019-05-03.Windows.MS Office Application Removal">
           <Body description="">
             <Statement description="Procedure description: Procedure to completely remove specific Offic product without user interaction.&#xD;&#xA;Kaseya customer value: Removes any manual interaction when uninstalling Microsoft Office.&#xD;&#xA;End user value: No end user interaction needed.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule or Run Now.&#xD;&#xA;Report options: Look for log #vAgentConfiguration.agentTempDir#\OfficeRemoval.log&#xD;&#xA;Maintainer: powerpack@upstream.se Last change: 2018-05-04&#xD;&#xA;------------------------------------------------------------------------------------------------------------&#xD;&#xA;https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/tree/master/Office-ProPlus-Deployment/Remove-PreviousOfficeInstalls" name="GetURL" continueOnFail="false" osType="Windows">
               <Parameter xsi:type="StringParameter" name="URL" value="https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/blob/master/Office-ProPlus-Deployment/Remove-PreviousOfficeInstalls/OffScrub_O16msi.vbs" />
@@ -662,7 +602,7 @@
             </Statement>
           </Body>
         </Procedure>
-        <Procedure name="Remove Application - Windows - Remove Office Click 2 Run" treePres="3" id="279830912" folderId="361719869012814" treeFullPath="Upstream Power Pack 2019-05-03.MS Office And Office 365 Mgmnt 2019-05-03.Windows.MS Office Application Removal">
+        <Procedure name="Remove Application - Windows - Remove Office Click 2 Run" treePres="3" id="279830912" folderId="361719869012814" treeFullPath="Upstream Power Pack 2019-05-03.MS Office And Office 365 Mgmt 2019-05-03.Windows.MS Office Application Removal">
           <Body description="">
             <Statement description="Procedure description: Procedure to completely remove specific Offic product without user interaction.&#xD;&#xA;Kaseya customer value: Removes any manual interaction when uninstalling Microsoft Office.&#xD;&#xA;End user value: No end user interaction needed.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule or Run Now.&#xD;&#xA;Report options: Look for log #vAgentConfiguration.agentTempDir#\OfficeRemoval.log&#xD;&#xA;Maintainer: powerpack@upstream.se Last change: 2018-05-04&#xD;&#xA;------------------------------------------------------------------------------------------------------------&#xD;&#xA;https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/tree/master/Office-ProPlus-Deployment/Remove-PreviousOfficeInstalls" name="GetURL" continueOnFail="false" osType="Windows">
               <Parameter xsi:type="StringParameter" name="URL" value="https://github.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/blob/master/Office-ProPlus-Deployment/Remove-PreviousOfficeInstalls/OffScrubc2r.vbs" />
