@@ -1,8 +1,8 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <ScriptExport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.kaseya.com/vsa/2008/12/Scripting">
-  <Folder name="Audit (Feeding The Agent Procedure Log) 2018-10-26" treePres="3">
+  <Folder name="Audit (Feeding The Agent Procedure Log) 2019-05-03" treePres="3">
     <Folder name="Mac" treePres="3">
-      <Procedure name="Audit - Mac OS X - Get Current Java Version" treePres="3" id="1497869408" folderId="114152001130465" treeFullPath="Upstream Kaseya Power Pack.Audit (Feeding The Agent Procedure Log) 2018-10-26.Mac">
+      <Procedure name="Audit - Mac OS X - Get Current Java Version" treePres="3" id="1497869408" folderId="142821827783632" treeFullPath="Upstream Power Pack 2019-05-03.Audit (Feeding The Agent Procedure Log) 2019-05-03.Mac">
         <Body description="">
           <Statement description="softwareupdate -l &gt;&gt; #agentpath#\softwarelist.txt" name="ExecuteShellCommand" continueOnFail="false" osType="MacOS">
             <Parameter xsi:type="StringParameter" name="Command" value="java -version &gt;&gt; #vAgentConfiguration.agentTempDir#/java-version.result" />
@@ -19,7 +19,7 @@
           </Statement>
         </Body>
       </Procedure>
-      <Procedure name="Audit - Mac OS X - Get Current Power Settings Profile" treePres="3" id="188703937" folderId="114152001130465" treeFullPath="Upstream Kaseya Power Pack.Audit (Feeding The Agent Procedure Log) 2018-10-26.Mac">
+      <Procedure name="Audit - Mac OS X - Get Current Power Settings Profile" treePres="3" id="188703937" folderId="142821827783632" treeFullPath="Upstream Power Pack 2019-05-03.Audit (Feeding The Agent Procedure Log) 2019-05-03.Mac">
         <Body description="">
           <Statement description="softwareupdate -l &gt;&gt; #agentpath#\softwarelist.txt" name="ExecuteShellCommand" continueOnFail="false" osType="MacOS">
             <Parameter xsi:type="StringParameter" name="Command" value="pmset -g live &gt;&gt; #vAgentConfiguration.agentTempDir#/current-power-profile.result" />
@@ -41,7 +41,67 @@
       </Procedure>
     </Folder>
     <Folder name="Windows" treePres="3">
-      <Procedure name="Audit - Windows - Find Local OST Files On C" treePres="3" id="553401827" folderId="288920762990099" treeFullPath="Upstream Kaseya Power Pack.Audit (Feeding The Agent Procedure Log) 2018-10-26.Windows">
+      <Procedure name="Audit - Windows - Bluescreen Memory Dump Analyzer" treePres="3" id="1520851710" folderId="853311098671197" treeFullPath="Upstream Power Pack 2019-05-03.Audit (Feeding The Agent Procedure Log) 2019-05-03.Windows">
+        <Body description="">
+          <If description="Procedure description: Create bluescreen memory dump reports for auditing and troubleshooting.&#xD;&#xA;Kaseya customer value: Troubleshoot machines crashing with bluescreens.&#xD;&#xA;End user value: &#xD;&#xA;Dependencies: Nirsoft Bluescreenview, Windows OS.&#xD;&#xA;Usage: Run now or execute in combination with Bluescreen Event Set.&#xD;&#xA;Report options: Agent Procedure Log: &quot;UPSTREAM: Bluescreen Memory Dump:&quot;&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
+            <Condition name="Windows 32 or 64 Bit Check">
+              <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+            </Condition>
+            <Then>
+              <Statement name="GetURL" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="URL" value="http://www.nirsoft.net/utils/bluescreenview.zip" />
+                <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\bluescreenview.zip" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="">
+            <Condition name="Windows 32 or 64 Bit Check">
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Exists" />
+            </Condition>
+            <Then>
+              <Statement name="GetURL" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="URL" value="http://www.nirsoft.net/utils/bluescreenview-x64.zip" />
+                <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\bluescreenview.zip" />
+                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
+              </Statement>
+            </Then>
+          </If>
+          <Statement name="Unzip file" continueOnFail="false" osType="Windows">
+            <Parameter xsi:type="StringParameter" name="Parameter1" value="#vAgentConfiguration.agentTempDir#\bluescreenview.zip" />
+            <Parameter xsi:type="StringParameter" name="Parameter2" value="#vAgentConfiguration.agentTempDir#\" />
+            <Parameter xsi:type="StringParameter" name="Parameter3" value="True" />
+          </Statement>
+          <Statement name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+            <Parameter xsi:type="StringParameter" name="Command" value="#vAgentConfiguration.agentTempDir#\bluescreenview.exe /stext #vAgentConfiguration.agentTempDir#\bluescreen.txt" />
+            <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+            <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+          </Statement>
+          <Statement description="This is a workaround. We need to copy the result one more time as the original format from Nirsoft result code is not supported in the VSA script enginge." name="ExecuteShellCommand" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
+            <Parameter xsi:type="StringParameter" name="Command" value="type #vAgentConfiguration.agentTempDir#\bluescreen.txt &gt;&gt; #vAgentConfiguration.agentTempDir#\bluescreen_utf.txt" />
+            <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+            <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+          </Statement>
+          <Statement name="GetVariable" continueOnFail="false" osType="Windows">
+            <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+            <Parameter xsi:type="StringParameter" name="SourceContent" value="#vAgentConfiguration.agentTempDir#\bluescreen_utf.txt" />
+            <Parameter xsi:type="StringParameter" name="VariableName" value="bluescreen" />
+          </Statement>
+          <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Bluescreen Memory Dump: #bluescreen#" />
+          </Statement>
+          <Statement name="DeleteFile" continueOnFail="true" osType="Windows">
+            <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\bluescreen.txt" />
+          </Statement>
+          <Statement name="DeleteFile" continueOnFail="true" osType="Windows">
+            <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\bluescreen.txt" />
+          </Statement>
+          <Statement name="DeleteFile" continueOnFail="true" osType="Windows">
+            <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\bluescreenview.zip" />
+          </Statement>
+        </Body>
+      </Procedure>
+      <Procedure name="Audit - Windows - Find Local OST Files On C" treePres="3" id="553401827" folderId="853311098671197" treeFullPath="Upstream Power Pack 2019-05-03.Audit (Feeding The Agent Procedure Log) 2019-05-03.Windows">
         <Body description="Description: Detects local PST files with size adn location and writes the result in the Agent Procedure log.&#xA;&#xA;Kaseya customer value: Procedure to audit clients berfore setting up backup.&#xA;&#xA;End user value: Limiting the risks for unwanted data loss.&#xA;&#xA;Dependencies: Windows OS.&#xA;&#xA;Usage: Run at any given time.&#xA;&#xA;Report options: Procedure Log, content: &quot;FindPSTFiles:*&quot;&#xA;&#xA;Script maintainer: ronny [at] upstream.se&#xA;&#xA;Support: This script is delivered &quot;as is&quot;. No support included.">
           <If description="">
             <Condition name="TestFile">
@@ -78,7 +138,7 @@
           </Statement>
         </Body>
       </Procedure>
-      <Procedure name="Audit - Windows - Find Local PST Files On C" treePres="3" id="14760693" folderId="288920762990099" treeFullPath="Upstream Kaseya Power Pack.Audit (Feeding The Agent Procedure Log) 2018-10-26.Windows">
+      <Procedure name="Audit - Windows - Find Local PST Files On C" treePres="3" id="14760693" folderId="853311098671197" treeFullPath="Upstream Power Pack 2019-05-03.Audit (Feeding The Agent Procedure Log) 2019-05-03.Windows">
         <Body description="Description: Detects local PST files with size adn location and writes the result in the Agent Procedure log.&#xA;&#xA;Kaseya customer value: Procedure to audit clients berfore setting up backup.&#xA;&#xA;End user value: Limiting the risks for unwanted data loss.&#xA;&#xA;Dependencies: Windows OS.&#xA;&#xA;Usage: Run at any given time.&#xA;&#xA;Report options: Procedure Log, content: &quot;FindPSTFiles:*&quot;&#xA;&#xA;Script maintainer: ronny [at] upstream.se&#xA;&#xA;Support: This script is delivered &quot;as is&quot;. No support included.">
           <Statement name="ExecuteShellCommand" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
             <Parameter xsi:type="StringParameter" name="Command" value="dir c:\*.pst /S &gt;&gt; #vAgentConfiguration.agentTempDir#\pst.result" />
@@ -101,61 +161,27 @@
           </Statement>
         </Body>
       </Procedure>
-      <Procedure name="Audit - Windows - Get Current Temp On Drive(s)" treePres="3" id="1204439113" folderId="288920762990099" treeFullPath="Upstream Kaseya Power Pack.Audit (Feeding The Agent Procedure Log) 2018-10-26.Windows">
+      <Procedure name="Audit - Windows - Get Current Temp On Drive(s)" treePres="3" id="1204439113" folderId="853311098671197" treeFullPath="Upstream Power Pack 2019-05-03.Audit (Feeding The Agent Procedure Log) 2019-05-03.Windows">
         <Body description="">
-          <If description="Procedure description: Get the disktemp on the drives on the machine.&#xD;&#xA;Kaseya customer value: Procedure for pro-active support and troubleshooting harddrive problems.&#xD;&#xA;End user value: Prevent any production and data loss tied to harddrive failure.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule once or Run Now.&#xD;&#xA;Report options: Agent Procedure log.&#xD;&#xA;Maintainer: powerpack@upstream.se Last change: 2017-09-28&#xD;&#xA;------------------------------------------------------------------------------------------------------------&#xD;&#xA;First we need a file.">
-            <Condition name="TestFile">
-              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\disktemp.exe" />
-              <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
-              <Parameter xsi:type="StringParameter" name="Value" value="" />
-            </Condition>
-            <Then>
-              <Statement name="GetURL" continueOnFail="false" osType="Windows">
-                <Parameter xsi:type="StringParameter" name="URL" value="https://upstream.dattodrive.com/index.php/s/M0Q0RMd0D3yERYC/download" />
-                <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\disktemp.exe" />
-                <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
-              </Statement>
-            </Then>
-          </If>
-          <Statement name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
-            <Parameter xsi:type="StringParameter" name="Command" value="#vAgentConfiguration.agentTempDir#\disktemp.exe &gt;&gt;#vAgentConfiguration.agentTempDir#\disktemp.result" />
-            <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
-            <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+          <Statement description="Procedure description: Get the disktemp on the drives on the machine.&#xD;&#xA;Kaseya customer value: Procedure for pro-active support and troubleshooting harddrive problems.&#xD;&#xA;End user value: Prevent any production and data loss tied to harddrive failure.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule once or Run Now.&#xD;&#xA;Report options: Agent Procedure log.&#xD;&#xA;Maintainer: powerpack@upstream.se Last change: 2017-09-28&#xD;&#xA;------------------------------------------------------------------------------------------------------------" name="GetURL" continueOnFail="false" osType="None">
+            <Parameter xsi:type="StringParameter" name="URL" value="https://raw.githubusercontent.com/UpstreamAB/UpstreamPowerPack/master/KaseyaVSA/Powershell/KaseyaVSA-Audit-GetCurrentFreeDiskOnC.ps1?token=Akb5roZWuVy2Fu34IwUbibyHu-yGBPW7ks5cRJVdwA%3D%3D" />
+            <Parameter xsi:type="StringParameter" name="ResponseFileName" value="#vAgentConfiguration.agentTempDir#\KaseyaVSA-Audit-GetCurrentFreeDisk.ps1" />
+            <Parameter xsi:type="BooleanParameter" name="WaitComplete" value="True" />
           </Statement>
-          <If description="">
-            <Condition name="TestFile">
-              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\disktemp.result" />
-              <Parameter xsi:type="EnumParameter" name="Condition" value="Exists" />
-              <Parameter xsi:type="StringParameter" name="Value" value="" />
-            </Condition>
-            <Then>
-              <Statement name="GetVariable" continueOnFail="false" osType="Windows">
-                <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
-                <Parameter xsi:type="StringParameter" name="SourceContent" value="#vAgentConfiguration.agentTempDir#\disktemp.result" />
-                <Parameter xsi:type="StringParameter" name="VariableName" value="disktemp" />
-              </Statement>
-              <Statement name="WriteScriptLogEntry" continueOnFail="true" osType="Windows">
-                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Disktemp: #disktemp#" />
-              </Statement>
-            </Then>
-            <Else>
-              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
-                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: OS Install Date: No result exists. Run &quot;wmic os get installdate&quot; manually to troubleshoot." />
-              </Statement>
-            </Else>
-          </If>
-          <Statement name="DeleteFile" continueOnFail="true" osType="Windows">
-            <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\disktemp.result" />
+          <Statement name="Execute Powershell" continueOnFail="false" osType="None">
+            <Parameter xsi:type="StringParameter" name="Parameter1" value="#vAgentConfiguration.agentTempDir#\KaseyaVSA-Audit-GetCurrentFreeDisk.ps1" />
+            <Parameter xsi:type="StringParameter" name="Parameter2" value="" />
+            <Parameter xsi:type="StringParameter" name="Parameter3" value="True" />
+          </Statement>
+          <Statement name="DeleteFile" continueOnFail="true" osType="None">
+            <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\KaseyaVSA-Audit-GetCurrentFreeDisk.ps1" />
           </Statement>
           <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
-            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Disktemp: #disktemp#" />
-          </Statement>
-          <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
-            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Disktemp: The Agent Procedure hit the last row and will now exit. Evaluate the Agent Procedure log output." />
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: #global:psresult#" />
           </Statement>
         </Body>
       </Procedure>
-      <Procedure name="Audit - Windows - Get Exchange DB Size On C" treePres="3" id="1855476398" folderId="288920762990099" treeFullPath="Upstream Kaseya Power Pack.Audit (Feeding The Agent Procedure Log) 2018-10-26.Windows">
+      <Procedure name="Audit - Windows - Get Exchange DB Size On C" treePres="3" id="1855476398" folderId="853311098671197" treeFullPath="Upstream Power Pack 2019-05-03.Audit (Feeding The Agent Procedure Log) 2019-05-03.Windows">
         <Body description="">
           <Statement name="GetVariable" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
             <Parameter xsi:type="EnumParameter" name="VariableType" value="FileSize" />
@@ -167,7 +193,7 @@
           </Statement>
         </Body>
       </Procedure>
-      <Procedure name="Audit - Windows - Get Notepad File Version Example" treePres="3" id="359040046" folderId="288920762990099" treeFullPath="Upstream Kaseya Power Pack.Audit (Feeding The Agent Procedure Log) 2018-10-26.Windows">
+      <Procedure name="Audit - Windows - Get Notepad File Version Example" treePres="3" id="359040046" folderId="853311098671197" treeFullPath="Upstream Power Pack 2019-05-03.Audit (Feeding The Agent Procedure Log) 2019-05-03.Windows">
         <Body description="">
           <Statement description="This example will get the version of Notepad.exe and report the result in the Agent Procedure log." name="GetVariable" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
             <Parameter xsi:type="EnumParameter" name="VariableType" value="FileVersionNumber" />
@@ -179,7 +205,7 @@
           </Statement>
         </Body>
       </Procedure>
-      <Procedure name="Audit - Windows - Get Pagefile Size" treePres="3" id="1548718466" folderId="288920762990099" treeFullPath="Upstream Kaseya Power Pack.Audit (Feeding The Agent Procedure Log) 2018-10-26.Windows">
+      <Procedure name="Audit - Windows - Get Pagefile Size" treePres="3" id="1548718466" folderId="853311098671197" treeFullPath="Upstream Power Pack 2019-05-03.Audit (Feeding The Agent Procedure Log) 2019-05-03.Windows">
         <Body description="Description: This procedure will  get the current pagefile settings from registry and put this in a custom audit field.&#xA;&#xA;Kaseya customer value: Health, performance and troubleshooting.&#xA;&#xA;End user value: Ensures that the machine is working in optimal performance condition.&#xA;&#xA;Dependencies: Windows OS. Custom Aduit Field: &quot;Pagefile Settings&quot; present.&#xA;&#xA;Usage: Execture the procedure at any time.&#xA;&#xA;Report options: Procedure Log, content: &quot;Pagefile:&quot; OR Audit, Aggregate Table, &quot;Pagefile Settings&quot;&#xA; &#xA;Script maintainer: ronny [at] upstream.se&#xA;&#xA;Support: This script is delivered &quot;as is&quot; No support included.">
           <Statement name="GetVariable" continueOnFail="false" osType="NT4|2000|XP|2003|Vista|2008">
             <Parameter xsi:type="EnumParameter" name="VariableType" value="RegistryValue" />
@@ -195,7 +221,7 @@
           </Statement>
         </Body>
       </Procedure>
-      <Procedure name="Audit - Windows - Internet Speed Test" treePres="3" id="2073177801" folderId="288920762990099" treeFullPath="Upstream Kaseya Power Pack.Audit (Feeding The Agent Procedure Log) 2018-10-26.Windows">
+      <Procedure name="Audit - Windows - Internet Speed Test" treePres="3" id="2073177801" folderId="853311098671197" treeFullPath="Upstream Power Pack 2019-05-03.Audit (Feeding The Agent Procedure Log) 2019-05-03.Windows">
         <Body description="">
           <If description="Procedure description: Test the Internet speed connection with the tool from https://github.com/zpeters/speedtest&#xD;&#xA;Kaseya customer value: Procedure verify Internet connection and to speed up troubleshooting.&#xD;&#xA;End user value: Validates the user perspective of a slow Internet connection if reported.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Run Now from LiveConnect.&#xD;&#xA;Report options: Agent Procedure log. Look for &quot;UPSTREAM: Internet Speed test: github&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se Latest update: 2018-09-06&#xD;&#xA;------------------------------------------------------------------------------------------------------------&#xD;&#xA;Stage 1: Are the right tools in place?">
             <Condition name="TestFile">
@@ -282,7 +308,123 @@
           </Statement>
         </Body>
       </Procedure>
-      <Procedure name="Audit - Windows - List 5 Largest Files on C" treePres="3" id="1572058087" folderId="288920762990099" treeFullPath="Upstream Kaseya Power Pack.Audit (Feeding The Agent Procedure Log) 2018-10-26.Windows">
+      <Procedure name="Audit - Windows - Is Machine Domain Joined" treePres="3" id="2071624995" folderId="853311098671197" treeFullPath="Upstream Power Pack 2019-05-03.Audit (Feeding The Agent Procedure Log) 2019-05-03.Windows">
+        <Body description="">
+          <Statement name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+            <Parameter xsi:type="StringParameter" name="Command" value="echo %USERDOMAIN% &gt;&gt;c:\kworking\userdomain.txt" />
+            <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+            <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+          </Statement>
+          <Statement name="ExecuteShellCommand" continueOnFail="false" osType="Windows">
+            <Parameter xsi:type="StringParameter" name="Command" value="echo %COMPUTERNAME% &gt;&gt;c:\kworking\computername.txt" />
+            <Parameter xsi:type="EnumParameter" name="ExecuteAccount" value="System" />
+            <Parameter xsi:type="BooleanParameter" name="Is64Bit" value="False" />
+          </Statement>
+          <Statement name="GetVariable" continueOnFail="false" osType="Windows">
+            <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+            <Parameter xsi:type="StringParameter" name="SourceContent" value="c:\kworking\userdomain.txt" />
+            <Parameter xsi:type="StringParameter" name="VariableName" value="USERDOMAIN" />
+          </Statement>
+          <Statement name="GetVariable" continueOnFail="false" osType="Windows">
+            <Parameter xsi:type="EnumParameter" name="VariableType" value="FileContent" />
+            <Parameter xsi:type="StringParameter" name="SourceContent" value="c:\kworking\computername.txt" />
+            <Parameter xsi:type="StringParameter" name="VariableName" value="COMPUTERNAME" />
+          </Statement>
+          <Statement name="DeleteFile" continueOnFail="false" osType="Windows">
+            <Parameter xsi:type="StringParameter" name="Path" value="c:\kworking\userdomain.txt" />
+          </Statement>
+          <Statement name="DeleteFile" continueOnFail="false" osType="Windows">
+            <Parameter xsi:type="StringParameter" name="Path" value="c:\kworking\computername.txt" />
+          </Statement>
+          <If description="">
+            <Condition name="CheckVariable">
+              <Parameter xsi:type="StringParameter" name="VariableName" value="#USERDOMAIN#" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Equals" />
+              <Parameter xsi:type="StringParameter" name="Value" value="#COMPUTERNAME#" />
+            </Condition>
+            <Then>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Is Machine Domain Joined: No Domain identified. Domain is set to local computername #COMPUTERNAME#." />
+              </Statement>
+            </Then>
+            <Else>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Is Machine Domain Joined: Domain identified as #USERDOMAIN#" />
+              </Statement>
+            </Else>
+          </If>
+          <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+            <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Is Machine Domain Joined: The Agent Procedure hit the last row and will now exit. Evaluate the Agent Procedure log output." />
+          </Statement>
+        </Body>
+      </Procedure>
+      <Procedure name="Audit - Windows - Is Windows Activated" treePres="3" id="1436509215" folderId="853311098671197" treeFullPath="Upstream Power Pack 2019-05-03.Audit (Feeding The Agent Procedure Log) 2019-05-03.Windows">
+        <Body description="">
+          <If description="Procedure description: Deploy applications with Chocolatey. Read more here: https://chocolatey.org&#xD;&#xA;Kaseya customer value: Procedure to secure clients with the latest software.&#xD;&#xA;End user value: Limiting the risks for exploits, ransomware, phishing attacks, downtime and possible data loss.&#xD;&#xA;Dependencies: &quot;UPSTREAM - Event Set - User Experience - MS Office Application Crashes&quot;.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Schedule Once, Recurring or Run Now.&#xD;&#xA;Report options: Agent Procedure log and &quot;C:\ProgramData\chocolatey\logs\chocolatey.log&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se&#xD;&#xA;------------------------------------------------------------------------------------------------------------">
+            <Condition name="TestFile">
+              <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\KaseyaVSA-Audit-GetOSActivation.ps1" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+              <Parameter xsi:type="StringParameter" name="Value" value="" />
+            </Condition>
+            <Then>
+              <Statement name="WriteFile" continueOnFail="false">
+                <Parameter xsi:type="StringParameter" name="Path" value="#vAgentConfiguration.agentTempDir#\KaseyaVSA-Audit-GetOSActivation.ps1" />
+                <Parameter xsi:type="StringParameter" name="ManagedFile" value="VSASharedFiles\UpstreamPowerPack\Powershell\KaseyaVSA-Audit-GetOSActivation.ps1" />
+                <Parameter xsi:type="BooleanParameter" name="DeleteAfter" value="False" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="">
+            <Condition name="Windows 32 or 64 Bit Check">
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Exists" />
+            </Condition>
+            <Then>
+              <Statement name="Execute Powershell Command (64-bit, Run As System)" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Parameter1" value="#vAgentConfiguration.agentTempDir#\KaseyaVSA-Audit-GetOSActivation.ps1" />
+                <Parameter xsi:type="StringParameter" name="Parameter2" value="" />
+                <Parameter xsi:type="StringParameter" name="Parameter3" value="True" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="">
+            <Condition name="Windows 32 or 64 Bit Check">
+              <Parameter xsi:type="EnumParameter" name="Condition" value="NotExists" />
+            </Condition>
+            <Then>
+              <Statement name="Execute Powershell Command (32-bit, Run As System)" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Parameter1" value="#vAgentConfiguration.agentTempDir#\KaseyaVSA-Audit-GetOSActivation.ps1" />
+                <Parameter xsi:type="StringParameter" name="Parameter2" value="" />
+                <Parameter xsi:type="StringParameter" name="Parameter3" value="True" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="">
+            <Condition name="CheckVariable">
+              <Parameter xsi:type="StringParameter" name="VariableName" value="#global:psresult#" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Equals" />
+              <Parameter xsi:type="StringParameter" name="Value" value="1" />
+            </Condition>
+            <Then>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Windows is activated" />
+              </Statement>
+            </Then>
+          </If>
+          <If description="">
+            <Condition name="CheckVariable">
+              <Parameter xsi:type="StringParameter" name="VariableName" value="#global:psresult#" />
+              <Parameter xsi:type="EnumParameter" name="Condition" value="Equals" />
+              <Parameter xsi:type="StringParameter" name="Value" value="0" />
+            </Condition>
+            <Then>
+              <Statement name="WriteScriptLogEntry" continueOnFail="false" osType="Windows">
+                <Parameter xsi:type="StringParameter" name="Comment" value="UPSTREAM: Windows is not activated" />
+              </Statement>
+            </Then>
+          </If>
+        </Body>
+      </Procedure>
+      <Procedure name="Audit - Windows - List 5 Largest Files on C" treePres="3" id="1572058087" folderId="853311098671197" treeFullPath="Upstream Power Pack 2019-05-03.Audit (Feeding The Agent Procedure Log) 2019-05-03.Windows">
         <Body description="">
           <If description="Procedure description: Get the top 5 biggest files on C: with the tool from http://sourceforge.net/projects/swissfileknife.&#xD;&#xA;Kaseya customer value: Procedure verify Internet connection and to speed up troubleshooting.&#xD;&#xA;End user value: Validates the user perspective of a slow Internet connection if reported.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Run Now from LiveConnect.&#xD;&#xA;Report options: Agent Procedure log. Look for &quot;UPSTREAM: Internet Speed test: github&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se Latest update: 2018-09-06&#xD;&#xA;------------------------------------------------------------------------------------------------------------&#xD;&#xA;Stage 1: Are the right tools in place?">
             <Condition name="TestFile">
@@ -319,7 +461,7 @@
           </Statement>
         </Body>
       </Procedure>
-      <Procedure name="Audit - Windows - List 5 Largest Files On User Selected Drive - Interactive" treePres="3" id="426991988" folderId="288920762990099" treeFullPath="Upstream Kaseya Power Pack.Audit (Feeding The Agent Procedure Log) 2018-10-26.Windows">
+      <Procedure name="Audit - Windows - List 5 Largest Files On User Selected Drive - Interactive" treePres="3" id="426991988" folderId="853311098671197" treeFullPath="Upstream Power Pack 2019-05-03.Audit (Feeding The Agent Procedure Log) 2019-05-03.Windows">
         <Body description="">
           <If description="Procedure description: Get the top 5 biggest files on selected drive with the tool from http://sourceforge.net/projects/swissfileknife.&#xD;&#xA;Kaseya customer value: Procedure verify Internet connection and to speed up troubleshooting.&#xD;&#xA;End user value: Validates the user perspective of a slow Internet connection if reported.&#xD;&#xA;Dependencies: Windows OS.&#xD;&#xA;Usage: Run Now from LiveConnect.&#xD;&#xA;Report options: Agent Procedure log. Look for &quot;UPSTREAM: Internet Speed test: github&quot;.&#xD;&#xA;Maintainer: powerpack@upstream.se Latest update: 2018-09-06&#xD;&#xA;------------------------------------------------------------------------------------------------------------&#xD;&#xA;Stage 1: Are the right tools in place?">
             <Condition name="TestFile">
