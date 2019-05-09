@@ -12,10 +12,12 @@ if(Test-Path -Path "C:\Program Files (x86)\Microsoft Office\Office16"){
 if(Test-Path -Path "C:\Program Files\Microsoft Office\Office16"){
     $O365LicenseInfo = cscript.exe //nologo "C:\Program Files\Microsoft Office\Office16\OSPP.VBS" /dstatus | Out-String
 }
+
+Write-Output "UPSTREAM: Detailed Office 365 license information:" $O365LicenseInfo
  
 if ($O365LicenseInfo -Match "---LICENSED---")
 {
-	Write-Output "UPSTREAM: Office 365 license found, activated and are good to go!"
+	Write-Output "UPSTREAM: Office 365 license(s) found, activated and are good to go!"
 }
 else
 {
