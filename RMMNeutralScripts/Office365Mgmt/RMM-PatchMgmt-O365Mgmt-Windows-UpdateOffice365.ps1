@@ -1,4 +1,4 @@
-# Script name: RMM-O365Mgmt-Windows-UpdateOffice365.ps1
+# Script name: RMM-PatchMgmt-O365Mgmt-Windows-UpdateOffice365.ps1
 # Script type: Powershell
 # Script description: Updadates existing Office 365 installation with the latest patches.
 # Dependencies: Powershell 3.0
