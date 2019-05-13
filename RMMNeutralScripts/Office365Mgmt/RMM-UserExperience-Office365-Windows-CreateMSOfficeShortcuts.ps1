@@ -47,7 +47,7 @@ If (Test-Path "C:\Program Files (x86)\Microsoft Office\Root\Office16\Winword.exe
 # We are creating shortcuts for Word, Excel and Powerpoint.
 If (Test-Path -Path "C:\Program\Microsoft Office\Root\Office16\Winword.exe"){
     # Let's create a shortcut for Microsoft Word.
-	$SourceFileLocation = "C:\Program Files (x86)\Microsoft Office\Root\Office16\Winword.exe"
+	$SourceFileLocation = "C:\Program\Microsoft Office\Root\Office16\Winword.exe"
 	$ShortcutLocation = "C:\Users\public\Desktop\Microsoft Word.lnk"
 	#New-Object : Creates an instance of a Microsoft .NET Framework or COM object.
 	#-ComObject WScript.Shell: This creates an instance of the COM object that represents the WScript.Shell for invoke CreateShortCut
@@ -58,7 +58,7 @@ If (Test-Path -Path "C:\Program\Microsoft Office\Root\Office16\Winword.exe"){
 	$Shortcut.Save()
 	
 	# Let's create a shortcut for Microsoft Excel.
-	$SourceFileLocation = "C:\Program Files (x86)\Microsoft Office\Root\Office16\Excel.exe"
+	$SourceFileLocation = "C:\Program\Microsoft Office\Root\Office16\Excel.exe"
 	$ShortcutLocation = "C:\Users\public\Desktop\Microsoft Excel.lnk"
 	#New-Object : Creates an instance of a Microsoft .NET Framework or COM object.
 	#-ComObject WScript.Shell: This creates an instance of the COM object that represents the WScript.Shell for invoke CreateShortCut
@@ -69,7 +69,7 @@ If (Test-Path -Path "C:\Program\Microsoft Office\Root\Office16\Winword.exe"){
 	$Shortcut.Save()
 	
 	# Let's create a shortcut for Microsoft PowerPoint.
-	$SourceFileLocation = "C:\Program Files (x86)\Microsoft Office\Root\Office16\Powerpnt.exe"
+	$SourceFileLocation = "C:\Program\Microsoft Office\Root\Office16\Powerpnt.exe"
 	$ShortcutLocation = "C:\Users\public\Desktop\Microsoft PowerPoint.lnk"
 	#New-Object : Creates an instance of a Microsoft .NET Framework or COM object.
 	#-ComObject WScript.Shell: This creates an instance of the COM object that represents the WScript.Shell for invoke CreateShortCut
