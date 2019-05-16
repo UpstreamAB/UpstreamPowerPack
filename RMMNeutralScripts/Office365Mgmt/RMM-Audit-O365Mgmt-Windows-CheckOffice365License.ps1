@@ -1,4 +1,4 @@
-# Script name: RMM-O365Mgmt-Windows-CheckOffice365License.ps1
+# Script name: RMM-Audit-O365Mgmt-Windows-CheckOffice365License.ps1
 # Script type: Powershell
 # Script description: Check the Office 365 license information and activation status on local machine.
 # Dependencies: Office 2016 and OSPP.VBS present on local machine.
