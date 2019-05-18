@@ -1,7 +1,7 @@
 # Script name: RMM-UserExperience-Office365-Windows-CreateMSOfficeShortcuts.ps1
 # Script type: Powershell
 # Script description: Crates desktop shortcuts to Word, Excel and PowerPoint on local machine.
-# Dependencies: Windows OS.
+# Dependencies: Office 365.
 # Script maintainer: powerpack@upstream.se
 # https://en.upstream.se/powerpack/
 # --------------------------------------------------------------------------------------------------------------------------------
