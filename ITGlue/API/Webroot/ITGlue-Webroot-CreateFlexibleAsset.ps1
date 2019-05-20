@@ -1,6 +1,6 @@
 # Script name: ITGlue-Webroot-CreateFlexibleAsset.ps1
 # Script type: Powershell
-# Script description: Creates a custom Flexible Asset called "Webroot". Use "ITGlue-Webroot-CreateFlexibleAsset.ps1" to update. 
+# Script description: Creates a custom Flexible Asset called "Webroot". Use "ITGlue-Webroot-CreateFlexibleAsset.ps1" to update.
 # Dependencies: Powershell 3.0
 # Script maintainer: powerpack@upstream.se
 # https://en.upstream.se/powerpack/
@@ -21,9 +21,9 @@ $data = @{
                     type = "flexible_asset_fields"
                     attributes = @{
                         order = 1
-                        name = "Keycode"
+                        name = "Site Key"
                         kind = "Text"
-                        hint = "Enter the keycode for the corresponding customer"
+                        hint = "Enter your GSM site here. This will be the"
                         required = $true
                         use_for_title = $false
                         expiration = $false
@@ -37,7 +37,7 @@ $data = @{
                         name = "Log in to GSM Portal"
                         kind = "Tag"
                         tag_type = "Passwords"
-                        required = $true
+                        required = $false
                         use_for_title = $false
                         expiration = $false
                         show_in_list = $true
@@ -185,21 +185,10 @@ $data = @{
                         show_in_list = $true
                         default_value = ""
                     }
-                },
-                @{
-                    type = "flexible_asset_fields"
-                    attributes = @{
-                        order = 14
-                        name = "This automated documentation is powered by Upstream Power Pack"
-                        kind = "Header"
-                        required = $false
-                        use_for_title = $false
-                        expiration = $false
-                        show_in_list = $false
-                    }
                 }
             )
         }
     }
 }
+
 New-ITGlueFlexibleAssetTypes -data $data
