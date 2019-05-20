@@ -7,6 +7,7 @@
 # --------------------------------------------------------------------------------------------------------------------------------
 
 #Requires -Version 3
+#Requires -Modules @{ ModuleName='ITGlueAPI'; ModuleVersion='2.0.7' }
 
 # ----------------------------- UPDATE THE BELOW VARIABLES -----------------------------
 # Fill in your Webroot username, password, client ID and client secret. These will be uses for authentication.
