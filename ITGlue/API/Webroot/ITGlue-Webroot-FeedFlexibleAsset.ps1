@@ -93,7 +93,7 @@ function Format-ITGlueData {
 
         return [PSCustomObject]@{
             flexible_asset_id                     = $itglue_data.id
-            Keycode                               = $itglue_data.attributes.traits.'keycode'
+            Keycode                               = $itglue_data.attributes.traits.'site-key'
             'log-in-to-gsm-portal'                = $itglue_data.attributes.traits.'log-in-to-gsm-portal'.values.id
             'configurations-with-webroot'         = $itglue_data.attributes.traits.'configurations-with-webroot'.values.id
             'webroot-endpoint-protection'         = $itglue_data.attributes.traits.'webroot-endpoint-protection'
@@ -101,6 +101,17 @@ function Format-ITGlueData {
             'webroot-security-awareness-training' = $itglue_data.attributes.traits.'webroot-security-awareness-training'
             'main-contact-at-customer'            = $itglue_data.attributes.traits.'main-contact-at-customer'.values.id
             configurations                        = $itglue_configrations
+            oldData = @{
+                'volume-active-licenses'               = $itglue_data.attributes.traits.'volume-active-licenses'
+                'expiration-date'                      = $itglue_data.attributes.traits.'expiration-date'
+                'webroot-endpoint-protection'          = $itglue_data.attributes.traits.'webroot-endpoint-protection'
+                'webroot-dns-protection'               = $itglue_data.attributes.traits.'webroot-dns-protection'
+                'webroot-security-awareness-training'  = $itglue_data.attributes.traits.'webroot-security-awareness-training'
+                'billing-cycle'                        = $itglue_data.attributes.traits.'billing-cycle'
+                'billing-date'                         = $itglue_data.attributes.traits.'billing-date'
+                'active-configurations-with-webroot'   = $itglue_data.attributes.traits.'active-configurations-with-webroot'.values.id
+                'inactive-configurations-with-webroot' = $itglue_data.attributes.traits.'inactive-configurations-with-webroot'.values.id
+            }
         }
     }
 }
@@ -130,32 +141,58 @@ function Merge-ITGlueWebrootData {
             }
         }
 
-        return @{
-            type = 'flexible_assets'
-            attributes = @{
-                id = $formated_itglue_data.flexible_asset_id
-                traits = @{
-                    # This is data kept from IT Glue.
-                    'keycode'                              = $formated_itglue_data.Keycode
-                    'log-in-to-gsm-portal'                 = $formated_itglue_data.'log-in-to-gsm-portal'
-                    'main-contact-at-customer'             = $formated_itglue_data.'main-contact-at-customer'
+        $update = $false
 
-                    # This is data updated from Webroot.
-                    'volume-active-licenses'               = $formated_webroot_data.Volume
-                    'active-configurations-with-webroot'   = $formated_active_endpoints
-                    'inactive-configurations-with-webroot' = $formated_inactive_endpoints
-                    'expiration-date'                      = $formated_webroot_data.Expiration
-                    'webroot-endpoint-protection'          = $formated_webroot_data.WEP
-                    'webroot-dns-protection'               = $formated_webroot_data.DNSP
-                    'webroot-security-awareness-training'  = $formated_webroot_data.SAT
-                    'billing-cycle'                        = $formated_webroot_data.BillingCycle
-                    'billing-date'                         = $formated_webroot_data.BillingDate
+        if([int]$formated_itglue_data.oldData.'volume-active-licenses' -ne $formated_webroot_data.Volume) {
+            $update = $true
+        } elseif($formated_itglue_data.oldData.'expiration-date' -ne $formated_webroot_data.Expiration.Substring(0,10)) {
+            $update = $true
+        } elseif($formated_itglue_data.oldData.'webroot-endpoint-protection' -ne $formated_webroot_data.WEP) {
+            $update = $true
+        } elseif($formated_itglue_data.oldData.'webroot-dns-protection' -ne $formated_webroot_data.DNSP) {
+            $update = $true
+        } elseif($formated_itglue_data.oldData.'webroot-security-awareness-training' -ne $formated_webroot_data.SAT) {
+            $update = $true
+        } elseif($formated_itglue_data.oldData.'billing-cycle' -ne $formated_webroot_data.BillingCycle) {
+            $update = $true
+        } elseif($formated_itglue_data.oldData.'billing-date' -ne $formated_webroot_data.BillingDate) {
+            $update = $true
+        } elseif($formated_active_endpoints | ? {$formated_itglue_data.oldData.'active-configurations-with-webroot' -notcontains $_}) {
+            $update = $true
+        } elseif($formated_inactive_endpoints | ? {$formated_itglue_data.oldData.'inactive-configurations-with-webroot' -notcontains $_}) {
+            $update = $true
+        }
 
-                    # Update time logging
-                    'last-update'                          = $(Get-date -UFormat '%Y-%m-%d %T')
+
+        if($update) {
+            return @{
+                type = 'flexible_assets'
+                attributes = @{
+                    id = $formated_itglue_data.flexible_asset_id
+                    traits = @{
+                        # This is data kept from IT Glue.
+                        'site-key'                             = $formated_itglue_data.Keycode
+                        'log-in-to-gsm-portal'                 = $formated_itglue_data.'log-in-to-gsm-portal'
+                        'main-contact-at-customer'             = $formated_itglue_data.'main-contact-at-customer'
+
+                        # This is data updated from Webroot.
+                        'volume-active-licenses'               = $formated_webroot_data.Volume
+                        'active-configurations-with-webroot'   = $formated_active_endpoints
+                        'inactive-configurations-with-webroot' = $formated_inactive_endpoints
+                        'expiration-date'                      = $formated_webroot_data.Expiration
+                        'webroot-endpoint-protection'          = $formated_webroot_data.WEP
+                        'webroot-dns-protection'               = $formated_webroot_data.DNSP
+                        'webroot-security-awareness-training'  = $formated_webroot_data.SAT
+                        'billing-cycle'                        = $formated_webroot_data.BillingCycle
+                        'billing-date'                         = $formated_webroot_data.BillingDate
+
+                        # Update time logging
+                        'last-update'                          = $(Get-date -UFormat '%Y-%m-%d %T')
+                    }
                 }
             }
         }
+
     }
 }
 
@@ -205,4 +242,6 @@ foreach($org in $organizations) {
 }
 
 # Upload all data to IT Glue.
-Set-ITGlueFlexibleAssets -data $data
+if($data) {
+    Set-ITGlueFlexibleAssets -data $data
+}
