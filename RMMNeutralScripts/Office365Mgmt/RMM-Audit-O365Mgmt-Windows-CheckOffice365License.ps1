@@ -34,7 +34,7 @@ If ($O365LicenseInfo -Match "Processing"){
 			New-EventLog -LogName System -Source UpstreamPowerPack	
 		}	
 		# This line will create the Windows Event Log for your RMM to pick up.
-		Write-EventLog -LogName System -Source UpstreamPowerPack -EventId 10 -Entrytype Information -Message "UPSTREAM: Whoops. There may be potential problems with Office 365 licensing. Please investigate. Detailed licesne information: $($O365LicenseInfo)"
+		Write-EventLog -LogName System -Source UpstreamPowerPack -EventId 10 -Entrytype Information -Message "UPSTREAM: Whoops. There may be potential problems with Office 365 licensing. Please investigate. Detailed license information: $($O365LicenseInfo)"
 	}
 	Else{
 		Write-Output "UPSTREAM: Office 365 license(s) found, activated and looking good!"	
