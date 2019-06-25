@@ -1,6 +1,6 @@
 # Script name: ITGlue-Webroot-FeedFlexibleAsset.ps1
 # Script type: Powershell
-# Script description: Updates IT Glue with infomation from Webroot
+# Script description: Updates custom Felxible Asset "Webroot". Schdeule to run once a day.
 # Dependencies: Powershell 3.0
 # Script maintainer: powerpack@upstream.se
 # https://en.upstream.se/powerpack/
