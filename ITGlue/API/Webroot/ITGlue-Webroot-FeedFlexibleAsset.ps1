@@ -1,7 +1,7 @@
 # Script name: ITGlue-Webroot-FeedFlexibleAsset.ps1
 # Script type: Powershell
-# Script description: Updates custom Felxible Asset "Webroot". Schdeule to run once a day.
-# Dependencies: Powershell 3.0
+# Script description: Updates IT Glue with infomation from Webroot
+# Dependencies: Powershell 3.0, ITGluePowerShell Wrapper
 # Script maintainer: powerpack@upstream.se
 # https://en.upstream.se/powerpack/
 # --------------------------------------------------------------------------------------------------------------------------------
@@ -19,12 +19,38 @@ param(
     # Fill in your global GSM key (not site key), this is used to find all the sites.
     $global_gsm_key = '',
     # Fill in the ID of the flexible asset ID in IT Glue. You create this asset with ITGlue-Webroot-CreateFlexibleAsset.ps1.
-    $flexible_asset_type_id = ''
+    [Parameter(ValueFromPipelineByPropertyName=$true, HelpMessage='The id of the asset in IT Glue')]
+    [long]$flexible_asset_type_id = '',
+
+    [Parameter(ValueFromPipelineByPropertyName=$true, HelpMessage='IT Glue api key')]
+    $api_key = (Get-ITGlueAPIKey | ConvertFrom-SecureString),
+
+    [Parameter(ValueFromPipelineByPropertyName=$true, HelpMessage='Where is your data stored? EU or US?')]
+    [ValidateSet('US', 'EU')]
+    $data_center = 'EU'
 )
 
 
 
 # ------------------------------- NO NEED EDIT THE BELOW CODE ----------------------------
+$username =       [PSCredential]::new('null', ($username       | ConvertTo-SecureString)).GetNetworkCredential().Password
+$password =       [PSCredential]::new('null', ($password       | ConvertTo-SecureString)).GetNetworkCredential().Password
+$client_id =      [PSCredential]::new('null', ($client_id      | ConvertTo-SecureString)).GetNetworkCredential().Password
+$client_secret =  [PSCredential]::new('null', ($client_secret  | ConvertTo-SecureString)).GetNetworkCredential().Password
+$global_gsm_key = [PSCredential]::new('null', ($global_gsm_key | ConvertTo-SecureString)).GetNetworkCredential().Password
+$api_key =        [PSCredential]::new('null', ($api_key        | ConvertTo-SecureString)).GetNetworkCredential().Password
+
+# If any parameter is missing
+# Cannot use mandatory because it would break setting parameters inside the script.
+if(!$flexible_asset_type_id -or !$api_key -or !$data_center) {
+    return "One or more parameter(s) is missing. This script will not continue."
+}
+
+# Set API key for this sessions
+Add-ITGlueAPIKey -api_key $api_key
+# Set data center for this sessions
+Add-ITGlueBaseURI -data_center $data_center
+
 # These functions are used in the script
 function Format-WebrootData {
     param (

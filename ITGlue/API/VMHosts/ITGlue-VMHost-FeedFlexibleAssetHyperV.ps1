@@ -315,7 +315,7 @@ $asset_data = @{
             # Host platform
             'virtualization-platform' = 'Hyper-V'
             # Host CPU data
-            'cpu' = Get-VMHost | Select -ExpandProperty LogicalProcessorCount
+            'cpu-cores' = Get-VMHost | Select -ExpandProperty LogicalProcessorCount
             # Host RAM data
             'ram-gb' = ((Get-CimInstance CIM_PhysicalMemory).capacity | Measure -Sum).Sum/1GB
             # Host disk data

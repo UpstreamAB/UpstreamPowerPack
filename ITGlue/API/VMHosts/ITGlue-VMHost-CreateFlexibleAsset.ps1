@@ -73,8 +73,9 @@ VMware"
                     type = "flexible_asset_fields"
                     Attributes = @{
                         order = 5
-                        Name = "CPU"
-                        kind = "Number"
+                        Name = "VM host hardware information"
+                        kind = "Textbox"
+                        hint = "Manufacturer Model Serial number"
                         required = $false
                         use_for_title = $false
                         expiration = $false
@@ -86,6 +87,31 @@ VMware"
                     type = "flexible_asset_fields"
                     Attributes = @{
                         order = 6
+                        Name = "Version"
+                        kind = "Text"
+                        required = $false
+                        use_for_title = $false
+                        expiration = $false
+                        show_in_list = $true
+                    }
+                },
+                @{
+                    type = "flexible_asset_fields"
+                    Attributes = @{
+                        order = 7
+                        Name = "CPU cores"
+                        kind = "Number"
+                        required = $false
+                        use_for_title = $false
+                        expiration = $false
+                        show_in_list = $false
+                        default_value = ""
+                    }
+                },
+                @{
+                    type = "flexible_asset_fields"
+                    Attributes = @{
+                        order = 8
                         Name = "RAM (GB)"
                         kind = "Number"
                         required = $false
@@ -98,7 +124,7 @@ VMware"
                 @{
                     type = "flexible_asset_fields"
                     Attributes = @{
-                        order = 7
+                        order = 9
                         Name = "Disk information"
                         kind = "Textbox"
                         required = $false
@@ -111,7 +137,7 @@ VMware"
                 @{
                     type = "flexible_asset_fields"
                     Attributes = @{
-                        order = 8
+                        order = 10
                         Name = "Virtual switches"
                         kind = "Textbox"
                         required = $false
@@ -124,8 +150,8 @@ VMware"
                 @{
                     type = "flexible_asset_fields"
                     Attributes = @{
-                        order = 9
-                        Name = "VM guests configuration"
+                        order = 11
+                        Name = "VM guests information"
                         kind = "Header"
                         required = $false
                         use_for_title = $false
@@ -136,7 +162,7 @@ VMware"
                 @{
                     type = "flexible_asset_fields"
                     Attributes = @{
-                        order = 10
+                        order = 12
                         Name = "Current number of VM guests on this VM host"
                         kind = "Number"
                         hint = "Number of guests detected on this VM host based on latest execution of the ducumentation atutomation script."
@@ -150,7 +176,7 @@ VMware"
                 @{
                     type = "flexible_asset_fields"
                     Attributes = @{
-                        order = 11
+                        order = 13
                         Name = "VM guest names and information"
                         kind = "Textbox"
                         hint = "VM guest names vCPUs RAM and other infromation."
@@ -164,7 +190,7 @@ VMware"
                 @{
                     type = "flexible_asset_fields"
                     Attributes = @{
-                        order = 12
+                        order = 14
                         Name = "VM guest virtual disk paths"
                         kind = "Textbox"
                         hint = "VM guests and virtual disk paths discovered on this VM host."
@@ -178,7 +204,7 @@ VMware"
                 @{
                     type = "flexible_asset_fields"
                     Attributes = @{
-                        order = 13
+                        order = 15
                         Name = "VM guests snapshot information"
                         kind = "Textbox"
                         hint = "All snapshots found on the host"
@@ -192,7 +218,7 @@ VMware"
                 @{
                     type = "flexible_asset_fields"
                     Attributes = @{
-                        order = 14
+                        order = 16
                         Name = "VM guests BIOS settings"
                         kind = "Textbox"
                         hint = "Specifies the BIOS boot settings in each each discovered guest on this VM host."
@@ -206,7 +232,7 @@ VMware"
                 @{
                     type = "flexible_asset_fields"
                     Attributes = @{
-                        order = 15
+                        order = 17
                         Name = "Assigned virtual switches and IP information"
                         kind = "Textbox"
                         required = $false
@@ -219,7 +245,7 @@ VMware"
                 @{
                     type = "flexible_asset_fields"
                     Attributes = @{
-                        order = 16
+                        order = 18
                         Name = "Force manual sync now?"
                         kind = "Select"
                         required = $false
@@ -233,7 +259,7 @@ No"
                 @{
                     type = "flexible_asset_fields"
                     Attributes = @{
-                        order = 17
+                        order = 19
                         Name = "This automated documentation is powered by Upstream Power Pack"
                         kind = "Header"
                         required = $false
