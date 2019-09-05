@@ -1,23 +1,60 @@
 Param(
-    [Parameter(Mandatory=$true]
-    [IPAddress]$Server,
-    [Parameter(Mandatory=$true]
+    [Parameter(Mandatory=$true)]
+    [IPAddress]$Server = 10.21.241.50,
+    [Parameter(Mandatory=$true)]
     [String]$UserName,
-    [Parameter(Mandatory=$true]
+    [Parameter(Mandatory=$true)]
     [String]$Password,
-    [Parameter(Mandatory=$true]
-    [Long]$OrganizationID
+    [Parameter(Mandatory=$true)]
+    [Long]$OrganizationID,
+    [Parameter(Mandatory=$true)]
+    [Long]$FlexibleAssetTypeID
 )
 
 # Connect to ESXi
 Connect-VIServer -Server $Server -User $UserName -Password $Password
 
 
-$HTMLHash = @{}
-$data = @()
+# Page tracker for configurations
+$page_number_conf = 1
+# First batch IT Glue Configurations
+$apicall_conf = Get-ITGlueConfigurations -page_size 100 -filter_organization_id $OrganizationID -page_number $page_number_conf
+# Store all configurations here
+$ITGlueConfigurations = @()
+$ITGlueConfigurations += $apicall_conf.data
+
+# Page tracker for flexible assets
+$page_number_asset = 1
+# First batch flexible assets
+$apicall_asset = Get-ITGlueConfigurations -page_size 100 -filter_organization_id $OrganizationID -page_number $page_number_asset
+# Store all assets here
+$ITGlueFlexibleAssets = @()
+$ITGlueFlexibleAssets += $apicall_asset.data
+
+
+# Store final asset data here
+$assetData = @()
 
 # Get all vm hosts
 foreach($VMhost in Get-VMHost) {
+    $extractedData = [PSCustomObject]@{
+        'vm-host-name' = ''
+        'vm-host-related-it-glue-configuration' = ''
+        'virtualization-platform' = ''
+        'vm-host-hardware-information' = ''
+        'version' = ''
+        'cpu-cores' = ''
+        'ram-gb' = ''
+        'disk-information' = ''
+        'virtual-switches' = ''
+        'current-number-of-vm-guests-on-this-vm-host' = ''
+        'vm-guest-names-and-information' = ''
+        'vm-guest-virtual-disk-paths' = ''
+        'vm-guests-snapshot-information' = ''
+        'vm-guests-bios-settings' = ''
+        'assigned-virtual-switches-and-ip-information' = ''
+    }
+
     # Add data to hash
     $HostNetwork = Get-VMHostNetwork $VMHost
     $Hardware = $VMHost | Get-VMHostHardware
@@ -34,19 +71,15 @@ foreach($VMhost in Get-VMHost) {
 
 
     ### IT Glue data ###
-    $HTMLHash[$VMHost.Name] = @{}
 
     ## Host ##
-    # * VM host name
-    $HTMLHash[$VMHost.Name]['vm-host-name'] = $VMHost.Name
-    # * VM host related IT Glue configuration
-    $HTMLHash[$VMHost.Name]['vm-host-related-it-glue-configuration'] = 1238967020437639
+
     # Virtualization platform
-    $HTMLHash[$VMHost.Name]['virtualization-platform'] ='VMware'
+    $extractedData.'virtualization-platform' ='VMware'
 
     # VM host hardware information #
     ## Manufacturer, Model, Serial number
-    $HTMLHash[$VMHost.Name]['vm-host-hardware-information'] =
+    $extractedData.'vm-host-hardware-information' =
 @"
 <div>
     <table>
@@ -74,20 +107,19 @@ foreach($VMhost in Get-VMHost) {
 
 
     # Version
-    $HTMLHash[$VMHost.Name]['version'] = $VMhost.Version
+    $extractedData.'version' = $VMhost.Version
 
     # CPU Cores
-    $HTMLHash[$VMHost.Name]['cpu-cores'] = $Hardware.CpuCount
-    $Hardware.CpuCoreCountTotal
+    $extractedData.'cpu-cores' = $Hardware.CpuCoreCountTotal
 
     # RAM (GB)
-    $HTMLHash[$VMHost.Name]['ram-gb'] = $VMhost.MemoryTotalGB.ToString('#.#')
+    $extractedData.'ram-gb'= $VMhost.MemoryTotalGB.ToString('#.#')
 
     # Disk information
     # $HTMLHash[$VMHost.Name]['disk-information'] = $Storage.FileSystemVolumeInfo | Where Type -ne 'OTHER'
-    $table_data = ''
+    $tableData = ''
     foreach($disk in Get-Datastore) {
-        $table_data +="<tr>
+        $tableData +="<tr>
             <td>$($disk.Name)</td>
             <td>$($disk.FreeSpaceGB)</td>
             <td>$($disk.CapacityGB)</td>
@@ -96,7 +128,7 @@ foreach($VMhost in Get-VMHost) {
             <td>$($disk.DatastoreBrowserPath)</td>
         </tr>"
     }
-        $HTMLHash[$VMHost.Name]['disk-information'] =
+    $extractedData.'disk-information' =
 @"
 <div>
     <table>
@@ -109,7 +141,7 @@ foreach($VMhost in Get-VMHost) {
                 <td>Type</td>
                 <td>Path</td>
             </tr>
-            $table_data
+            $tableData
         </tbody>
     </table>
 </div>
@@ -118,15 +150,15 @@ foreach($VMhost in Get-VMHost) {
 
 
     # Virtual switches
-    $table_data = ''
+    $tableData = ''
     foreach($vswitch in $VirtualSwitches) {
-        $table_data += "<tr>
+        $tableData += "<tr>
             <td>$($vswitch.Name)</td>
             <td>$($vswitch.VMHost)</td>
             <td>$([String]$vswitch.nic)</td>
         </tr>"
     }
-        $HTMLHash[$VMHost.Name]['virtual-switches'] =
+    $extractedData.'virtual-switches' =
 @"
 <div>
     <table>
@@ -136,7 +168,7 @@ foreach($VMhost in Get-VMHost) {
                 <td>VMHost</td>
                 <td>Nic</td>
             </tr>
-            $table_data
+            $tableData
         </tbody>
     </table>
 </div>
@@ -146,12 +178,12 @@ foreach($VMhost in Get-VMHost) {
     # VM guests information #
 
     # Current number of VM guests on this VM host
-    $HTMLHash[$VMHost.Name]['Current number of VM guests on this VM host'] = $NumberOfGuests
+    $extractedData.'current-number-of-vm-guests-on-this-vm-host' = $NumberOfGuests
 
     # VM guest names and information
-    $table_data = ''
+    $tableData = ''
     foreach($vm in $VMs) {
-        $table_data += "<tr>
+        $tableData += "<tr>
             <td>$($vm.Name)</td>
             <td>$($vm.ExtensionData.Config.GuestFullName)</td>
             <td>$($vm.Folder)</td>
@@ -164,7 +196,7 @@ foreach($VMhost in Get-VMHost) {
             <td>$($vm.UsedSpaceGB.ToString('#'))</td>
         </tr>"
     }
-    $HTMLHash[$VMHost.Name]['vm-guest-names-and-information'] =
+    $extractedData.'vm-guest-names-and-information' =
 @"
 <div>
     <table>
@@ -181,16 +213,16 @@ foreach($VMhost in Get-VMHost) {
                 <td>ProvisionedSpaceGB</td>
                 <td>UsedSpaceGB</td>
             </tr>
-            $table_data
+            $tableData
         </tbody>
     </table>
 </div>"
 "@
 
     # VM guest virtual disk paths
-    $table_data = ''
+    $tableData = ''
     foreach($vmdisk in $($VMs | Get-Harddisk)) {
-        $table_data += "<tr>
+        $tableData += "<tr>
             <td>$($vmdisk.Parent)</td>
             <td>$($vmdisk.StorageFormat)</td>
             <td>$($vmdisk.DiskType)</td>
@@ -199,7 +231,7 @@ foreach($VMhost in Get-VMHost) {
             <td>$($vmdisk.Persistence)</td>
         </tr>"
     }
-    $HTMLHash[$VMHost.Name]['vm-guest-virtual-disk-paths'] =
+    $extractedData.'vm-guest-virtual-disk-paths' =
 @"
 <div>
     <table>
@@ -212,16 +244,16 @@ foreach($VMhost in Get-VMHost) {
                 <td>CapacityGB</td>
                 <td>Persistence</td>
             </tr>
-            $table_data
+            $tableData
         </tbody>
     </table>
 </div>
 "@
 
     # VM guests snapshot information
-    $table_data = ''
+    $tableData = ''
     foreach($snapshot in $($VMs | Get-Snapshot)) {
-        $table_data += "<tr>
+        $tableData += "<tr>
             <td>$($snapshot.VM)</td>
             <td>$($snapshot.Created)</td>
             <td>$($snapshot.ParentSnapshot)</td>
@@ -230,7 +262,7 @@ foreach($VMhost in Get-VMHost) {
             <td>$($snapshot.PowerState)</td>
         </tr>"
     }
-        $HTMLHash[$VMHost.Name]['vm-guests-snapshot-information'] =
+    $extractedData.'vm-guests-snapshot-information' =
 @"
 <div>
     <table>
@@ -243,26 +275,25 @@ foreach($VMhost in Get-VMHost) {
                 <td>SizeGB</td>
                 <td>PowerState</td>
             </tr>
-            $table_data
+            $tableData
         </tbody>
     </table>
 </div>
 "@
 
     # VM guests BIOS settings
-    $table_data = ''
+    $tableData = ''
     foreach($vm in $VMs) {
-        $table_data = '<tr>'
-        $table_data += "<td>$($vm.Name)</td>"
-        $table_data += "<td>$($vm.ExtensionData.Config.Firmware)</td>"
-        $table_data += "<td>$($vm.ExtensionData.Config.BootOptions.EnterBIOSSetup)</td>"
-        $table_data += "<td>$($vm.ExtensionData.Config.BootOptions.BootRetryEnabled)</td>"
-        $table_data += "<td>$($vm.ExtensionData.Config.BootOptions.BootRetryDelay)</td>"
-        $table_data += "<td>$($vm.ExtensionData.Config.BootOptions.BootOrder)</td>"
-        $table_data = '</tr>'
+        $tableData += "<tr>
+             <td>$($vm.Name)</td>
+             <td>$($vm.ExtensionData.Config.Firmware)</td>
+             <td>$($vm.ExtensionData.Config.BootOptions.EnterBIOSSetup)</td>
+             <td>$($vm.ExtensionData.Config.BootOptions.BootRetryEnabled)</td>
+             <td>$($vm.ExtensionData.Config.BootOptions.BootRetryDelay)</td>
+             <td>$($vm.ExtensionData.Config.BootOptions.BootOrder)</td>
+        </tr>"
     }
-
-    $HTMLHash[$VMHost.Name]['vm-guests-bios-settings'] =
+    $extractedData.'vm-guests-bios-settings' =
 @"
 <div>
     <table>
@@ -275,17 +306,17 @@ foreach($VMhost in Get-VMHost) {
                 <td>BootRetryDelay</td>
                 <td>BootOrder</td>
             </tr>
-            $table_data
+            $tableData
         </tbody>
     </table>
 </div>
 "@
 
     # Assigned virtual switches and IP information
-    $table_data = ''
+    $tableData = ''
     foreach($vm in $VMs) {
         $nic = Get-NetworkAdapter -VM $vm
-        $table_data += "<tr>
+        $tableData += "<tr>
             <td>$($vm.Name)</td>
             <td>$($nic.Name)</td>
             <td>$($nic.NetworkName)</td>
@@ -296,7 +327,7 @@ foreach($VMhost in Get-VMHost) {
             <td>$($nic.ConnectionState.AllowGuestControl)</td>
         </tr>"
     }
-    $HTMLHash[$VMHost.Name]['assigned-virtual-switches-and-ip-information'] =
+    $extractedData.'assigned-virtual-switches-and-ip-information' =
 @"
 <div>
     <table>
@@ -312,38 +343,132 @@ foreach($VMhost in Get-VMHost) {
                 <td>StartConnected</td>
                 <td>AllowGuestControl</td>
             </tr>
-            $table_data
+            $tableData
         </tbody>
     </table>
 </div>
 "@
 
-    $data += @{
+    # Look up host in IT Glue #
+    # Clean slate
+    $configuration = $null
+    # Match host with IT Glue configuration
+    $configuration = $ITGlueConfigurations | Where {$_.attributes.'mac-address' -eq $extractedData.MAC -and $_.attributes.'primary-ip' -eq $extractedData.IP}
+
+    while(-not $configuration -and $page_number_conf -le $apicall_conf.meta.'total-pages' -and $apicall_conf.links.next) {
+        $apicall_conf = Get-ITGlueConfigurations -page_size 100 -filter_organization_id $OrganizationID -page_number ($page_number_conf++)
+        $ITGlueConfigurations += $apicall_conf.data
+
+        # Try matching again
+        $configuration = $ITGlueConfigurations | Where {$_.attributes.'mac-address' -eq $extractedData.MAC -and $_.attributes.'primary-ip' -eq $extractedData.IP}
+    }
+
+    # Did we get a match?
+    if(-not $configuration) {
+        # We did not get a match, creating configuration
+        # Type id
+        $configurationTypeId = (Get-ITGlueConfigurationTypes -filter_name 'VMWare').data.id
+        if(-not $configurationTypeId) {
+            # VMware as type was not found, creating
+            $configurationTypeId = (New-ITGlueConfigurationTypes -data @{type = 'configuration-types';attributes = @{name = 'VMWare'}}).data.id
+        }
+
+        # Status id
+        $configurationStatusId = (Get-ITGlueConfigurationStatuses -filter_name 'Active').data.id
+
+        $configurationData = @(
+            @{
+                type = 'configurations'
+                attributes = @{
+                    name = $extractedData.Name
+                    organization_id = $OrganizationID
+                    configuration_type_id = $configurationTypeId
+                    configuration_status_id = $configurationStatusId
+                    'primary_ip' = $extractedData.IP
+                    'mac_address' = $extractedData.MAC
+                }
+            }
+        )
+
+        $configuration = (New-ITGlueConfigurations -data $configurationData).data
+    }
+
+    $extractedData.ConfigurationId = $configuration.id
+
+
+    # Look asset ID #
+
+    # Clean slate
+    $flexibleAsset = $null
+    # Match configuration ID with IT Glue flexible asset
+    $flexibleAsset = $ITGlueFlexibleAssets | Where {$extractedData.ConfigurationId -eq $_.attributes.traits.'vm-host-related-it-glue-configuration'.Values.id}
+
+    while(-not $flexibleAsset -and $page_number_asset -le $apicall_asset.meta.'total-pages' -and $apicall_asset.links.next) {
+        $apicall_asset = Get-ITGlueConfigurations -page_size 100 -filter_organization_id $OrganizationID -page_number ($page_number_asset++)
+        $ITGlueFlexibleAssets += $apicall_asset.data
+
+        # Try matching again
+        $flexibleAsset = $ITGlueFlexibleAssets | Where {$extractedData.ConfigurationId -eq $_.attributes.traits.'vm-host-related-it-glue-configuration'.Values.id}
+    }
+
+    # Did we get a match?
+    if(-not $flexibleAsset) {
+        # We did not get a match, creating flexible asset
+        $flexibleAssetData = @{
+            type = 'flexible-assets'
+            attributes = @{
+                'flexible-asset-type-id' = $FlexibleAssetTypeID
+                traits = @{
+                    'vm-host-name' = $VMHost.Name
+                    'vm-host-related-it-glue-configuration' = $extractedData.ConfigurationId
+                }
+            }
+        }
+
+        $flexibleAsset = (New-ITGlueFlexibleAssets -data $flexibleAssetData -organization_id $OrganizationID).data
+    }
+
+    $extractedData.'vm-host-name' = $flexibleAsset.attributes.traits.'vm-host-name'
+    $extractedData.'vm-host-related-it-glue-configuration' = $flexibleAsset.id
+
+
+# Page tracker for flexible assets
+$page_number_asset = 1
+# First batch flexible assets
+$apicall_asset = Get-ITGlueConfigurations -page_size 100 -filter_organization_id $OrganizationID -page_number $page_number_asset
+$ITGlueFlexibleAssets = @()
+$ITGlueFlexibleAssets += $apicall_asset.data
+
+
+    $assetData += @{
         type = 'flexible-assets'
         attributes = @{
-            id = 1270161852465389
+            id = $extractedData.AssetId
             traits = @{
-                'vm-host-name' = $VMHost.Name
-                'vm-host-related-it-glue-configuration' = 1270160615194765, 1270160536830091
-                'virtualization-platform' = 'VMWare'
-                'vm-host-hardware-information' = $HTMLHash[$VMHost.Name]['vm-host-hardware-information']
-                'version' = $HTMLHash[$VMHost.Name]['version']
-                'cpu-cores' = $HTMLHash[$VMHost.Name]['cpu-cores']
-                'ram-gb' = $HTMLHash[$VMHost.Name]['ram-gb']
-                'disk-information' = $HTMLHash[$VMHost.Name]['disk-information']
-                'virtual-switches' = $HTMLHash[$VMHost.Name]['virtual-switches']
-                'current-number-of-vm-guests-on-this-vm-host' = $HTMLHash[$VMHost.Name]['current-number-of-vm-guests-on-this-vm-host']
-                'vm-guest-names-and-information' = $HTMLHash[$VMHost.Name]['vm-guest-names-and-information']
-                'vm-guest-virtual-disk-paths' = $HTMLHash[$VMHost.Name]['vm-guest-virtual-disk-paths']
-                'vm-guests-snapshot-information' = $HTMLHash[$VMHost.Name]['vm-guests-snapshot-information']
-                'vm-guests-bios-settings' = $HTMLHash[$VMHost.Name]['vm-guests-bios-settings']
-                'assigned-virtual-switches-and-ip-information' = $HTMLHash[$VMHost.Name]['assigned-virtual-switches-and-ip-information']
+                'vm-host-name' = $extractedData.'vm-host-name'
+                'vm-host-related-it-glue-configuration' = $extractedData.'vm-host-related-it-glue-configuration'
+                'virtualization-platform' = $extractedData.'virtualization-platform'
+                'vm-host-hardware-information' = $extractedData.'vm-host-hardware-information'
+                'version' = $extractedData.'version'
+                'cpu-cores' = $extractedData.'cpu-cores'
+                'ram-gb' = $extractedData.'ram-gb'
+                'disk-information' = $extractedData.'disk-information'
+                'virtual-switches' = $extractedData.'virtual-switches'
+                'current-number-of-vm-guests-on-this-vm-host' = $extractedData.'current-number-of-vm-guests-on-this-vm-host'
+                'vm-guest-names-and-information' = $extractedData.'vm-guest-names-and-information'
+                'vm-guest-virtual-disk-paths' = $extractedData.'vm-guest-virtual-disk-paths'
+                'vm-guests-snapshot-information' = $extractedData.'vm-guests-snapshot-information'
+                'vm-guests-bios-settings' = $extractedData.'vm-guests-bios-settings'
+                'assigned-virtual-switches-and-ip-information' = $extractedData.'assigned-virtual-switches-and-ip-information'
             }
         }
     }
-
-    break;
 }
 
-Set-ITGlueFlexibleAssets -data $data
+if(0 -ne $assetData.Count){
+    Set-ITGlueFlexibleAssets -data $assetData
+} else {
+    # Error loggning
+}
+
 Disconnect-VIServer -Confirm:$false
