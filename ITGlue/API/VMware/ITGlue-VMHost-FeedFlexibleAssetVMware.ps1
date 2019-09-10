@@ -26,7 +26,7 @@ $ITGlueConfigurations += $apicall_conf.data
 # Page tracker for flexible assets
 $page_number_asset = 1
 # First batch flexible assets
-$apicall_asset = Get-ITGlueConfigurations -page_size 100 -filter_organization_id $OrganizationID -page_number $page_number_asset
+$apicall_asset = Get-ITGlueFlexibleAssets -page_size 100 -filter_organization_id $OrganizationID -filter_flexible_asset_type_id $FlexibleAssetTypeID -page_number $page_number_asset
 # Store all assets here
 $ITGlueFlexibleAssets = @()
 $ITGlueFlexibleAssets += $apicall_asset.data
@@ -53,6 +53,10 @@ foreach($VMhost in Get-VMHost) {
         'vm-guests-snapshot-information' = ''
         'vm-guests-bios-settings' = ''
         'assigned-virtual-switches-and-ip-information' = ''
+
+        # extra data
+        ConfigurationId = ''
+        AssetId = ''
     }
 
     # Add data to hash
@@ -75,7 +79,7 @@ foreach($VMhost in Get-VMHost) {
     ## Host ##
 
     # Virtualization platform
-    $extractedData.'virtualization-platform' ='VMware'
+    $extractedData.'virtualization-platform' ='VMware Host'
 
     # VM host hardware information #
     ## Manufacturer, Model, Serial number
@@ -338,7 +342,6 @@ foreach($VMhost in Get-VMHost) {
                 <td>NetworkName</td>
                 <td>WakeOnLanEnabled</td>
                 <td>Type</td>
-                <tdTypetd>
                 <td>Connected</td>
                 <td>StartConnected</td>
                 <td>AllowGuestControl</td>
@@ -353,42 +356,40 @@ foreach($VMhost in Get-VMHost) {
     # Clean slate
     $configuration = $null
     # Match host with IT Glue configuration
-    $configuration = $ITGlueConfigurations | Where {$_.attributes.'mac-address' -eq $extractedData.MAC -and $_.attributes.'primary-ip' -eq $extractedData.IP}
+    $configuration = $ITGlueConfigurations | Where {$_.attributes.'mac-address' -eq $MAC -and $_.attributes.'primary-ip' -eq $IP}
 
     while(-not $configuration -and $page_number_conf -le $apicall_conf.meta.'total-pages' -and $apicall_conf.links.next) {
         $apicall_conf = Get-ITGlueConfigurations -page_size 100 -filter_organization_id $OrganizationID -page_number ($page_number_conf++)
         $ITGlueConfigurations += $apicall_conf.data
 
         # Try matching again
-        $configuration = $ITGlueConfigurations | Where {$_.attributes.'mac-address' -eq $extractedData.MAC -and $_.attributes.'primary-ip' -eq $extractedData.IP}
+        $configuration = $ITGlueConfigurations | Where {$_.attributes.'mac-address' -eq $MAC -and $_.attributes.'primary-ip' -eq $IP}
     }
 
     # Did we get a match?
     if(-not $configuration) {
         # We did not get a match, creating configuration
         # Type id
-        $configurationTypeId = (Get-ITGlueConfigurationTypes -filter_name 'VMWare').data.id
+        $configurationTypeId = (Get-ITGlueConfigurationTypes -filter_name 'VMware Host').data.id
         if(-not $configurationTypeId) {
-            # VMware as type was not found, creating
-            $configurationTypeId = (New-ITGlueConfigurationTypes -data @{type = 'configuration-types';attributes = @{name = 'VMWare'}}).data.id
+            # VMware Host as type was not found, creating
+            $configurationTypeId = (New-ITGlueConfigurationTypes -data @{type = 'configuration-types';attributes = @{name = 'VMware Host'}}).data.id
         }
 
         # Status id
         $configurationStatusId = (Get-ITGlueConfigurationStatuses -filter_name 'Active').data.id
 
-        $configurationData = @(
-            @{
-                type = 'configurations'
-                attributes = @{
-                    name = $extractedData.Name
-                    organization_id = $OrganizationID
-                    configuration_type_id = $configurationTypeId
-                    configuration_status_id = $configurationStatusId
-                    'primary_ip' = $extractedData.IP
-                    'mac_address' = $extractedData.MAC
-                }
+        $configurationData = @{
+            type = 'configurations'
+            attributes = @{
+                name = $extractedData.'vm-host-name'
+                organization_id = $OrganizationID
+                configuration_type_id = $configurationTypeId
+                configuration_status_id = $configurationStatusId
+                'primary_ip' = $extractedData.IP
+                'mac_address' = $extractedData.MAC
             }
-        )
+        }
 
         $configuration = (New-ITGlueConfigurations -data $configurationData).data
     }
@@ -404,7 +405,7 @@ foreach($VMhost in Get-VMHost) {
     $flexibleAsset = $ITGlueFlexibleAssets | Where {$extractedData.ConfigurationId -eq $_.attributes.traits.'vm-host-related-it-glue-configuration'.Values.id}
 
     while(-not $flexibleAsset -and $page_number_asset -le $apicall_asset.meta.'total-pages' -and $apicall_asset.links.next) {
-        $apicall_asset = Get-ITGlueConfigurations -page_size 100 -filter_organization_id $OrganizationID -page_number ($page_number_asset++)
+        $apicall_asset = Get-ITGlueFlexibleAssets -page_size 100 -filter_organization_id $OrganizationID -filter_flexible_asset_type_id $FlexibleAssetTypeID -page_number ($page_number_asset++)
         $ITGlueFlexibleAssets += $apicall_asset.data
 
         # Try matching again
@@ -417,6 +418,7 @@ foreach($VMhost in Get-VMHost) {
         $flexibleAssetData = @{
             type = 'flexible-assets'
             attributes = @{
+                'organization-id' = $OrganizationID
                 'flexible-asset-type-id' = $FlexibleAssetTypeID
                 traits = @{
                     'vm-host-name' = $VMHost.Name
@@ -425,22 +427,15 @@ foreach($VMhost in Get-VMHost) {
             }
         }
 
-        $flexibleAsset = (New-ITGlueFlexibleAssets -data $flexibleAssetData -organization_id $OrganizationID).data
+        $flexibleAsset = (New-ITGlueFlexibleAssets -data $flexibleAssetData).data
     }
 
+    $extractedData.AssetId = $flexibleAsset.id
+
     $extractedData.'vm-host-name' = $flexibleAsset.attributes.traits.'vm-host-name'
-    $extractedData.'vm-host-related-it-glue-configuration' = $flexibleAsset.id
+    $extractedData.'vm-host-related-it-glue-configuration' = $extractedData.ConfigurationId
 
-
-# Page tracker for flexible assets
-$page_number_asset = 1
-# First batch flexible assets
-$apicall_asset = Get-ITGlueConfigurations -page_size 100 -filter_organization_id $OrganizationID -page_number $page_number_asset
-$ITGlueFlexibleAssets = @()
-$ITGlueFlexibleAssets += $apicall_asset.data
-
-
-    $assetData += @{
+    $this_assetData = @{
         type = 'flexible-assets'
         attributes = @{
             id = $extractedData.AssetId
@@ -460,8 +455,49 @@ $ITGlueFlexibleAssets += $apicall_asset.data
                 'vm-guests-snapshot-information' = $extractedData.'vm-guests-snapshot-information'
                 'vm-guests-bios-settings' = $extractedData.'vm-guests-bios-settings'
                 'assigned-virtual-switches-and-ip-information' = $extractedData.'assigned-virtual-switches-and-ip-information'
+                #'force-manual-sync-now' = 'No' # Left out because of destructive API, removes it from asset if not there.
             }
         }
+    }
+
+    $update = $false
+
+    if($flexibleAsset.attributes.traits.'force-manual-sync-now' -eq 'Yes') {
+        $update = $true
+    } elseif($this_assetData.attributes.traits.'vm-host-hardware-information'.replace("`n","").replace("`r","") -ne $flexibleAsset.attributes.traits.'vm-host-hardware-information'.replace("`n","").replace("`r","")) {
+        Write-Verbose "Change detected. Will update asset."
+        $update = $true
+    } elseif($this_assetData.attributes.traits.'version' -ne $flexibleAsset.attributes.traits.'version') {
+        Write-Verbose "Change detected. Will update asset."
+        $update = $true
+    } elseif($this_assetData.attributes.traits.'disk-information'.replace("`n","").replace("`r","") -ne $flexibleAsset.attributes.traits.'disk-information'.replace("`n","").replace("`r","")) {
+        Write-Verbose "Change detected. Will update asset."
+        $update = $true
+    } elseif($this_assetData.attributes.traits.'virtual-switches'.replace("`n","").replace("`r","") -ne $flexibleAsset.attributes.traits.'virtual-switches'.replace("`n","").replace("`r","")) {
+        Write-Verbose "Change detected. Will update asset."
+        $update = $true
+    } elseif($this_assetData.attributes.traits.'current-number-of-vm-guests-on-this-vm-host' -ne $flexibleAsset.attributes.traits.'current-number-of-vm-guests-on-this-vm-host') {
+        Write-Verbose "Change detected. Will update asset."
+        $update = $true
+    } elseif($this_assetData.attributes.traits.'vm-guest-names-and-information'.replace("`n","").replace("`r","") -ne $flexibleAsset.attributes.traits.'vm-guest-names-and-information'.replace("`n","").replace("`r","")) {
+        Write-Verbose "Change detected. Will update asset."
+        $update = $true
+    } elseif($this_assetData.attributes.traits.'vm-guest-virtual-disk-paths'.replace("`n","").replace("`r","") -ne $flexibleAsset.attributes.traits.'vm-guest-virtual-disk-paths'.replace("`n","").replace("`r","")) {
+        Write-Verbose "Change detected. Will update asset."
+        $update = $true
+    } elseif($this_assetData.attributes.traits.'vm-guests-snapshot-information'.replace("`n","").replace("`r","") -ne $flexibleAsset.attributes.traits.'vm-guests-snapshot-information'.replace("`n","").replace("`r","")) {
+        Write-Verbose "Change detected. Will update asset."
+        $update = $true
+    } elseif($this_assetData.attributes.traits.'vm-guests-bios-settings'.replace("`n","").replace("`r","") -ne $flexibleAsset.attributes.traits.'vm-guests-bios-settings'.replace("`n","").replace("`r","")) {
+        Write-Verbose "Change detected. Will update asset."
+        $update = $true
+    } elseif($this_assetData.attributes.traits.'assigned-virtual-switches-and-ip-information'.replace("`n","").replace("`r","") -ne $flexibleAsset.attributes.traits.'assigned-virtual-switches-and-ip-information'.replace("`n","").replace("`r","")) {
+        Write-Verbose "Change detected. Will update asset."
+        $update = $true
+    }
+
+    if($update) {
+        $assetData += $this_assetData
     }
 }
 
