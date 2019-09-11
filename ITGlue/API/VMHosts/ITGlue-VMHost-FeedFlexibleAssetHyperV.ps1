@@ -311,7 +311,7 @@ $asset_data = @{
     attributes = @{
         traits = @{
             # Manual sync
-            'force-manual-sync-now' = 'No'
+            'force-new-revision-next-sync' = 'No'
             # Host platform
             'virtualization-platform' = 'Hyper-V'
             # Host CPU data
@@ -344,7 +344,7 @@ Write-Verbose "Comparing data.."
 
 $update = $false
 
-if($flexibleAsset.data.attributes.traits.'force-manual-sync-now' -eq 'Yes') {
+if($flexibleAsset.data.attributes.traits.'force-new-revision-next-sync' -eq 'Yes') {
     $update = $true
 } elseif($asset_data.attributes.traits.cpu -ne $flexibleAsset.data.attributes.traits.cpu) {
     Write-Verbose "Change detected. Will update asset."
