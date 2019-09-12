@@ -4,7 +4,7 @@
 [CmdletBinding()]
 Param(
     [Parameter(Mandatory=$true)]
-    [IPAddress]$vSphereServer,
+    [IPAddress]$vCenter,
     [Parameter(Mandatory=$true)]
     [String]$UserName,
     [Parameter(Mandatory=$true)]
