@@ -19,8 +19,8 @@ $loggingObject = @{}
 
 # Connect to ESXi
 try {
-    Write-Verbose "$(Get-Date -format G) Connecting to $Server."
-    $loggingObject['Connection'] = Connect-VIServer -Server $Server -User $UserName -Password $Password
+    Write-Verbose "$(Get-Date -format G) Connecting to $vSphereServer."
+    $loggingObject['Connection'] = Connect-VIServer -Server $vSphereServer -User $UserName -Password $Password
     Write-Verbose "$(Get-Date -format G) $($loggingObject.Connection | Select Name, Port, IsConnected, User)"
     Write-Verbose "$(Get-Date -format G) Successfully conncected."
 } catch {
