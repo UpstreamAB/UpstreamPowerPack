@@ -15,16 +15,26 @@ Param(
     [Long]$FlexibleAssetTypeID
 )
 
+Write-Verbose "$(Get-Date -format G) BEGIN NEW SESSION OF VMHOST (VMWARE) -----------------------------------------------"
+
 $loggingObject = @{}
+
+try{
+    Write-Verbose "$(Get-Date -format G)Import module ITGlueAPI."
+    Import-Module ITGlueAPI -ErrorAction Stop
+} catch {
+    Write-Error "Unable to import the module ITGlueAPI: $_. The script will not continue."
+    return
+}
 
 # Connect to ESXi
 try {
-    Write-Verbose "$(Get-Date -format G) Connecting to $vSphereServer."
-    $loggingObject['Connection'] = Connect-VIServer -Server $vSphereServer -User $UserName -Password $Password
+    Write-Verbose "$(Get-Date -format G) Connecting to $vCenter."
+    $loggingObject['Connection'] = Connect-VIServer -Server $vCenter -User $UserName -Password $Password -Force
     Write-Verbose "$(Get-Date -format G) $($loggingObject.Connection | Select Name, Port, IsConnected, User)"
     Write-Verbose "$(Get-Date -format G) Successfully conncected."
 } catch {
-    Write-Error "Failed to connect to server: $_"
+    Write-Error "Failed to connect to server: $_. The script will not continue."
     return
 }
 
@@ -36,7 +46,7 @@ try {
     Write-Verbose "$(Get-Date -format G) Calling the IT Glue API, asking for the first 100 configurations in $OrganizationID."
     $apicall_conf = Get-ITGlueConfigurations -page_size 100 -filter_organization_id $OrganizationID -page_number $page_number_conf -ErrorAction Stop
 }catch {
-    Write-Verbose "$(Get-Date -format G) Failed to get IT Glue configurations."
+    Write-Error "$(Get-Date -format G) Failed to get IT Glue configurations. The script will not continue."
     return
 }
 
@@ -54,7 +64,7 @@ try {
     Write-Verbose "$(Get-Date -format G) Calling the IT Glue API, asking for the first 100 flexible assets in $OrganizationID with type id $FlexibleAssetTypeID."
     $apicall_asset = Get-ITGlueFlexibleAssets -page_size 100 -filter_organization_id $OrganizationID -filter_flexible_asset_type_id $FlexibleAssetTypeID -page_number $page_number_asset -ErrorAction Stop
 }catch {
-    Write-Verbose "$(Get-Date -format G) Failed to get IT Glue flexible assets."
+    Write-Error "$(Get-Date -format G) Failed to get IT Glue flexible assets. The script will not continue."
     return
 }
 
@@ -72,8 +82,7 @@ $assetData = @()
 # Get all vm hosts
 Write-Verbose "$(Get-Date -format G) Looping all VM hosts."
 foreach($VMhost in Get-VMHost) {
-    Write-Verbose "$(Get-Date -format G) ####### BEGIN NEW HOST #######"
-    Write-Verbose "$(Get-Date -format G) Current host's name: $($VMhost.Name)."
+    Write-Verbose "$(Get-Date -format G) ####### Begin host $($VMHost.Name) #######"
 
     Write-Verbose "$(Get-Date -format G) Creating object to store this hosts data."
     $extractedData = [PSCustomObject]@{
@@ -136,7 +145,7 @@ foreach($VMhost in Get-VMHost) {
             Write-Verbose "$(Get-Date -format G) Asking for 100 more configurations from IT Glue."
             $apicall_conf = Get-ITGlueConfigurations -page_size 100 -filter_organization_id $OrganizationID -page_number ($page_number_conf++) -ErrorAction Stop
         } catch {
-            Write-Error "Failed to get more configurations. Skipping this host."
+            Write-Error "Failed to get more configurations: $_. Skipping this host."
             continue
         }
 
@@ -640,6 +649,7 @@ foreach($VMhost in Get-VMHost) {
             Write-Verbose "$(Get-Date -format G) No change detected. This asset will not be updated."
         }
     }
+    Write-Verbose "$(Get-Date -format G) ####### End host $($VMHost.Name) #######"
 }
 
 Write-Verbose "$(Get-Date -format G) Number of assets to update: $($assetData.Count)"
@@ -653,6 +663,8 @@ if(0 -ne $assetData.Count){
         Write-Verbose "$(Get-Date -format G) Uploading final asset data to IT Glue"
         $loggingObject['flexible_asset'] = Set-ITGlueFlexibleAssets -data $assetData
         Write-Verbose "$(Get-Date -format G) Upload complete."
+        Write-Verbose "Data:"
+        Write-Verbose "$($loggingObject.flexible_asset | ConvertTo-Json -Depth 2)"
     } catch {
         Write-Error "Unable to upload data to IT Glue: $_"
         return

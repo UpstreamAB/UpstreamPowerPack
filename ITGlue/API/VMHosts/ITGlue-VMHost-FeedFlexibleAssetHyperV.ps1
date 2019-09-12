@@ -306,14 +306,20 @@ Write-Verbose "[8/9] VM NICs done."
 
 
 Write-Verbose "Building final data structure..."
+
+$forcesync = 'No'
+if('Yes' -eq $flexibleAsset.data.attributes.traits.'force-new-revision-next-sync') {
+    $forcesync = 'Yes'
+}
+
 $asset_data = @{
     type = 'flexible-assets'
     attributes = @{
         traits = @{
             # Manual sync
-            'force-new-revision-next-sync' = 'No'
+            'force-new-revision-next-sync' = $forcesync
             # Host platform
-            'virtualization-platform' = 'Hyper-V'
+            'virtualization-platform' = 'Hyper-V host'
             # Host CPU data
             'cpu-cores' = Get-VMHost | Select -ExpandProperty LogicalProcessorCount
             # Host RAM data

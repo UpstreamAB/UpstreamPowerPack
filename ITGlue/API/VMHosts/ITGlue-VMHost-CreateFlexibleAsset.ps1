@@ -65,7 +65,7 @@ $data = @{
                         use_for_title = $false
                         expiration = $false
                         show_in_list = $true
-                        default_value = "Hyper-V
+                        default_value = "Hyper-V host
 VMware"
                     }
                 },
