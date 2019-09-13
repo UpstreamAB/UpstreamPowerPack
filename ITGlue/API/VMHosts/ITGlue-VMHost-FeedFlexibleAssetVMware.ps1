@@ -13,6 +13,8 @@ Param(
     [Long]$OrganizationID,
     [Parameter(Mandatory=$true)]
     [Long]$FlexibleAssetTypeID
+    [Parameter(Mandatory=$true)]
+    [String]$SubDomain = 'upstream-demo'
 )
 
 Write-Verbose "$(Get-Date -format G) BEGIN NEW SESSION OF VMHOST (VMWARE) -----------------------------------------------"
@@ -136,7 +138,7 @@ foreach($VMhost in Get-VMHost) {
     # Clean slate
     $configuration = $null
     # Match host with IT Glue configuration
-    Write-Verbose "$(Get-Date -format G) Looking up the configuration in all retreived."
+    Write-Verbose "$(Get-Date -format G) Looking up the configuration in all retrieved."
     $configuration = $ITGlueConfigurations | Where {$_.attributes.'mac-address' -eq $MAC -and $_.attributes.'primary-ip' -eq $IP}
 
     while(-not $configuration -and $page_number_conf -le $apicall_conf.meta.'total-pages' -and $apicall_conf.links.next) {
@@ -144,13 +146,12 @@ foreach($VMhost in Get-VMHost) {
         try {
             Write-Verbose "$(Get-Date -format G) Asking for 100 more configurations from IT Glue."
             $apicall_conf = Get-ITGlueConfigurations -page_size 100 -filter_organization_id $OrganizationID -page_number ($page_number_conf++) -ErrorAction Stop
+            $ITGlueConfigurations += $apicall_conf.data
+            Write-Verbose "$(Get-Date -format G) ITGlueConfigurations now has $($ITGlueConfigurations.Count) configurations."
         } catch {
             Write-Error "Failed to get more configurations: $_. Skipping this host."
             continue
         }
-
-        $ITGlueConfigurations += $apicall_conf.data
-        Write-Verbose "$(Get-Date -format G) ITGlueConfigurations now has $($ITGlueConfigurations.Count) configurations."
 
         # Try matching again
         Write-Verbose "$(Get-Date -format G) Looking for the configuration again."
@@ -222,7 +223,7 @@ foreach($VMhost in Get-VMHost) {
     # Clean slate
     $flexibleAsset = $null
     # Match configuration ID with IT Glue flexible asset
-    Write-Verbose "$(Get-Date -format G) Looking up the flexible asset in all retreived."
+    Write-Verbose "$(Get-Date -format G) Looking up the flexible asset in all retrieved."
     $flexibleAsset = $ITGlueFlexibleAssets | Where {$extractedData.ConfigurationId -eq $_.attributes.traits.'vm-host-related-it-glue-configuration'.Values.id}
 
     while(-not $flexibleAsset -and $page_number_asset -le $apicall_asset.meta.'total-pages' -and $apicall_asset.links.next) {
@@ -271,6 +272,42 @@ foreach($VMhost in Get-VMHost) {
     $extractedData.'force-new-revision-next-sync' = $flexibleAsset.attributes.traits.'force-new-revision-next-sync'
     Write-Verbose "$(Get-Date -format G) Force new revision next sync: $($extractedData.'force-new-revision-next-sync')."
 
+    Write-Verbose "$(Get-Date -format G) Begin matching VMs against configurations."
+    Write-Verbose "$(Get-Date -format G) ITGlueConfigurations now $($ITGlueConfigurations.Count) configurations."
+    $url = (Get-ITGlueBaseURI).replace('https://api', 'https://{0}' -f $subdomain)
+    Write-Verbose "$(Get-Date -format G) URL: $url."
+    $vmLinks = @{}
+
+    foreach($VM in $VMs) {
+        Write-Verbose "$(Get-Date -format G) Looking up $($vm.Name) in all retrieved configuration."
+        $vmLinks[$VM.Name] = @{data = $ITGlueConfigurations | Where {$_.attributes.name -like "*$($VM.Name)*"}}
+
+        while(-not $vmLinks[$VM.Name].data -and $page_number_conf -le $apicall_conf.meta.'total-pages' -and $apicall_conf.links.next) {
+            Write-Verbose "$(Get-Date -format G) It was not found and there are more configurations."
+            try {
+                Write-Verbose "$(Get-Date -format G) Asking for 100 more configurations from IT Glue."
+                $apicall_conf = Get-ITGlueConfigurations -page_size 100 -filter_organization_id $OrganizationID -page_number ($page_number_conf++) -ErrorAction Stop
+                $ITGlueConfigurations += $apicall_conf.data
+                Write-Verbose "$(Get-Date -format G) ITGlueConfigurations now has $($ITGlueConfigurations.Count) configurations."
+            } catch {
+                Write-Error "Failed to get more configurations: $_. Skipping this host."
+                continue
+            }
+
+            # Try matching again
+            Write-Verbose "$(Get-Date -format G) Looking up the configuration in all retreived."
+            $vmLinks[$VM.Name] = @{data = $ITGlueConfigurations | Where {$_.attributes.name -like "*$($VM.Name)*"}}
+        }
+
+        if($vmLinks[$VM.Name].data) {
+            Write-Verbose "$(Get-Date -format G) Agent was matched!"
+            $vmLinks[$VM.Name]['link'] = '<a href="{0}/{1}/configurations/{2}">{3}</a>' -f $url, $vmLinks[$VM.Name].data.attributes.'organization-id', $vmLinks[$VM.Name].data.id, $VM.name
+            Write-Verbose "$(Get-Date -format G) Link: $($vmLinks[$VM.Name]['link'])"
+        } else {
+            Write-Verbose "$(Get-Date -format G) Agent was not matched. Will use agent name instead."
+            $vmLinks[$VM.Name]['link'] = $VM.Name
+        }
+    }
 
     ### IT Glue data ###
     if($extractedData.AssetId) {
@@ -398,7 +435,7 @@ foreach($VMhost in Get-VMHost) {
         $tableData = ''
         foreach($vm in $VMs) {
             $tableData += "<tr>
-                <td>$($vm.Name)</td>
+                <td>$($vmLinks[$vm.Name].link)</td>
                 <td>$($vm.ExtensionData.Config.GuestFullName)</td>
                 <td>$($vm.Folder)</td>
                 <td>$($vm.HARestartPriority)</td>
@@ -439,7 +476,7 @@ foreach($VMhost in Get-VMHost) {
         $tableData = ''
         foreach($vmdisk in $($VMs | Get-Harddisk)) {
             $tableData += "<tr>
-                <td>$($vmdisk.Parent)</td>
+                <td>$($vmLinks[$vmdisk.Parent.Name].link)</td>
                 <td>$($vmdisk.StorageFormat)</td>
                 <td>$($vmdisk.DiskType)</td>
                 <td>$($vmdisk.Filename)</td>
@@ -505,7 +542,7 @@ foreach($VMhost in Get-VMHost) {
         $tableData = ''
         foreach($vm in $VMs) {
             $tableData += "<tr>
-                 <td>$($vm.Name)</td>
+                 <td>$($vmLinks[$vm.Name].link)</td>
                  <td>$($vm.ExtensionData.Config.Firmware)</td>
                  <td>$($vm.ExtensionData.Config.BootOptions.EnterBIOSSetup)</td>
                  <td>$($vm.ExtensionData.Config.BootOptions.BootRetryEnabled)</td>
@@ -539,7 +576,7 @@ foreach($VMhost in Get-VMHost) {
         foreach($vm in $VMs) {
             $nic = Get-NetworkAdapter -VM $vm
             $tableData += "<tr>
-                <td>$($vm.Name)</td>
+                <td>$($vmLinks[$vm.Name].link)</td>
                 <td>$($nic.Name)</td>
                 <td>$($nic.NetworkName)</td>
                 <td>$($nic.WakeOnLanEnabled)</td>
