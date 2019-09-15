@@ -1,48 +1,74 @@
 [cmdletbinding(DefaultParameterSetName='NotReplace')]
 param(
-    [Parameter(ParameterSetName = 'Replace', Mandatory=$true)]
+    [Parameter(ParameterSetName='Replace', Mandatory=$true)]
+    [Parameter(ParameterSetName='ReplaceApiKey', Mandatory=$true)]
+    [Switch]$ReplaceApiKey,
+
+    [Parameter(ParameterSetName='Replace', Mandatory=$true)]
+    [Parameter(ParameterSetName='ReplaceDataCenter', Mandatory=$true)]
+    [Switch]$ReplaceDataCenter,
+
+    [Parameter(ParameterSetName='Replace', Mandatory=$true)]
+    [Parameter(ParameterSetName='ReplaceApiKey', Mandatory=$true)]
     [Parameter(ParameterSetName='NotReplace')]
     [String]$ApiKey,
 
-    [ValidateSet( 'US', 'EU')]
-    [Parameter(ParameterSetName='Replace')]
+    [Parameter(ParameterSetName='Replace', Mandatory=$true)]
+    [Parameter(ParameterSetName='ReplaceDataCenter', Mandatory=$true)]
     [Parameter(ParameterSetName='NotReplace')]
-    [String]$DataCenter,
-
-    [Parameter(ParameterSetName='Replace')]
-    [Switch]$ReplaceApiKey
+    [ValidateSet( 'US', 'EU')]
+    [String]$DataCenter
 )
 
-# Check if module is installed
+
 try {
-    Import-Module ITGlueAPI -ErrorAction Stop
+    # Try to import module
+    Import-Module -Name 'ITGlueAPI' -ErrorAction Stop
 } catch {
-    if(-not (Get-Module -ListAvailable ITGlueAPI)) {
-        Install-Module -Name ITGlueAPI
+    # Failed to import, check if possible to install
+    if( (Get-Module -ListAvailable -Name 'ITGlueAPI') ) {
+        try {
+            Install-Module -Name 'ITGlueAPI'
+            Import-Module -Name 'ITGlueAPI'
+        } catch {
+            Write-Error "Failed to install or import module: $_"
+            return;
+        }
+    } else {
+        # The module was not listed for install
+        Write-Error 'The module was not available for install.'
+        return;
     }
 }
 
-# Replace API key if asked
-if($ReplaceApiKey) {
-    Add-ITGlueAPIKey -Api_Key $apikey
-    Export-ITGlueModuleSettings
-}
-
 try {
-    Get-Variable ITGlue_API_Key -ErrorAction Stop > $null
-    Get-Variable ITGlue_Base_URI -ErrorAction Stop > $null
+    Get-Variable 'ITGlue_API_Key' -ErrorAction Stop
+    if($ReplaceApiKey) {
+        Add-ITGlueAPIKey -Api_Key $ApiKey
+        Export-ITGlueModuleSettings
+    }
 } catch {
-    if($apikey) {
-        Add-ITGlueAPIKey -Api_Key $apikey
+    if($ApiKey) {
+        Add-ITGlueAPIKey -Api_Key $ApiKey
+        Export-ITGlueModuleSettings
     }
-    if($datacenter) {
-        Add-ITGlueBaseURI -data_center $datacenter
-    }
-    Export-ITGlueModuleSettings
 }
 
 try {
-    [void](Get-ITGlueContacts -ErrorAction Stop)
-} catch{
-    Write-Error 'Your API key is not valid.'
+    Get-ITGlueBaseURI -ErrorAction Stop
+    if($ReplaceDataCenter) {
+        Add-ITGlueBaseURI -data_center $DataCenter
+        Export-ITGlueModuleSettings
+    }
+} catch {
+    if($DataCenter) {
+        Add-ITGlueBaseURI -data_center $DataCenter
+        Export-ITGlueModuleSettings
+    }
+}
+
+try {
+    Get-ITGlueContacts -ErrorAction Stop
+} catch {
+    Write-Error "Unable to connect to the API: $_"
 }
