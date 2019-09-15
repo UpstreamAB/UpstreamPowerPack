@@ -14,7 +14,7 @@ Param(
     [Parameter(Mandatory=$true)]
     [Long]$FlexibleAssetTypeID
     [Parameter(Mandatory=$true)]
-    [String]$SubDomain = 'upstream-demo'
+    [String]$SubDomain
 )
 
 Write-Verbose "$(Get-Date -format G) BEGIN NEW SESSION OF VMHOST (VMWARE) -----------------------------------------------"
