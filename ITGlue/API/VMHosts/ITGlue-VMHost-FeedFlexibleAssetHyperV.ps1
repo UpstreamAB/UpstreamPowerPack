@@ -1,6 +1,12 @@
-#Requires -Version 3
-#Requires -Modules @{ ModuleName="ITGlueAPI"; ModuleVersion="2.0.7" }
+# Script name: ITGlue-VMHost-FeedFlexibleAssetHyperV.ps1
+# Script type: Powershell
+# Script description: Updates IT Glue with infomation from Webroot
+# Dependencies: Powershell 3.0, ITGluePowerShell Wrapper
+# Script maintainer: powerpack@upstream.se
+# https://en.upstream.se/powerpack/
+# --------------------------------------------------------------------------------------------------------------------------------
 
+#Requires -Version 3
 
 [cmdletbinding()]
 param(
