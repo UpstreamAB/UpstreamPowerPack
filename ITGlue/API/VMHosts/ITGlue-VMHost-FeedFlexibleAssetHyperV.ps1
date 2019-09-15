@@ -1,7 +1,7 @@
 # Script name: ITGlue-VMHost-FeedFlexibleAssetHyperV.ps1
 # Script type: Powershell
-# Script description: Updates IT Glue with infomation from Webroot
-# Dependencies: Powershell 3.0, ITGluePowerShell Wrapper
+# Script description: Updates IT Glue with infomation from a Hyper-V host.
+# Dependencies: Powershell 3.0, ITGluePowerShell Wrapper, Windows OS with Hyper-V enabled.
 # Script maintainer: powerpack@upstream.se
 # https://en.upstream.se/powerpack/
 # --------------------------------------------------------------------------------------------------------------------------------
