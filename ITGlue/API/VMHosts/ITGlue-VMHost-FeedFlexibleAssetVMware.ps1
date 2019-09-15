@@ -643,6 +643,7 @@ foreach($VMhost in Get-VMHost) {
                     'vm-guests-bios-settings' = $extractedData.'vm-guests-bios-settings'
                     'assigned-virtual-switches-and-ip-information' = $extractedData.'assigned-virtual-switches-and-ip-information'
                     'force-new-revision-next-sync' = $extractedData.'force-new-revision-next-sync'
+                    'flexible-asset-release-information' = 'v0.8 2019-09-14'
                 }
             }
         }
