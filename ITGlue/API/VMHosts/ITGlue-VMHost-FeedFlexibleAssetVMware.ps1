@@ -1,8 +1,8 @@
 
 # Script name: ITGlue-VMHost-FeedFlexibleAssetVMware.ps1
 # Script type: Powershell
-# Script description: Creates a custom Flexible Asset called "VM Host". Use "ITGlue-VMHost-CreateFlexibleAsset.ps1" to update.
-# Dependencies: Powershell 3.0
+# Script description: Updates IT Glue VM host Flexible Asset with information from a VMware host.
+# Dependencies: Powershell 3.0, ITGluePowerShell Wrapper, Windows OS with vCenter, valid ESX license.
 # Script maintainer: powerpack@upstream.se
 # https://en.upstream.se/powerpack/
 # --------------------------------------------------------------------------------------------------------------------------------
