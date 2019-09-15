@@ -1,6 +1,6 @@
 # Script name: ITGlue-Webroot-CreateFlexibleAsset.ps1
 # Script type: Powershell
-# Script description: Creates a custom Flexible Asset called "Webroot". Run this once. Schedule "ITGlue-Webroot-FeedFlexibleAsset.ps1" once a day to update.
+# Script description: Creates a custom Flexible Asset called "Webroot". Schedule "ITGlue-Webroot-FeedFlexibleAsset.ps1" once a day to update.
 # Dependencies: Powershell 3.0
 # Script maintainer: powerpack@upstream.se
 # https://en.upstream.se/powerpack/
