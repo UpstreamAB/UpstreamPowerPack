@@ -1,3 +1,11 @@
+# Script name: Install-And-Activate-ITGlue-Module.ps1
+# Script type: Powershell
+# Script description: Install and activate the IT Glue API Powershell module on a Windows machine.
+# Dependencies: Powershell 3.0
+# Script maintainer: powerpack@upstream.se
+# https://en.upstream.se/powerpack/
+# --------------------------------------------------------------------------------------------------------------------------------
+
 [cmdletbinding(DefaultParameterSetName='NotReplace')]
 param(
     [Parameter(ParameterSetName='Replace', Mandatory=$true)]
