@@ -1,4 +1,3 @@
-
 # Script name: ITGlue-VMHost-FeedFlexibleAssetVMware.ps1
 # Script type: Powershell
 # Script description: Updates IT Glue "VM Host" Flexible Asset with information from a VMware host.
@@ -7,6 +6,8 @@
 # https://en.upstream.se/powerpack/
 # --------------------------------------------------------------------------------------------------------------------------------
 #Requires -Version 3
+
+using namespace System.Collections.Generic
 
 [CmdletBinding()]
 Param(
@@ -19,33 +20,40 @@ Param(
     [Parameter(Mandatory=$true)]
     [Long]$OrganizationID,
     [Parameter(Mandatory=$true)]
-    [Long]$FlexibleAssetTypeID
+    [Long]$FlexibleAssetTypeID,
     [Parameter(Mandatory=$true)]
     [String]$SubDomain
 )
 
 Write-Verbose "$(Get-Date -format G) BEGIN NEW SESSION OF VMHOST (VMWARE) -----------------------------------------------"
 
+# Store response for logging in verbose output
 $loggingObject = @{}
 
 try{
-    Write-Verbose "$(Get-Date -format G)Import module ITGlueAPI."
+    # Try to import the IT Glue API module
+    Write-Verbose "$(Get-Date -format G) Import module ITGlueAPI."
     Import-Module ITGlueAPI -ErrorAction Stop
-} catch {
-    Write-Error "Unable to import the module ITGlueAPI: $_. The script will not continue."
-    return
-}
 
-# Connect to ESXi
-try {
+    # Connect to ESXi
     Write-Verbose "$(Get-Date -format G) Connecting to $vCenter."
     $loggingObject['Connection'] = Connect-VIServer -Server $vCenter -User $UserName -Password $Password -Force
     Write-Verbose "$(Get-Date -format G) $($loggingObject.Connection | Select Name, Port, IsConnected, User)"
     Write-Verbose "$(Get-Date -format G) Successfully conncected."
-} catch {
+
+# Import error
+} catch [System.IO.FileNotFoundException] {
+    Write-Error "Unable to import the module ITGlueAPI: $_. The script will not continue."
+    return
+# Connection error
+} catch [VMware.VimAutomation.Sdk.Types.V1.ErrorHandling.VimException.ViServerConnectionException] {
     Write-Error "Failed to connect to server: $_. The script will not continue."
     return
+# Connection error
+} catch [VMware.VimAutomation.ViCore.Types.V1.ErrorHandling.InvalidLogin] {
+    Write-Error "Failed to login to server: $_. The script will not continue."
 }
+
 
 # Page tracker for configurations
 Write-Verbose "$(Get-Date -format G) Setting page number (configurations) to 1."
@@ -88,6 +96,10 @@ Write-Verbose "$(Get-Date -format G) ITGlueFlexibleAssets now has $($ITGlueFlexi
 Write-Verbose "$(Get-Date -format G) Creating array to store all final asset data for all assets."
 $assetData = @()
 
+# Store all related items here
+Write-Verbose "$(Get-Date -format G) Creating hashtable to store all related items."
+$relatedData = @{}
+
 # Get all vm hosts
 Write-Verbose "$(Get-Date -format G) Looping all VM hosts."
 foreach($VMhost in Get-VMHost) {
@@ -118,7 +130,7 @@ foreach($VMhost in Get-VMHost) {
     }
 
 
-    # Add data to hash
+    # Collect all host and guest data
     Write-Verbose "$(Get-Date -format G) Asking the host for its network data."
     $HostNetwork = Get-VMHostNetwork $VMHost
     Write-Verbose "$(Get-Date -format G) Asking the host for its hardware data."
@@ -127,6 +139,8 @@ foreach($VMhost in Get-VMHost) {
     $VirtualSwitches = $VMHost | Get-VirtualSwitch
     Write-Verbose "$(Get-Date -format G) Asking the host for its virutal machines."
     $VMs = $VMHost | Get-VM
+    Write-Verbose "$(Get-Date -format G) Asking the host for virutal machines' NICs."
+    $VmNICs = $VMs | Get-NetworkAdapter
     Write-Verbose "$(Get-Date -format G) Asking the host for its storage data."
     $Storage = $VMHost | Get-VMHostStorage
 
@@ -135,7 +149,7 @@ foreach($VMhost in Get-VMHost) {
 
     # Used for configuration matching
     $IP = $HostNetwork.VirtualNic.IP
-    Write-Verbose "$(Get-Date -format G) IP address: $IP (used for matching)."
+    Write-Verbose "$(Get-Date -format G) IP address: $IP (not used for matching)."
     $MAC = $HostNetwork.VirtualNic.MAC
     Write-Verbose "$(Get-Date -format G) MAC address: $MAC (used for matching)."
 
@@ -146,7 +160,7 @@ foreach($VMhost in Get-VMHost) {
     $configuration = $null
     # Match host with IT Glue configuration
     Write-Verbose "$(Get-Date -format G) Looking up the configuration in all retrieved."
-    $configuration = $ITGlueConfigurations | Where {$_.attributes.'mac-address' -eq $MAC -and $_.attributes.'primary-ip' -eq $IP}
+    $configuration = $ITGlueConfigurations | Where {$_.attributes.'mac-address' -eq $MAC}
 
     while(-not $configuration -and $page_number_conf -le $apicall_conf.meta.'total-pages' -and $apicall_conf.links.next) {
         Write-Verbose "$(Get-Date -format G) It was not found and there are more configurations."
@@ -162,7 +176,7 @@ foreach($VMhost in Get-VMHost) {
 
         # Try matching again
         Write-Verbose "$(Get-Date -format G) Looking for the configuration again."
-        $configuration = $ITGlueConfigurations | Where {$_.attributes.'mac-address' -eq $MAC -and $_.attributes.'primary-ip' -eq $IP}
+        $configuration = $ITGlueConfigurations | Where {$_.attributes.'mac-address' -eq $MAC}
     }
 
     # Did we get a match?
@@ -236,7 +250,7 @@ foreach($VMhost in Get-VMHost) {
     while(-not $flexibleAsset -and $page_number_asset -le $apicall_asset.meta.'total-pages' -and $apicall_asset.links.next) {
         Write-Verbose "$(Get-Date -format G) It was not found and there are more flexible assets."
         Write-Verbose "$(Get-Date -format G) Asking for 100 more flexible assets from IT Glue."
-        $apicall_asset = Get-ITGlueFlexibleAssets -page_size 100 -filter_organization_id $OrganizationID -filter_flexible_asset_type_id $FlexibleAssetTypeID -page_number ($page_number_asset++)
+        $apicall_asset = Get-ITGlueFlexibleAssets -page_size 1000 -filter_organization_id $OrganizationID -filter_flexible_asset_type_id $FlexibleAssetTypeID -page_number ($page_number_asset++)
         $ITGlueFlexibleAssets += $apicall_asset.data
         Write-Verbose "$(Get-Date -format G) ITGlueFlexibleAssets now has $($ITGlueFlexibleAssets.Count) flexible assets."
 
@@ -285,15 +299,22 @@ foreach($VMhost in Get-VMHost) {
     Write-Verbose "$(Get-Date -format G) URL: $url."
     $vmLinks = @{}
 
+    Write-Verbose "$(Get-Date -format G) Adding host as key to related items."
+    $relatedData[$VMhost.Name] = @{}
+    $relatedData[$VMhost.Name]['flexibleAssetId'] = $extractedData.AssetId
+    $relatedData[$VMhost.Name]['data'] = [Collections.Generic.List[Object]]::new()
+
     foreach($VM in $VMs) {
         Write-Verbose "$(Get-Date -format G) Looking up $($vm.Name) in all retrieved configuration."
-        $vmLinks[$VM.Name] = @{data = $ITGlueConfigurations | Where {$_.attributes.name -like "*$($VM.Name)*"}}
+        $vmLinks[$VM.Name] = @{}
+        $vmLinks[$VM.Name]['MAC'] = $VM | Get-NetworkAdapter
+        $vmLinks[$VM.Name]['data'] = $ITGlueConfigurations | Where {$_.attributes.'mac-address' -eq $vmLinks[$VM.Name]['MAC'].MacAddress}
 
-        while(-not $vmLinks[$VM.Name].data -and $page_number_conf -le $apicall_conf.meta.'total-pages' -and $apicall_conf.links.next) {
+        while(-not $vmLinks[$VM.Name]['data'] -and $page_number_conf -le $apicall_conf.meta.'total-pages' -and $apicall_conf.links.next) {
             Write-Verbose "$(Get-Date -format G) It was not found and there are more configurations."
             try {
                 Write-Verbose "$(Get-Date -format G) Asking for 100 more configurations from IT Glue."
-                $apicall_conf = Get-ITGlueConfigurations -page_size 100 -filter_organization_id $OrganizationID -page_number ($page_number_conf++) -ErrorAction Stop
+                $apicall_conf = Get-ITGlueConfigurations -page_size 1000 -filter_organization_id $OrganizationID -page_number ($page_number_conf++) -ErrorAction Stop
                 $ITGlueConfigurations += $apicall_conf.data
                 Write-Verbose "$(Get-Date -format G) ITGlueConfigurations now has $($ITGlueConfigurations.Count) configurations."
             } catch {
@@ -303,13 +324,22 @@ foreach($VMhost in Get-VMHost) {
 
             # Try matching again
             Write-Verbose "$(Get-Date -format G) Looking up the configuration in all retreived."
-            $vmLinks[$VM.Name] = @{data = $ITGlueConfigurations | Where {$_.attributes.name -like "*$($VM.Name)*"}}
+            $vmLinks[$VM.Name]['data'] = $ITGlueConfigurations | Where {$_.attributes.'mac-address' -eq $vmLinks[$VM.Name]['MAC'].MacAddress}
         }
 
-        if($vmLinks[$VM.Name].data) {
+        if($vmLinks[$VM.Name]['data']) {
             Write-Verbose "$(Get-Date -format G) Agent was matched!"
-            $vmLinks[$VM.Name]['link'] = '<a href="{0}/{1}/configurations/{2}">{3}</a>' -f $url, $vmLinks[$VM.Name].data.attributes.'organization-id', $vmLinks[$VM.Name].data.id, $VM.name
-            Write-Verbose "$(Get-Date -format G) Link: $($vmLinks[$VM.Name]['link'])"
+            $vmLinks[$VM.Name]['link'] = '<a href="{0}/{1}/configurations/{2}">{3}</a>' -f $url, $vmLinks[$VM.Name]['data'].attributes.'organization-id', $vmLinks[$VM.Name]['data'].id, $VM.name
+
+            $relatedData[$VMhost.Name]['data'].Add(
+                @{
+                    type = 'related_items'
+                    attributes = @{
+                        'destination_id' = $vmLinks[$VM.Name]['data'].id
+                        'destination_type' = 'Configuration'
+                    }
+                }
+            )
         } else {
             Write-Verbose "$(Get-Date -format G) Agent was not matched. Will use agent name instead."
             $vmLinks[$VM.Name]['link'] = $VM.Name
@@ -649,50 +679,52 @@ foreach($VMhost in Get-VMHost) {
         }
         Write-Verbose "$(Get-Date -format G) [16/16] Constructing flexible asset data done."
 
-        $update = $false
+        $updateAssetData = $false
 
         Write-Verbose "$(Get-Date -format G) Compare old data with new data to find any changes..."
         if($flexibleAsset.attributes.traits.'force-new-revision-next-sync' -eq 'Yes') {
             Write-Verbose "$(Get-Date -format G) Force update detected. Will update asset."
-            $update = $true
+            $updateAssetData = $true
         } elseif($this_assetData.attributes.traits.'vm-host-hardware-information'.replace("`n","").replace("`r","") -ne ($flexibleAsset.attributes.traits.'vm-host-hardware-information' -replace"`n","" -replace"`r","")) {
             Write-Verbose "$(Get-Date -format G) Change detected: vm host hardware information. Will update asset."
-            $update = $true
+            $updateAssetData = $true
         } elseif($this_assetData.attributes.traits.'version' -ne $flexibleAsset.attributes.traits.'version') {
             Write-Verbose "$(Get-Date -format G) Change detected: verison. Will update asset."
-            $update = $true
+            $updateAssetData = $true
         } elseif($this_assetData.attributes.traits.'disk-information'.replace("`n","").replace("`r","") -ne ($flexibleAsset.attributes.traits.'disk-information' -replace"`n","" -replace"`r","")) {
             Write-Verbose "$(Get-Date -format G) Change detected: disk information. Will update asset."
-            $update = $true
+            $updateAssetData = $true
         } elseif($this_assetData.attributes.traits.'virtual-switches'.replace("`n","").replace("`r","") -ne ($flexibleAsset.attributes.traits.'virtual-switches' -replace"`n","" -replace"`r","")) {
             Write-Verbose "$(Get-Date -format G) Change detected: virutal switches. Will update asset."
-            $update = $true
+            $updateAssetData = $true
         } elseif($this_assetData.attributes.traits.'current-number-of-vm-guests-on-this-vm-host' -ne ($flexibleAsset.attributes.traits.'current-number-of-vm-guests-on-this-vm-host')) {
             Write-Verbose "$(Get-Date -format G) Change detected: number of vm guests. Will update asset."
-            $update = $true
+            $updateAssetData = $true
         } elseif($this_assetData.attributes.traits.'vm-guest-names-and-information'.replace("`n","").replace("`r","") -ne ($flexibleAsset.attributes.traits.'vm-guest-names-and-information' -replace"`n","" -replace"`r","")) {
             Write-Verbose "$(Get-Date -format G) Change detected: vm guest name and information. Will update asset."
-            $update = $true
+            $updateAssetData = $true
         } elseif($this_assetData.attributes.traits.'vm-guest-virtual-disk-paths'.replace("`n","").replace("`r","") -ne ($flexibleAsset.attributes.traits.'vm-guest-virtual-disk-paths' -replace"`n","" -replace"`r","")) {
             Write-Verbose "$(Get-Date -format G) Change detected: vm guest virutal disk paths. Will update asset."
-            $update = $true
+            $updateAssetData = $true
         } elseif($this_assetData.attributes.traits.'vm-guests-snapshot-information'.replace("`n","").replace("`r","") -ne ($flexibleAsset.attributes.traits.'vm-guests-snapshot-information' -replace"`n","" -replace"`r","")) {
             Write-Verbose "$(Get-Date -format G) Change detected: vm guest snapshot information. Will update asset."
-            $update = $true
+            $updateAssetData = $true
         } elseif($this_assetData.attributes.traits.'vm-guests-bios-settings'.replace("`n","").replace("`r","") -ne ($flexibleAsset.attributes.traits.'vm-guests-bios-settings' -replace"`n","" -replace"`r","")) {
             Write-Verbose "$(Get-Date -format G) Change detected: vm guest bios settings. Will update asset."
-            $update = $true
+            $updateAssetData = $true
         } elseif($this_assetData.attributes.traits.'assigned-virtual-switches-and-ip-information'.replace("`n","").replace("`r","") -ne ($flexibleAsset.attributes.traits.'assigned-virtual-switches-and-ip-information' -replace"`n","" -replace"`r","")) {
             Write-Verbose "$(Get-Date -format G) Change detected: assigned virtual switches and ip information. Will update asset."
-            $update = $true
+            $updateAssetData = $true
         }
 
-        if($update) {
+        if($updateAssetData) {
             Write-Verbose "$(Get-Date -format G) Adding this (host: $($VMhost.Name)) asset data to final asset data for upload."
             $assetData += $this_assetData
         } else {
             Write-Verbose "$(Get-Date -format G) No change detected. This asset will not be updated."
         }
+
+        Write-Verbose "$(Get-Date -format G) Matching VMs against configurations for related items."
     }
     Write-Verbose "$(Get-Date -format G) ####### End host $($VMHost.Name) #######"
 }
@@ -718,5 +750,95 @@ if(0 -ne $assetData.Count){
     Write-Verbose "$(Get-Date -format G) No flexible assets to update."
 }
 
+$loggingObject['relatedItemsRemove'] = @{}
+$loggingObject['relatedItems'] = @{}
+
+foreach($key in $relatedData.Keys) {
+    Write-Verbose "$(Get-Date -format G) Updating related items for host: $key"
+
+    $loggingObject['relatedItemsRemove'][$key] = [List[Object]]::new()
+    $loggingObject['relatedItems'][$key] = [List[Object]]::new()
+
+    $file = '{0}\vmware-related-items-{1}.txt' -f $PSScriptRoot, $key
+
+    if(Test-Path $file) {
+        Write-Verbose "$file found, importing last response."
+
+        Write-Verbose "Creating a list of old related items from file..."
+        $oldRelatedItems = Get-Content $file | ConvertFrom-Json
+        Write-Verbose "Done."
+
+
+        Write-Verbose "Comparing with related items..."
+        $relatedItemsRemove = [List[Object]]::new()
+
+        foreach($oldId in $oldRelatedItems.attributes.'destination-id') {
+            if($relatedData[$key]['data'].attributes.destination_id -notcontains $oldId) {
+                Write-Verbose "$($oldId) is no longer on the host and will be removed."
+
+                $relatedItemsRemove.Add(
+                    @{
+                        type = 'related_items'
+                        attributes = @{
+                            id = $oldId
+                        }
+                    }
+                )
+            }
+        }
+
+        Write-Verbose "Done comparing related items."
+
+        if($relatedItemsRemove) {
+            Write-Verbose "Removing the old related items..."
+
+            $body = @{}
+
+            $body += @{'data'= $relatedItemsRemove}
+
+            $body = ConvertTo-Json -InputObject $body -Depth $ITGlue_JSON_Conversion_Depth
+
+            $resourceUriRelatedItemsRemove = '/{0}/{1}/relationships/related_items' -f 'flexible_assets', $flexible_asset_id
+
+            try {
+                $ITGlue_Headers.Add('x-api-key', (New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList 'N/A', $ITGlue_API_Key).GetNetworkCredential().Password)
+                $loggingObject['relatedItemsRemove'][$key].Add((Invoke-RestMethod -method 'DELETE' -uri ($ITGlue_Base_URI + $resourceUriRelatedItemsRemove) -headers $ITGlue_Headers `
+                    -body $body -ErrorAction Stop))
+                Write-Verbose "Old related items removed."
+            } catch {
+                Write-Error $_
+            } finally {
+                [void] ($ITGlue_Headers.Remove('x-api-key')) # Quietly clean up scope so the API key doesn't persist
+            }
+        }
+    }
+
+    Write-Verbose "Begin uploading related items (because there is not endpoint to check current ones)..."
+
+    $body = @{}
+
+    $body += @{'data'= $relatedData[$key]['data']}
+
+    $body = ConvertTo-Json -InputObject $body -Depth $ITGlue_JSON_Conversion_Depth
+
+    $resourceUriRelatedItems = '/{0}/{1}/relationships/related_items' -f 'flexible_assets', $relatedData[$key]['flexibleAssetId']
+
+    try {
+        $ITGlue_Headers.Add('x-api-key', (New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList 'N/A', $ITGlue_API_Key).GetNetworkCredential().Password)
+        $loggingObject['relatedItems'][$key].Add((Invoke-RestMethod -method 'POST' -uri ($ITGlue_Base_URI + $resourceUriRelatedItems) -headers $ITGlue_Headers `
+            -body $body -ErrorAction Stop))
+        Write-Verbose "New related items updated."
+    } catch {
+        Write-Error $_
+    } finally {
+        [void] ($ITGlue_Headers.Remove('x-api-key')) # Quietly clean up scope so the API key doesn't persist
+    }
+
+     $loggingObject['relatedItems'][$key].data | ConvertTo-Json -Depth 100 | Out-File $file -Force
+}
+
+
 Write-Verbose "$(Get-Date -format G) Disconnecting."
 Disconnect-VIServer -Server $loggingObject.Connection -Confirm:$false
+
+return $loggingObject
