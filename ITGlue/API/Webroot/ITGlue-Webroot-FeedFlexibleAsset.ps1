@@ -80,9 +80,9 @@ function Format-WebrootData {
             # Keep asking until there are not more endpoints
             while($endpoints.TotalAvailable -ne 0) {
                 # All active (billed) endpoints
-                $endpoints_active += $endpoints.Endpoints | Where Deactivated -eq $false | Select-Object -ExpandProperty HostName
+                $endpoints_active += $endpoints.Endpoints | Where Deactivated -eq $false
                 # All inactive (not billed) endpoints
-                $endpoints_inactive += $endpoints.Endpoints | Where Deactivated -eq $true | Select-Object -ExpandProperty HostName
+                $endpoints_inactive += $endpoints.Endpoints | Where Deactivated -eq $true
                 # Get next set of data (if any)
                 $endpoints = Invoke-RestMethod -URI ('https://unityapi.webrootcloudav.com/service/api/console/gsm/{0}/sites/{1}/endpoints?pageSize=50&pageNr={2}' -f $global_gsm_key, $webroot_data.siteid, ++$pageNr) -Headers $headers
             }
@@ -158,12 +158,14 @@ function Merge-ITGlueWebrootData {
             $formated_inactive_endpoints = @()
 
             foreach($config in $formated_itglue_data.configurations) {
-                # If endpoint is listed as active
-                if($formated_webroot_data.endpoints_active -contains $config.attributes.name) {
-                    $formated_active_endpoints += $config.id
-                # If endpoint is listed as inactive
-                } elseif($formated_webroot_data.endpoints_inactive -contains $config.attributes.name) {
-                    $formated_inactive_endpoints += $config.id
+                if($config.attributes.'mac-address') {
+                    # If endpoint is listed as active
+                    if($formated_webroot_data.endpoints_active.MACAddress -contains $config.attributes.'mac-address'.Replace('-',':')) {
+                        $formated_active_endpoints += $config.id
+                    # If endpoint is listed as inactive
+                    } elseif($formated_webroot_data.endpoints_inactive.MACAddress -contains $config.attributes.'mac-address'.Replace('-',':')) {
+                        $formated_inactive_endpoints += $config.id
+                    }
                 }
             }
         }
