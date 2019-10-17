@@ -692,6 +692,12 @@ foreach($VMhost in Get-VMHost) {
         } elseif($this_assetData.attributes.traits.'version' -ne $flexibleAsset.attributes.traits.'version') {
             Write-Verbose "$(Get-Date -format G) Change detected: verison. Will update asset."
             $updateAssetData = $true
+        } elseif($this_assetData.attributes.traits.'cpu-cores' -ne $flexibleAsset.attributes.traits.'cpu-cores'.TrimEnd('.0')) {
+            Write-Verbose "$(Get-Date -format G) Change detected: CPU cores. Will update asset."
+            $updateAssetData = $true
+        } elseif($this_assetData.attributes.traits.'ram-gb' -ne $flexibleAsset.attributes.traits.'ram-gb'.TrimEnd('.0')) {
+            Write-Verbose "$(Get-Date -format G) Change detected: RAM (GB). Will update asset."
+            $updateAssetData = $true
         } elseif($this_assetData.attributes.traits.'disk-information'.replace("`n","").replace("`r","") -ne ($flexibleAsset.attributes.traits.'disk-information' -replace"`n","" -replace"`r","")) {
             Write-Verbose "$(Get-Date -format G) Change detected: disk information. Will update asset."
             $updateAssetData = $true

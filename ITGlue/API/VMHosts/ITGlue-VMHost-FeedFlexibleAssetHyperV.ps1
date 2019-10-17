@@ -346,6 +346,8 @@ $asset_data = @{
             'vm-guests-bios-settings' = $vmBIOSSettingsHTML
             # NIC and IP assigned to each VM
             'assigned-virtual-switches-and-ip-information' = $guestNICsIPsHTML
+            # Version
+            'flexible-asset-release-information' = 'v1.0 2019-10-31'
         }
     }
 }
