@@ -190,6 +190,10 @@ function Merge-ITGlueWebrootData {
             $update = $true
         } elseif($formated_inactive_endpoints | ? {$formated_itglue_data.oldData.'inactive-configurations-with-webroot' -notcontains $_}) {
             $update = $true
+        } elseif($formated_itglue_data.oldData.'active-configurations-with-webroot' | ? {$formated_active_endpoints -notcontains $_}) {
+            $update = $true
+        } elseif($formated_itglue_data.oldData.'inactive-configurations-with-webroot' | ? {$formated_inactive_endpoints -notcontains $_}) {
+            $update = $true
         }
 
 
@@ -217,6 +221,9 @@ function Merge-ITGlueWebrootData {
 
                         # Update time logging
                         'last-update'                          = $(Get-date -UFormat '%Y-%m-%d %T')
+
+                        # Keeping relase info
+                        'flexible-asset-release-information'  = 'v1.0 2019-10-31'
                     }
                 }
             }
