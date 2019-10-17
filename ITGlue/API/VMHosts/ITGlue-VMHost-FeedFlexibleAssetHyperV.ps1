@@ -470,7 +470,7 @@ if($update) {
                 $ITGlue_Headers.Add('x-api-key', (New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList 'N/A', $ITGlue_API_Key).GetNetworkCredential().Password)
                 $response['removed_related_items'] = Invoke-RestMethod -method 'DELETE' -uri ($ITGlue_Base_URI + $resource_uri_related_items_remove) -headers $ITGlue_Headers `
                     -body $body -ErrorAction Stop
-                Write-Verbose "Old realted items removed."
+                Write-Verbose "Old related items removed."
             } catch {
                 Write-Error $_
             } finally {
