@@ -52,6 +52,7 @@ try{
 # Connection error
 } catch [VMware.VimAutomation.ViCore.Types.V1.ErrorHandling.InvalidLogin] {
     Write-Error "Failed to login to server: $_. The script will not continue."
+    return
 }
 
 
