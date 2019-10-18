@@ -1,7 +1,7 @@
 # Script name: ITGlue-Webroot-CreateFlexibleAsset.ps1
 # Script type: Powershell
 # Script description: Creates a custom Flexible Asset called "Webroot". Schedule "ITGlue-Webroot-FeedFlexibleAsset.ps1" once a day to update.
-# Dependencies: Powershell 3.0
+# Dependencies: Powershell 3.0, ITGlueAPI module
 # Script maintainer: powerpack@upstream.se
 # https://en.upstream.se/powerpack/
 # --------------------------------------------------------------------------------------------------------------------------------
@@ -185,10 +185,35 @@ $data = @{
                         show_in_list = $true
                         default_value = ""
                     }
+                },
+                @{
+                    type = "flexible_asset_fields"
+                    attributes = @{
+                        order = 14
+                        name = "This automated documentation is powered by Upstream Power Pack"
+                        kind = "Header"
+                        required = $false
+                        use_for_title = $false
+                        expiration = $false
+                        show_in_list = $true
+                        default_value = ""
+                    }
+                },
+                @{
+                    type = "flexible_asset_fields"
+                    attributes = @{
+                        order = 15
+                        name = "Flexible Asset release information"
+                        kind = "Text"
+                        required = $true
+                        use_for_title = $false
+                        expiration = $false
+                        show_in_list = $true
+                        default_value = "v0.8 2019-09-14"
+                    }
                 }
             )
         }
     }
 }
-
 New-ITGlueFlexibleAssetTypes -data $data

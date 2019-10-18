@@ -278,7 +278,7 @@ No"
                         use_for_title = $false
                         expiration = $false
                         show_in_list = $true
-                        default_value = "v1.0 2019-10-31"
+                        default_value = "v1.0.0 2019-10-31"
                     }
                 }
             )

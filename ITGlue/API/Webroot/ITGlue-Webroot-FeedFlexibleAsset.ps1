@@ -223,7 +223,7 @@ function Merge-ITGlueWebrootData {
                         'last-update'                          = $(Get-date -UFormat '%Y-%m-%d %T')
 
                         # Keeping relase info
-                        'flexible-asset-release-information'  = 'v1.0 2019-10-31'
+                        'flexible-asset-release-information'  = 'v1.0.0 2019-10-31'
                     }
                 }
             }

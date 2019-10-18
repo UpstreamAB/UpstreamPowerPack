@@ -347,7 +347,7 @@ $asset_data = @{
             # NIC and IP assigned to each VM
             'assigned-virtual-switches-and-ip-information' = $guestNICsIPsHTML
             # Version
-            'flexible-asset-release-information' = 'v1.0 2019-10-31'
+            'flexible-asset-release-information' = 'v1.0.0 2019-10-31'
         }
     }
 }
