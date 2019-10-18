@@ -1,7 +1,7 @@
 # Script name: ITGlue-VMHost-CreateFlexibleAsset.ps1
 # Script type: Powershell
 # Script description: Creates a custom Flexible Asset called "VM Host". To be used with "ITGlue-VMHost-FeedFlexibleAssetHyperV.ps1" & "ITGlue-VMHost-FeedFlexibleAssetVMware.ps1".
-# Dependencies: Powershell 3.0
+# Dependencies: Powershell 3.0, ITGlueAPI module
 # Script maintainer: powerpack@upstream.se
 # https://en.upstream.se/powerpack/
 # --------------------------------------------------------------------------------------------------------------------------------
@@ -34,7 +34,7 @@ $data = @{
                     type = "flexible_asset_fields"
                     Attributes = @{
                         order = 2
-                        Name = "VM host configuration"
+                        Name = "VM host information"
                         kind = "Header"
                         required = $false
                         use_for_title = $false
@@ -66,7 +66,7 @@ $data = @{
                         expiration = $false
                         show_in_list = $true
                         default_value = "Hyper-V host
-VMware"
+VMware host"
                     }
                 },
                 @{
@@ -267,11 +267,22 @@ No"
                         expiration = $false
                         show_in_list = $true
                     }
+                },
+                @{
+                    type = "flexible_asset_fields"
+                    Attributes = @{
+                        order = 20
+                        Name = "Flexible Asset release information"
+                        kind = "Text"
+                        required = $false
+                        use_for_title = $false
+                        expiration = $false
+                        show_in_list = $true
+                        default_value = "v1.0 2019-10-31"
+                    }
                 }
             )
         }
     }
 }
-
-
 New-ITGlueFlexibleAssetTypes -data $data
