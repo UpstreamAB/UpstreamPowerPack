@@ -1,3 +1,11 @@
+# Script name: PULSEWAY-WindowsServer-RemoveServicesToPulsewayMonitoring.ps1
+# Script type: Powershell
+# Script description: Register Auto started Windows Services to Pulseway Services monitoring excempt for a "notmach" black list.
+# Dependencies: Windows Server
+# Script maintainer: powerpack@upstream.se
+# https://en.upstream.se/powerpack/
+# --------------------------------------------------------------------------------------------------------------------------------
+
 # Google Chrome Update Service
 $ServiceName = 'gupdate'
 $ServiceIndex = ((Get-ItemProperty 'HKLM:\SOFTWARE\MMSOFT Design\PC Monitor\Services\').PSobject.Properties | Where {$_.Value -eq $ServiceName}).Name
