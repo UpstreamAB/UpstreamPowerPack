@@ -1,4 +1,4 @@
-# Script name: PULSEWAY-Monitor-RemoveServicesToPulsewayMonitoring.ps1
+# Script name: Monitor-RemoveServicesToPulsewayMonitoring.ps1
 # Script type: Powershell
 # Script description: Register Auto started Windows Services to Pulseway Services monitoring excempt for a "notmach" black list.
 # Dependencies: Windows Server
