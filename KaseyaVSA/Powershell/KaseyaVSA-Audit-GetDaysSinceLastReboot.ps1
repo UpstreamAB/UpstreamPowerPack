@@ -1,5 +1,5 @@
 # Script name: KaseyaVSA-Audit-GetDaysSinceLastReboot.ps1
-# Related Kaseya Agent Procedure: "Audit - Windows 10 - Get Days Since Last Reboot"
+# Related Kaseya Agent Procedure: "User Experience - Windows 10 - Inform User To Reboot The Computer"
 # Script description: Get the number of days since last real system reboot, not just when the system was shut down or hibernated.
 # To be used in pop-up messages instructing customers to reboot.
 # Upload this Powershell script to your Kaseya Agent Procedures folder "VSASharedFiles\UpstreamPowerPack\Powershell".
