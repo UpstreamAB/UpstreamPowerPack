@@ -1,1 +1,1 @@
-Placeholder for Evenlt Logs to be imported in Pulseway.
+Placeholder for Evenlt Logs Filters to be imported in Pulseway.
