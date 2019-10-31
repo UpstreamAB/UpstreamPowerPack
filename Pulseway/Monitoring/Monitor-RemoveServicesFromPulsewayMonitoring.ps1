@@ -1,4 +1,4 @@
-# Script name: Monitor-RemoveServicesToPulsewayMonitoring.ps1
+# Script name: Monitor-RemoveServicesFromPulsewayMonitoring.ps1
 # Script type: Powershell
 # Script description: Remove named Auto started Windows Services from Pulseway Services monitoring.
 # Dependencies: Windows Server
