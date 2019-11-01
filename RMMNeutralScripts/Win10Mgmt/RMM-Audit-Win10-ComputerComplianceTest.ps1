@@ -1,7 +1,7 @@
 # Script name: RMM-Audit-Win10-ComputerComplianceTest.ps1
 # Script type: Powershell
 # Script description: A computer compliance test to be used for pro-actively catch and address problems.
-# Dependencies: Windows 10, PSWINUpate module
+# Dependencies: Windows 10, PSWINUpate module, Nuget Provider
 # Script maintainer: powerpack@upstream.se
 # https://en.upstream.se/powerpack/
 # --------------------------------------------------------------------------------------------------------------------------------
@@ -43,17 +43,16 @@ Write-Output "UPSTREAM: Compliance Check: Started $StartDate"
 # At script start the variable $IsComputerCompliant is always "YES".
 $IsComputerCompliant = "YES"
 
-# Checking if PSWinUpdate Powershell module from PSGallery is instatalled on this machine. We need this to test Windows Updates.
+# Checking if NuGet Package Provider and PSWinUpdate Powershell module from PSGallery. We need this to test Windows Updates.
+Write-Output "UPSTREAM: Compliance Check: Checking for required packages."
 
-Write-Output "UPSTREAM: Compliance Check: Checking for PSWinUpdate Powershell module."
-If(-not(Get-InstalledModule PSWinUpdate -ErrorAction silentlycontinue)){
-    Write-Output "UPSTREAM: Compliance Check: Installing PSWinUpdate Powershell module..."
-    Set-PSRepository PSGallery -InstallationPolicy Trusted
-    Install-Module PSWinUpdate -AllowClobber -Confirm:$False -Force
-    Import-Module PSWinUpdate -ErrorAction Stop}
+Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
 
-Else{
-    Write-Output "UPSTREAM: Compliance Check: PSWinUpdate Powershell module already istalled. Continuing."}
+If(-not(Get-InstalledModule PSWindowsUpdate -ErrorAction SilentlyContinue))
+    {
+        Set-PSRepository PSGallery -InstallationPolicy Trusted
+        Install-Module PSWindowsUpdate -AllowClobber -Confirm:$False -Force
+    }
 
 # Test: Check Windows Update status
 # -----------------------------------------------------------------------------------------------------------------------
@@ -61,21 +60,25 @@ Else{
 Write-Output "UPSTREAM: Compliance Check: Windows Update: Scanning for missing Windows Updates."
 
 $updates = Get-WuInstall
-$updatenumber = ($updates.kb).count
+# You could also get the pending reboot status back as False or True. We will not use that option in the current version. We only check if reboot is more than X days below.
+# $RebootRequired = Get-WURebootStatus | Select -Expand RebootREquired
+
+$UpdateNumber = ($Updates.kb).count
 
 Write-Output "UPSTREAM: Compliance Check: Windows Update: Number of missing Windows Updates: $updatenumber"
 
 # Ok, here comes the logic. If this computer are missing more than $AllowedNumberOfMissingPatches Windows Updates the compliance will be set to NO.
-If ($updatenumber -gt $AllowedNumberOfMissingPatches){
+If ($UpdateNumber -gt $AllowedNumberOfMissingPatches){
     Write-Output "UPSTREAM: Compliance Check: Windows Update: Missing more than $AllowedNumberOfMissingPatches Windows Updates: YES"
     Write-Output "UPSTREAM: Compliance Check: Windows Update: Is Windows Update compliant: NO"
-    Write-Output $updates
+    Write-Output $Updates
     $IsComputerCompliant = "NO"}
 
 Else{
     Write-Output "UPSTREAM: Compliance Check: Windows Update: Missing more than $AllowedNumberOfMissingPatches Windows Updates: NO"
     Write-Output "UPSTREAM: Compliance Check: Windows Update: Is Windows Update compliant: YES"
     $IsComputerCompliant = "YES"}
+
 
 # Test: Check Windows Firewall status
 # -----------------------------------------------------------------------------------------------------------------------
@@ -210,19 +213,18 @@ Else{
     Write-Output "UPSTREAM: Compliance Check: Windows Reboot: Reboot more than $AllowedNumberOfDaysWithoutReboot days: NO"
     Write-Output "UPSTREAM: Compliance Check: Windows Reboot: Is Windows last reboot compliant: YES"}
 
-
 # Test: Unexpected shutdowns in the Windows Event Log.
 # -----------------------------------------------------------------------------------------------------------------------
 $UnexpectedShutdownEvents = Get-EventLog -LogName System -EntryType Error -After ([DateTime]::Today.AddDays(-$NumberOfDaysBackLookingForUnexpectedShutdowns))| Where-Object {$_.EventID -eq 6008}
 $NumberOfUnexpectedShutdowns = ($UnexpectedShutdownEvents.EventID).count
-Write-Output "UPSTREAM: Compliance Check: Unexpected Shutdowns: Detected shutdowns whitin $NumberOfDaysBackLookingForUnexpectedShutdowns days: $NumberOfUnexpectedShutdowns"
+Write-Output "UPSTREAM: Compliance Check: Unexpected Shutdowns: Detected shutdowns within $NumberOfDaysBackLookingForUnexpectedShutdowns days: $NumberOfUnexpectedShutdowns"
 
 If ($NumberOfUnexpectedShutdowns -gt $AllowedNumberOfUnexpectedShutdowns){
     Write-Output "UPSTREAM: Compliance Check: Unexpected Shutdowns: More than $AllowedNumberOfUnexpectedShutdowns within $NumberOfDaysBackLookingForUnexpectedShutdowns days: YES"
     Write-Output "UPSTREAM: Compliance Check: Unexpected Shutdowns: Is Unexpected shutdowns compliant: NO"
     $IsComputerCompliant = "NO"
     $UnexpectedShutdownEvents}
-else{
+Else{
     Write-Output "UPSTREAM: Compliance Check: Unexpected Shutdowns: Shutdowns more than $AllowedNumberOfUnexpectedShutdowns within $NumberOfDaysBackLookingForUnexpectedShutdowns days: NO"}
     Write-Output "UPSTREAM: Compliance Check: Unexpected Shutdowns: Is Unexpected shutdowns compliant: YES"
 
@@ -237,7 +239,8 @@ If ($NumberApplicationErrorEvents -gt $AllowedNumberOfapplicationErrors){
     Write-Output "UPSTREAM: Compliance Check: Application Errors: Is Application errors compliant: NO"
     $IsComputerCompliant = "NO"
     $ApplicationErrorEvents}
-else{
+
+Else{
     Write-Output "UPSTREAM: Compliance Check: Application Errors: More than $AllowedNumberOfapplicationErrors within $NumberOfDaysBackLookingForApplicationErrors days: NO"}
     Write-Output "UPSTREAM: Compliance Check: Application Errors: Is Application errors compliant: YES"
 
@@ -250,14 +253,32 @@ Write-Output "UPSTREAM: Compliance Check: Available Disk: Available disk: $FreeS
 If ($FreeSpace -gt $AllowedMinimumDiskFree){
     Write-Output "UPSTREAM: Compliance Check: Available Disk: Less than $AllowedMinimumDiskFree GB: NO"
     Write-Output "UPSTREAM: Compliance Check: Available Disk: Is available disk compliant: YES"}
-else{
+Else{
     Write-Output "UPSTREAM: Compliance Check: Available Disk: Less than $AllowedMinimumDiskFree GB: YES"
     Write-Output "UPSTREAM: Compliance Check: Available Disk: Is available disk compliant: NO"
     $IsComputerCompliant = "NO"}
 
-# End of the line: Compliance Check. It's either YES or NO, nothing in between.
+# End of the line: Compliance Check. It's either YES or NO, nothing in between. If compliance is "NO" a custom Windows Event Set
+# will be created to be used with most RMM's Event Log parsing capabilities.
 # -----------------------------------------------------------------------------------------------------------------------
 $EndDate = (Get-Date)
 Write-Output "UPSTREAM: Compliance Check: Is this computer compliant: $IsComputerCompliant"
 Write-Output "UPSTREAM: Compliance Check: Ended $EndDate"
+
+If ($IsComputerCompliant -Match "YES"){
+    Write-Output "UPSTREAM: Compliance Check: One Windows Event Log was created for your RMM to pick up."
+    $UpstreamPowerPacklogFileExists = [System.Diagnostics.EventLog]::SourceExists("UpstreamPowerPack")
+        
+    If ($UpstreamPowerPacklogFileExists -Match "True"){
+    # Great. UpstreamPowerPack Event Log Source exists on local machine. Probably created from another of our scripts."
+    }
+        
+    Else{
+    # UpstreamPowerPack Event Log Source does not exist. Let's create.
+        New-EventLog -LogName System -Source UpstreamPowerPack}
+
+    # This line will create the Windows Event Log for your RMM to pick up.
+    Write-EventLog -LogName System -Source UpstreamPowerPack -EventId 10 -Entrytype Information -Message "UPSTREAM: Whoops. Windows OS license is NOT activated on this machine."
+}
+
 Write-Output "Compliance Check powered by Upstream Powwer Pack https://en.upstream.se/powerpack"
