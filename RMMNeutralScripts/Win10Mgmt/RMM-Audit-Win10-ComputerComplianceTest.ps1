@@ -1,10 +1,42 @@
-# Script name: RMM-Audit-Win10-ComputerComplianceTest.ps1
-# Script type: Powershell
-# Script description: A computer compliance test to be used for pro-actively catch and address problems.
-# Dependencies: Windows 10, PSWindowsUpdate Module, NuGet PackageProvider MinimumVersion 2.8.5.201
-# Script maintainer: powerpack@upstream.se
-# https://en.upstream.se/powerpack/
+<#
+    ===========================================================================
+        Filename:       RMM-Audit-Win10-ComputerComplianceTest.ps1.ps1
+        Latest update:  2019-11-01
+        Created by:     powerpack@upstream.se
+        Organization:   Upstream AB, https://en.upstream.se/powerpack
+    ===========================================================================
+
+.SYNOPSIS
+To be used for pro-actively catch Windows 10 computers out of secuirity and quality compliance.
+
+.DESCRIPTION
+Windows Update: Missing more than X number of patches.
+Windows Firewall: Profiles enabled or not.
+Anti-Virus: Enabled and definition up to date?
+Windows Reboot: Computer rebooted more than X days ago.
+Unexpected Shutdowns: More than X times within X number of days.
+Application Errors: More than X times within X number of days.
+Available Disk: Less than X GB.
+
+Additional Windows Event Log will be created if the computer is out of compliance to be used with any Event Log parser.
+LogName "System" Source "UpstreamPowerPack" EventId "10" Entrytype "Information" ;essage "UPSTREAM: Compliance Check: Is this computer compliant: NO"
+
+.EXAMPLE
+Execute in the Powershell console as Administrator. Configure the variables in the #VARIABLES section to your threshold needs.
+
+.NOTES
+Changelog
+2019-11-01: First version.
+
+.LINK
+Upstream Power Pack: https://en.upstream.se/powerpack/
+mailing list: https://upstream.us19.list-manage.com/subscribe?u=70733bc93d986c3f32bfb0d48&id=c22d15864a
+Slack channel: https://join.slack.com/t/upstreampowerpack/shared_invite/enQtNTM2NTgyNjc5NjY3LTM0NTk1MzNjNmM4NWJiNjM4MzkwMDliNjA4N2Q0MzMxMGZkODdiOTczMjAwM2ExMTNkMTM3YzA1ZGU2MjVjYzE
+
+#>
+
 # --------------------------------------------------------------------------------------------------------------------------------
+# VARIABLES
 
 # Windows Update test
 # What is the allowed number of missing patches?
@@ -35,6 +67,10 @@ $AllowedNumberOfapplicationErrors = "5"
 # Avialable Disk test
 $AllowedMinimumDiskFree = "20"
 
+# END OF VARIABLES
+# -----------------------------------------------------------------------------------------------------------------------
+
+# PREPARATIONS
 # -----------------------------------------------------------------------------------------------------------------------
 $StartDate = (Get-Date)
 Write-Output "UPSTREAM: Compliance Check: Started $StartDate"
@@ -42,7 +78,7 @@ Write-Output "UPSTREAM: Compliance Check: Started $StartDate"
 # At script start the variable $IsComputerCompliant is always "YES".
 $IsComputerCompliant = "YES"
 
-# Checking if NuGet Package Provider and PSWinUpdate Powershell module from PSGallery. We need this to test Windows Updates.
+# Checking if NuGet Package Provider and PSWindowsUpdate Powershell module from PSGallery.
 Write-Output "UPSTREAM: Compliance Check: Checking for required packages."
 
 Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
@@ -53,9 +89,11 @@ If(-not(Get-InstalledModule PSWindowsUpdate -ErrorAction SilentlyContinue))
         Install-Module PSWindowsUpdate -AllowClobber -Confirm:$False -Force
     }
 
-# Test: Check Windows Update status
+# END OF PREPARATIONS
 # -----------------------------------------------------------------------------------------------------------------------
 
+# Test: Check Windows Update status
+# -----------------------------------------------------------------------------------------------------------------------
 Write-Output "UPSTREAM: Compliance Check: Windows Update: Scanning for missing Windows Updates."
 
 $updates = Get-WuInstall
@@ -276,8 +314,8 @@ If ($IsComputerCompliant -Match "NO"){
     # UpstreamPowerPack Event Log Source does not exist. Let's create.
         New-EventLog -LogName System -Source UpstreamPowerPack}
 
-    # This line will create the Windows Event Log for your RMM to pick up.
-    Write-EventLog -LogName System -Source UpstreamPowerPack -EventId 10 -Entrytype Information -Message "UPSTREAM: Whoops. Windows OS license is NOT activated on this machine."
+    # This line will create the Windows Event Log for your RMM to 
+    Write-EventLog -LogName System -Source UpstreamPowerPack -EventId 10 -Entrytype Information -Message "UPSTREAM: Compliance Check: Is this computer compliant: NO"
 }
 
 Write-Output "Compliance Check powered by Upstream Powwer Pack https://en.upstream.se/powerpack"
