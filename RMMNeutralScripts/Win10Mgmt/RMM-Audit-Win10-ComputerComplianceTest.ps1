@@ -265,7 +265,7 @@ $EndDate = (Get-Date)
 Write-Output "UPSTREAM: Compliance Check: Is this computer compliant: $IsComputerCompliant"
 Write-Output "UPSTREAM: Compliance Check: Ended $EndDate"
 
-If ($IsComputerCompliant -Match "YES"){
+If ($IsComputerCompliant -Match "NO"){
     Write-Output "UPSTREAM: Compliance Check: One Windows Event Log was created for your RMM to pick up."
     $UpstreamPowerPacklogFileExists = [System.Diagnostics.EventLog]::SourceExists("UpstreamPowerPack")
         
