@@ -1,6 +1,6 @@
 <#
     ===========================================================================
-        Filename:       RMM-Audit-Win10-ComputerComplianceTest.ps1.ps1
+        Filename:       RMM-Audit-Win10-ComputerComplianceTest.ps1
         Latest update:  2019-11-01
         Created by:     powerpack@upstream.se
         Organization:   Upstream AB, https://en.upstream.se/powerpack
