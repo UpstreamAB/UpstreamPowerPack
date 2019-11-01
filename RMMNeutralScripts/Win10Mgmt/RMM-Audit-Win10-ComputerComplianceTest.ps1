@@ -1,11 +1,10 @@
 # Script name: RMM-Audit-Win10-ComputerComplianceTest.ps1
 # Script type: Powershell
 # Script description: A computer compliance test to be used for pro-actively catch and address problems.
-# Dependencies: Windows 10, PSWINUpate module, Nuget Provider
+# Dependencies: Windows 10, PSWindowsUpdate Module, NuGet PackageProvider MinimumVersion 2.8.5.201
 # Script maintainer: powerpack@upstream.se
 # https://en.upstream.se/powerpack/
 # --------------------------------------------------------------------------------------------------------------------------------
-
 
 # Windows Update test
 # What is the allowed number of missing patches?
