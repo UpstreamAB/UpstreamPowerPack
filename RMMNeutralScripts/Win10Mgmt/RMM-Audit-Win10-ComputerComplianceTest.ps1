@@ -51,7 +51,6 @@ $AllowedNumberOfDaysWithoutReboot = "7"
 # Get-WmiObject -Namespace "root\SecurityCenter2" -Class AntiVirusProduct | Where DisplayName -ne "Windows Defender"
 # We will add this as variable option coming releases.
 
-
 # Windows Firewall test
 # As for now wer are testing all the 3 available profiles.
 # We will add this as variable option coming releases.
@@ -119,7 +118,6 @@ Else{
     Write-Output "UPSTREAM: Compliance Test: Windows Update: Missing more than $AllowedNumberOfMissingPatches Windows Updates: NO"
     Write-Output "UPSTREAM: Compliance Test: Windows Update: Is Windows Update compliant: YES"}
 
-
 # Test: Check Windows Firewall status
 # -----------------------------------------------------------------------------------------------------------------------
 $FirewallStatus = 0
@@ -139,7 +137,6 @@ If ($SysFirewallReg2 -eq 1){
 Else{
     Write-Output "UPSTREAM: Compliance Test: Windows Firewall: Public Profile enabled: NO`r" -Outvariable +AppendErrorMessage}
 
-
 $SysFirewallReg3 = Get-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\StandardProfile" -Name EnableFirewall | Select-Object -ExpandProperty EnableFirewall
 If ($SysFirewallReg3 -eq 1){
     $FirewallStatus = ($FirewallStatus + 1)
@@ -155,7 +152,6 @@ If ($FirewallStatus -eq 3){
 Else{
     Write-Output "UPSTREAM: Compliance Test: Windows Firewall: Is Windows Firewall compliant: NO`r" -Outvariable +AppendErrorMessage
     $IsComputerCompliant = "NO"}
-
 
 # Test: Check for Anti-Virus status.
 # -----------------------------------------------------------------------------------------------------------------------
