@@ -7,30 +7,31 @@
     ===========================================================================
 
 .SYNOPSIS
-To be used for pro-actively catch Windows 10 computers out of secuirity and quality compliance. Configure the variables in the #VARIABLES section to your threshold needs.
+To be used for pro-actively catch Windows 10 computers out of secuirity and quality compliance. Configure the variables in the VARIABLES section to your threshold needs.
 
 .DESCRIPTION
-Test: Check Windows Update status
-Test: Check BitLocker status
-Test: Check Windows Firewall status
-Test: Check for Anti-Virus status
+Test: Windows Update status
+Test: BitLocker status
+Test: Windows Firewall status
+Test: Anti-Virus status (from Windows Security Center)
 Test: User Account Control (UAC)
-Test: Last reboot
+Test: Last reboot time (not to be confused with last shut down)
 Test: Unexpected shutdowns in the Windows Event Log
 Test: Application hangs and errors in the Windows Event Log
 Test: Available disk on system drive
+
 Additional Windows Event Log will be created if the computer is out of compliance to be used with any Event Log parser.
-LogName "System" Source "UpstreamPowerPack" EventId "10" Entrytype "Information" Message "UPSTREAM: Is this computer compliant: NO"
+LogName "System" Source "UpstreamPowerPack" EventId "1337" Entrytype "Error" Message "UPSTREAM: Is this computer compliant: NO"
 
 .EXAMPLE
 Execute in the Powershell console as Administrator like ".\RMM-Audit-Win10-ComputerComplianceTest.ps1" or execute from any RMM.
 
 .NOTES
-Changelog
-2019-11-24: Simplified the the preparation stage for NuGet Package Provider and PSWindUpdate Powershell module.
+CHANGELOG
+2019-11-24: Simplified the the preparation stage for NuGet Package Provider and PSWindUpdate Powershell module. Added additional logging.
 2019-11-21: Variables: Added variable $AllowTestForBitLocker for BitLocker encryption test. Default is "NO".
 2019-11-18: Anti-Virus: Changed If statement from "NotLike" to "NotMatch" for "Enabled" and "Up to date".
-2019-11-11: Variables: Added variable $AppendErrorMessage for detailed log output to Event Log message when test(s) fail.
+2019-11-11: Added variable $AppendErrorMessage for detailed log output to Event Log message when test(s) fail.
 2019-11-01: First version.
 
 .LINK
@@ -42,14 +43,14 @@ Upstream Power Pack mailing list: https://upstream.us19.list-manage.com/subscrib
 # VARIABLES
 
 # What is the compliant number of missing patches for the Windows Update test?
-$AllowedNumberOfMissingPatches = "5"
+$AllowedNumberOfMissingPatches = "3"
 
 # What is the compliant number for the Windows Last Reboot test?
 $AllowedNumberOfDaysWithoutReboot = "10"
 
 # Would you like to add BitLocker in the compliance test? YES/NO
 # The test is successful if C: drive is "FullyEnrypted".
-$AllowTestForBitLocker = "YES"
+$AllowTestForBitLocker = "NO"
 
 # What is the compliand numbers for the Unexpected Shutdown test?
 $NumberOfDaysBackLookingForUnexpectedShutdowns = "30"
@@ -72,6 +73,12 @@ $AllowTestForWindowsDefender = "YES"
 
 # PREPARATIONS
 # -----------------------------------------------------------------------------------------------------------------------
+
+$StartDateTime = Get-Date
+Write-Output "UPSTREAM: Compliance test started: $StartDateTime"
+
+# At script start the variable $IsComputerCompliant is always "YES". If any test fails it will be set to "NO".
+$IsComputerCompliant = "YES"
 
 # Checking for required NuGet Package Provider and either update or install if needed.
 Write-Output "UPSTREAM: Preparations: Checking for required Powershell components."
@@ -103,12 +110,6 @@ Else{
     }
 }
 
-# At script start the variable $IsComputerCompliant is always "YES". If any test fails it will be set to "NO".
-$IsComputerCompliant = "YES"
-
-$StartDateTime = Get-Date
-Write-Output "UPSTREAM: Compliance test started: $StartDateTime"
-
 # END OF PREPARATIONS
 # -----------------------------------------------------------------------------------------------------------------------
 
@@ -116,22 +117,18 @@ Write-Output "UPSTREAM: Compliance test started: $StartDateTime"
 # -----------------------------------------------------------------------------------------------------------------------
 # Get all available Windows Updtes from Microsoft
 $Updates = Get-WuInstall
-# Get the pending reboot status back as False or True. We will use this as additional information when not compliant.
-$RebootRequired = Get-WURebootStatus | Select -Expand RebootRequired
 
 $UpdateNumber = ($Updates.kb).count
 
 # Ok, here comes the logic. If this computer are missing more than $AllowedNumberOfMissingPatches Windows Updates the compliance will be set to NO.
 If ($UpdateNumber -gt $AllowedNumberOfMissingPatches){
-    Write-Output "UPSTREAM: Windows Update: Number of missing Windows Updates: $updatenumber`r" -Outvariable +AppendErrorMessage
+    Write-Output "UPSTREAM: Windows Update: Number of missing Windows Updates: $UpdateNumber`r" -Outvariable +AppendErrorMessage
     Write-Output "UPSTREAM: Windows Update: Missing more than $AllowedNumberOfMissingPatches Windows Updates: YES`r" -Outvariable +AppendErrorMessage
-    Write-Output "UPSTREAM: Windows Update: Pending reboot from Windows update: $RebootRequired`r" -Outvariable +AppendErrorMessage
     Write-Output "UPSTREAM: Windows Update: Is Windows Update compliant: NO`r" -Outvariable +AppendErrorMessage
-    Write-Output "$Updates`r" -Outvariable +AppendErrorMessage
     $IsComputerCompliant = "NO"}
 
 Else{
-    Write-Output "UPSTREAM: Windows Update: Number of missing Windows Updates: $updatenumber`r" -Outvariable +AppendErrorMessage
+    Write-Output "UPSTREAM: Windows Update: Number of missing Windows Updates: $UpdateNumber"
     Write-Output "UPSTREAM: Windows Update: Missing more than $AllowedNumberOfMissingPatches Windows Updates: NO"
     Write-Output "UPSTREAM: Windows Update: Is Windows Update compliant: YES"}
 
@@ -139,16 +136,18 @@ Else{
 # -----------------------------------------------------------------------------------------------------------------------
 If ($AllowTestForBitLocker -Match "YES"){
     
-    $BitLockerStatus = (manage-bde -status c:)
+    $BitLockerStatus = Get-BitLockerVolume | Select -Expand VolumeStatus
     # Ok, here comes the logic. If this computer are reporting $AVRealTimeProtectionStatus as anything else than "Enabled" the compliance will be set to NO.
-    If ($BitLockerStatus -Match "Fully Encrypted"){
+    If ($BitLockerStatus -Match "FullyEncrypted"){
+        Write-Output "UPSTREAM: BitLocker: $BitLockerStatus"
         Write-Output "UPSTREAM: BitLocker: Enabled: YES"
         Write-Output "UPSTREAM: BitLocker: Is BitLocker compliant: YES"} 
 
     Else{
+        $BitLockerDetails = Get-BitLockerVolume
         Write-Output "UPSTREAM: BitLocker: Enabled: NO`r" -Outvariable +AppendErrorMessage
         Write-Output "UPSTREAM: BitLocker: Is BitLocker compliant: NO`r" -Outvariable +AppendErrorMessage
-        Write-Output "UPSTREAM: BitLocker: $BitLockerStatus`r" -Outvariable +AppendErrorMessage
+        Write-Output "UPSTREAM: BitLocker: $BitLockerDetails`r" -Outvariable +AppendErrorMessage
         $IsComputerCompliant = "NO"}
 }
 
@@ -299,13 +298,12 @@ $LastRebootInDays = Get-Uptime
 If ($LastRebootInDays -gt $AllowedNumberOfDaysWithoutReboot){
     Write-Output "UPSTREAM: Windows Reboot: Last reboot was $LastRebootInDays days ago`r" -Outvariable +AppendErrorMessage
     Write-Output "UPSTREAM: Windows Reboot: Last reboot more than $AllowedNumberOfDaysWithoutReboot ago: YES`r" -Outvariable +AppendErrorMessage
-    Write-Output "UPSTREAM: Windows Reboot: Pending reboot from Windows update: $RebootRequired`r" -Outvariable +AppendErrorMessage
     Write-Output "UPSTREAM: Windows Reboot: Is Windows last reboot compliant: NO`r" -Outvariable +AppendErrorMessage
     $IsComputerCompliant = "NO"}
 
 Else{
     Write-Output "UPSTREAM: Windows Reboot: Last reboot was $LastRebootInDays days ago."
-    Write-Output "UPSTREAM: Windows Reboot: Reboot more than $AllowedNumberOfDaysWithoutReboot days: NO"
+    Write-Output "UPSTREAM: Windows Reboot: Reboot more than $AllowedNumberOfDaysWithoutReboot days ago: NO"
     Write-Output "UPSTREAM: Windows Reboot: Is Windows last reboot compliant: YES"}
 
 # Test: Unexpected shutdowns in the Windows Event Log
