@@ -1,14 +1,21 @@
 # Script name: KaseyaVSA-Audit-GetPendingRebootStatus.ps1
-# Related Kaseya Agent Procedure: "Audit - Windows - Get Pending Reboot Status"
+# Related Kaseya Agent Procedure: "Patch Mgmnt - Windows 10 - Get Pending Reboot Status"
 # Script description: Audit if Windows is in apending reboot state from Windows Update.
 # Upload this Powershell script to your Kaseya Agent Procedures, Manged Files folder "VSASharedFiles\UpstreamPowerPack\Powershell".
-# Supported OS: Windows 8.1, 10, Server 2012, 2016, 2019. PSWindowsUpdate Powersehll module.
+# Supported OS: Windows 10, PendingReboot Powershell module.
 # Script maintainer: powerpack@upstream.se
 # https://en.upstream.se/powerpack
 
-If(-not(Get-InstalledModule PSWindowsUpdate -ErrorAction SilentlyContinue))
-    {
-        Set-PSRepository PSGallery -InstallationPolicy Trusted
-        Install-Module PSWindowsUpdate -AllowClobber -Confirm:$False -Force}
+If (Get-Module -ListAvailable -Name PendingReboot){
+    Update-Module PendingReboot} 
 
-Get-WURebootStatus | Select -Expand RebootRequired
+Else{
+    Try {
+        Install-Module PendingReboot -AllowClobber -Confirm:$False -Force -Verbose:$False}
+    Catch [Exception] {
+        $_.message 
+        Exit
+    }
+}
+
+Test-PendingReboot
