@@ -18,4 +18,4 @@ Else{
     }
 }
 
-Test-PendingReboot
+Test-PendingReboot -SkipConfigurationManagerClientCheck
