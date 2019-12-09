@@ -1,5 +1,5 @@
 # Script name: KaseyaVSA-Audit-IsUptimeMoreThan10Days.ps1
-# Related Kaseya Agent Procedure: "User Experience - Windows 10 - Send Message For Reboot If Uptime Is More Than 10 Days"
+# Related Kaseya Agent Procedure: "Policy Mgmt - Windows 10 - Send Message For Reboot If Uptime Is More Than 10 Days"
 # Script description: Get the number of days since last real/cold system reboot. The result will be used to prompt the user for reboot if more than 10 days uptime.
 # Upload this Powershell script to your Kaseya Agent Procedures folder "VSASharedFiles\UpstreamPowerPack\Powershell".
 # Script maintainer: powerpack@upstream.se
