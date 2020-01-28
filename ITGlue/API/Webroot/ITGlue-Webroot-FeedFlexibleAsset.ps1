@@ -7,7 +7,6 @@
 # --------------------------------------------------------------------------------------------------------------------------------
 
 #Requires -Version 3
-#Requires -Modules @{ ModuleName='ITGlueAPI'; ModuleVersion='2.0.7' }
 
 # ----------------------------- UPDATE THE BELOW VARIABLES -----------------------------
 # Fill in your Webroot username, password, client ID and client secret. These will be uses for authentication.
@@ -32,13 +31,19 @@ param(
 
 
 
-# ------------------------------- NO NEED EDIT THE BELOW CODE ----------------------------
-$username =       [PSCredential]::new('null', ($username       | ConvertTo-SecureString)).GetNetworkCredential().Password
-$password =       [PSCredential]::new('null', ($password       | ConvertTo-SecureString)).GetNetworkCredential().Password
-$client_id =      [PSCredential]::new('null', ($client_id      | ConvertTo-SecureString)).GetNetworkCredential().Password
-$client_secret =  [PSCredential]::new('null', ($client_secret  | ConvertTo-SecureString)).GetNetworkCredential().Password
-$global_gsm_key = [PSCredential]::new('null', ($global_gsm_key | ConvertTo-SecureString)).GetNetworkCredential().Password
-$api_key =        [PSCredential]::new('null', ($api_key        | ConvertTo-SecureString)).GetNetworkCredential().Password
+# # ------------------------------- NO NEED EDIT THE BELOW CODE ----------------------------
+# $username =       [PSCredential]::new('null', ($username       | ConvertTo-SecureString)).GetNetworkCredential().Password
+# $password =       [PSCredential]::new('null', ($password       | ConvertTo-SecureString)).GetNetworkCredential().Password
+# $client_id =      [PSCredential]::new('null', ($client_id      | ConvertTo-SecureString)).GetNetworkCredential().Password
+# $client_secret =  [PSCredential]::new('null', ($client_secret  | ConvertTo-SecureString)).GetNetworkCredential().Password
+# $global_gsm_key = [PSCredential]::new('null', ($global_gsm_key | ConvertTo-SecureString)).GetNetworkCredential().Password
+# $api_key =        [PSCredential]::new('null', ($api_key        | ConvertTo-SecureString)).GetNetworkCredential().Password
+
+try {
+    Import-Module -Name 'ITGlueAPI' -ErrorAction Stop
+} catch {
+    return $(Write-Error $_)
+}
 
 # If any parameter is missing
 # Cannot use mandatory because it would break setting parameters inside the script.
