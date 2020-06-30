@@ -1,12 +1,11 @@
-# Script name: RMM-AppMgmt-Windows-ChocoDeploy-UpgradeAll.ps1
-# Script type: Powershell
-# Script description: Upgrade all Choco deployed apps on local machine.
-# Dependencies: Powershell 3.0
-# Script maintainer: powerpack@upstream.se
-# https://en.upstream.se/powerpack/
-# --------------------------------------------------------------------------------------------------------------------------------
+<#
+=================================================================================
+Filename:           RMM-AppMgmt-Windows-ChocoDeploy-UpgradeAll.ps1
+Support type:       Upstream Power Pack
+Support:            Upstream AB, powerpack@upstream.se Last updated 2020-04-22
+=================================================================================
+#>
 
-#Requires -Version 3
 # Let's check if Chocolatey is installed on local machine. If not, install.
 Write-Output "UPSTREAM: Checking for Chocolatey on this machine."
 if (Test-Path "C:\ProgramData\Chocolatey\choco.exe")
