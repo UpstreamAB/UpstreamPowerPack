@@ -1,18 +1,19 @@
-# Script name: KaseyaVSA-Audit-GetAzureUserName.ps1
-# Related Kaseya Agent Procedure: "Audit - Windows 10 - Custom Field - Azure AD Info"
-# Script description: Audit the Azure tenant user name on a Windows 10 computer.
-# Upload this Powershell script to your Kaseya Agent Procedures folder "VSASharedFiles\UpstreamPowerPack\Powershell".
-# Dependencies: Existing registry values
-# Supported OS: Windows 10.
-# Script maintainer: powerpack@upstream.se
-# https://en.upstream.se/powerpack"
+<#
+=================================================================================
+Filename:           UPSTREAM-KaseyaVSA-Audit-Win10-GetAzureUserName.ps1
+Kaseya Procedure:   Custom Field - Audit - Windows 10 - Get Azure AD Tenant And User
+Support type:       Upstream Power Pack
+Support:            Upstream AB, powerpack@upstream.se Last updated 2020-04-22
+=================================================================================
+#>
 
-$subKey = Get-Item "HKLM:/SYSTEM/CurrentControlSet/Control/CloudDomainJoin/JoinInfo"
+Try{
+    $subKey = Get-Item "HKLM:/SYSTEM/CurrentControlSet/Control/CloudDomainJoin/JoinInfo" -ErrorAction Stop
+    $guids = $subKey.GetSubKeyNames()
+    foreach($guid in $guids) {
+        $guidSubKey = $subKey.OpenSubKey($guid)
+        $AzureUserName = $guidSubKey.GetValue("UserEmail")}
+        Write-Output $AzureUserName}
 
-$guids = $subKey.GetSubKeyNames()
-foreach($guid in $guids) {
-    $guidSubKey = $subKey.OpenSubKey($guid);
-    $UserEmail = $guidSubKey.GetValue("UserEmail");
-}
-# Let's write the Azure Tenant User Name to the concole for Kaseya VSA to pick up as a variable.
-write-output $UserEmail
+Catch{
+    Write-Output "Not Detected"}
