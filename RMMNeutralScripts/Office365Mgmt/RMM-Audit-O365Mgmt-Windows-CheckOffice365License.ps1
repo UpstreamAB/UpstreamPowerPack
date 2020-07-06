@@ -1,11 +1,11 @@
-# Script name: RMM-Audit-O365Mgmt-Windows-CheckOffice365License.ps1
-# Script type: Powershell
-# Script description: Check the Office 365 license information and activation status on local machine.
-# Dependencies: Office 2016 and OSPP.VBS present on local machine.
-# Script maintainer: powerpack@upstream.se
-# https://en.upstream.se/powerpack/
-# --------------------------------------------------------------------------------------------------------------------------------
- 
+<#
+=================================================================================
+Filename:           RMM-Audit-O365Mgmt-Windows-CheckOffice365License.ps1
+Support type:       Upstream Power Pack
+Support:            Upstream AB, powerpack@upstream.se Last updated 2020-04-22
+=================================================================================
+#>
+
 # First, let's look for Office 365 on the local machine. Particularly the OSPP.VBS file that we are going to use in this script.
 If(Test-Path -Path "C:\Program Files (x86)\Microsoft Office\Office16"){
     $O365LicenseInfo = cscript.exe //nologo "C:\Program Files (x86)\Microsoft Office\Office16\OSPP.VBS" /dstatus | Out-String
@@ -37,9 +37,7 @@ If ($O365LicenseInfo -Match "Processing"){
 		Write-EventLog -LogName System -Source UpstreamPowerPack -EventId 10 -Entrytype Information -Message "UPSTREAM: Whoops. There may be potential problems with Office 365 licensing. Please investigate. Detailed license information: $($O365LicenseInfo)"
 	}
 	Else{
-		Write-Output "UPSTREAM: Office 365 license(s) found, activated and looking good!"	
-	}
+		Write-Output "UPSTREAM: Office 365 license(s) found, activated and looking good!"}
 }
 Else{
-	Write-Output "UPSTREAM: We can't find OSPP.VBS on this machine. Nothing to do."
-}
+	Write-Output "UPSTREAM: We can't find OSPP.VBS on this machine. Nothing to do."}
