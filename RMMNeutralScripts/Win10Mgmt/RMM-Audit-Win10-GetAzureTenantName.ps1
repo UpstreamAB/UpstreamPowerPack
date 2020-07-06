@@ -1,15 +1,18 @@
-# Script name: RMM-Audit-Win10-GetAzureTenantName.ps1
-# Script type: Powershell
-# Script description: Uninstalls Google Chrome on local machine.
-# Dependencies: Powershell 3.0, Windows 10
-# Script maintainer: powerpack@upstream.se
-# https://en.upstream.se/powerpack/
-# --------------------------------------------------------------------------------------------------------------------------------
+<#
+=================================================================================
+Filename:           RMM-Audit-Win10-GetAzureTenantName.ps1
+Support type:       Upstream Power Pack
+Support:            Upstream AB, powerpack@upstream.se Last updated 2020-04-22
+=================================================================================
+#>
 
-$subKey = Get-Item "HKLM:/SYSTEM/CurrentControlSet/Control/CloudDomainJoin/TenantInfo"
-$guids = $subKey.GetSubKeyNames()
-foreach($guid in $guids) {
-    $guidSubKey = $subKey.OpenSubKey($guid);
-    $AzureTenantName = $guidSubKey.GetValue("DisplayName");
-}
-write-output $AzureTenantName
+Try{
+    $subKey = Get-Item "HKLM:/SYSTEM/CurrentControlSet/Control/CloudDomainJoin/TenantInfo" -ErrorAction Stop
+    $guids = $subKey.GetSubKeyNames()
+    foreach($guid in $guids) {
+        $guidSubKey = $subKey.OpenSubKey($guid)
+        $AzureTenantName = $guidSubKey.GetValue("DisplayName")}
+        Write-Output $AzureTenantName}
+
+Catch{
+    Write-Output "Not Detected"}
