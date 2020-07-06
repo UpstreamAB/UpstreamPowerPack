@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
-<event_sets>
-  <set_elements setName="__[UPSTREAM] Win10 Computer Compliance Test" eventSetId="26269323" snmpTraps="0">
-    <element_data ignore="0" source="*" category="*" eventId="1337" username="*" description="UPSTREAM:*"/>
-  </set_elements>
-</event_sets>
