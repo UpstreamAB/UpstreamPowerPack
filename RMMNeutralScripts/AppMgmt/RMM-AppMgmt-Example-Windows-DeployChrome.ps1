@@ -23,7 +23,7 @@ Write-Output "UPSTREAM: Installation begins. Waiting for completion."
 Start-Process $File /qn -Wait
 
 # Remove the installer after completion.
-#Remove-Item -Path $File -Force
+Remove-Item -Path $File -Force
 
 # Validate successful installation by looking for $AppName in the Add/Remove Programs list. 
 $IsAppInstalledOrNot = Get-WmiObject -Class Win32_Product | Where-Object { $_.Name -Match "$AppName" }
