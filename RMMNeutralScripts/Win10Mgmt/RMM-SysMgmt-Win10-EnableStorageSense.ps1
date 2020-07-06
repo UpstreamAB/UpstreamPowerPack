@@ -17,7 +17,6 @@ If (!(Test-Path "$key\Parameters")){
 If (!(Test-Path "$key\Parameters\StoragePolicy")){
     New-Item -Path "$key\Parameters\StoragePolicy" | Out-Null}
 
-# Set Storage Sense settings
 # Enable Storage Sense
 Set-ItemProperty -Path "$key\Parameters\StoragePolicy" -Name "01" -Type DWord -Value 1 -Force
 
