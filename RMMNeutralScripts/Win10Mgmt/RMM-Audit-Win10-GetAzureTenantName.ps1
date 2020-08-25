@@ -2,7 +2,7 @@
 =================================================================================
 Filename:           RMM-Audit-Win10-GetAzureTenantName.ps1
 Support type:       Upstream Power Pack
-Support:            Upstream AB, powerpack@upstream.se Last updated 2020-04-22
+Support:            Upstream AB, powerpack@upstream.se Last updated 2020-07-06
 =================================================================================
 #>
 
