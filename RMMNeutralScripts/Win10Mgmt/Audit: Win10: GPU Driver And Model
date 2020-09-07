@@ -1,0 +1,14 @@
+<#
+=================================================================================
+Script name:        Audit: Win10: GPU Driver And Model
+Support type:       Upstream Power Pack
+Support:            Upstream AB, support@upstream.se
+Lastest version:    2020-05-25
+=================================================================================
+#>
+
+$GPUModel = Get-WmiObject Win32_VideoController | Select -Expand Caption
+$GPUDriver = Get-WmiObject Win32_VideoController | Select -Expand DriverVersion
+
+Write-Output "UPSTREAM: Extended Audit: GPU Model And Driver: Model: $GPUModel"
+Write-Output "UPSTREAM: Extended Audit: GPU Model And Driver: Driver: $GPUDriver"
