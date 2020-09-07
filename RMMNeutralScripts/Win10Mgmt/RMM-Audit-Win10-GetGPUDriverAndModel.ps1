@@ -1,9 +1,16 @@
 <#
 =================================================================================
-Script name:        Audit: Win10: GPU Driver And Model
+Filename:           RMM-Audit-Win10-GetAzureTenantName.ps1
 Support type:       Upstream Power Pack
-Support:            Upstream AB, support@upstream.se
-Lastest version:    2020-05-25
+Support:            Upstream AB, powerpack@upstream.se Last updated 2020-07-06
+=================================================================================
+#>
+
+<#
+=================================================================================
+Script name:        RMM-Audit-Win10-GetGPUDriverAndModel.ps1
+Support type:       Upstream Power Pack
+Support:            Upstream AB, powerpack@upstream.se Last updated 2020-07-06
 =================================================================================
 #>
 
