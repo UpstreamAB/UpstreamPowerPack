@@ -1,6 +1,6 @@
 <#
 =================================================================================
-Filename:           RMM-Audit-Win10-GetAzureTenantName.ps1
+Filename:           RMM-Audit-Win10-GetGPUDriverAndModel.ps1
 Support type:       Upstream Power Pack
 Support:            Upstream AB, powerpack@upstream.se Last updated 2020-07-06
 =================================================================================
