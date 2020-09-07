@@ -6,14 +6,6 @@ Support:            Upstream AB, powerpack@upstream.se Last updated 2020-07-06
 =================================================================================
 #>
 
-<#
-=================================================================================
-Script name:        RMM-Audit-Win10-GetGPUDriverAndModel.ps1
-Support type:       Upstream Power Pack
-Support:            Upstream AB, powerpack@upstream.se Last updated 2020-07-06
-=================================================================================
-#>
-
 $GPUModel = Get-WmiObject Win32_VideoController | Select -Expand Caption
 $GPUDriver = Get-WmiObject Win32_VideoController | Select -Expand DriverVersion
 
