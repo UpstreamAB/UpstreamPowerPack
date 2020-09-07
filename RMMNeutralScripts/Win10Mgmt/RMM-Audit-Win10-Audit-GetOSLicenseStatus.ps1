@@ -1,10 +1,10 @@
 <#
 =================================================================================
-Pulseway script:    Audit: Win10: OS License Status
-Support type:       Upstream Premium Power Pack
-Support:            Upstream AB, support@upstream.se
-Lastest version:    2020-05-25
+Filename:           RMM-Audit-Win10-Audit-GetOSLicenseStatus.ps1
+Support type:       Upstream Power Pack
+Support:            Upstream AB, powerpack@upstream.se Last updated 2020-07-06
 =================================================================================
+
 This is a list of all possible license status codes. 
 0 = Unlicensed
 1 = Licensed
