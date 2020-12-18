@@ -1,6 +1,6 @@
 <#
 =================================================================================
-Filename:           RMM-Audit-Win10-GetLatestRestorePointDate.ps1
+Filename:           RMM-Audit-Win10-GetLatestRestorePointDateAndHistory.ps1
 Support type:       Upstream Power Pack
 Support:            Upstream AB, powerpack@upstream.se Last updated 2020-12-10
 =================================================================================
