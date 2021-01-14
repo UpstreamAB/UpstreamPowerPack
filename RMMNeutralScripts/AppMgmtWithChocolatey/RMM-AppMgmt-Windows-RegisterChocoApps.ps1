@@ -2,7 +2,7 @@
 =================================================================================
 Filename:           RMM-PatchMgmt-Win10-RegisterChocoApps.ps1
 Support type:       Upstream Power Pack
-Support:            Upstream AB, powerpack@upstream.se Last updated 2020-07-06
+Support:            Upstream AB, powerpack@upstream.se Last updated 2021-01-06
 =================================================================================
 #>
 
@@ -11,28 +11,28 @@ Support:            Upstream AB, powerpack@upstream.se Last updated 2020-07-06
 
 # Let's create a list of packages we want to be managed with Chocolatey. Package names can be viewed here: https://chocolatey.org/packages.
 $ChocolateyPackageName = @(
-	"flashplayerppapi"
-	"flashplayerplugin"
+	# "flashplayerppapi" Deprecated since December 2020
+	# "flashplayerplugin" Deprecated since December 2020
 	"firefox"
 	"googlechrome"
 	"adobereader"
 	"adobeair"
-	"jre8"
+	# "jre8" Deprecated
 	"7zip"
-	"zoom"
+	"zoom" # Michine wide install only
 )
 
 # Let's create a local Add/Remove app list as counterpart to above packages. It's important that the lines match. For example, "firefox" and "Mozilla Firefox" should be both be represented in line 3.'
 $LocalRegistryAppName = @(
-	"Adobe Flash Player 32 PPAPI" # For Google Chrome
-	"Adobe Flash Player 32 NPAPI" # For Firefox
+	# "Adobe Flash Player 32 PPAPI" # Deprecated since December 2020
+	# "Adobe Flash Player 32 NPAPI" # Deprecated since December 2020
 	"Mozilla Firefox"
 	"Google Chrome"
 	"Adobe Acrobat Reader DC MUI"
 	"Adobe AIR"
-	"Java 8 update"
+	# "Java 8 update" Deprecated
 	"7-Zip"
-	"Zoom"
+	"Zoom" # Michine wide install only
 )
 
 # END OF VARIABLES & OPTIONS
