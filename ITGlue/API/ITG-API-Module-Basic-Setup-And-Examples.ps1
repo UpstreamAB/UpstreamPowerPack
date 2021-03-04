@@ -50,6 +50,10 @@ Do {
 Write-Output "UPSTREAM: Show all Configuration attributes:"
 $AllITGlueConfigs
 
+# Show Configurataions based on creation date, newest first.
+Write-Output "UPSTREAM: Show Configurataions based on creation date, newest first:"
+$AllITGlueConfigs | Sort -Property created-at -Descending
+
 # Export all Server type Configurations to CSV example. 
 
 $CSVPath = "c:\temp"
