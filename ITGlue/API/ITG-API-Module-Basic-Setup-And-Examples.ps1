@@ -33,8 +33,8 @@ Add-ITGlueAPIKey $ITGAPI
 
 # We are now done with the basic IT Glue Powershell module setup.
 
-# We can start exploring the features with a couple of get commands. We need to step the query one page with 1000 items at a time.
-# This is how IT Glue API endpoint is designed. Let's create a counter called "$PageCounter" for stepping trough each page number of 1000 items each until reaching the final page.
+# We can start exploring the features with a couple of get commands. By design we need to step the query one page with 1000 items at the time.
+# Let's create a counter called "$PageCounter" for stepping trough each page number of 1000 items each until reaching the final page.
 # You can see this method being repeated in below examples.
 
 # Get all IT Glue Configurations example.
