@@ -47,6 +47,7 @@ Do {
 }While ($AllITGlueConfigs.Count % 1000 -eq 0 -and $AllITGlueConfigs.Count -ne 0)
 
 # Show all Configuration attributes.
+Write-Output "UPSTREAM: Show all Configuration attributes:"
 $AllITGlueConfigs
 
 # Export all Server type Configurations to CSV example. 
