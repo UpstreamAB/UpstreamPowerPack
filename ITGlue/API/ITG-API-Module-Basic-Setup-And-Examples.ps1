@@ -27,7 +27,7 @@ Else {
     Import-Module ITGlueAPI
 }
 
-# Let's enable the IT Glue Powershell module based on the API secret above.
+# Let's enable the IT Glue Powershell module based on the API secret and endpoint region above.
 Add-ITGlueBaseURI -base_uri $APIEndpoint
 Add-ITGlueAPIKey $ITGAPI
 
