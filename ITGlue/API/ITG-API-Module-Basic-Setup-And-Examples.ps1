@@ -1,8 +1,22 @@
+<#
+=================================================================================
+IT Glue script:     ITG-API-Module-Basic-Setup-And-Examples.ps1
+Support type:       Upstream IT Glue Power Pack
+Support:            Upstream AB, powerpack@upstream.se
+=================================================================================
+#>
+
+# -----------------------------------------------------------------
+# VARIABLES & OPTIONS
+
 # Your top secret API key generated from Account, Authentication within IT Glue. You have to be IT Glue Administrator in order create this.
 $ITGAPI = "Top secret API key"
 
 # Set the region for the IT Glue API endpoint. Non EU IT Glue customers should use "https://api.itglue.com".
 $APIEndpoint = "https://api.eu.itglue.com" 
+
+# END OF VARIABLES & OPTIONS
+# -----------------------------------------------------------------------------------------------------------------------
 
 # Let's look for the IT Glue Powershell module. Install if missing.
 If (Get-Module -ListAvailable -Name "ITGlueAPI") { 
