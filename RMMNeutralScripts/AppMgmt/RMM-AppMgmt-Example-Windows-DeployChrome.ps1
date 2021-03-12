@@ -1,9 +1,7 @@
 # Script name: RMM-AppMgmt-Windows-DeployChrome.ps1
 # Script type: Powershell
 # Script description: Installs Google Chrome on local machine.
-# Dependencies: Powershell 3.0
 # Script maintainer: powerpack@upstream.se
-# https://en.upstream.se/powerpack/
 # --------------------------------------------------------------------------------------------------------------------------------
 
 # What file do you want to download? Enter the path here.
@@ -28,12 +26,8 @@ Remove-Item -Path $File -Force
 # Validate successful installation by looking for $AppName in the Add/Remove Programs list. 
 $IsAppInstalledOrNot = Get-WmiObject -Class Win32_Product | Where-Object { $_.Name -Match "$AppName" }
 
-if ($IsAppInstalledOrNot -Match $AppName)
-{
+If ($IsAppInstalledOrNot -Match $AppName){
 	Write-Output $IsAppInstalledOrNot
-	Write-Output "UPSTREAM: Application successfully installed."
-}
-else
-{
-	Write-Output "UPSTREAM: Application failed to install. We can't find $AppName in the Add/Remove Programs list."
-}
+	Write-Output "UPSTREAM: Application successfully installed."}
+Else{
+	Write-Output "UPSTREAM: Application failed to install. We can't find $AppName in the Add/Remove Programs list."}
