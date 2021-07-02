@@ -2,7 +2,7 @@
 =================================================================================
 Pulseway script:    RMM-Patch-Win10-UpgradeToLatestVersion.ps1
 Support type:       Upstream Power Pack
-Support:            Upstream AB, powerpack@upstream.se Last updated 2020-12-10
+Support:            Upstream AB, powerpack@upstream.se Last updated 2021-06-18
 =================================================================================
 #>
 
@@ -10,7 +10,7 @@ Support:            Upstream AB, powerpack@upstream.se Last updated 2020-12-10
 # VARIABLES & OPTIONS
 
 # What is the current Windwos 10 version?
-$OldestWin10VersionAllowed = "2004"
+$LatestWin10Version = "21H1"
 
 # Minimum disk allowed in GB
 $MinimumDiskSpaceAllowed = "20"
@@ -18,7 +18,7 @@ $MinimumDiskSpaceAllowed = "20"
 # File download
 $Dir = "c:\Win10Upgrade"
 $WebClient = New-Object System.Net.WebClient
-$Url = "https://go.microsoft.com/fwlink/?LinkID=799445"
+$Url = "https://go.microsoft.com/fwlink/?LinkId=691209"
 $File = "$($dir)\Win10Upgrade.exe"
 
 # END OF VARIABLES & OPTIONS
@@ -52,16 +52,29 @@ Else{
 # Test: Current Windows 10 version on this computer
 # -----------------------------------------------------------------------------------------------------------------------
 
-$CurrentWin10VersionOnThisComputer = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion').ReleaseId
-Write-Output "UPSTREAM: Win10 upgrade: Oldest Windows 10 version allowed: $OldestWin10VersionAllowed"
+# This is for getting Windows 10 version 2009 and older.
+If (!(Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion" -Name ReleaseID).ReleaseID) {
+    Write-Output "ReleaseID registry key not found." } 
+    
+Else { $CurrentWin10VersionOnThisComputer = (Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion" -Name ReleaseID).ReleaseID }
+    
+# This is for gettting Windows 10 version 20H1 an newer.
+If (!(Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion" -Name DisplayVersion).DisplayVersion) {
+    Write-Output "DisplayVersion registry key not found." }
+    
+    Else { $CurrentWin10VersionOnThisComputer = (Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion" -Name DisplayVersion).DisplayVersion }
+  
+Write-Output "UPSTREAM: Win10 upgrade: Oldest Windows 10 version allowed: $LatestWin10Version"
 Write-Output "UPSTREAM: Win10 upgrade: Windows 10 version on this computer: $CurrentWin10VersionOnThisComputer"
 
-If ($CurrentWin10VersionOnThisComputer -ge $OldestWin10VersionAllowed){
-    Write-Output "UPSTREAM: Win10 upgrade: No upgrade needed."
-    $IsThisComputerReadyForUpgrade = "NO"}
+$CurrentWin10VersionOnThisComputer
+$LatestWin10Version
 
-Else{
-    Write-Output "UPSTREAM: Win10 upgrade: Upgrade needed."}
+If ($CurrentWin10VersionOnThisComputer -Match "$LatestWin10Version") {
+    Write-Output "UPSTREAM: Win10 upgrade: No upgrade needed."
+    $IsThisComputerReadyForUpgrade = "NO" }
+
+Else { Write-Output "UPSTREAM: Win10 upgrade: Upgrade needed." }
 
 
 # Execution: Upgrade Windows 10 if above tests passed
@@ -81,5 +94,4 @@ If ($IsThisComputerReadyForUpgrade -Match "YES"){
     Start-Process -FilePath $File -ArgumentList "/quietinstall /skipeula /auto upgrade /copylogs $Dir" -Verb Runas
 }
 
-Else{
-    Write-Output "UPSTREAM: Win10 upgrade: This computer will not get upgraded. Review the script log."}
+Else { Write-Output "UPSTREAM: Win10 upgrade: This computer will not get upgraded. Review the script log." }
