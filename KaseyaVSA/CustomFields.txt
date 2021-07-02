@@ -1,0 +1,28 @@
+Upstream Power Pack Custom Fields to be added to Kaseys VSA. All should be String.
+How to add Custom Fields: https://upstream.eu.itglue.com/1387150/docs/994025072328920 (Use Incognito if getting 404)
+
+Custom Field Name (sorted by name)
+
+CF.Active.Power.Plan
+CF.AzureAD.Tenant
+CF.AzureAD.User
+CF.Battery.Health
+CF.Bitlocker.Protection
+CF.Bitlocker.Recovery.Password
+CF.Default.Browser
+CF.GPU.Driver
+CF.GPU.Model
+CF.HDD.Health
+CF.HDD.Model
+CF.HDD.Serial
+CF.Installed.Webcams
+CF.Last.Used.Wifi.SSID
+CF.Last.Wifi.Signal.Strength
+CF.Latest.Restore.Point
+CF.Latest.Stability.Index.Score
+CF.OS.Install.Date
+CF.OS.Language
+CF.OS.License
+CF.Powershell.Version
+CF.Reboot.Pending
+CF.Win10.Version
