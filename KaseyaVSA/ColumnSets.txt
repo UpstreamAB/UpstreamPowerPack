@@ -1,0 +1,29 @@
+Column Sets suggestions
+
+Name: Wokplace Essentials
+#####################################
+Online
+OS Status
+Computer Name
+Current User
+CF.Latest.Stability.Index.Score
+CF.Reboot.Pending
+CF.Win10.Versions
+CF.Default.Browser
+CF.Last.Used.Wifi.SSID
+CF.Last.Wifi.Signal.Strength
+CF.AzureAD.Tenant
+CF.AzureAD.User
+CF.Installed.Webcams
+CF.Latest.Restore.Point
+CF.Bitlocker.Protection
+CF.Bitlocker.Recovery.Password
+CF.Powershell.Version
+CF.OS.Install.Date
+CF.GPU.Driver
+CF.GPU.Model
+CF.HDD.Health
+CF.HDD.Model
+CF.HDD.Serial
+CF.HDD.Serial
+CF.HDD.Health
