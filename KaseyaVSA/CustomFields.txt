@@ -6,7 +6,6 @@ Custom Field Name (sorted by name)
 CF.Active.Power.Plan
 CF.AzureAD.Tenant
 CF.AzureAD.User
-CF.Battery.Health
 CF.Bitlocker.Protection
 CF.Bitlocker.Recovery.Password
 CF.Default.Browser
@@ -18,7 +17,6 @@ CF.HDD.Serial
 CF.Installed.Webcams
 CF.Last.Used.Wifi.SSID
 CF.Last.Wifi.Signal.Strength
-CF.Latest.Restore.Point
 CF.Latest.Stability.Index.Score
 CF.OS.Install.Date
 CF.OS.Language
@@ -26,3 +24,4 @@ CF.OS.License
 CF.Powershell.Version
 CF.Reboot.Pending
 CF.Win10.Version
+CF.Win11.Ready
