@@ -2,7 +2,7 @@
 =================================================================================
 Pulseway script:    RMM-Patch-Win10-UpgradeToLatestVersion.ps1
 Support type:       Upstream Power Pack
-Support:            Upstream AB, powerpack@upstream.se Last updated 2021-06-18
+Support:            Upstream AB, powerpack@upstream.se Last updated 2021-12-02
 =================================================================================
 #>
 
@@ -10,7 +10,7 @@ Support:            Upstream AB, powerpack@upstream.se Last updated 2021-06-18
 # VARIABLES & OPTIONS
 
 # What is the current Windwos 10 version?
-$LatestWin10Version = "21H1"
+$LatestWin10VersionAvailable = "21H1"
 
 # Minimum disk allowed in GB
 $MinimumDiskSpaceAllowed = "20"
@@ -18,7 +18,7 @@ $MinimumDiskSpaceAllowed = "20"
 # File download
 $Dir = "c:\Win10Upgrade"
 $WebClient = New-Object System.Net.WebClient
-$Url = "https://go.microsoft.com/fwlink/?LinkId=691209"
+$Url = "https://go.microsoft.com/fwlink/?LinkID=799445"
 $File = "$($dir)\Win10Upgrade.exe"
 
 # END OF VARIABLES & OPTIONS
@@ -27,7 +27,7 @@ $File = "$($dir)\Win10Upgrade.exe"
 # STANDARD PREPARATIONS
 # -----------------------------------------------------------------------------------------------------------------------
 
-# At script start the variable $IsThisComputerReadyForUpgrade is always "YES". If any tests below fails it will be set to "NO".
+# At script start the variable $IsThisComputerReadyForUpgrade is always "YES". If any test below fails it will be set to "NO".
 $IsThisComputerReadyForUpgrade = "YES"
 
 # END OF STANDARD PREPARATIONS
@@ -44,7 +44,7 @@ Write-Output "UPSTREAM: Win10 upgrade: Mininum available disk space allowed: $Mi
 If ($FreeSpace -gt $MinimumDiskSpaceAllowed){
     Write-Output "UPSTREAM: Win10 upgrade: There is enough disk available for upgrade."}
 
-Else{
+Else {
     Write-Output "UPSTREAM: Win10 upgrade: There is not enough disk space available for upgrade."
     $IsThisComputerReadyForUpgrade = "NO"}
 
@@ -54,27 +54,27 @@ Else{
 
 # This is for getting Windows 10 version 2009 and older.
 If (!(Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion" -Name ReleaseID).ReleaseID) {
-    Write-Output "ReleaseID registry key not found." } 
-    
-Else { $CurrentWin10VersionOnThisComputer = (Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion" -Name ReleaseID).ReleaseID }
-    
+    Write-Output "UPSTREAM: Win10 upgrade: ReleaseID registry key not found." } 
+
+Else { 
+    $CurrentWin10VersionOnThisComputer = (Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion" -Name ReleaseID).ReleaseID }
+
 # This is for gettting Windows 10 version 20H1 an newer.
 If (!(Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion" -Name DisplayVersion).DisplayVersion) {
-    Write-Output "DisplayVersion registry key not found." }
-    
-    Else { $CurrentWin10VersionOnThisComputer = (Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion" -Name DisplayVersion).DisplayVersion }
-  
-Write-Output "UPSTREAM: Win10 upgrade: Oldest Windows 10 version allowed: $LatestWin10Version"
-Write-Output "UPSTREAM: Win10 upgrade: Windows 10 version on this computer: $CurrentWin10VersionOnThisComputer"
+    Write-Output "UPSTREAM: Win10 upgrade: DisplayVersion registry key not found." }
 
-$CurrentWin10VersionOnThisComputer
-$LatestWin10Version
+Else { 
+    $CurrentWin10VersionOnThisComputer = (Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion" -Name DisplayVersion).DisplayVersion }
 
-If ($CurrentWin10VersionOnThisComputer -Match "$LatestWin10Version") {
-    Write-Output "UPSTREAM: Win10 upgrade: No upgrade needed."
-    $IsThisComputerReadyForUpgrade = "NO" }
+Write-Output "UPSTREAM: Win10 upgrade: Latest Windows 10 version available: $LatestWin10VersionAvailable"
+Write-Output "UPSTREAM: Win10 upgrade: Current Windows 10 version on this computer: $CurrentWin10VersionOnThisComputer"
 
-Else { Write-Output "UPSTREAM: Win10 upgrade: Upgrade needed." }
+If ($CurrentWin10VersionOnThisComputer -NotMatch $LatestWin10VersionAvailable){
+    Write-Output "UPSTREAM: Win10 upgrade: This computer is already on the latest version."
+    $IsThisComputerReadyForUpgrade = "NO"}
+
+Else{
+    Write-Output "UPSTREAM: Win10 upgrade: This computer is not on latest version."}
 
 
 # Execution: Upgrade Windows 10 if above tests passed
@@ -94,4 +94,5 @@ If ($IsThisComputerReadyForUpgrade -Match "YES"){
     Start-Process -FilePath $File -ArgumentList "/quietinstall /skipeula /auto upgrade /copylogs $Dir" -Verb Runas
 }
 
-Else { Write-Output "UPSTREAM: Win10 upgrade: This computer will not get upgraded. Review the script log." }
+Else{
+    Write-Output "UPSTREAM: Win10 upgrade: This computer will not get upgraded. Review the script log."}
