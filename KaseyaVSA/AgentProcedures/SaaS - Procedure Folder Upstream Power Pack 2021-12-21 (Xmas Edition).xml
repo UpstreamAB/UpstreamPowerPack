@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ScriptExport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.kaseya.com/vsa/2008/12/Scripting">
+<ScExport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.kaseya.com/vsa/2008/12/Scripting">
   <Folder name="Upstream Power Pack 2021-12-21 (Xmas Edition)" treePres="3">
     <Folder name="Automation For Linux" treePres="3">
       <Folder name="Audit" treePres="3">
@@ -7448,4 +7448,4 @@
       </Folder>
     </Folder>
   </Folder>
-</ScriptExport>
+</ScExport>
