@@ -1,6 +1,6 @@
 <#
 =================================================================================
-Filename:           UPSTREAM-KaseyaVSA-Audit-IsUptimeMoreThan10Days
+Filename:           UPSTREAM-KaseyaVSA-Audit-WorkplaceEssentials-IsUptimeMoreThan10Days.ps1
 Kaseya Procedure:   Policy Mgmt - Windows 10 - Send Message If Uptime Is More Than 10 Days
 Support type:       Upstream Premium Power Pack
 Support:            Upstream AB, powerpack@upstream.se Last updated 2020-04-22
