@@ -1,1 +1,1 @@
-Placeholder for Powershell scripts specifically designed to be executed with Kaseya VSA. Upload all of the Powershell scripts in this folder to Kaseya VSA, Agent Procedures, Managed Files, "VSASharedFiles\UpstreamPowerPack\Powershell".
+Placeholder for Powershell scripts specifically designed to be executed with Kaseya VSA. Upload all Powershell scripts in this folder to Kaseya VSA, Agent Procedures, Managed Files, "VSASharedFiles\UpstreamPowerPack\Powershell".
