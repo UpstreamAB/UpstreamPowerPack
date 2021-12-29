@@ -1,9 +1,9 @@
 <#
 =================================================================================
-Filename:           UPSTREAM-KaseyaVSA-Audit-Win10-GetAzureUserName.ps1
+Filename:           UPSTREAM-KaseyaVSA-Audit-WorkplaceEssentials-GetAzureUserName.ps1
 Kaseya Procedure:   Custom Field - Audit - Windows 10 - Get Azure AD Tenant And User
 Support type:       Upstream Power Pack
-Support:            Upstream AB, powerpack@upstream.se Last updated 2020-04-22
+Support:            Upstream AB, powerpack@upstream.se Last updated 2021-12-22
 =================================================================================
 #>
 
