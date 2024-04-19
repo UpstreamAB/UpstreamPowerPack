@@ -1,1 +1,0 @@
-New-LocalUser -AccountNeverExpires:$true -Password (ConvertTo-SecureString -AsPlainText -Force "Password123!") -Name "MSPSupport -Description "MSP Support Account"| Add-LocalGroupMember -Group Administrators
